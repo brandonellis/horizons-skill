@@ -1,0 +1,112 @@
+[
+  {
+    "scenario": "complete-lead-grading",
+    "model": "claude-opus-5",
+    "status": "completed",
+    "elapsedSeconds": 259.44,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "complete-lead-grading",
+    "model": "claude-sonnet-5",
+    "status": "completed",
+    "elapsedSeconds": 360.31,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "first-use",
+    "model": "claude-opus-5",
+    "status": "completed",
+    "elapsedSeconds": 87.79,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": null
+  },
+  {
+    "scenario": "first-use",
+    "model": "claude-sonnet-5",
+    "status": "completed",
+    "elapsedSeconds": 71.02,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": null
+  },
+  {
+    "scenario": "grade-priorities",
+    "model": "claude-opus-5",
+    "status": "completed",
+    "elapsedSeconds": 122.62,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "grade-priorities",
+    "model": "claude-sonnet-5",
+    "status": "completed",
+    "elapsedSeconds": 80.91,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "reviewed-moves",
+    "model": "claude-opus-5",
+    "status": "completed",
+    "elapsedSeconds": 84.57,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "reviewed-moves",
+    "model": "claude-sonnet-5",
+    "status": "completed",
+    "elapsedSeconds": 55.48,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "starter-refresh",
+    "model": "claude-opus-5",
+    "status": "completed",
+    "elapsedSeconds": 85.09,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  },
+  {
+    "scenario": "starter-refresh",
+    "model": "claude-sonnet-5",
+    "status": "completed",
+    "elapsedSeconds": 42.59,
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "synthetic": true,
+  "observedAt": "2026-09-14T12:00:00Z",
+  "issues": [
+    {
+      "id": "DEMO-11",
+      "title": "Team invitations",
+      "state": "In Progress",
+      "acceptance": "Reject expired invitations; valid invitations work."
+    },
+    {
+      "id": "DEMO-12",
+      "title": "Weekly digest",
+      "state": "Backlog",
+      "acceptance": "Lead can review agreed fields."
+    },
+    {
+      "id": "DEMO-13",
+      "title": "Portfolio view",
+      "state": "Backlog",
+      "acceptance": "Cross-team blockers can be inspected."
+    }
+  ]
+}

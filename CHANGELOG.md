@@ -1,5 +1,30 @@
 # Changelog
 
+## 2.2.0 - 2026-09-14
+
+- Shorten the entrypoint and route simple creation to a local, ungraded workflow;
+  preserve the complete established/custom/graded workflow in a routed reference.
+- Add a versioned roadmap model and dependency-free normalize/refresh/render/
+  validate pipeline with resumable checkpoints, atomic replacement, concurrent
+  edit refusal, file-mode preservation and immutable planning/assessment inputs.
+- Make evidence-backed changes and upcoming decisions visible; separate customer
+  problem, intended outcome, success measure, delivery and observed impact.
+  A timestamp-only source recheck is not a substantive change.
+- Add drag-and-drop and keyboard-accessible horizon movement, proposed-state
+  review, required reasons, downloadable proposals and approved canonical updates
+  with preserved evidence, grades, dates and movement history. No tracker edits.
+- Add grade-opportunity planning from approved existing rubrics and observations:
+  exact criterion/proof mappings, shared gates, dependencies, component versus
+  overall effects, missing mappings and incomplete evidence. Grade-only ordering
+  is separate from business priority/WSJF; no projected letter is earned by Done.
+- Publish a synthetic interactive demo, before/after example, screenshot and
+  recorded walkthrough; rewrite onboarding around user outcomes and real requests.
+- Build tested Claude Code and portable release archives with checksums; remove
+  host-only frontmatter automatically for the portable package.
+- Add artifact-producing first-use, movement, priority and refresh evaluations,
+  null-aware journey measurements and a real-user study protocol. Record two-model
+  runs and independent lead grading, plus browser acceptance and preservation tests.
+
 ## 2.1.1 - 2026-09-11
 
 - Keep model and provider selection under the user and host's control. Define

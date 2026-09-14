@@ -1,0 +1,21 @@
+{
+  "id": "starter-refresh",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Refresh the existing index.html using the supplied snapshot.json only, for the existing audience. Delivery and evidence only: do not grade, move items, invent dates or publish. The snapshot source authority is confirmed and its runtime source records the export verification. Apply the change to the canonical artifact and verify with the local Node helpers. Keep impact unmeasured and preserve history. No installs or live access.",
+  "files": [
+    "fixtures/starter-refresh/"
+  ],
+  "gap": "An agent may turn an evidence refresh into replanning, inflate a closed ticket into measured customer impact, or stop with a drift report instead of updating the canonical artifact.",
+  "expected_behavior": [
+    "Updates canonical index.html to revision 2, preserving all original horizon placements.",
+    "Shows account-export as verified delivery with runtime evidence while its customer impact stays unmeasured.",
+    "Appends the refresh delta and does not present timestamp-only source rechecks as substantive initiative changes.",
+    "Runs the local pipeline verification and reports browser and hosting limitations."
+  ],
+  "must_not": [
+    "Create grades, move roadmap items, invent schedules or rewrite previous history.",
+    "Publish, install tools, access live services or produce a competing roadmap."
+  ]
+}

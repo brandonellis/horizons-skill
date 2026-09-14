@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "observedAt": "2026-09-13T12:00:00Z",
+  "project": {
+    "id": "meridian-demo",
+    "name": "Meridian",
+    "audience": "Product and engineering weekly review",
+    "synthetic": true,
+    "headline": "Less coordination. More work moving.",
+    "summary": "A small team is making account access and project updates easier. Follow the commitments, inspect the proof, and see which decisions unlock the next step."
+  },
+  "sources": [
+    {
+      "id": "planning",
+      "label": "Planning decisions",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-13T12:00:00Z",
+      "locator": "Synthetic source: planning",
+      "summary": "Self-service access is committed now. Reporting follows usable access controls. Portfolio views remain an option."
+    },
+    {
+      "id": "tracker",
+      "label": "Issue tracker snapshot",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-13T12:00:00Z",
+      "locator": "Synthetic source: tracker",
+      "summary": "Account export is Done. Invitation work remains in progress. Reporting waits for a definition of useful adoption."
+    },
+    {
+      "id": "runtime",
+      "label": "Delivery verification",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-13T12:00:00Z",
+      "locator": "Synthetic source: runtime",
+      "summary": "Synthetic production probe verified account export. No expiry probe or business-impact measurement is available."
+    }
+  ],
+  "items": [
+    {
+      "id": "team-invitations",
+      "title": "Invite the whole team",
+      "horizon": "now",
+      "stream": "Access",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "New colleagues can start without waiting for an administrator.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Reject expired invitations, then verify the deployed path.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "in-progress",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "account-export",
+      "title": "Take your account data with you",
+      "horizon": "now",
+      "stream": "Ownership",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Teams can retrieve their account records for their own reporting.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Verify the exported records in the deployed revision.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "marked-done",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "weekly-digest",
+      "title": "A useful weekly update",
+      "horizon": "next",
+      "stream": "Visibility",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Leads can review changes without chasing every team.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Agree on which changes belong in the digest.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      },
+      "decision": "Choose the first audience and the decision this update should support."
+    },
+    {
+      "id": "adoption-measure",
+      "title": "Know whether onboarding improved",
+      "horizon": "next",
+      "stream": "Learning",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "The team can tell whether self-service access reduces waiting.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Record a baseline and a comparable observation period.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "portfolio-view",
+      "title": "See work across teams",
+      "horizon": "later",
+      "stream": "Visibility",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Leads can spot shared blockers across several projects.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Confirm demand from teams using the weekly digest.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    }
+  ],
+  "history": [],
+  "gradePlanning": {
+    "contract": {
+      "schemaVersion": 1,
+      "id": "invitation-contract",
+      "baselineId": "initial",
+      "status": "approved",
+      "aggregation": "lowest-mandatory-cell",
+      "scopes": [
+        "code",
+        "production"
+      ],
+      "initialFindingIds": [
+        "expiry-gap"
+      ],
+      "findingEvidenceMaxAgeHours": 24,
+      "cells": [
+        {
+          "id": "code-testing",
+          "component": "invitations",
+          "dimension": "testing",
+          "scope": "code",
+          "mandatory": true
+        },
+        {
+          "id": "production-testing",
+          "component": "invitations",
+          "dimension": "testing",
+          "scope": "production",
+          "mandatory": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "code-testing-D",
+          "cellId": "code-testing",
+          "tier": "D",
+          "test": "Empty invitation value is rejected.",
+          "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "code-testing-C",
+          "cellId": "code-testing",
+          "tier": "C",
+          "test": "An invitation with a nonempty value and future expiresAt is accepted.",
+          "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "code-testing-B",
+          "cellId": "code-testing",
+          "tier": "B",
+          "test": "An invitation with a nonempty value and expiresAt in the past is rejected.",
+          "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "code-testing-A",
+          "cellId": "code-testing",
+          "tier": "A",
+          "test": "A malformed expiresAt is rejected rather than treated as valid.",
+          "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "production-testing-D",
+          "cellId": "production-testing",
+          "tier": "D",
+          "test": "Empty invitation value is rejected.",
+          "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "production-testing-C",
+          "cellId": "production-testing",
+          "tier": "C",
+          "test": "An invitation with a nonempty value and future expiresAt is accepted.",
+          "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "production-testing-B",
+          "cellId": "production-testing",
+          "tier": "B",
+          "test": "An invitation with a nonempty value and expiresAt in the past is rejected.",
+          "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        },
+        {
+          "id": "production-testing-A",
+          "cellId": "production-testing",
+          "tier": "A",
+          "test": "A malformed expiresAt is rejected rather than treated as valid.",
+          "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+          "maxAgeHours": 24,
+          "thisAssessment": true
+        }
+      ],
+      "approval": {
+        "reference": "Synthetic demo rubric approval",
+        "approvedAt": "2026-09-13T10:00:00Z",
+        "contractHash": "72db2b61cda3f22e5b06bd9178256b059cf2149758c3a5d2f15085d9fe2af2db"
+      }
+    },
+    "assessment": {
+      "id": "demo-assessment",
+      "baselineId": "initial",
+      "contractId": "invitation-contract",
+      "contractHash": "72db2b61cda3f22e5b06bd9178256b059cf2149758c3a5d2f15085d9fe2af2db",
+      "observedAt": "2026-09-13T12:00:00Z",
+      "sourceCodeRefs": [
+        {
+          "scope": "code",
+          "repository": "synthetic/meridian",
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "runtimeRefs": [
+        {
+          "scope": "production",
+          "service": "synthetic-meridian",
+          "revision": "demo-1",
+          "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "coverageGaps": [],
+      "observations": [
+        {
+          "criterionId": "code-testing-D",
+          "result": "pass",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "code",
+            "repository": "synthetic/meridian",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "code-testing-C",
+          "result": "pass",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "code",
+            "repository": "synthetic/meridian",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "code-testing-B",
+          "result": "fail",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "code",
+            "repository": "synthetic/meridian",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "code-testing-A",
+          "result": "fail",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "code",
+            "repository": "synthetic/meridian",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "production-testing-D",
+          "result": "pass",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "production",
+            "service": "synthetic-meridian",
+            "revision": "demo-1",
+            "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "production-testing-C",
+          "result": "pass",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "production",
+            "service": "synthetic-meridian",
+            "revision": "demo-1",
+            "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "production-testing-B",
+          "result": "unknown",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "production",
+            "service": "synthetic-meridian",
+            "revision": "demo-1",
+            "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        },
+        {
+          "criterionId": "production-testing-A",
+          "result": "unknown",
+          "observedAt": "2026-09-13T12:00:00Z",
+          "assessmentId": "demo-assessment",
+          "subject": {
+            "scope": "production",
+            "service": "synthetic-meridian",
+            "revision": "demo-1",
+            "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "evidenceRefs": [
+            "Synthetic invitation acceptance evidence"
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "id": "expiry-gap",
+          "scope": "code",
+          "status": "open",
+          "blocking": true
+        },
+        {
+          "id": "expiry-gap",
+          "scope": "production",
+          "status": "unknown",
+          "blocking": true
+        }
+      ]
+    },
+    "tickets": [
+      {
+        "id": "DEMO-101",
+        "title": "Reject expired invitations",
+        "criterionIds": [
+          "code-testing-B"
+        ],
+        "mappingEvidenceRefs": [
+          "Synthetic acceptance: expired invitations must be rejected"
+        ],
+        "dependsOn": [],
+        "effort": 2
+      },
+      {
+        "id": "DEMO-102",
+        "title": "Verify expiry on the deployed revision",
+        "criterionIds": [
+          "production-testing-B"
+        ],
+        "mappingEvidenceRefs": [
+          "Synthetic runtime acceptance: past expiry rejected"
+        ],
+        "dependsOn": [
+          "DEMO-101"
+        ],
+        "effort": 1
+      },
+      {
+        "id": "DEMO-103",
+        "title": "Reject malformed expiration dates",
+        "criterionIds": [
+          "code-testing-A",
+          "production-testing-A"
+        ],
+        "mappingEvidenceRefs": [
+          "Synthetic acceptance: malformed expiration rejected in code and production"
+        ],
+        "dependsOn": [],
+        "effort": 2
+      },
+      {
+        "id": "DEMO-104",
+        "title": "Polish invitation confirmation copy",
+        "criterionIds": [],
+        "mappingEvidenceRefs": [],
+        "dependsOn": [],
+        "effort": 1
+      }
+    ],
+    "effortUnit": "relative points (synthetic)"
+  }
+}

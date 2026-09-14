@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "observedAt": "2026-09-14T12:00:00Z",
+  "project": {
+    "id": "meridian-demo",
+    "name": "Meridian",
+    "audience": "Product and engineering weekly review",
+    "synthetic": true,
+    "headline": "Less coordination. More work moving.",
+    "summary": "A small team is making account access and project updates easier. Follow the commitments, inspect the proof, and see which decisions unlock the next step."
+  },
+  "sources": [
+    {
+      "id": "planning",
+      "label": "Planning decisions",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-14T12:00:00Z",
+      "locator": "Synthetic source: planning",
+      "summary": "Self-service access is committed now. Reporting follows usable access controls. Portfolio views remain an option."
+    },
+    {
+      "id": "tracker",
+      "label": "Issue tracker snapshot",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-14T12:00:00Z",
+      "locator": "Synthetic source: tracker",
+      "summary": "Account export is Done. Invitation work remains in progress. Reporting waits for a definition of useful adoption."
+    },
+    {
+      "id": "runtime",
+      "label": "Delivery verification",
+      "kind": "record",
+      "confirmed": true,
+      "observedAt": "2026-09-14T12:00:00Z",
+      "locator": "Synthetic source: runtime",
+      "summary": "Synthetic production probe verified account export. No expiry probe or business-impact measurement is available."
+    }
+  ],
+  "items": [
+    {
+      "id": "team-invitations",
+      "title": "Invite the whole team",
+      "horizon": "now",
+      "stream": "Access",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "New colleagues can start without waiting for an administrator.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Reject expired invitations, then verify the deployed path.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "in-progress",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "account-export",
+      "title": "Take your account data with you",
+      "horizon": "now",
+      "stream": "Ownership",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Teams can retrieve their account records for their own reporting.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Measure whether teams use the export in their reporting workflow.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "verified",
+        "evidenceRefs": [
+          "runtime"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "weekly-digest",
+      "title": "A useful weekly update",
+      "horizon": "next",
+      "stream": "Visibility",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Leads can review changes without chasing every team.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Agree on which changes belong in the digest.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      },
+      "decision": "Choose the first audience and the decision this update should support."
+    },
+    {
+      "id": "adoption-measure",
+      "title": "Know whether onboarding improved",
+      "horizon": "next",
+      "stream": "Learning",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "The team can tell whether self-service access reduces waiting.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Record a baseline and a comparable observation period.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    },
+    {
+      "id": "portfolio-view",
+      "title": "See work across teams",
+      "horizon": "later",
+      "stream": "Visibility",
+      "owner": null,
+      "problem": "Small teams lose time coordinating access and recurring project updates.",
+      "outcome": "Leads can spot shared blockers across several projects.",
+      "successMeasure": "Compare time to the first successful team workflow; no measurement recorded yet.",
+      "nextProof": "Confirm demand from teams using the weekly digest.",
+      "refs": [
+        "planning",
+        "tracker"
+      ],
+      "delivery": {
+        "status": "planned",
+        "evidenceRefs": [
+          "tracker"
+        ]
+      },
+      "impact": {
+        "status": "unmeasured",
+        "summary": "No comparable customer measurement has been recorded.",
+        "evidenceRefs": []
+      }
+    }
+  ],
+  "history": []
+}

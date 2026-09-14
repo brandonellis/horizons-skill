@@ -1,0 +1,21 @@
+{
+  "id": "grade-priorities",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Update the grade-opportunities section of the existing index.html using grade-planning.json. Prioritize tickets that could increase the recorded grades, identify the exact acceptance evidence and any shared gates or dependencies, and retain unmapped work visibly. This is planning only: do not regrade or alter the rubric, observations, dates or history. Append only a roadmap presentation event if needed. Use local Node helpers to verify the artifact. No publication, installations or live access.",
+  "files": [
+    "fixtures/grade-priorities/"
+  ],
+  "gap": "An agent may over-expand a simple request, omit a finished artifact, change commitments without a recorded decision, or imply a letter improvement from ticket closure alone.",
+  "expected_behavior": [
+    "Keeps the existing artifact and all recorded assessment inputs unchanged while showing conditional grade opportunities.",
+    "Identifies DEMO-101 as addressing the code C-to-B acceptance gate and names the expiry rejection proof.",
+    "Keeps production Incomplete without a promised letter; shows missing runtime checks and the DEMO-102 dependency on DEMO-101.",
+    "Retains DEMO-104 as mapping needed and distinguishes grade-only ordering from overall business priority."
+  ],
+  "must_not": [
+    "Assign a new grade, fabricate proof, mutate the frozen contract or claim Done earns a letter.",
+    "Move roadmap items, edit tracker priorities or create a competing hub."
+  ]
+}

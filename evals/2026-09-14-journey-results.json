@@ -1,0 +1,372 @@
+[
+  {
+    "run": "opus",
+    "scenario": "complete-lead-grading",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "030221b697161244f238e418e301002d340237b25a7419fbed72416346a71fc2",
+    "elapsedSeconds": 259.44,
+    "costUsd": 2.0193989999999995,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 720,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "model": "opus",
+      "assessment": "assessment-2",
+      "code": "C",
+      "production": "incomplete",
+      "readOnlyInputsPreserved": true,
+      "originalBaselinePreserved": true,
+      "priorAssessmentPreserved": true,
+      "historyLockPreservation": "verified",
+      "verifiedFiles": 12
+    }
+  },
+  {
+    "run": "sonnet",
+    "scenario": "complete-lead-grading",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "3d0fc82ea0b4e204861f8fa33c0f29ebff1737dc64883470a0d9f56a6740f1f8",
+    "elapsedSeconds": 360.31,
+    "costUsd": 2.0550888,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 720,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "model": "sonnet",
+      "assessment": "assessment-2",
+      "code": "C",
+      "production": "incomplete",
+      "readOnlyInputsPreserved": true,
+      "originalBaselinePreserved": true,
+      "priorAssessmentPreserved": true,
+      "historyLockPreservation": "verified",
+      "verifiedFiles": 12
+    }
+  },
+  {
+    "run": "opus",
+    "scenario": "first-use",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "b0682a4f5ee9e5dcbf6c338d6d03e725a165316631708aa4d5cb37faf5e1aac8",
+    "elapsedSeconds": 87.79,
+    "costUsd": 0.795332,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": null,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "opus",
+      "scenario": "first-use",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 1",
+        "Read-only fixture inputs preserved",
+        "Three source-backed ungraded initiatives; missing owners/impact/proof kept explicit"
+      ]
+    }
+  },
+  {
+    "run": "sonnet",
+    "scenario": "first-use",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "b0682a4f5ee9e5dcbf6c338d6d03e725a165316631708aa4d5cb37faf5e1aac8",
+    "elapsedSeconds": 71.02,
+    "costUsd": 0.5163365999999999,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": null,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "sonnet",
+      "scenario": "first-use",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 1",
+        "Read-only fixture inputs preserved",
+        "Three source-backed ungraded initiatives; missing owners/impact/proof kept explicit"
+      ]
+    }
+  },
+  {
+    "run": "opus",
+    "scenario": "grade-priorities",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "3d0fc82ea0b4e204861f8fa33c0f29ebff1737dc64883470a0d9f56a6740f1f8",
+    "elapsedSeconds": 153.73,
+    "costUsd": 1.060216,
+    "status": "historical-not-counted",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": null,
+    "unsupportedClaims": null,
+    "scopeRegressions": null,
+    "historyPreserved": null,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "opus",
+      "scenario": "grade-priorities",
+      "status": "historical",
+      "checks": [
+        "Initial fixture already contained the section; not counted as creation validation"
+      ]
+    }
+  },
+  {
+    "run": "opus-final",
+    "scenario": "grade-priorities",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "030221b697161244f238e418e301002d340237b25a7419fbed72416346a71fc2",
+    "elapsedSeconds": 122.62,
+    "costUsd": 1.2023210000000002,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "opus-final",
+      "scenario": "grade-priorities",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 3",
+        "Read-only fixture inputs preserved",
+        "Created view from unchanged assessment; conditional code C-to-B; production incomplete; dependency and unmapped ticket retained"
+      ]
+    }
+  },
+  {
+    "run": "sonnet",
+    "scenario": "grade-priorities",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "55ed1a91f86d7517f8dfcfb28d37fb77ea38a7953e97ddc0fd9f4f830e275fca",
+    "elapsedSeconds": 80.92,
+    "costUsd": 0.5277408,
+    "status": "historical-not-counted",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": null,
+    "unsupportedClaims": null,
+    "scopeRegressions": null,
+    "historyPreserved": null,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "sonnet",
+      "scenario": "grade-priorities",
+      "status": "historical",
+      "checks": [
+        "Initial fixture already contained the section; not counted as creation validation"
+      ]
+    }
+  },
+  {
+    "run": "sonnet-final",
+    "scenario": "grade-priorities",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "030221b697161244f238e418e301002d340237b25a7419fbed72416346a71fc2",
+    "elapsedSeconds": 80.91,
+    "costUsd": 0.7784027999999998,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "sonnet-final",
+      "scenario": "grade-priorities",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 3",
+        "Read-only fixture inputs preserved",
+        "Created view from unchanged assessment; conditional code C-to-B; production incomplete; dependency and unmapped ticket retained"
+      ]
+    }
+  },
+  {
+    "run": "opus",
+    "scenario": "reviewed-moves",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "677313aedc0f57e09418b18000d34204926534a041d9bfa23c97db2e9c0d4fd1",
+    "elapsedSeconds": 84.57,
+    "costUsd": 0.8004149999999999,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "opus",
+      "scenario": "reviewed-moves",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 3",
+        "Read-only fixture inputs preserved",
+        "Both approved moves saved; all nonplacement item fields, grades, timestamps and original history preserved"
+      ]
+    }
+  },
+  {
+    "run": "sonnet",
+    "scenario": "reviewed-moves",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "b0682a4f5ee9e5dcbf6c338d6d03e725a165316631708aa4d5cb37faf5e1aac8",
+    "elapsedSeconds": 55.48,
+    "costUsd": 0.48881579999999997,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "sonnet",
+      "scenario": "reviewed-moves",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 3",
+        "Read-only fixture inputs preserved",
+        "Both approved moves saved; all nonplacement item fields, grades, timestamps and original history preserved"
+      ]
+    }
+  },
+  {
+    "run": "opus-final",
+    "scenario": "starter-refresh",
+    "model": "claude-opus-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "bbcddac84b3dc9fd64e2e719146bf562eb2ff8788397a910758e98b79b9462f6",
+    "elapsedSeconds": 85.09,
+    "costUsd": 0.7843045000000001,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "opus-final",
+      "scenario": "starter-refresh",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 2",
+        "Read-only fixture inputs preserved",
+        "Verified export delta only; impact unmeasured; no grading or horizon movement"
+      ]
+    }
+  },
+  {
+    "run": "sonnet-final",
+    "scenario": "starter-refresh",
+    "model": "claude-sonnet-5",
+    "reasoning": "high",
+    "candidateBaseCommit": "4f983bd37c63545ca9eefe282b0b984ccd4de8d2",
+    "candidateBundleSha256": "bbcddac84b3dc9fd64e2e719146bf562eb2ff8788397a910758e98b79b9462f6",
+    "elapsedSeconds": 42.59,
+    "costUsd": 0.4389221999999999,
+    "status": "completed",
+    "firstUsefulArtifactSeconds": null,
+    "clarificationRounds": 0,
+    "unsupportedClaims": null,
+    "scopeRegressions": 0,
+    "historyPreserved": true,
+    "limits": {
+      "seconds": 480,
+      "usd": 4
+    },
+    "suppliedReplies": [],
+    "verification": {
+      "run": "sonnet-final",
+      "scenario": "starter-refresh",
+      "status": "verified",
+      "checks": [
+        "Candidate pipeline validated revision 2",
+        "Read-only fixture inputs preserved",
+        "Verified export delta only; impact unmeasured; no grading or horizon movement"
+      ]
+    }
+  }
+]

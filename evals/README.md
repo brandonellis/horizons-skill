@@ -104,3 +104,28 @@ cases do not require an unsolicited offer to create an artifact.
 Question scenarios stop at the question when no answer is supplied; do not invent
 an answer to make the run complete. The automated suite validates scenario files,
 not these behavioral outcomes. Record any tool or model limitations in RESULTS.
+
+## First-use and recurring-review journeys
+
+Scenarios 16–19 exercise the lightweight path with all necessary scope decisions
+supplied: a first ungraded artifact from raw planning/issue sources, two approved
+horizon moves, creating a grade-opportunities view from recorded observations,
+and evidence-only refresh. Scenario 18 starts without a grade-planning view so
+checking an existing section is not a substitute for producing the requested one.
+All fixtures are synthetic. An actual participant study remains separate; see
+`docs/usability-study.md` for tasks and consented measurement boundaries.
+
+For each run, record exact model, candidate fingerprint, tools, budget, elapsed
+time, supplied replies and final artifact verification. Measure successful task
+completion separately from a model returning normally. Record missing measures
+as null. `scripts/summarize-evals.mjs <runs.json>` summarizes records with:
+
+- `scenario`, `model`, `status` (completed/failed/blocked/timeout), `elapsedSeconds`.
+- `firstUsefulArtifactSeconds`, `clarificationRounds`, `unsupportedClaims`,
+  `scopeRegressions`: measured nonnegative numbers or null.
+- `historyPreserved`: true, false or null when not evaluated/applicable.
+
+Do not infer first-use latency from whole-run elapsed time or call a helper-test
+pass an end-to-end success. Publish completion counts with their scenario and
+model coverage; blocked and timed-out runs remain in the denominator. No telemetry
+is collected from users or generated artifacts by these helpers.

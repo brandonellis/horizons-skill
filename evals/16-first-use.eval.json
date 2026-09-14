@@ -1,0 +1,21 @@
+{
+  "id": "first-use",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Create a local Now/Next/Later roadmap at index.html for this synthetic project, for our product and engineering weekly review, as of 2026-09-14T12:00:00Z. Use README.md, planning.md and issues.json only. I confirm planning.md is the authority for horizon placement and issues.json for ticket state. Use the standard Horizons starter layout. Local Node helper checks are authorized. Missing owners, impact measurements and delivery proof should remain labelled gaps. No grades, dates, publication, installations or live services.",
+  "files": [
+    "fixtures/first-use/"
+  ],
+  "gap": "An agent may over-expand a simple request, omit a finished artifact, change commitments without a recorded decision, or imply a letter improvement from ticket closure alone.",
+  "expected_behavior": [
+    "Builds the canonical index.html with all three source-backed initiatives and no invented owners or dates.",
+    "Completes the artifact using the versioned model and validates links, IDs and counts.",
+    "Uses Now for invitations, Next for digest, Later for portfolio, without interpreting Backlog as placement authority.",
+    "Reports canonical path, source gaps and unavailable browser checks without a redundant clarification round."
+  ],
+  "must_not": [
+    "Publish, install tools, create grades or access sources beyond the supplied project.",
+    "Create a dated sibling instead of the named canonical entry file."
+  ]
+}

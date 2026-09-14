@@ -3,6 +3,76 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-14 · v2.2.0 journeys and grading
+
+Completed ten artifact-producing scenario/model pairs on `claude-sonnet-5` and
+`claude-opus-5`, high effort: first use (16), approved movement (17), creation of
+grade opportunities (18), starter refresh (19), and full scoped grading (15).
+Exact query, fixture, tool configuration, limits, candidate fingerprints, timings
+and independent checks are recorded in [journey results](2026-09-14-journey-results.json).
+These are bounded synthetic runs, not a guarantee for other projects or models.
+
+| Scenario | Sonnet 5 elapsed | Opus 5 elapsed | Independently checked result |
+|---|---:|---:|---|
+| First local roadmap | 71.02 s | 87.79 s | Three source-backed initiatives, no grades, unknown owners/impact retained |
+| Two approved moves | 55.48 s | 84.57 s | Same file; both moves and reasons recorded; evidence, grades and prior history preserved |
+| Create grade opportunities | 80.91 s | 122.62 s | New view, one presentation event; code C → B conditional; production Incomplete; unmapped ticket and dependency visible |
+| Evidence-only refresh | 42.59 s | 85.09 s | Export delivery verified; impact unmeasured; commitments unchanged; no timestamp-only change claims |
+| Full scoped grading | 360.31 s | 259.44 s | assessment-2 appended; code C, production Incomplete; original lock verified; 12-file manifests validated |
+
+The CLI harness used fresh workspaces and project-local copies of the candidate,
+no prior conversation or evaluation expectations, no supplied follow-up answers,
+Read/Write/Edit/Glob/Grep/Skill plus bounded Node commands, project settings only,
+hooks disabled, no external MCP servers, and no browser/live/publication tools.
+Limits were $4 and 480 seconds per journey, 720 seconds for grading. Some shell
+attempts were denied and the models used permitted alternatives. This is not
+technical containment of every possible Node operation or proof of tool-scope
+compliance; the independent scope checks cover artifact/data mutations.
+
+Independent checks re-read finished artifacts, invoked each candidate's real
+pipeline verifier, compared read-only fixture hashes and prior model/history,
+and re-evaluated both grading outputs with the retained original lock digest.
+Both named models retained the baseline, previous assessment, rubric and eight
+read-only grading inputs. Tickets marked Done did not earn runtime acceptance.
+Some preliminary runs invoked import-only browser helper files as CLIs; their
+exit status was not counted as verification. Browser checks were separate.
+
+Two initial scenario-18 runs are recorded as historical, not counted in the ten
+creation checks: the fixture already contained the requested section, so a no-op
+could pass without creating anything. One also encountered a development mismatch
+between required effort units and the earlier fixture. The final fixture starts
+without the section, declares the effort unit, and both fresh runs created and
+validated it. Earlier candidates remain identified by their own bundle hashes.
+Subsequent timestamp-only delta, immutable planning input, file-mode and interrupted
+save corrections have targeted helper tests; no wider model coverage is implied.
+
+An additional independent Codex-hosted lead run used the inherited model (exact
+identifier unavailable), no parent conversation or expected outcomes, and completed
+scenario 15 in 149 seconds. It verified 13 files, preserved all eight read-only
+inputs plus the original baseline/assessment, and reported code C / production
+Incomplete. It used the explicitly approved single-agent method. No independent
+auditor panel, other dimensions, live runtime or publication was exercised.
+
+**Browser QA:** installed Chrome through existing Playwright, local synthetic
+artifacts only. Desktop light/dark, 390px mobile without horizontal overflow,
+drag-and-drop, keyboard type-ahead movement, reason-required review, download,
+discard, search, deep-link reveal, print expansion and no-JavaScript reading all
+passed with no page errors. Native arrow-key popup behavior was not usable in
+headless macOS Chrome; keyboard type-ahead and Tab exercised the native select.
+The design detector degraded to regex because its optional parsers were absent;
+its empty result is not a computed contrast audit. Visual inspection and browser
+interaction checks were performed separately. A walkthrough records real browser
+interactions over invented project data.
+
+**141 helper/structure tests pass**, including grade bottlenecks, unknown evidence,
+missing A+ gates, cycles, stale moves, read-only grade planning, atomic update
+recovery, preserved file modes, package extraction/build, and null-aware metrics.
+No dependencies were installed. [Journey measures](2026-09-14-journey-measures.json)
+record full-run elapsed time; time to first useful artifact and a general
+unsupported-claim count were not instrumented and remain null. No participant
+usability study has been performed. The protocol in `docs/usability-study.md`
+describes the next evidence to collect; no adoption or customer-impact claim is made.
+
 ## 2026-09-11 · v2.1.1 final verification · passed
 
 The failures in the earlier candidate below are fixed in these fresh runs.

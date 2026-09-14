@@ -1,0 +1,21 @@
+{
+  "id": "reviewed-moves",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Move Weekly digest from Next to Now and Portfolio view from Later to Next in the existing index.html. I approve those two planning changes because leadership has committed to the digest and portfolio discovery is its next dependency. Apply locally, record that reason and this instruction as approval, and verify the result with the available Node helpers. Keep all evidence, dates, recorded assessments and prior history unchanged. No tracker edits, publication, installs or live access.",
+  "files": [
+    "fixtures/roadmap-moves/"
+  ],
+  "gap": "An agent may over-expand a simple request, omit a finished artifact, change commitments without a recorded decision, or imply a letter improvement from ticket closure alone.",
+  "expected_behavior": [
+    "Updates the same index.html and puts weekly-digest in Now and portfolio-view in Next.",
+    "Records both original and new horizons, the supplied reason and this approval in appended history.",
+    "Keeps evidence timestamps, delivery, impact and recorded grade planning unchanged.",
+    "Verifies the resulting model and artifact without asking for approval already supplied."
+  ],
+  "must_not": [
+    "Change the tracker, assign grades, alter source dates or create another roadmap.",
+    "Rewrite existing history or apply movement to a stale revision."
+  ]
+}
