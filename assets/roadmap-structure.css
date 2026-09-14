@@ -28,7 +28,7 @@
   .rm-mobile-stream { padding: 12px 14px 16px; }
   .rm-mobile-stream + .rm-mobile-stream { border-top: 1px solid var(--rm-rule); }
   .roadmap-shell .rm-mobile-stream h4 { margin: 0 0 10px; font-size: 14px; color: var(--rm-muted); }
-  .rm-mobile-items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rm-mobile-items { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
 }
 .rm-dependency-path { margin-block: 40px; --muted: var(--rm-muted); --now-bg: var(--rm-soft); --next-bg: var(--rm-soft); --later-bg: var(--rm-soft); --now: var(--rm-ink); --next: var(--rm-t5); --later: var(--rm-muted); }
 .rm-dependency-path .fig-scroll { overflow-x: auto; }
@@ -84,14 +84,18 @@
 .roadmap-shell .rm-gantt-undated-items .rm-gantt-row { flex: 0 1 340px; grid-area: auto; }
 .roadmap-shell .rm-gantt-theme-lanes .rm-gantt-unscheduled { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; min-height: 90px; margin: 0; padding: 12px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--theme); text-decoration: none; pointer-events: auto; }
 .rm-gantt-theme-lanes :is(a, button):focus-visible { outline: 2px solid var(--theme, var(--rm-ink)); outline-offset: 3px; }
-.roadmap-shell { --rm-completed-bg: #edf0f2; --rm-completed-ink: #56616b; --rm-completed-rule: #a8b2ba; --rm-completed-hover: #e2e7eb; }
-:root[data-theme="dark"] .roadmap-shell { --rm-completed-bg: #27313a; --rm-completed-ink: #c0cad3; --rm-completed-rule: #75818c; --rm-completed-hover: #303d48; }
-.roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-gantt-row, .rm-item)[data-completion-state] { --theme: var(--rm-completed-ink); --theme-soft: var(--rm-completed-bg); }
-.roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-item)[data-completion-state] { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); color: var(--rm-completed-ink); }
-.roadmap-shell .rm-gantt-row[data-completion-state] :is(.rm-gantt-bar, .rm-gantt-unscheduled) { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); }
-.rm-completion-label { font-weight: 600; }
-.rm-completion-remaining { display: block; font-weight: 400; }
-.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill)[data-completion-state]:hover, .roadmap-shell .rm-gantt-row[data-completion-state] a:hover { background: var(--rm-completed-hover); }
+.roadmap-shell { --rm-completed-bg: #f0f1f2; --rm-completed-ink: #596169; --rm-completed-rule: #c5c9cc; --rm-completed-hover: #e7e9eb; --rm-completed-badge: #dfe3e6; }
+:root[data-theme="dark"] .roadmap-shell { --rm-completed-bg: #25292d; --rm-completed-ink: #b3b9bf; --rm-completed-rule: #50575d; --rm-completed-hover: #2d3237; --rm-completed-badge: #3a4249; }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill, .rm-gantt-row, .rm-item)[data-completion-state] { --theme: var(--rm-completed-ink); --theme-soft: var(--rm-completed-bg); }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill, .rm-item)[data-completion-state], .roadmap-shell .rm-gantt-row[data-completion-state] :is(.rm-gantt-bar, .rm-gantt-unscheduled) { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); color: var(--rm-completed-ink); box-shadow: none; }
+.roadmap-shell .rm-completion-label { display: inline-flex; align-items: center; gap: 4px; padding: 2px 5px; margin-block: 2px; background: var(--rm-completed-badge); color: var(--rm-completed-ink); font-size: 12px; font-weight: 600; line-height: 1.3; }
+.roadmap-shell .rm-item > summary .rm-completion-status { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.roadmap-shell .rm-item > summary .rm-completion-remaining { margin: 0; }
+.rm-completion-icon { flex: 0 0 16px; }
+.roadmap-shell .rm-gantt-row .rm-completion-label { display: block; }
+.rm-gantt-row .rm-completion-icon { display: inline-block; vertical-align: -3px; margin-right: 4px; }
+.rm-completion-remaining { display: block; margin-top: 4px; font-size: 12px; font-weight: 400; color: var(--rm-completed-ink); }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill)[data-completion-state]:hover, .roadmap-shell .rm-gantt-row[data-completion-state] a:hover { background: var(--rm-completed-hover); outline: none; }
 .roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill)[data-completion-state]:focus-visible, .roadmap-shell .rm-gantt-row[data-completion-state] a:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 3px; }
 @media print {
   .roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-gantt-row, .rm-item)[data-completion-state] { --rm-completed-bg: #f1f1f1; --rm-completed-ink: #444; --rm-completed-rule: #999; }

@@ -1,0 +1,218 @@
+{
+  "date": "2026-09-14",
+  "release": "2.2.3",
+  "baseCommit": "c1ccbf606a21211f043d8489b83aac1febf48a2a",
+  "candidateFingerprint": {
+    "algorithm": "SHA-256 of concatenated file SHA-256 inventory",
+    "files": "SKILL.md followed by sorted assets, references and scripts files, each line HASH + two spaces + relative path + newline",
+    "value": "62ceda568025d9ecec311e6f830027296dd7976b4492e03842870f846b25c39a"
+  },
+  "tools": [
+    "Local filesystem and shell",
+    "Node.js Horizons helpers",
+    "Existing Playwright and Chrome; external page requests blocked"
+  ],
+  "allRequiredRunsCompleted": true,
+  "limitations": [
+    "Synthetic local fixtures; no live production, hosted publication or human usability study.",
+    "Exact backend lead identifier, reasoning effort, elapsed/spend and first-artifact times not exposed or measured; null means unknown.",
+    "Supporting model configured as gpt-5.6-sol by host; backend identity not independently verified.",
+    "Grading run uses approved single-agent method and does not qualify a multi-auditor panel.",
+    "Browser checks independently added by maintainer; supporting evaluator and grading evaluator did not run browser checks.",
+    "Question smoke check reused a session; no cold-start discovery claim. Prior no-load results remain recorded in RESULTS.md."
+  ],
+  "runs": [
+    {
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "reasoningSetting": null,
+      "timeLimitSeconds": null,
+      "spendLimit": null,
+      "suppliedUserReplies": [],
+      "scenario": "completion-layout",
+      "model": "host-inherited assessment lead (exact backend identifier unavailable)",
+      "status": "completed",
+      "skillLoaded": true,
+      "expected_behavior": [
+        {
+          "expectation": "Loads the Horizons execution and presentation guidance and updates the existing local index.html.",
+          "status": "met"
+        },
+        {
+          "expectation": "Distinguishes the completed migration core from its open follow-ups, and retains the fully completed export and active reporting item.",
+          "status": "met"
+        },
+        {
+          "expectation": "Keeps readable titles without strike-through and real evidence links with keyboard access.",
+          "status": "met"
+        },
+        {
+          "expectation": "Uses spacing selectors matching section headings and environment content, with mobile item alignment that does not stretch neighboring items.",
+          "status": "met"
+        },
+        {
+          "expectation": "Preserves evidence.json and embedded saved evidence, all three initiative identities, baseline B and the sourced timeline windows.",
+          "status": "met"
+        }
+      ],
+      "must_not": [
+        {
+          "prohibition": "Invent completion for the entire migration or the reporting initiative from its ticket count.",
+          "status": "met"
+        },
+        {
+          "prohibition": "Modify recorded evidence, dates, baseline or grades; publish the artifact or create a second canonical hub.",
+          "status": "met"
+        }
+      ],
+      "verification": [
+        "Unchanged evidence.json and verbatim embedded evidence",
+        "Baseline B, IDs, active state and sourced windows preserved",
+        "Root Chrome checks at 1440/390/320px, light/dark: no overflow, no disabled/struck completion, no missing fragment targets, mobile flex-start, Evidence/runtime heading gaps >=16px"
+      ]
+    },
+    {
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "reasoningSetting": null,
+      "timeLimitSeconds": null,
+      "spendLimit": null,
+      "suppliedUserReplies": [],
+      "scenario": "completion-layout",
+      "model": "gpt-5.6-sol (configured by host; backend not independently exposed)",
+      "status": "completed",
+      "skillLoaded": true,
+      "expected_behavior": [
+        {
+          "expectation": "Loads the Horizons execution and presentation guidance and updates the existing local index.html.",
+          "status": "met"
+        },
+        {
+          "expectation": "Distinguishes the completed migration core from its open follow-ups, and retains the fully completed export and active reporting item.",
+          "status": "met"
+        },
+        {
+          "expectation": "Keeps readable titles without strike-through and real evidence links with keyboard access.",
+          "status": "met"
+        },
+        {
+          "expectation": "Uses spacing selectors matching section headings and environment content, with mobile item alignment that does not stretch neighboring items.",
+          "status": "met"
+        },
+        {
+          "expectation": "Preserves evidence.json and embedded saved evidence, all three initiative identities, baseline B and the sourced timeline windows.",
+          "status": "met"
+        }
+      ],
+      "must_not": [
+        {
+          "prohibition": "Invent completion for the entire migration or the reporting initiative from its ticket count.",
+          "status": "met"
+        },
+        {
+          "prohibition": "Modify recorded evidence, dates, baseline or grades; publish the artifact or create a second canonical hub.",
+          "status": "met"
+        }
+      ],
+      "verification": [
+        "Unchanged evidence.json and verbatim embedded evidence",
+        "Baseline B, IDs, active state and sourced windows preserved",
+        "Root Chrome checks at 1440/390/320px, light/dark: no overflow, no disabled/struck completion, no missing fragment targets, mobile flex-start, Evidence/runtime heading gaps >=16px"
+      ]
+    },
+    {
+      "scenario": "complete-lead-grading",
+      "model": "host-inherited GPT-6 assessment lead (exact backend identifier unavailable)",
+      "reasoningSetting": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "timeLimitSeconds": null,
+      "spendLimit": null,
+      "clarificationRounds": 0,
+      "suppliedUserReplies": [],
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "skillLoaded": true,
+      "reviewMethod": "single-agent",
+      "expected_behavior": [
+        {
+          "expectation": "Reads the execution contract before project evidence, uses the selected model as lead, reads project rules and the approved contract, and labels the review single-agent without claiming independent auditors.",
+          "status": "met"
+        },
+        {
+          "expectation": "Reads issues, implementation and both evidence snapshots; identifies acceptance of expired invitations despite the Done ticket.",
+          "status": "met"
+        },
+        {
+          "expectation": "Runs the assessment engine for assessment-2; code resolves to C and production remains incomplete with a null grade because expiry and malformed probes are missing.",
+          "status": "met"
+        },
+        {
+          "expectation": "Keeps expiry-gap open in code and unknown in production; preserves the original finding denominator and describes missing runtime proof as unverified rather than observed operational failure.",
+          "status": "met"
+        },
+        {
+          "expectation": "Retains the original lock hash before writes and verifies against it afterward; updates canonical index.html, appends exactly one assessment and preserves originalBaseline, prior assessment and history-lock.json unchanged.",
+          "status": "met"
+        },
+        {
+          "expectation": "Reconciles the ticket as Done separately from acceptance without moving the Now horizon, validates the publication manifest and embedded ledger, and discloses unavailable browser checks.",
+          "status": "met"
+        }
+      ],
+      "must_not": [
+        {
+          "prohibition": "Switch models/providers, spawn auditors, repair code, install tools, access live services or publish artifacts.",
+          "status": "met"
+        },
+        {
+          "prohibition": "Modify the approved rubric, original baseline, previous assessment, evidence or history lock; claim operational closure from the ticket or code.",
+          "status": "met"
+        },
+        {
+          "prohibition": "Treat engine output alone as completed artifact validation or create a competing dated hub.",
+          "status": "met"
+        }
+      ],
+      "verification": {
+        "codeGrade": "C",
+        "productionGrade": null,
+        "productionStatus": "incomplete",
+        "assessmentCountAdded": 1,
+        "verifiedManifestFiles": 13,
+        "originalHistoryLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+        "historyLockPreservation": "verified",
+        "browser": false,
+        "liveProbes": false
+      },
+      "approvalNote": "Initial temporary-fixture write rejection resolved after evaluator read maintainer release policy and retried with explicit authorization context."
+    }
+  ],
+  "questionSmoke": {
+    "scenario": "question-not-a-build",
+    "model": "gpt-5.6-sol (host configured)",
+    "freshContext": false,
+    "status": "completed",
+    "skillSelection": "Guidance already in context; no new skill load or artifact workflow",
+    "result": "Alerting Later; split and rate limiting Done; ownership/on-call and staff-versus-fold unresolved; no target date.",
+    "filesRead": [
+      "meridian/README.md",
+      "meridian/docs/architecture-memo.md",
+      "meridian/docs/planning-notes.md",
+      "meridian/issues.json",
+      "prior-artifact.html"
+    ],
+    "writes": false,
+    "publication": false
+  }
+}

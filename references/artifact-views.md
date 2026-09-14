@@ -212,7 +212,8 @@ project into an A+. A filtered grade is labelled `Selected components`, never
 
 ### Completed work remains accessible
 
-Use a muted neutral treatment for completed work in both the matrix and Gantt,
+Use a checked badge naming the completed scope and a muted neutral treatment
+for completed work in desktop/mobile boards and the Gantt,
 not literal disabled controls. Keep real links, normal keyboard access, focus,
 theme memberships, search and return navigation. Use readable neutral tokens,
 not reduced opacity, removed hrefs, `aria-disabled` or pointer-event blocking.
@@ -221,8 +222,14 @@ Both renderers accept an optional `completion` object with `state`, `label`,
 `scope` and `evidenceHref` pointing to the canonical evidence detail. State is
 `complete` only when the entire scoped initiative is evidenced complete. Use
 `milestone-complete` for a delivered part with outstanding work, and include a
-visible `remainingLabel`, such as `Follow-ups remain`. The latter must never
-look like a claim that the whole initiative is finished.
+visible `remainingLabel`, such as `Follow-ups open`. Make `label` self-contained,
+for example `Core migration done`, and keep open work on a separate line. Do not
+repeat the completed scope in another status line or strike through the title;
+the completion badge carries the state without suggesting cancellation. Use the
+same scoped status in the canonical detail header.
+Gray alone is not a status. The milestone badge must never claim the whole
+initiative is finished. Keep titles readable and evidence links functional;
+suppress the active theme hover outline while preserving keyboard focus.
 
 `scripts/render-completion.mjs` supplies the shared validated presentation and
 `assets/roadmap-structure.css` its light/dark neutral tokens. Canonical details

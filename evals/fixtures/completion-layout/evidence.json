@@ -1,0 +1,44 @@
+{
+  "synthetic": true,
+  "baseline": {
+    "id": "baseline-1",
+    "grade": "B",
+    "observedAt": "2026-09-10"
+  },
+  "items": [
+    {
+      "id": "migration",
+      "title": "Worker migration",
+      "completion": {
+        "state": "milestone-complete",
+        "label": "Core delivered",
+        "remainingLabel": "Follow-ups remain",
+        "scope": "Reviewed code",
+        "evidenceHref": "#migration"
+      },
+      "status": "Core delivered; follow-ups remain"
+    },
+    {
+      "id": "export",
+      "title": "Account export",
+      "completion": {
+        "state": "complete",
+        "label": "Complete",
+        "scope": "Verified export acceptance",
+        "evidenceHref": "#export"
+      },
+      "status": "Complete"
+    },
+    {
+      "id": "reports",
+      "title": "Weekly reports",
+      "completion": null,
+      "status": "1/3 tickets Done"
+    }
+  ],
+  "notes": [
+    "Worker migration core is delivered in reviewed code. Retry hardening and end-to-end acceptance remain open.",
+    "Account export original acceptance is verified complete. Weekly reports remains active despite one Done ticket."
+  ],
+  "planning": "Recorded September, October, November windows stay unchanged."
+}

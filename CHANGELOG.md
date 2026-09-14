@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.3 - 2026-09-14
+
+- Show completed scope with a checked, readable neutral badge. Keep outstanding
+  follow-ups separate and evidence links accessible; avoid crossed-out titles
+  and disabled controls. Share this presentation across desktop/mobile boards
+  and Gantt views.
+- Tighten mobile controls and stop neighboring roadmap items stretching each
+  other. Standardize Evidence headings, environment-proof spacing, grade rows
+  and standalone link targets through shared styles and authoring guidance.
+- Add a synthetic completion/layout scenario covering presentation-only updates
+  with preserved evidence, baseline, dates and active work.
+
 ## 2.2.2 - 2026-09-14
 
 - Accept null optional tracker labels as unknown work type so a complete delivery

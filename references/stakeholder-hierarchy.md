@@ -16,7 +16,10 @@ Retain board/Gantt formats, critical-path diagrams and completion links.
 Theme filters belong immediately above the chart and only affect Roadmap.
 On phones, reduce the control footprint and use a stacked horizon overview
 rather than showing only a clipped table. Keep a full, scrollable Gantt with
-an explicit pan hint. Preserve item identity, filters, source windows and focus.
+an explicit pan hint. Preserve item identity, filters, source windows and focus. Group the view/search
+controls and the real move disclosure in `.rm-roadmap-controls`, before the theme
+bar, with compact move-review copy. Secondary refresh detail can use a native
+`.rm-refresh-note` disclosure. Keep the same DOM and keyboard reading order.
 
 ## Progress: change, standing, next proof
 
@@ -29,7 +32,8 @@ historical results as though they were comparable observations.
 
 Follow concise wins with the compact scorecard and the next proof required.
 Keep the scalability grade and measurement status visible. Its dimensions and
-capacity ladder remain accessible in the named breakdown, not removed. Give
+capacity ladder remain accessible in the named breakdown, not removed. Use `.rm-runtime-section` around environment proof: its heading, per-environment
+subheadings and revision disclosures need separate spacing. Give
 the fixed-cohort findings and delivery throughput a separate supporting role.
 Place detailed runtime records, long acceptance narratives and raw timestamps
 in disclosures or Evidence, with human-readable dates on the summary.
@@ -43,7 +47,8 @@ adapt these categories to the actual material rather than creating empty ones.
 accepts groups of existing `{ id, html }` records and
 preserves each record unchanged beneath a closed, descriptive group. Its HTML
 inputs must be trusted, already-rendered records, not unescaped user content.
-Keep each record once, preserve anchor IDs, and reject uncategorized records
+Use section-heading spacing when groups render as `section > h2`; disclosure
+header selectors apply only to groups rendered as details. Keep each record once, preserve anchor IDs, and reject uncategorized records
 when transforming an existing artifact rather than silently dropping them.
 
 The shared navigation opens nested disclosures on deep links. Keep that

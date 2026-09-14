@@ -331,3 +331,50 @@ agent evidence; they were not rerun for this patch. Browser checks on the privat
 hub cover desktop/mobile, keyboard and drag proposals, discard/download, grade
 opportunity links, filters, print and no-JavaScript behavior. These do not claim
 new cross-model grading qualification or human usability results.
+
+
+## 2026-09-14 · v2.2.3 completion and layout
+
+Three isolated artifact-producing evaluations completed: scenario 20 on the
+host-inherited GPT-6 assessment lead (exact backend ID unavailable) and the
+host-configured `gpt-5.6-sol` supporting model; scenario 15 on the same inherited
+lead with its approved single-agent method. No model changes or delegation
+occurred inside those runs. Queries were supplied verbatim, without expected
+outcomes or simulated user replies. Agents received separate synthetic fixture
+copies and the candidate skill. The grading evaluator additionally read the
+maintainer release policy to resolve an initial automatic temporary-write
+rejection; its contextualized retry succeeded.
+
+Candidate: `c1ccbf6` plus the shared completion/layout diff, runtime-file inventory
+SHA-256 `62ceda568025d9ecec311e6f830027296dd7976b4492e03842870f846b25c39a`.
+Detailed outcomes, configured models, tools, missing timing/budget measures and
+verification are in `2026-09-14-v2.2.3-results.json`. Reasoning settings and exact
+lead backend identity were not exposed; no timing or spend claim is made.
+
+- **20, both models:** all five expectations and both prohibitions met. Updated
+  the existing artifact with scoped completion, open follow-ups and shared
+  spacing; preserved evidence, baseline, active work, IDs and sourced windows.
+  Independent Chrome checks passed 12 combinations (both outputs at 1440, 390
+  and 320px, light/dark): no body overflow, disabled/struck completion or broken
+  fragment targets; mobile alignment and heading gaps match shared guidance.
+  The lead also checked disclosure navigation, keyboard controls and print.
+- **15, lead:** all six expectations and three prohibitions met. Read source and
+  recorded runtime evidence, reproduced expired/malformed invitation acceptance,
+  computed code C and production Incomplete/null, preserved expiry-gap as open
+  in code and unknown in production, and appended exactly one assessment-2.
+  Done delivery remains distinct from partial acceptance; Now is unchanged.
+  The maintainer independently compared the original rubric, evidence, baseline,
+  prior assessment and lock, then verified the 13-file manifest and embedded
+  ledger against retained lock SHA-256
+  `964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0`.
+  The grading run disclosed unavailable browser/live checks and made no repairs.
+- **04, reused-session smoke check:** answered alerting in prose with ownership,
+  on-call and staffing unresolved; no writes or publication. This was not a fresh
+  context and does not measure discovery. Earlier no-load findings in the
+  September 10 record remain historical; cold-start discovery was not rerun.
+
+All 144 helper tests and `git diff --check` pass. Portable and Claude Code
+archives build, and package tests extract and exercise the starter workflow.
+This is synthetic local coverage, not live operational proof, a multi-auditor
+qualification, a hosted-publication check or a human usability study. The
+private roadmap and its evidence are excluded from the repository and archives.

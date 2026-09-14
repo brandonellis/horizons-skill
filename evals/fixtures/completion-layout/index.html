@@ -1,0 +1,408 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthetic Meridian roadmap</title><style>.roadmap-shell {
+  --rm-ground: #fafaf7;
+  --rm-panel: #ffffff;
+  --rm-ink: #1c2321;
+  --rm-muted: #56625d;
+  --rm-rule: #ccd2ca;
+  --rm-soft: #eff1ec;
+  --rm-link: #245d94;
+  --rm-focus: #245d94;
+  --rm-warn: #804812;
+  --rm-warn-bg: #f7efe1;
+  --rm-space: 4px;
+  min-height: 100vh;
+  padding: 0 32px 48px;
+  background: var(--rm-ground);
+  color: var(--rm-ink);
+  font: 16px/1.5 Barlow, system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-theme="dark"] .roadmap-shell {
+  --rm-ground: #141a18;
+  --rm-panel: #1b2320;
+  --rm-ink: #e8eee9;
+  --rm-muted: #b1bdb4;
+  --rm-rule: #425048;
+  --rm-soft: #222e27;
+  --rm-link: #a2c9f2;
+  --rm-focus: #a2c9f2;
+  --rm-warn: #f3c391;
+  --rm-warn-bg: #332a20;
+  color-scheme: dark;
+}
+.roadmap-shell *, .roadmap-shell *::before, .roadmap-shell *::after { box-sizing: border-box; }
+.roadmap-shell [hidden] { display: none !important; }
+.rm-container { max-width: 1200px; margin: auto; min-width: 0; }
+.roadmap-shell a { color: var(--rm-link); text-underline-offset: 3px; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input { font: inherit; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input[type="search"] {
+  min-height: 44px; border: 1px solid var(--rm-rule); border-radius: 6px;
+  padding: 8px 12px; color: var(--rm-ink); background: var(--rm-panel); max-width: 100%;
+}
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell summary { cursor: pointer; }
+.roadmap-shell button:hover, .roadmap-shell select:hover { border-color: var(--rm-ink); }
+.roadmap-shell button:disabled { cursor: default; color: var(--rm-muted); border-color: var(--rm-rule); background: var(--rm-soft); }
+.roadmap-shell input::placeholder { color: var(--rm-muted); opacity: 1; }
+.roadmap-shell :is(a, button, select, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--rm-focus); outline-offset: 3px;
+}
+.roadmap-shell ::selection { background: var(--rm-ink); color: var(--rm-ground); }
+.roadmap-shell h1, .roadmap-shell h2, .roadmap-shell h3, .roadmap-shell p { margin: 0; }
+.roadmap-shell h1 { font: 700 30px/1.1 "Barlow Condensed", Barlow, sans-serif; letter-spacing: -.01em; }
+.roadmap-shell h2 { font: 600 28px/1.15 "Barlow Condensed", Barlow, sans-serif; text-wrap: balance; }
+.roadmap-shell h3 { font-size: 17px; line-height: 1.3; }
+.roadmap-shell h4 { font-size: 16px; line-height: 1.3; margin: 0; }
+.rm-small { font-size: 13px; font-weight: 400; }
+.roadmap-shell code, .rm-grade, .rm-number { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.rm-mast { display: flex; align-items: center; gap: 32px; min-height: 84px; border-bottom: 1px solid var(--rm-rule); }
+.rm-brand { display: flex; align-items: baseline; gap: 12px; flex: 1; }
+.rm-brand p { color: var(--rm-muted); font-size: 14px; }
+.roadmap-shell .view-tabs { display: flex; gap: 4px; overflow-x: auto; max-width: 100%; border: 0; padding: 0; }
+.roadmap-shell .view-tabs a {
+  color: var(--rm-muted); text-decoration: none; display: inline-flex; align-items: center;
+  min-height: 52px; padding: 12px 16px; white-space: nowrap; border-bottom: 2px solid transparent;
+}
+.roadmap-shell .view-tabs a[aria-selected="true"] { color: var(--rm-ink); border-bottom-color: currentColor; font-weight: 600; }
+.roadmap-shell .view-tabs a:hover { color: var(--rm-ink); background: var(--rm-soft); }
+.rm-context { padding: 24px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-context-top, .rm-section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+.rm-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.rm-control label { font-weight: 600; }
+.rm-source-grid { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-source-grid span { display: block; }
+.rm-source-grid dd { margin: 4px 0 0; }
+.rm-source-grid .rm-status { display: inline-flex; }
+.rm-source-grid code { color: var(--rm-ink); overflow-wrap: anywhere; }
+.rm-status { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--rm-rule); padding: 4px 10px; border-radius: 4px; font-size: 13px; color: var(--rm-muted); }
+.rm-status-warning { background: var(--rm-warn-bg); color: var(--rm-warn); border-color: transparent; }
+.rm-scope-panel, .rm-roadmap-panel, .rm-evidence-panel { padding-top: 28px; }
+.rm-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; }
+.rm-intro p, .rm-description { color: var(--rm-muted); max-width: 72ch; margin-top: 8px; }
+.rm-notice { background: var(--rm-soft); padding: 16px 20px; margin-top: 20px; font-size: 14px; }
+.rm-notice strong { color: var(--rm-ink); }
+.rm-progress-band { display: grid; grid-template-columns: 1fr 1.4fr 1fr; margin-top: 24px; border-block: 1px solid var(--rm-rule); }
+.rm-progress-step { padding: 20px 24px 20px 0; min-width: 0; }
+.rm-progress-step + .rm-progress-step { border-left: 1px solid var(--rm-rule); padding-left: 24px; }
+.rm-progress-step dt { color: var(--rm-muted); font-size: 13px; }
+.rm-progress-step dd { margin: 8px 0 0; font-size: 24px; font-weight: 600; line-height: 1.15; }
+.rm-progress-step .rm-grade { font-size: 30px; }
+.rm-progress-step p { margin-top: 8px; font-size: 13px; color: var(--rm-muted); }
+.rm-measurements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-measurements dt { font-size: 14px; }
+.rm-measurements dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.rm-measurements p { font-size: 12px; color: var(--rm-muted); margin-top: 4px; }
+.rm-section { margin-top: 32px; }
+.rm-table-region { overflow-x: auto; max-width: 100%; margin-top: 16px; scrollbar-color: var(--rm-muted) var(--rm-soft); }
+.rm-table { border-collapse: collapse; width: 100%; text-align: left; }
+.rm-table caption { text-align: left; font-size: 13px; color: var(--rm-muted); padding-bottom: 12px; }
+.rm-table th, .rm-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--rm-rule); vertical-align: top; }
+.rm-table thead th { color: var(--rm-muted); font-size: 12px; font-weight: 500; }
+.rm-table tbody th { font-weight: 600; min-width: 140px; }
+.rm-table td { font-size: 14px; }
+.rm-table td small { display: block; color: var(--rm-muted); font-size: 12px; margin-top: 4px; }
+.rm-component-table th:nth-child(1) { width: 22%; }
+.rm-component-table th:nth-child(2), .rm-component-table th:nth-child(3) { width: 16%; }
+.rm-component-table th:nth-child(4) { width: 46%; }
+.rm-proof-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 0; list-style: none; margin: 20px 0 0; }
+.rm-proof-list li { border-top: 2px solid var(--rm-ink); padding-top: 16px; }
+.rm-proof-list p { font-size: 14px; color: var(--rm-muted); margin-top: 8px; }
+.rm-proof-list dl { margin: 16px 0 0; font-size: 13px; }
+.rm-proof-list dt { font-weight: 600; }
+.rm-proof-list dd { margin: 4px 0 12px; color: var(--rm-muted); }
+.rm-toolbar { display: flex; align-items: end; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
+.rm-toolbar label { display: grid; gap: 6px; font-size: 13px; }
+.rm-toolbar input[type="search"] { width: 260px; }
+.rm-toolbar .rm-count { margin-left: auto; color: var(--rm-muted); font-size: 13px; align-self: center; }
+.rm-nnl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rm-horizon { min-width: 0; }
+.rm-horizon-header { padding-bottom: 16px; border-bottom: 2px solid var(--rm-ink); }
+.rm-horizon-header p { font-size: 13px; color: var(--rm-muted); margin-top: 6px; }
+.rm-item { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); overflow-wrap: anywhere; }
+.rm-item > summary { list-style: none; display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-weight: 600; }
+.rm-item > summary::-webkit-details-marker { display: none; }
+.rm-item > summary::after { content: "+"; margin-left: auto; flex-shrink: 0; color: var(--rm-muted); font-weight: 400; }
+.rm-item[open] > summary::after { content: "−"; }
+.rm-item .rm-item-preview { color: var(--rm-muted); font-size: 14px; margin: 4px 0 10px; }
+.rm-item-body { font-size: 14px; padding-top: 12px; }
+.rm-item-body p { margin-bottom: 12px; }
+.rm-item-body ul { margin: 12px 0; padding-left: 20px; }
+.rm-item-body li + li { margin-top: 8px; }
+.rm-item-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--rm-muted); }
+.rm-empty { padding: 24px; border: 1px dashed var(--rm-rule); color: var(--rm-muted); }
+.rm-history-record { margin-top: 16px; border-top: 1px solid var(--rm-rule); padding-top: 8px; }
+.rm-history-record > summary { padding: 14px 0; min-height: 48px; font-weight: 600; }
+.rm-history-record > summary span { color: var(--rm-muted); font-size: 14px; font-weight: 400; margin-left: 12px; }
+.rm-history-source { padding: 8px 0 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-history-source code { overflow-wrap: anywhere; font-size: 11px; }
+.rm-archive-frame { width: 100%; min-height: 800px; border: 1px solid var(--rm-rule); background: var(--rm-panel); }
+.rm-print-archive { display: none; }
+.rm-footer { border-top: 1px solid var(--rm-rule); padding-top: 20px; margin-top: 40px; font-size: 12px; color: var(--rm-muted); }
+.rm-footer p + p { margin-top: 6px; }
+.rm-plain-navigation { padding-top: 16px; }
+@media (max-width: 860px) {
+  .rm-mast { gap: 16px; flex-wrap: wrap; padding: 20px 0 0; }
+  .rm-mast .view-tabs { order: 3; width: 100%; }
+  .rm-proof-list { grid-template-columns: 1fr; gap: 16px; }
+  .rm-proof-list li { border-top-width: 1px; }
+  .rm-proof-list dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; }
+  .rm-proof-list dd { margin: 0; }
+  .rm-nnl { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 540px) {
+  .roadmap-shell { padding: 0 20px 32px; }
+  .rm-brand { display: block; }
+  .rm-brand p { margin-top: 4px; }
+  .rm-context { padding: 20px 0; }
+  .rm-control { display: grid; gap: 8px; width: 100%; }
+  .rm-control select { width: 100%; }
+  .rm-progress-band { grid-template-columns: 1fr; }
+  .rm-progress-step, .rm-progress-step + .rm-progress-step { padding: 16px 0; border-left: 0; }
+  .rm-progress-step + .rm-progress-step { border-top: 1px solid var(--rm-rule); }
+  .rm-progress-step dd { font-size: 22px; }
+  .rm-measurements { grid-template-columns: 1fr; gap: 16px; }
+  .rm-source-grid { gap: 12px; }
+  .rm-source-grid > div { width: 100%; }
+  .rm-component-table thead { display: none; }
+  .rm-component-table, .rm-component-table tbody, .rm-component-table tr { display: block; }
+  .rm-component-table tr { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); }
+  .rm-component-table tbody th, .rm-component-table td { display: block; border: 0; padding: 4px 0; min-width: 0; }
+  .rm-component-table td[data-label]::before { content: attr(data-label) ": "; color: var(--rm-muted); }
+  .rm-toolbar label, .rm-toolbar input[type="search"] { width: 100%; }
+  .rm-toolbar .rm-count { margin-left: 0; }
+}
+@media print {
+  .roadmap-shell, :root[data-theme="dark"] .roadmap-shell {
+    --rm-ground: #fff; --rm-panel: #fff; --rm-ink: #111; --rm-muted: #444;
+    --rm-rule: #999; --rm-soft: #f4f4f4; --rm-link: #174976;
+    padding: 0; min-height: 0; color-scheme: light;
+  }
+  .roadmap-shell :is([data-view], [data-assessment-scope], [data-roadmap-format])[hidden] { display: block !important; }
+  .roadmap-shell [data-roadmap-item][hidden] { display: revert !important; }
+  .roadmap-shell :is(.view-tabs, [data-enhance-control], .rm-toolbar, .rm-plain-navigation, .rm-empty, .rm-archive-frame) { display: none !important; }
+  .rm-mast { min-height: 60px; }
+  .rm-scope-panel + .rm-scope-panel, .rm-history-record, .rm-evidence-panel, .rm-roadmap-panel { break-before: page; }
+  .rm-print-archive { display: block; white-space: pre-wrap; font: 11px/1.5 sans-serif; }
+  .roadmap-shell details::details-content { content-visibility: visible; display: block; }
+  .rm-nnl { grid-template-columns: 1fr; }
+  .rm-table-region { overflow: visible; }
+}
+
+.rm-structure-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; border-bottom: 3px solid var(--rm-ink); padding-bottom: 16px; margin: 28px 0 20px; }
+.rm-structure-heading h2 { font-family: "Barlow Condensed", sans-serif; font-size: clamp(32px, 4vw, 48px); text-transform: uppercase; }
+.rm-structure-heading p { color: var(--rm-muted); font-style: italic; }
+.rm-structure-heading > span { margin-left: auto; font-size: 12px; color: var(--rm-muted); }
+.rm-matrix-key { display: flex; flex-wrap: wrap; border: 1px solid var(--rm-rule); }
+.rm-matrix-key > strong { display: flex; align-items: center; padding: 12px 16px; background: var(--rm-soft); font-size: 12px; }
+.roadmap-shell .rm-matrix-theme { display: flex; align-items: center; gap: 9px; flex: 1; min-height: 48px; padding: 12px 14px; border: 0; border-radius: 0; background: var(--theme-soft); color: var(--theme); text-align: left; font-family: "Barlow Condensed", sans-serif; font-size: 18px; font-weight: 600; text-transform: uppercase; }
+.rm-matrix-theme > span { font-size: 12px; }
+.roadmap-shell .rm-matrix-theme[aria-pressed="true"] { outline: 2px solid var(--theme); outline-offset: -3px; text-decoration: underline; text-underline-offset: 4px; }
+.rm-matrix-scroll { overflow-x: auto; scrollbar-width: thin; }
+.rm-matrix { width: 100%; min-width: 820px; table-layout: fixed; border-collapse: collapse; border: 1px solid var(--rm-ink); }
+.rm-matrix th, .rm-matrix td { padding: 18px 16px; border: 1px solid var(--rm-rule); vertical-align: top; text-align: left; }
+.rm-matrix thead { background: var(--rm-ink); color: var(--rm-ground); }
+.rm-matrix thead th { padding-block: 20px; font-family: "Barlow Condensed", sans-serif; font-size: 19px; text-transform: uppercase; }
+.rm-matrix th:first-child { width: 150px; }
+.rm-matrix tbody th { background: var(--rm-soft); font-family: "Barlow Condensed", sans-serif; font-size: 23px; line-height: 1.15; text-transform: uppercase; }
+.rm-matrix-cell { display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; gap: 9px; min-height: 82px; }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill) { display: inline-flex; flex-direction: column; gap: 3px; max-width: 100%; min-height: 44px; padding: 8px 10px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--rm-ink); text-decoration: none; font-size: 15px; line-height: 1.3; }
+:is(.rm-matrix-pill, .rm-mobile-pill) small { color: var(--theme); font-size: 11px; font-weight: 600; }
+:is(.rm-matrix-pill, .rm-mobile-pill):hover, :is(.rm-matrix-pill, .rm-mobile-pill):focus-visible { outline: 2px solid var(--theme); outline-offset: 2px; }
+.rm-matrix-empty { font-size: 13px; color: var(--rm-muted); }
+.rm-mobile-board { display: none; }
+@media screen and (max-width: 600px) {
+  .rm-roadmap-matrix > .rm-matrix-scroll { display: none; }
+  .rm-mobile-board { display: block; }
+  .rm-mobile-board > section { border: 1px solid var(--rm-rule); margin-bottom: 20px; }
+  .roadmap-shell .rm-mobile-board h3 { margin: 0; padding: 14px; background: var(--rm-ink); color: var(--rm-ground); font: 600 24px/1.2 "Barlow Condensed", sans-serif; }
+  .rm-mobile-stream { padding: 12px 14px 16px; }
+  .rm-mobile-stream + .rm-mobile-stream { border-top: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-mobile-stream h4 { margin: 0 0 10px; font-size: 14px; color: var(--rm-muted); }
+  .rm-mobile-items { display: flex; flex-wrap: wrap; gap: 8px; }
+}
+.rm-dependency-path { margin-block: 40px; --muted: var(--rm-muted); --now-bg: var(--rm-soft); --next-bg: var(--rm-soft); --later-bg: var(--rm-soft); --now: var(--rm-ink); --next: var(--rm-t5); --later: var(--rm-muted); }
+.rm-dependency-path .fig-scroll { overflow-x: auto; }
+.rm-dependency-path svg { display: block; width: 100%; min-width: 840px; height: auto; }
+.rm-dependency-path .spine { margin: 24px 0; padding: 20px; border: 1px solid var(--rm-rule); background: var(--rm-surface, var(--rm-ground)); }
+.rm-dependency-path .sv-node { fill: var(--rm-soft); stroke: var(--rm-muted); stroke-width: 1.2; }
+.rm-dependency-path .sv-node-gate { fill: var(--rm-t3-soft); stroke: var(--rm-t3); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rm-dependency-path .sv-node-hero { fill: var(--rm-t2-soft); stroke: var(--rm-t2); stroke-width: 1.8; }
+.rm-dependency-path .sv-label { font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 700; fill: var(--rm-ink); text-transform: uppercase; }
+.rm-dependency-path .sv-sub { font-family: "Barlow", sans-serif; font-size: 11px; fill: var(--rm-muted); }
+.rm-dependency-path .sv-col { font-family: "Barlow Condensed", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.rm-dependency-path .sv-edge { fill: none; stroke: var(--rm-muted); stroke-width: 1.2; }
+.rm-dependency-path .sv-edge-dash { stroke-dasharray: 4 3; }
+.rm-dependency-path .sv-elabel { font-family: "Barlow", sans-serif; font-size: 10px; fill: var(--rm-muted); paint-order: stroke; stroke: var(--rm-ground); stroke-width: 4px; }
+.rm-dependency-path svg a:focus-visible { outline: 2px solid var(--rm-ink); }
+.rm-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.roadmap-shell .rm-gantt-region { overflow: auto; max-height: 820px; border: 1px solid var(--rm-ink); }
+.roadmap-shell .rm-gantt { min-width: 980px; }
+.roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { display: grid; grid-template-columns: 280px minmax(0, 1fr); }
+.roadmap-shell .rm-gantt-axis { position: sticky; top: 0; z-index: 4; background: #181e23; color: #f2f4f5; }
+.roadmap-shell .rm-gantt-axis > strong { padding: 14px 16px; position: sticky; left: 0; background: #181e23; color: #f2f4f5; }
+.roadmap-shell .rm-gantt-calendar { display: grid; grid-template-columns: repeat(var(--month-count, 12), minmax(0, 1fr)); }
+.roadmap-shell .rm-gantt-calendar span { border: 1px solid #46505a; text-align: center; padding: 7px 0; color: inherit; background: transparent; }
+.roadmap-shell .rm-gantt-group { margin: 0; padding: 10px 16px; background: var(--rm-soft); color: var(--rm-ink); border-block: 1px solid var(--rm-rule); font: 600 19px "Barlow Condensed", sans-serif; }
+.roadmap-shell .rm-gantt-row { min-height: 66px; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-gantt-label { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; gap: 0 8px; padding: 6px 12px 6px 16px; position: sticky; left: 0; z-index: 2; background: var(--rm-panel); }
+.roadmap-shell .rm-gantt-label > a { font-size: 15px; font-weight: 500; line-height: 1.2; min-height: 28px; text-decoration: none; }
+.roadmap-shell .rm-gantt-label .rm-theme-tag { grid-column: 2; grid-row: 1 / 3; width: 44px; min-height: 44px; padding: 0; border-radius: 0; justify-content: center; font-size: 12px; }
+.rm-gantt-status { grid-column: 1; font-size: 11px; line-height: 1.3; color: var(--rm-muted); }
+.roadmap-shell .rm-gantt-track { min-height: 66px; background-size: calc(100% / var(--month-count, 12)) 100%; }
+.roadmap-shell .rm-gantt-bar { top: 11px; height: 44px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.roadmap-shell .rm-gantt-unscheduled { display: inline-flex; align-items: center; min-height: 44px; margin: 11px 12px; padding: 0 10px; background: var(--rm-panel); color: var(--rm-muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 200px; min-width: 1120px; }
+.roadmap-shell .rm-gantt-theme-lanes :is(.rm-gantt-axis, .rm-gantt-lane) { display: grid; grid-template-columns: var(--rm-lane-width) minmax(0, 1fr); }
+.rm-gantt-lane { border-bottom: 1px solid var(--rm-rule); }
+.rm-gantt-lane-label { position: sticky; left: 0; z-index: 2; min-width: 0; padding: 20px 16px; background: var(--theme-soft); color: var(--theme); border-right: 1px solid var(--theme); }
+.rm-gantt-lane-label > div { position: sticky; top: 100px; }
+.roadmap-shell .rm-gantt-lane-label h3 { margin: 0; color: inherit; font: 600 25px/1.1 "Barlow Condensed", sans-serif; text-transform: uppercase; overflow-wrap: anywhere; }
+.roadmap-shell .rm-gantt-lane-label button { display: block; width: 100%; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; text-align: left; text-transform: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.roadmap-shell .rm-gantt-lane-label button[aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 5px; }
+.roadmap-shell .rm-gantt-lane-label p { margin-top: 12px; font-size: 13px; color: inherit; }
+.rm-gantt-lane-body { min-width: 0; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-track { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-row { display: grid; grid-template-columns: minmax(0, 1fr); grid-area: 1 / 1; min-width: 0; min-height: 0; border: 0; pointer-events: none; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-bar { position: static; left: auto; top: auto; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 5px; box-sizing: border-box; width: var(--duration); height: auto; min-height: 90px; margin: 8px 0 8px var(--start); padding: 10px; background: var(--theme-soft); white-space: normal; overflow: visible; text-overflow: clip; pointer-events: auto; }
+.rm-gantt-theme-lanes .rm-gantt-title { font-size: 15px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+.rm-gantt-theme-lanes .rm-gantt-status { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--theme); overflow-wrap: anywhere; }
+.rm-gantt-secondary, .rm-gantt-window-note { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--theme); }
+.rm-gantt-theme-lanes .rm-gantt-bar.is-scenario { border-style: dashed; }
+.rm-gantt-undated { padding: 16px; background: var(--rm-panel); border-top: 1px dashed var(--rm-rule); }
+.roadmap-shell .rm-gantt-undated > p { margin-bottom: 10px; color: var(--rm-muted); font-size: 13px; }
+.rm-gantt-undated-items { display: flex; flex-wrap: wrap; gap: 12px; }
+.roadmap-shell .rm-gantt-undated-items .rm-gantt-row { flex: 0 1 340px; grid-area: auto; }
+.roadmap-shell .rm-gantt-theme-lanes .rm-gantt-unscheduled { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; min-height: 90px; margin: 0; padding: 12px; border: 1px solid var(--theme); background: var(--theme-soft); color: var(--theme); text-decoration: none; pointer-events: auto; }
+.rm-gantt-theme-lanes :is(a, button):focus-visible { outline: 2px solid var(--theme, var(--rm-ink)); outline-offset: 3px; }
+.roadmap-shell { --rm-completed-bg: #edf0f2; --rm-completed-ink: #56616b; --rm-completed-rule: #a8b2ba; --rm-completed-hover: #e2e7eb; }
+:root[data-theme="dark"] .roadmap-shell { --rm-completed-bg: #27313a; --rm-completed-ink: #c0cad3; --rm-completed-rule: #75818c; --rm-completed-hover: #303d48; }
+.roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-gantt-row, .rm-item)[data-completion-state] { --theme: var(--rm-completed-ink); --theme-soft: var(--rm-completed-bg); }
+.roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-item)[data-completion-state] { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); color: var(--rm-completed-ink); }
+.roadmap-shell .rm-gantt-row[data-completion-state] :is(.rm-gantt-bar, .rm-gantt-unscheduled) { background: var(--rm-completed-bg); border-color: var(--rm-completed-rule); }
+.rm-completion-label { font-weight: 600; }
+.rm-completion-remaining { display: block; font-weight: 400; }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill)[data-completion-state]:hover, .roadmap-shell .rm-gantt-row[data-completion-state] a:hover { background: var(--rm-completed-hover); }
+.roadmap-shell :is(.rm-matrix-pill, .rm-mobile-pill)[data-completion-state]:focus-visible, .roadmap-shell .rm-gantt-row[data-completion-state] a:focus-visible { outline: 2px solid var(--rm-ink); outline-offset: 3px; }
+@media print {
+  .roadmap-shell :is(:is(.rm-matrix-pill, .rm-mobile-pill), .rm-gantt-row, .rm-item)[data-completion-state] { --rm-completed-bg: #f1f1f1; --rm-completed-ink: #444; --rm-completed-rule: #999; }
+  .roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 140px; min-width: 0; }
+  .roadmap-shell :is([data-roadmap-lane], [data-roadmap-track])[hidden] { display: grid !important; }
+  .rm-gantt-lane-label, .rm-gantt-lane-label > div { position: static; }
+  .roadmap-shell .rm-gantt-region { max-height: none; overflow: visible; }
+  .roadmap-shell .rm-gantt { min-width: 0; }
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-label { position: static; }
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 180px minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .roadmap-shell .rm-gantt-theme-lanes { --rm-lane-width: 132px; }
+  .rm-gantt-lane-label { padding: 16px 10px; }
+  .roadmap-shell .rm-gantt-lane-label h3 { font-size: 21px; }
+  .roadmap-shell .rm-gantt-axis, .roadmap-shell .rm-gantt-row { grid-template-columns: 176px minmax(0, 1fr); }
+  .roadmap-shell .rm-gantt-label { padding-left: 10px; }
+  .roadmap-shell .rm-gantt-label > a { font-size: 13px; }
+  .rm-matrix-key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rm-matrix-key > strong { grid-column: 1 / -1; }
+  .roadmap-shell .rm-matrix-theme { font-size: 16px; }
+  .rm-structure-heading > span { margin-left: 0; }
+  .rm-dependency-path .spine { padding: 12px; }
+}
+
+.roadmap-shell .rm-roadmap-lead { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(250px, .8fr); gap: 40px; align-items: start; margin: 28px 0 24px; }
+.roadmap-shell .rm-roadmap-lead h2 { max-width: 22ch; margin: 0 0 12px; font-size: clamp(32px, 3.4vw, 48px); line-height: 1.1; }
+.rm-roadmap-lead p { max-width: 65ch; }
+.rm-lead-review { padding-left: 24px; border-left: 1px solid var(--rm-rule); }
+.rm-lead-review > strong { display: block; margin-bottom: 10px; font-size: 16px; }
+.rm-lead-review ul { list-style: none; padding: 0; margin: 0 0 12px; }
+.rm-lead-review li { margin-block: 6px; }
+.rm-lead-review a { text-underline-offset: 3px; }
+.rm-lead-review p { font-size: 13px; color: var(--rm-muted); }
+.rm-grade-movement { list-style: none; margin: 20px 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--rm-rule); }
+.rm-grade-movement li + li { border-left: 1px solid var(--rm-rule); }
+.rm-grade-movement a { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; color: var(--rm-ink); text-decoration: none; }
+.rm-grade-movement strong { font: 600 38px/1.1 "Barlow Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+.rm-grade-movement a > span:last-child { color: var(--rm-muted); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.rm-grade-movement a:hover, .rm-grade-tile:hover { background: var(--rm-soft); }
+.roadmap-shell .rm-progress-intro > h2 { font: 600 clamp(34px, 4vw, 48px)/1.1 "Barlow Condensed", sans-serif; text-transform: uppercase; margin: 28px 0 12px; }
+.rm-progress-intro > p, .rm-evidence-intro { max-width: 70ch; color: var(--rm-muted); }
+.roadmap-shell .rm-outcomes { margin-block: 28px 36px; }
+.roadmap-shell .rm-outcomes .rm-structure-heading { border-bottom: 1px solid var(--rm-rule); margin: 0 0 16px; padding-bottom: 12px; }
+.roadmap-shell .rm-outcomes .rm-structure-heading h2 { font-size: 28px; }
+.roadmap-shell .rm-outcomes .rm-outcome-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 40px; margin-block: 16px; }
+.roadmap-shell .rm-outcome-list h3 { font-size: 19px; margin-bottom: 5px; }
+.roadmap-shell .rm-outcome-list p { font-size: 15px; line-height: 1.5; margin-bottom: 6px; }
+.roadmap-shell .rm-outcomes > .rm-measure-context { margin-top: 16px; font-size: 13px; max-width: 75ch; }
+.roadmap-shell .rm-grade-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--rm-rule); margin: 20px 0; }
+.roadmap-shell .rm-grade-tile { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; justify-content: flex-start; min-width: 0; padding: 16px 10px; color: var(--rm-ink); text-decoration: none; border-right: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-grade-tile:nth-child(4n) { border-right: 0; }
+.roadmap-shell .rm-grade-tile strong { font: 600 42px/1 "Barlow Condensed", sans-serif; font-variant-numeric: tabular-nums; }
+.roadmap-shell .rm-grade-tile span { font-size: 13px; color: var(--rm-muted); overflow-wrap: anywhere; }
+.roadmap-shell .rm-grade-tile > span:first-child { color: var(--rm-ink); }
+.roadmap-shell .rm-grade-tile[data-grade-state="not-reassessed"] strong,
+.roadmap-shell .rm-grade-tile[data-grade-state="blocked"] strong { opacity: .75; }
+.roadmap-shell .rm-grade-tile[data-grade-scope="lens"] { grid-column: span 2; border-top: 3px solid var(--rm-rule); }
+.roadmap-shell .rm-grade-tile[data-grade-scope="lens"]:last-child { border-right: 0; }
+.roadmap-shell .rm-grade-tile small { display: inline-block; font: 600 11px/1 "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: .12em; padding: 3px 6px; border: 1px solid var(--rm-rule); color: var(--rm-muted); vertical-align: middle; }
+.rm-grade-scope-note { max-width: 75ch; margin-block: 12px 20px; font-size: 13px; color: var(--rm-muted); }
+.rm-assessment-context { max-width: 75ch; margin-block: 14px; }
+.rm-scale-breakdown { border-block: 1px solid var(--rm-rule); padding-block: 8px; }
+.roadmap-shell .rm-scale-summary { margin-block: 16px; }
+.rm-scale-summary p { font-size: 15px; }
+.rm-scale-breakdown > summary { font-weight: 600; }
+.rm-next-proof { margin-block: 32px; padding-block: 20px; border-block: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-next-proof h2 { margin: 0 0 12px; font: 600 28px/1.2 "Barlow Condensed", sans-serif; }
+.rm-next-proof ul { padding-left: 22px; max-width: 75ch; }
+.rm-next-proof li { margin-block: 10px; }
+.roadmap-shell .rm-progress-story { gap: 32px; margin-block: 32px; }
+.roadmap-shell .rm-finding-segments { margin-block: 14px; }
+.roadmap-shell .rm-finding-segments a { min-height: 78px; }
+.rm-baseline-context { margin-top: 12px; }
+.roadmap-shell #view-history > .rm-evidence-group { margin: 0; padding: 0; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .rm-evidence-group > summary { padding: 22px 0; }
+.rm-evidence-group > summary strong { font: 600 27px/1.2 "Barlow Condensed", sans-serif; }
+.rm-evidence-group > summary span { display: block; margin: 8px 0 0 18px; color: var(--rm-muted); font-size: 15px; max-width: 75ch; }
+.rm-evidence-records { padding: 0 20px 20px; }
+.rm-evidence-records > details { border-top: 1px solid var(--rm-rule); padding-block: 12px; }
+.rm-evidence-records :is(p, li, summary), #view-history :is(code, a), .rm-assessment-context code { overflow-wrap: anywhere; }
+.rm-evidence-records pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.rm-evidence-intro { margin-bottom: 24px; }
+.rm-pan-hint { display: none; font-size: 13px; color: var(--rm-muted); margin-block: 10px; }
+.roadmap-shell :is(a, button, input, select, summary):focus-visible { outline: 2px solid var(--rm-t3); outline-offset: 3px; }
+@media screen and (max-width: 600px) {
+  .roadmap-shell .rm-roadmap-lead { grid-template-columns: 1fr; gap: 14px; margin-block: 18px; }
+  .roadmap-shell .rm-roadmap-lead h2 { font-size: 32px; margin-bottom: 8px; }
+  .rm-roadmap-lead > div:first-child p { font-size: 15px; line-height: 1.45; }
+  .rm-lead-review { border: 0; padding: 0; }
+  .rm-lead-review > strong, .rm-lead-review ul { display: none; }
+  .rm-lead-review p { font-size: 14px; margin: 0; }
+  .roadmap-shell .rm-toolbar { display: grid; grid-template-columns: 1fr 1.25fr; gap: 10px; margin-block: 14px; }
+  .roadmap-shell .rm-toolbar label { min-width: 0; font-size: 13px; }
+  .roadmap-shell .rm-toolbar :is(input, select) { width: 100%; min-width: 0; height: 44px; padding: 8px; font-size: 14px; }
+  .roadmap-shell .rm-theme-filter-heading { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; padding: 4px 8px; }
+  .roadmap-shell .rm-theme-filter-heading strong { display: none; }
+  .roadmap-shell .rm-theme-filter-heading .rm-count { margin: 0; font-size: 12px; }
+  .roadmap-shell .rm-theme-filter-heading button { margin-left: auto; min-height: 44px; padding: 8px; font-size: 13px; white-space: nowrap; }
+  .roadmap-shell .rm-theme-choices { display: flex; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: thin; }
+  .roadmap-shell .rm-theme-choice { flex: 0 0 auto; min-height: 44px; padding: 10px 12px; font-size: 17px; }
+  .roadmap-shell .rm-theme-count { margin-left: 8px; }
+  .rm-grade-movement { grid-template-columns: 1fr; }
+  .rm-grade-movement li + li { border-left: 0; border-top: 1px solid var(--rm-rule); }
+  .rm-grade-movement a { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 14px 0; }
+  .rm-grade-movement a > span:last-child { grid-column: 1 / -1; }
+  .rm-grade-movement strong { font-size: 30px; }
+  .roadmap-shell .rm-outcomes .rm-outcome-list { grid-template-columns: 1fr; gap: 18px; }
+  .roadmap-shell .rm-grade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .roadmap-shell .rm-grade-tile { border-bottom: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-grade-tile:nth-child(4n) { border-right: 1px solid var(--rm-rule); }
+  .roadmap-shell .rm-grade-tile:nth-child(2n) { border-right: 0; }
+  .roadmap-shell .rm-grade-tile[data-grade-scope="lens"] { grid-column: span 1; }
+  .roadmap-shell .rm-scale-summary { grid-template-columns: 110px minmax(0, 1fr); gap: 18px; }
+  .roadmap-shell .rm-scale-summary strong { font-size: inherit; }
+  .roadmap-shell .rm-scale-overall strong { font-size: 48px; }
+  .rm-scale-summary p, .rm-scale-summary a, .rm-scale-overall span { font-size: 14px; }
+  .rm-evidence-records { padding-inline: 0; }
+  .rm-pan-hint { display: block; }
+}
+@media print {
+  .rm-mobile-board { display: none !important; }
+  .rm-roadmap-matrix > .rm-matrix-scroll { display: block !important; }
+}
+</style></head><body><main class="roadmap-shell"><div class="rm-container"><header class="rm-mast"><h1>Meridian</h1><p>Synthetic roadmap</p></header><section class="rm-roadmap-panel"><div class="rm-roadmap-lead"><div><h2>A reliable weekly workflow.</h2><p>Keep the migration milestone distinct from its open follow-ups.</p></div></div><section class="rm-roadmap-matrix" aria-labelledby="roadmap-board-heading"><div class="rm-structure-heading"><h2 id="roadmap-board-heading">The board</h2><p>Streams × horizons. Select a pill for progress and evidence.</p><span>3 items · 3 placements</span></div><div class="rm-matrix-key" role="group" aria-label="Filter the board by theme"><strong>Throughlines · click filters</strong><button class="rm-matrix-theme rm-theme-t1" type="button" data-roadmap-theme-choice="t1" data-theme-label="Reliability" aria-pressed="false" data-enhance-control hidden><span>T1</span> Reliability</button><span class="rm-matrix-theme rm-theme-t1" data-theme-filter-fallback>Reliability</span></div><div class="rm-matrix-scroll" role="region" aria-label="Roadmap by stream and horizon" tabindex="0"><table class="rm-matrix"><caption class="rm-visually-hidden">Roadmap by stream and horizon; completion does not move planning commitments.</caption><thead><tr><th scope="col">Stream</th><th scope="col">Now</th></tr></thead><tbody><tr><th scope="row">Product</th><td><div class="rm-matrix-cell"><a class="rm-matrix-pill rm-theme-t1" href="#migration" data-roadmap-item="migration" data-completion-state="milestone-complete" data-completion-scope="Reviewed code" data-completion-evidence="#migration" data-throughlines="t1" data-search-text="Worker migration Core delivered · Follow-ups remain Core delivered; follow-ups remain" title="Worker migration"><span>Worker migration</span><small><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Core delivered</span><span class="rm-completion-remaining">Follow-ups remain</span></small></a><a class="rm-matrix-pill rm-theme-t1" href="#export" data-roadmap-item="export" data-completion-state="complete" data-completion-scope="Verified export acceptance" data-completion-evidence="#export" data-throughlines="t1" data-search-text="Account export Done Complete" title="Account export"><span>Account export</span><small><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span></small></a><a class="rm-matrix-pill rm-theme-t1" href="#reports" data-roadmap-item="reports" data-throughlines="t1" data-search-text="Weekly reports 1/3 tickets Done" title="Weekly reports"><span>Weekly reports</span><small>1/3 tickets Done</small></a></div></td></tr></tbody></table></div><div class="rm-mobile-board" data-roadmap-list aria-label="Roadmap by horizon"><section data-roadmap-mobile-group><h3>Now</h3><div class="rm-mobile-stream" data-roadmap-mobile-group><h4>Product</h4><div class="rm-mobile-items"><a class="rm-mobile-pill rm-theme-t1" href="#migration" data-roadmap-item="migration" data-completion-state="milestone-complete" data-completion-scope="Reviewed code" data-completion-evidence="#migration" data-throughlines="t1" data-search-text="Worker migration Core delivered · Follow-ups remain Core delivered; follow-ups remain" title="Worker migration"><span>Worker migration</span><small><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Core delivered</span><span class="rm-completion-remaining">Follow-ups remain</span></small></a><a class="rm-mobile-pill rm-theme-t1" href="#export" data-roadmap-item="export" data-completion-state="complete" data-completion-scope="Verified export acceptance" data-completion-evidence="#export" data-throughlines="t1" data-search-text="Account export Done Complete" title="Account export"><span>Account export</span><small><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span></small></a><a class="rm-mobile-pill rm-theme-t1" href="#reports" data-roadmap-item="reports" data-throughlines="t1" data-search-text="Weekly reports 1/3 tickets Done" title="Weekly reports"><span>Weekly reports</span><small>1/3 tickets Done</small></a></div></div></section><p data-filter-empty hidden>No matching roadmap items. Clear the filters above.</p></div><p class="rm-chart-note">Colors identify themes. Select an initiative for its progress and proof. Checked, muted items identify completed work. A milestone label names the finished scope; open follow-ups remain separate. Select an item for evidence.</p></section><div class="rm-gantt-region" role="region" aria-label="Roadmap timeline by theme; scroll to explore" tabindex="0" data-roadmap-list><div class="rm-gantt rm-gantt-theme-lanes" style="--month-count:3"><div class="rm-gantt-axis"><strong>Theme</strong><div class="rm-gantt-calendar"><span class="rm-quarter" style="grid-column:span 3">Autumn</span><span>Sep</span><span>Oct</span><span>Nov</span></div></div><section class="rm-gantt-lane rm-theme-t1" data-roadmap-lane="t1" aria-labelledby="gantt-lane-t1"><header class="rm-gantt-lane-label"><div><h3 id="gantt-lane-t1"><button type="button" data-roadmap-theme-choice="t1" data-theme-label="Reliability" aria-pressed="false" data-enhance-control hidden>Reliability</button><span data-theme-filter-fallback>Reliability</span></h3><p data-roadmap-lane-count>3 initiatives</p></div></header><div class="rm-gantt-lane-body"><div class="rm-gantt-track" data-roadmap-track><div class="rm-gantt-row rm-theme-t1" data-roadmap-item="migration" data-completion-state="milestone-complete" data-completion-scope="Reviewed code" data-completion-evidence="#migration" data-throughlines="t1" data-search-text="Worker migration. Core delivered · Follow-ups remain. September. source-stated. Synthetic approved plan"><a href="#migration" class="rm-gantt-bar" style="--start:0%;--duration:33.33333333333333%" aria-label="Worker migration. Core delivered · Follow-ups remain. September. source-stated. Synthetic approved plan" title="Worker migration. Core delivered · Follow-ups remain. September. source-stated. Synthetic approved plan"><strong class="rm-gantt-title">Worker migration</strong><span class="rm-gantt-status"><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Core delivered</span><span class="rm-completion-remaining">Follow-ups remain</span></span></a></div><div class="rm-gantt-row rm-theme-t1" data-roadmap-item="export" data-completion-state="complete" data-completion-scope="Verified export acceptance" data-completion-evidence="#export" data-throughlines="t1" data-search-text="Account export. Done. October. source-stated. Synthetic approved plan"><a href="#export" class="rm-gantt-bar" style="--start:33.33333333333333%;--duration:33.33333333333333%" aria-label="Account export. Done. October. source-stated. Synthetic approved plan" title="Account export. Done. October. source-stated. Synthetic approved plan"><strong class="rm-gantt-title">Account export</strong><span class="rm-gantt-status"><span class="rm-completion-label"><svg class="rm-completion-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path d="m3 8 3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span></span></a></div><div class="rm-gantt-row rm-theme-t1" data-roadmap-item="reports" data-throughlines="t1" data-search-text="Weekly reports. 1/3 tickets Done. November. source-stated. Synthetic approved plan"><a href="#reports" class="rm-gantt-bar" style="--start:66.66666666666666%;--duration:33.33333333333333%" aria-label="Weekly reports. 1/3 tickets Done. November. source-stated. Synthetic approved plan" title="Weekly reports. 1/3 tickets Done. November. source-stated. Synthetic approved plan"><strong class="rm-gantt-title">Weekly reports</strong><span class="rm-gantt-status">1/3 tickets Done</span></a></div></div></div></section></div><p data-filter-empty hidden>No matching roadmap items. Clear the filters to show the timeline.</p></div><details id="migration" class="rm-item"><summary>Worker migration <span class="rm-small">Core delivered; follow-ups remain</span></summary><p>The core worker migration is delivered in reviewed code; retry hardening and end-to-end acceptance remain open.</p></details><details id="export" class="rm-item"><summary>Account export <span class="rm-small">Complete</span></summary><p>Complete</p></details><details id="reports" class="rm-item"><summary>Weekly reports <span class="rm-small">1/3 tickets Done</span></summary><p>1/3 tickets Done</p></details></section><section class="rm-runtime-section"><h2>What is verified?</h2><div class="rm-runtime-summary"><div><h3>Reviewed code</h3><p>Migration core delivered.</p></div><div><h3>Production</h3><p>End-to-end acceptance not yet verified.</p></div></div></section><section id="view-history"><section class="rm-evidence-group"><h2>What supports progress?</h2><details><summary>Recorded delivery</summary><p>The source record is evidence.json.</p></details></section><section class="rm-evidence-group"><h2>What was the baseline?</h2><p>Baseline B on September 10. This presentation update is not a re-grade.</p></section></section><script type="application/json" id="saved-evidence">{"synthetic":true,"baseline":{"id":"baseline-1","grade":"B","observedAt":"2026-09-10"},"items":[{"id":"migration","title":"Worker migration","completion":{"state":"milestone-complete","label":"Core delivered","remainingLabel":"Follow-ups remain","scope":"Reviewed code","evidenceHref":"#migration"},"status":"Core delivered; follow-ups remain"},{"id":"export","title":"Account export","completion":{"state":"complete","label":"Complete","scope":"Verified export acceptance","evidenceHref":"#export"},"status":"Complete"},{"id":"reports","title":"Weekly reports","completion":null,"status":"1/3 tickets Done"}],"notes":["Worker migration core is delivered in reviewed code. Retry hardening and end-to-end acceptance remain open.","Account export original acceptance is verified complete. Weekly reports remains active despite one Done ticket."],"planning":"Recorded September, October, November windows stay unchanged."}</script></div></main></body></html>

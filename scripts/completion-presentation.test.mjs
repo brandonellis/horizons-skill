@@ -19,7 +19,7 @@ test('completed work has the same explicit presentation state and working link i
     assert.match(html, /data-completion-state="complete"/);
     assert.match(html, /data-completion-evidence="#work"/);
     assert.match(html, /href="#work"/);
-    assert.match(html, /class="rm-completion-label">Complete/);
+    assert.match(html, /class="rm-completion-label">[\s\S]*?<\/svg>Done<\/span>/);
     assert.doesNotMatch(html, /aria-disabled|\bdisabled\b|tabindex="-1"/);
   }
 });

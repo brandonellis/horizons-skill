@@ -1,0 +1,22 @@
+{
+  "id": "completion-layout",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Improve the existing synthetic Meridian roadmap in fixtures/completion-layout/index.html. Make it clear which work is done and which follow-ups are still open without crossing out titles or disabling evidence links. Fix the cramped Evidence and environment-proof spacing and keep mobile items from stretching each other. Use the existing visual identity and the shared Horizons presentation resources. This is a presentation-only update to the same local artifact; preserve evidence.json, saved evidence, baseline, dates and active work. No reassessment, publication, installations or live access.",
+  "files": [
+    "fixtures/completion-layout/"
+  ],
+  "gap": "A general visual edit may equate a delivered core with a completed initiative, disable historical evidence links, infer completion from ticket fractions or replace the established roadmap while adjusting spacing.",
+  "expected_behavior": [
+    "Loads the Horizons execution and presentation guidance and updates the existing local index.html.",
+    "Distinguishes the completed migration core from its open follow-ups, and retains the fully completed export and active reporting item.",
+    "Keeps readable titles without strike-through and real evidence links with keyboard access.",
+    "Uses spacing selectors matching section headings and environment content, with mobile item alignment that does not stretch neighboring items.",
+    "Preserves evidence.json and embedded saved evidence, all three initiative identities, baseline B and the sourced timeline windows."
+  ],
+  "must_not": [
+    "Invent completion for the entire migration or the reporting initiative from its ticket count.",
+    "Modify recorded evidence, dates, baseline or grades; publish the artifact or create a second canonical hub."
+  ]
+}
