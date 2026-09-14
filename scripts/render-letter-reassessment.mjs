@@ -4,6 +4,10 @@ import { escapeHtml as escape } from './render-progress.mjs';
 const lensStatuses = ['assessed', 'reassessment-required', 'historical'];
 const letter = value => typeof value === 'string' && /^(?:[ABCD][+-]?|F)$/.test(value);
 const day = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value));
+const informationOnly = component => component.movementClass === 'information' || component.movementClass === 'instrument';
+const transition = component => informationOnly(component)
+  ? `${escape(component.grade)} · previously ${escape(component.previousGrade)} (new judgment)`
+  : `${escape(component.previousGrade)} → ${escape(component.grade)}`;
 const text = value => typeof value === 'string' && value.trim().length > 0;
 
 function dateLabel(value) {
@@ -54,10 +58,10 @@ export function renderLetterReassessment(assessment) {
   }).join('');
   const details = assessment.components.map(component => {
     if (component.status !== 'assessed-qualitative-snapshot') return `<details id="grade-${escape(component.id)}"><summary>${escape(component.name)} · ${component.status === 'blocked' ? 'Blocked' : 'Not reassessed'}</summary><p>Last reported: ${escape(component.lastReportedGrade)} at ${escape(component.lastObservedAt ?? 'an unrecorded time')}. This is not a fresh grade.</p>${component.reason ? `<p>${escape(component.reason)}</p>` : ''}</details>`;
-    return `<details id="grade-${escape(component.id)}"><summary>${escape(component.name)} · ${escape(component.previousGrade)} → ${escape(component.grade)}</summary><p>${escape(component.rationale)}</p><p><strong>Verified improvements</strong></p><ul>${component.verifiedImprovements.map(text => `<li>${escape(text)}</li>`).join('')}</ul><p><strong>What still holds the grade back</strong></p><ul>${component.nextGradeRequirements.map(text => `<li>${escape(text)}</li>`).join('')}</ul><p>Qualitative code assessment on ${escape(dateLabel(component.observedAt))}. Not an operational certification.</p><details><summary>Source references and coverage</summary><p>Recorded at ${escape(component.observedAt)}.</p><ul>${component.evidenceRefs.map(reference => `<li>${escape(reference)}</li>`).join('')}</ul><p>${escape((component.coverage.limitations ?? []).join(' '))}</p></details></details>`;
+    return `<details id="grade-${escape(component.id)}"><summary>${escape(component.name)} · ${transition(component)}</summary><p>${escape(component.rationale)}</p><p><strong>Verified improvements</strong></p><ul>${component.verifiedImprovements.map(text => `<li>${escape(text)}</li>`).join('')}</ul><p><strong>What still holds the grade back</strong></p><ul>${component.nextGradeRequirements.map(text => `<li>${escape(text)}</li>`).join('')}</ul><p>Qualitative code assessment on ${escape(dateLabel(component.observedAt))}. Not an operational certification.</p><details><summary>Source references and coverage</summary><p>Recorded at ${escape(component.observedAt)}.</p><ul>${component.evidenceRefs.map(reference => `<li>${escape(reference)}</li>`).join('')}</ul><p>${escape((component.coverage.limitations ?? []).join(' '))}</p></details></details>`;
   }).join('');
   const reviewed = assessment.components.filter(component => component.status === 'assessed-qualitative-snapshot');
-  const movement = reviewed.length ? `<ul class="rm-grade-movement" aria-label="Changes in the latest component review">${reviewed.map(component => `<li><a href="#grade-${escape(component.id)}"><span>${escape(component.name)}</span><strong>${escape(component.previousGrade)} <span aria-label="to">→</span> ${escape(component.grade)}</strong><span>${component.grade === component.previousGrade ? 'Unchanged · see what remains' : 'Regraded · see the evidence'}</span></a></li>`).join('')}</ul>` : '';
+  const movement = reviewed.length ? `<ul class="rm-grade-movement" aria-label="Changes in the latest component review">${reviewed.map(component => `<li><a href="#grade-${escape(component.id)}"><span>${escape(component.name)}</span><strong>${informationOnly(component) ? `${escape(component.grade)} <small>previously ${escape(component.previousGrade)}</small>` : `${escape(component.previousGrade)} <span aria-label="to">→</span> ${escape(component.grade)}`}</strong><span>${informationOnly(component) ? 'New judgment · not an earned trend' : component.grade === component.previousGrade ? 'Unchanged · see what remains' : 'Regraded · see the evidence'}</span></a></li>`).join('')}</ul>` : '';
   const lenses = renderLensTiles(assessment, componentIds);
   return { tiles: `<div class="rm-grade-grid">${tiles}${lenses.tiles}</div>`, details, movement, lensNote: lenses.note };
 }

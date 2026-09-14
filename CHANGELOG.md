@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.2.2 - 2026-09-14
+
+- Accept null optional tracker labels as unknown work type so a complete delivery
+  refresh does not crash or invent a classification. Reject malformed label data
+  with a clear validation error.
+- Honor information and instrument movement classifications in qualitative grade
+  rendering: retain current and previous letters without earned-trend arrows.
+- Add behavioral regressions for preserved delivery, input immutability, malformed
+  metadata and non-trend grade changes. 144 helper tests pass.
+
 ## 2.2.1 - 2026-09-14
 
 - Keep the new CLI helpers inert when imported from `node -`, `node -e`, or a

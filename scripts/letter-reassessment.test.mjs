@@ -174,3 +174,21 @@ test('lens names and grades are escaped like every other rendered value', () => 
   assert(!rendered.tiles.includes('<script>'));
   assert(!rendered.lensNote.includes('<script>'));
 });
+
+test('information and instrument judgments retain both letters without earned-trend arrows', () => {
+  for (const movementClass of ['information', 'instrument']) {
+    const input = fixture();
+    input.assessment.reviews[0].movementClass = movementClass;
+    const result = recordLetterReassessment(input);
+    const before = structuredClone(result);
+    const rendered = renderLetterReassessment(result);
+    assert.match(rendered.details, /B · previously B- \(new judgment\)/);
+    assert.match(rendered.movement, /New judgment · not an earned trend/);
+    assert.doesNotMatch(rendered.details + rendered.movement, /→/);
+    assert.match(rendered.tiles, /<strong>B<\/strong>/);
+    assert.deepEqual(result, before);
+  }
+  const input = fixture();
+  input.assessment.reviews[0].movementClass = 'code';
+  assert.match(renderLetterReassessment(recordLetterReassessment(input)).movement, /→/);
+});

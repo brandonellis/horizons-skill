@@ -6,7 +6,14 @@ const roles = new Set(['supporting', 'follow-up', 'regression']);
 const workTypes = new Set(['capability', 'improvement', 'bug', 'unknown']);
 
 export function classifyWork(labels = []) {
-  const normalized = labels.map(label => (typeof label === 'string' ? label : label.name).toLowerCase());
+  // Connectors may return null for an unselected optional labels field.
+  if (labels == null) return 'unknown';
+  assert(Array.isArray(labels), 'Work labels must be an array or null');
+  const normalized = labels.map(label => {
+    const name = typeof label === 'string' ? label : label?.name;
+    assert(typeof name === 'string', 'Work labels need string names');
+    return name.toLowerCase();
+  });
   if (normalized.includes('bug')) return 'bug';
   if (normalized.includes('feature')) return 'capability';
   if (normalized.includes('improvement')) return 'improvement';

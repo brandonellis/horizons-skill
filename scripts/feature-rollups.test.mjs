@@ -107,3 +107,18 @@ test('safe static drill-downs retain titles, status, dates and all records', () 
   assert.match(renderFeatureProgress(model), /#feature-work-engine/);
   assert.throws(() => renderWorkRecords([{ ...model.records[0], url: 'javascript:alert(1)' }]), /safe source/);
 });
+
+// Optional tracker metadata must not block a complete delivery reconciliation.
+test('null or omitted labels retain unknown work type without losing delivery', () => {
+  assert.equal(classifyWork(null), 'unknown');
+  assert.equal(classifyWork(), 'unknown');
+  const source = input({ issues: [issue('ENG-1', { labels: null })] });
+  const before = structuredClone(source);
+  const model = buildFeatureRollups(source);
+  assert.equal(model.records[0].type, 'unknown');
+  assert.equal(model.records[0].completed, true);
+  assert.deepEqual(model.features[0].originalIssueIds, ['ENG-1']);
+  assert.deepEqual(source, before);
+  assert.throws(() => classifyWork('Bug'), /array/);
+  assert.throws(() => classifyWork([null]), /string names/);
+});

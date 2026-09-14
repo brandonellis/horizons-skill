@@ -39,6 +39,10 @@ the standing lens registry into the current ledger and render those views too.
 Follow `scalability.md` for scale-specific calibration, measurements and refresh
 triggers. A component-only result must never erase a previously assessed lens.
 
+Record `movementClass: "information"` or `"instrument"` on reviews whose changed
+judgment does not represent earned code or activation improvement. The renderer
+keeps both letters visible without drawing a trend arrow for those changes.
+
 Use the returned `components` to render current letters. Import
 `renderLetterReassessment` from `scripts/render-letter-reassessment.mjs` (a
 module, not a command); it returns grade tiles and collapsed explanations using

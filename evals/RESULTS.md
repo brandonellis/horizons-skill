@@ -314,3 +314,20 @@ Four scenarios are unrun, including every one that produces an artifact. The
 expensive failures — an invented date, a rewritten baseline, a second parallel
 page, an overall grade from a partial panel — are all in those four. Nothing
 here says the skill avoids them.
+
+
+## 2026-09-14 · v2.2.2 refresh corrections
+
+The maintainer exercised an owner-authorized existing private assessed hub using
+the host-inherited reasoning lead and independent blind component reviewers.
+Private project evidence remains outside this repository. This exposed null
+optional tracker labels crashing feature reconciliation and information-only
+judgments receiving trend arrows. Both now have synthetic behavioral regressions.
+
+All 144 helper tests pass. This patch changes metadata normalization and optional
+movement rendering, not the grading method or workflow decisions. The previous
+Sonnet/Opus artifact journeys and complete lead grading run remain the recorded
+agent evidence; they were not rerun for this patch. Browser checks on the private
+hub cover desktop/mobile, keyboard and drag proposals, discard/download, grade
+opportunity links, filters, print and no-JavaScript behavior. These do not claim
+new cross-model grading qualification or human usability results.
