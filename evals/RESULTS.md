@@ -3,6 +3,21 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-14 · v2.2.1 import regression
+
+The hosted-demo check exposed an import-time failure in the new CLI modules:
+`realpathSync(process.argv[1])` tried to resolve `-` as a file under Node stdin.
+A shared side-effect-free `isMain` check now distinguishes direct invocation from
+stdin/eval/import contexts, including nonexistent argument paths. The regression
+suite exercises all three new CLIs under those entry modes and extracts the
+portable archive to build a real artifact. **142 helper tests pass.**
+
+The public demo body was downloaded and matched byte-for-byte against the local
+release HTML, then passed the starter validator. No artifact layout, grading
+method or skill workflow changed in this patch; the dated v2.2.0 model/browser
+runs below retain their original candidate scope and are not relabelled as new
+runs. No new participant or live-runtime evidence is claimed.
+
 ## 2026-09-14 · v2.2.0 journeys and grading
 
 Completed ten artifact-producing scenario/model pairs on `claude-sonnet-5` and

@@ -1,7 +1,6 @@
+import { isMain } from './is-main.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { realpathSync } from 'node:fs';
 export function summarizeRuns(runs) {
  if(!Array.isArray(runs)||!runs.length) throw new Error('Need measured runs');
  for(const run of runs){
@@ -18,4 +17,4 @@ export function summarizeRuns(runs) {
  scopeRegressions:{measured:values('scopeRegressions').length,total:values('scopeRegressions').reduce((a,b)=>a+b,0)},
  historyPreservation:{verified:runs.filter(r=>r.historyPreserved===true).length,failed:runs.filter(r=>r.historyPreserved===false).length,unmeasured:runs.filter(r=>r.historyPreserved===null).length}};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(realpathSync(process.argv[1])).href) readFile(resolve(process.argv[2]),'utf8').then(text=>console.log(JSON.stringify(summarizeRuns(JSON.parse(text)),null,2))).catch(e=>{console.error(e.message);process.exitCode=1;});
+if(isMain(import.meta.url)) readFile(resolve(process.argv[2]),'utf8').then(text=>console.log(JSON.stringify(summarizeRuns(JSON.parse(text)),null,2))).catch(e=>{console.error(e.message);process.exitCode=1;});

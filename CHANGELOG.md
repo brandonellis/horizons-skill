@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.1 - 2026-09-14
+
+- Keep the new CLI helpers inert when imported from `node -`, `node -e`, or a
+  module whose argument is not an existing file. Preserve symlink-aware direct
+  execution through a shared `isMain` helper.
+- Add stdin/eval/nonexistent-argument regression checks; extracted release
+  packages still build a validated artifact. 142 helper tests pass.
+- Verify the hosted synthetic demo matches the released local artifact exactly.
+
 ## 2.2.0 - 2026-09-14
 
 - Shorten the entrypoint and route simple creation to a local, ungraded workflow;

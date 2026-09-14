@@ -1,8 +1,8 @@
-import { realpathSync } from 'node:fs';
+import { isMain } from './is-main.mjs';
 import { mkdtemp, mkdir, readdir, readFile, writeFile, copyFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 const root=fileURLToPath(new URL('../',import.meta.url));
@@ -26,4 +26,4 @@ export async function packageSkill(destination, format='portable') {
   return {archive,sha256,format};
  }finally{await rm(scratch,{recursive:true,force:true});}
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(realpathSync(process.argv[1])).href) packageSkill(process.argv[2]||'/tmp/horizons-packages',process.argv[3]||'portable').then(r=>console.log(JSON.stringify(r))).catch(e=>{console.error(e.message);process.exitCode=1;});
+if(isMain(import.meta.url)) packageSkill(process.argv[2]||'/tmp/horizons-packages',process.argv[3]||'portable').then(r=>console.log(JSON.stringify(r))).catch(e=>{console.error(e.message);process.exitCode=1;});

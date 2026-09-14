@@ -1,7 +1,6 @@
-import { realpathSync } from 'node:fs';
+import { isMain } from './is-main.mjs';
 import { readFile, writeFile, rename, unlink, lstat, mkdir, open } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { digest, validateModel, readEmbeddedModel, refreshModel, applyMoves, addGradePlanning } from './roadmap-model.mjs';
 import { renderStarter } from './render-starter.mjs';
 
@@ -91,4 +90,4 @@ export async function run(args) {
   const staged = await stageRoadmap(output, command === 'move' ? { proposal: data, approval } : command === 'priorities' ? { gradePlanning: data } : { snapshot: data });
   return stageOnly || staged.status === 'unchanged' ? staged : commitRoadmap(output);
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) run(process.argv.slice(2)).then(result => console.log(JSON.stringify(result, null, 2))).catch(error => { console.error(error.message); process.exitCode = 1; });
+if (isMain(import.meta.url)) run(process.argv.slice(2)).then(result => console.log(JSON.stringify(result, null, 2))).catch(error => { console.error(error.message); process.exitCode = 1; });
