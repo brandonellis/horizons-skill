@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.3.0 - 2026-09-19
+
+- Re-test the previous assessment's open findings before any new auditing.
+  Each gets exactly one outcome: held, fixed, retracted or unknown. A
+  retraction keeps the finding's ID and record, appends the contradicting
+  evidence and the retracting assessment, never counts as a fix and never
+  shrinks the denominator. The retraction fraction over findings first seen
+  on the previous card is printed in the measurement band and the instrument
+  manifest as the panel's own error rate.
+- Add `retracted` to the assessment engine, cohort register, progress
+  segments and finding filters, rendered by form rather than grade hue. The
+  engine refuses a retraction without contradicting evidence, excludes it
+  from blockers and reports `retractedIds`, `newRetractedIds` and
+  `newlyRetractedIds` beside the resolved sets. `verify-artifact` refuses a
+  bundle that retracts in the ledger while the page prints no
+  `data-panel-error-rate` element, a gap a supporting-model eval run exposed.
+- Two auditor rules from production use: a log line is evidence of what was
+  printed, not of what happened; a merged declaration is not an applied one.
+  Prompts are checked for expanded calibration and coverage content before
+  fan-out.
+- Add a re-test scenario (21) with a synthetic prior finding that the
+  recorded source contradicts.
+
 ## 2.2.3 - 2026-09-14
 
 - Show completed scope with a checked, readable neutral badge. Keep outstanding

@@ -32,7 +32,16 @@ export async function checkCohortFindings(page) {
 
   await register.locator('[data-finding-filter="remaining"]').click();
   const visibleRemaining = await register.locator('[data-finding-id]:visible').count();
-  assert.equal(visibleRemaining, statuses.filter(status => status !== 'fixed').length);
+  // Remaining excludes fixed AND retracted: a retraction is not work still owed.
+  assert.equal(visibleRemaining, statuses.filter(status => status !== 'fixed' && status !== 'retracted').length);
+  if (statuses.includes('retracted')) {
+    await register.locator('[data-finding-filter="retracted"]').click();
+    assert.equal(await register.locator('[data-finding-id]:visible').count(), statuses.filter(status => status === 'retracted').length);
+    for (const record of await register.locator('[data-finding-status="retracted"]').all()) {
+      assert(await record.locator('.rm-finding-retraction .rm-source-links a').count() > 0, 'A retracted finding must show the evidence that contradicts it');
+    }
+    passed.push('Retracted findings stay listed with contradicting evidence and are counted as neither fixed nor remaining');
+  }
   assert.equal(await page.locator('#roadmap-history').textContent(), ledger);
   passed.push('Finding filters preserve the full baseline denominator and all grades');
 

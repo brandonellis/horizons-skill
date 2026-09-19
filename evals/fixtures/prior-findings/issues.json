@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "exportedAt": "2026-09-11T18:00:00Z",
+  "issues": [
+    {
+      "id": "MER-201",
+      "status": "Done",
+      "title": "Validate invitation expiry",
+      "acceptance": "Reject empty, expired and malformed-expiry invitations; accept a nonempty future-dated invitation.",
+      "comment": "Implementation is Done. Production expiry protection is operating.",
+      "findingId": "expiry-gap",
+      "roadmapItemId": "invitation-validation"
+    }
+  ]
+}

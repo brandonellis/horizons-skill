@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "visibility": "private",
+  "audience": "Private synthetic reviewers",
+  "assessmentId": "assessment-1",
+  "artifactFile": "index.html",
+  "ledgerFile": "ledger.json",
+  "historyLockFile": "history-lock.json",
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "1954c006364787f15371d45b7c9a3179a52e4fdfe1503157a7bc37de2502ac15"
+    },
+    {
+      "path": "ledger.json",
+      "sha256": "e3c5edffa280866c5fb01831d81314fb4194d61cef663448cd93b9b04764bf55"
+    },
+    {
+      "path": "history-lock.json",
+      "sha256": "3b61f4385031b96016e23f2bf323f2643408398859c7e884ed88187b783902f7"
+    },
+    {
+      "path": "contract.json",
+      "sha256": "f661593f5932f375032f0929adc0e16493742509c17a81bd9355828020772308"
+    },
+    {
+      "path": "issues.json",
+      "sha256": "abe48a460cb1ec981b014b29ff47f3ab70355f137749c236a74244bc42b459c3"
+    },
+    {
+      "path": "src/invitations.mjs",
+      "sha256": "c187bebdee6efca66e5a62ae7a4da03649b730918ae7e8747cb7aeaaa406c8c0"
+    },
+    {
+      "path": "evidence/source.json",
+      "sha256": "9c4dc9df8143913f1dd34d0ecff347a61aa213b7d9ad560c448739133cc66188"
+    },
+    {
+      "path": "evidence/runtime.json",
+      "sha256": "ffce0de9eef88f6c7fa142567488f5af79dc210986c1d86242d0a593f7927486"
+    },
+    {
+      "path": "README.md",
+      "sha256": "631e61d389b05cb26ef7169a577f542378fd8f2675f77a6b427e2ac9d668adc2"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c90f68e6af34a2bf8c1e6868096e684e3233729769bff3fe46def131da125354"
+    }
+  ]
+}

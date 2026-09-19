@@ -19,6 +19,9 @@ export function renderFindingProgress(cohort) {
     ['partial', 'Partly resolved', cohort.partial],
     ['open', 'Still open', cohort.open],
     ['unknown', 'Not verified', cohort.unknown ?? 0],
+    // Never true as written. Counted so the denominator still adds up, and
+    // never folded into "verified": a retraction is not a remediation.
+    ['retracted', 'Retracted', cohort.retracted ?? 0],
   ];
   if (segments.reduce((sum, segment) => sum + count(segment[2], segment[1]), 0) !== total) throw new Error('Finding counts must match the original cohort');
   if (!/^#[\w-]+$/.test(cohort.registerHref)) throw new Error('Findings need a local register anchor');

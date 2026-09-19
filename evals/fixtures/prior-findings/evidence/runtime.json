@@ -1,0 +1,34 @@
+{
+  "synthetic": true,
+  "observedAt": "2026-09-11T18:00:00Z",
+  "subject": {
+    "scope": "production",
+    "service": "invitations",
+    "revision": "synthetic-rev-2",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "imageDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "checks": [
+    {
+      "id": "empty",
+      "input": {
+        "value": "",
+        "expiresAt": "2026-09-12T00:00:00Z"
+      },
+      "accepted": false
+    },
+    {
+      "id": "future",
+      "input": {
+        "value": "sample",
+        "expiresAt": "2026-09-12T00:00:00Z"
+      },
+      "accepted": true
+    }
+  ],
+  "missingChecks": [
+    "expired invitation",
+    "malformed expiresAt"
+  ],
+  "note": "Exported synthetic production snapshots. No expired or malformed invitation probe was recorded. The source snapshot is not runtime proof."
+}

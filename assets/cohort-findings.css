@@ -36,3 +36,11 @@
 @media print {
   .roadmap-shell [data-finding-id][hidden] { display: block !important; }
 }
+
+/* Retracted: never true as written. Encoded by form (dashed, mono), never by a
+   grade hue, so it cannot be read as fixed or as a tier. */
+.rm-cohort-cells .is-retracted a { background: transparent; box-shadow: inset 0 0 0 1px currentColor; outline: 1px dashed currentColor; outline-offset: -3px; opacity: .7; }
+.rm-finding-state.is-retracted { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
+.rm-finding-retraction { margin: 12px 0; padding: 10px 12px; border: 1px dashed var(--rm-muted); }
+.rm-finding-retraction h4 { margin: 0 0 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
+.rm-finding-retraction p { margin: 0 0 8px; font-size: 14px; }

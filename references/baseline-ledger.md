@@ -74,6 +74,13 @@ the original burn-down denominator or disappear to protect the trend. Show:
 - `New since baseline: 4 open` in a separate register.
 - `Reopened: 1` when closure evidence no longer holds. Reopening reduces the
   current resolved count, but never rewrites the earlier observation.
+- `Retracted: 1` when a re-test shows a finding was never true as written.
+  A retraction keeps the finding's ID and original record, appends the
+  contradicting evidence and the retracting assessment, is excluded from both
+  the resolved count and the remaining count, and does not shrink the
+  denominator. It is never a closure, and a previously resolved finding that
+  is retracted is not "reopened". The rule and the re-test that produces it
+  are in `report-card.md`, "The previous card's findings are re-tested".
 - `A+ criteria verified: 18 of 24`, a different denominator from findings.
 
 Zero baseline findings renders `No initial findings`, not `100% complete`.
@@ -163,7 +170,9 @@ minimum safe evidence; never secrets, raw credentials or customer payloads.
 - **Information:** newly discovered truth on existing scope updates the current
   verdict. Label it `new evidence`, not remediation or regression. Append a
   dated correction record referencing the original assessment, never mutate
-  that assessment or overwrite its reported letter.
+  that assessment or overwrite its reported letter. A finding shown never to
+  have been true is `retracted`, not `resolved`: same append-only rule, and
+  the record must name what contradicts it.
 - **Instrument / scope:** show baseline-scope results and new-scope findings
   separately, with the coverage gap explicit. Do not automatically promote the
   expanded panel to baseline on the next run. Unreached baseline checks are
@@ -240,6 +249,14 @@ assessments[]:
   sourceRefs[], correctionNotes[], contentHash
 ```
 
+A `findingStates[]` entry carries `status` from `resolved | partial | open |
+unknown | retracted`; a `retracted` entry also carries `contradictedBy[]`
+(evidence references) and `retractedInAssessmentId`. The engine refuses a
+retraction without both, and `compareFindings` reports `retractedIds`,
+`newRetractedIds` and `sincePrevious.newlyRetractedIds` beside the resolved
+sets so the panel's error rate can be printed from the same arrays that
+produce every other count.
+
 Arrays of IDs are the source of counts. Compare exact sets, not just totals.
 Validate unique IDs, valid references, required fields, approved baseline
 identity, matching frozen criteria and every earlier assessment hash before
@@ -272,6 +289,8 @@ preserving their content, not replacing them with the newest grade.
   verified burn-down. Live proof can improve both in a later observation.
 - Reopening an original finding reduces resolved progress; adding a new finding
   changes the new-findings register, not the initial denominator.
+- Retracting a finding changes neither the resolved count nor the denominator,
+  and the original record stays readable with the contradicting evidence.
 - Losing credentials yields incomplete coverage, never a better letter.
 - A newly discovered live exposure blocks A+ even with an otherwise perfect
   baseline panel. An accepted exception cannot hide it.

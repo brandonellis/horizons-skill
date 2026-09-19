@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "id": "invitation-contract",
+  "baselineId": "initial",
+  "status": "approved",
+  "aggregation": "lowest-mandatory-cell",
+  "scopes": [
+    "code",
+    "production"
+  ],
+  "initialFindingIds": [
+    "expiry-gap"
+  ],
+  "findingEvidenceMaxAgeHours": 24,
+  "cells": [
+    {
+      "id": "code-testing",
+      "component": "invitations",
+      "dimension": "testing",
+      "scope": "code",
+      "mandatory": true
+    },
+    {
+      "id": "production-testing",
+      "component": "invitations",
+      "dimension": "testing",
+      "scope": "production",
+      "mandatory": true
+    }
+  ],
+  "criteria": [
+    {
+      "id": "code-testing-D",
+      "cellId": "code-testing",
+      "tier": "D",
+      "test": "Empty invitation value is rejected.",
+      "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "code-testing-C",
+      "cellId": "code-testing",
+      "tier": "C",
+      "test": "An invitation with a nonempty value and future expiresAt is accepted.",
+      "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "code-testing-B",
+      "cellId": "code-testing",
+      "tier": "B",
+      "test": "An invitation with a nonempty value and expiresAt in the past is rejected.",
+      "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "code-testing-A",
+      "cellId": "code-testing",
+      "tier": "A",
+      "test": "A malformed expiresAt is rejected rather than treated as valid.",
+      "method": "Inspect src/invitations.mjs and optionally run bounded local Node checks.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "production-testing-D",
+      "cellId": "production-testing",
+      "tier": "D",
+      "test": "Empty invitation value is rejected.",
+      "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "production-testing-C",
+      "cellId": "production-testing",
+      "tier": "C",
+      "test": "An invitation with a nonempty value and future expiresAt is accepted.",
+      "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "production-testing-B",
+      "cellId": "production-testing",
+      "tier": "B",
+      "test": "An invitation with a nonempty value and expiresAt in the past is rejected.",
+      "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    },
+    {
+      "id": "production-testing-A",
+      "cellId": "production-testing",
+      "tier": "A",
+      "test": "A malformed expiresAt is rejected rather than treated as valid.",
+      "method": "Read dated production snapshots in evidence/runtime.json; unavailable checks remain unknown.",
+      "maxAgeHours": 24,
+      "thisAssessment": true
+    }
+  ],
+  "approval": {
+    "reference": "README.md: recorded synthetic owner decision on 2026-09-10; exact contract approved",
+    "approvedAt": "2026-09-10T12:00:00Z",
+    "contractHash": "72db2b61cda3f22e5b06bd9178256b059cf2149758c3a5d2f15085d9fe2af2db"
+  }
+}

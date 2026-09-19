@@ -56,3 +56,11 @@ test('initiative return is a real link with a no-script and shared-link fallback
   assert.match(renderRoadmapReturn(), /href="#roadmap-nnl" data-roadmap-return>Back to roadmap/);
   assert.doesNotMatch(renderRoadmapReturn(), /hidden|onclick|javascript:/);
 });
+
+test('a retracted segment keeps the denominator whole without joining the verified count', () => {
+  const html = renderFindingProgress({ ...cohort, total: 13, retracted: 1 });
+  assert.match(html, /data-finding-filter-target="retracted" style="flex:1"/);
+  assert.match(html, /1 of 13 original findings: Retracted/);
+  assert.match(html, /data-finding-filter-target="fixed" style="flex:4"/);
+  assert.throws(() => renderFindingProgress({ ...cohort, retracted: 1 }), /match the original cohort/);
+});

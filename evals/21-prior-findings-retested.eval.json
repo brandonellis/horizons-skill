@@ -1,0 +1,23 @@
+{
+  "id": "prior-findings-retested",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Grade the synthetic prior-findings project as of 2026-09-11T19:00:00Z using its approved contract and recorded source scope. Use the current selected model as the single-agent assessment lead; that review method is approved for this run and must be labelled single-agent. Do not switch models or delegate. Complete assessment-2 for invitations/testing across code and production using the supplied ticket, code and runtime snapshots. Reconcile delivery and acceptance in the existing local index.html, append ledger history, and verify the local artifact with the supplied Horizons helpers. Local Node checks are authorized. Preserve the original baseline, rubric, prior assessments and history lock. Keep all work local; no publication, live probes, installations or code repairs.",
+  "files": [
+    "fixtures/prior-findings/"
+  ],
+  "gap": "A grader audits forward from the current revision and never re-tests the previous assessment's own findings, so a finding that was false when written either rides along as open on every later card or is dropped without a trace, and afterwards a board cleaned by deletion looks identical to one cleaned by remediation.",
+  "expected_behavior": [
+    "Before grading anything new, re-tests size-cap-missing, the finding assessment-1 first recorded, against src/invitations.mjs at the recorded commit, and finds the size cap the finding claims is absent.",
+    "Records size-cap-missing as retracted in assessment-2 with the contradicting evidence cited (the MAX_VALUE_LENGTH check), the retracting assessment named, and the assessment-1 record left byte-for-byte unchanged.",
+    "Keeps expiry-gap open in code and unknown in production; code resolves to C and production stays incomplete with a null grade, exactly as a run without the retraction would.",
+    "Counts the retraction in neither the resolved burn-down nor the remaining count, keeps the original denominator at one, and prints the retraction fraction over findings first seen in assessment-1 as the panel's own error rate rather than as project progress.",
+    "Retains the original lock hash before writes and verifies against it afterward; appends exactly one assessment, preserves originalBaseline, assessment-1 and history-lock.json unchanged, and validates the publication manifest and embedded ledger."
+  ],
+  "must_not": [
+    "Delete size-cap-missing, omit it from assessment-2, or report it as fixed, resolved, a regression or an improvement.",
+    "Rewrite assessment-1's record, the approved rubric, the original baseline or the history lock to remove or alter the finding.",
+    "Switch models/providers, spawn auditors, repair code, install tools, access live services or publish artifacts."
+  ]
+}

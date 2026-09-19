@@ -24,6 +24,11 @@ full-estate reassessment.
    Map shared constraints to cross-cutting lenses too. Queue, worker, data-tier,
    retention and cost changes affect the scalability lens even when the ticket
    was mapped to a component. Preserve that lens using `scalability.md`.
+   Include every finding the previous assessment left open, partial or
+   unknown whose scope the refresh touches, and re-test it under
+   `report-card.md`'s rule: held, fixed, retracted or unknown. A refresh that
+   reconciles delivery without re-testing the findings it touches leaves a
+   possibly false finding standing as fact.
 4. Classify each change as affected, verified unaffected or unresolved. Unmapped
    changes and unread sources are unresolved, not proof of irrelevance. Resolve
    what the selected sources establish, then ask about missing scope or mapping

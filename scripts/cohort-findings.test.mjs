@@ -56,3 +56,46 @@ test('untrusted labels are escaped and unsafe evidence navigation is refused', (
   model.findings[0].references[0].href = 'javascript:alert(1)';
   assert.throws(() => renderCohortDetails(model), /HTTPS or local anchors/);
 });
+
+function retracted() {
+  const model = fixture();
+  model.initialIds.push('APP-3');
+  model.findings.push({
+    id: 'APP-3', title: 'Original size-cap claim', shortTitle: 'Cap request size', status: 'retracted',
+    reason: 'The cited file enforces a cap at the cited commit; the finding was never true as written.',
+    verifiedWork: 'None claimed.', remainingWork: 'None: the requirement the finding named was already met when it was filed.',
+    trackerStatus: 'Todo', owner: 'Owner', url: 'https://example.com/issues/APP-3',
+    steps: [{ label: 'Cap request size', status: 'unknown' }], references: [{ href: '#proof', label: 'Original proof' }],
+    contradictedBy: [{ href: '#cap-check', label: 'MAX_VALUE_LENGTH check at the cited commit' }], retractedInAssessmentId: 'current',
+    staging: 'Not applicable', production: 'Not applicable',
+  });
+  return model;
+}
+
+test('a retracted finding needs its contradicting evidence and the retracting assessment', () => {
+  const model = retracted();
+  assert.doesNotThrow(() => validateCohort(model));
+  const missingEvidence = retracted(); delete missingEvidence.findings[2].contradictedBy;
+  assert.throws(() => validateCohort(missingEvidence), /contradicting evidence/);
+  const missingAssessment = retracted(); delete missingAssessment.findings[2].retractedInAssessmentId;
+  assert.throws(() => validateCohort(missingAssessment), /contradicting evidence/);
+  const claimsRemediation = retracted(); claimsRemediation.findings[2].steps[0].status = 'verified';
+  assert.throws(() => validateCohort(claimsRemediation), /cannot also claim verified remediation/);
+});
+
+test('a retraction is counted as neither fixed nor remaining, and the record stays listed with its evidence', () => {
+  const model = retracted();
+  const summary = renderCohortSummary(model);
+  assert.match(summary, /data-finding-filter-target="fixed">1 fixed/);
+  assert.match(summary, /data-finding-filter-target="retracted">1 retracted/);
+  assert.match(summary, /class="is-retracted"><a href="#finding-APP-3"/);
+  const details = renderCohortDetails(model);
+  assert.match(details, /1 need closure · 1 fixed in code · 1 retracted/);
+  assert.match(details, /data-finding-id="APP-3" data-finding-status="retracted"/);
+  assert.match(details, /Retracted in current/);
+  assert.match(details, /MAX_VALUE_LENGTH check at the cited commit/);
+  assert.match(details, /data-finding-filter="retracted"/);
+  assert.doesNotMatch(details, /APP-3[\s\S]{0,400}Tracker says Done/);
+  // The denominator is unchanged: three originals, all still listed.
+  assert.match(details, /3 original findings/);
+});

@@ -48,6 +48,14 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
     if (!section.test(html)) throw new Error(`Standing assessment lens missing from artifact: ${lens.id}`);
   }
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
+  // A retraction recorded in the ledger and absent from the page is the
+  // failure this state exists to prevent: the register is clean and nobody can
+  // tell whether by remediation or by mis-measurement. When the current
+  // assessment retracts anything, the page must print the panel's own error
+  // rate where a reader will meet it, marked so this check can find it.
+  const current = ledger.assessments.find(assessment => assessment.id === manifest.assessmentId);
+  const retracted = (current.findings ?? current.findingStates ?? []).filter(finding => finding.status === 'retracted');
+  if (retracted.length && !/\bdata-panel-error-rate=["'][^"']+["']/.test(html)) throw new Error(`Current assessment retracts ${retracted.map(finding => finding.id).join(', ')} but the artifact prints no panel error rate (add data-panel-error-rate="<retracted> of <first seen on previous>" where the measurement band shows it)`);
   return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256,
     historyLockPreservation: expectedHistoryLockSha256 === undefined ? 'not-checked' : 'verified' };
 }

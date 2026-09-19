@@ -194,6 +194,8 @@ reach:  repositories: <list>
         credential stores: <list>                unauthenticated probes: <yes | no>
         sub-audits: <paths>
 rungs:  <unit> R0=<measured> / <named rungs>
+prior findings re-tested: <N> = held <n> / fixed <n> / retracted <n> / unknown <n>
+panel error rate: <retracted> of <first seen on previous card>   (instrument, not project)
 comparable to baseline: <yes | no: <what changed>>
 ```
 

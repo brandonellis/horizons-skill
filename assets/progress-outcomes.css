@@ -69,3 +69,5 @@
   .rm-outcome-list { grid-template-columns: repeat(3, 1fr); }
   .rm-next-check { break-inside: avoid; }
 }
+/* A retracted segment is not a tier and must not borrow a tier's colour. */
+.rm-finding-segments .is-retracted { background: transparent; color: var(--rm-ink); outline: 1px dashed currentColor; outline-offset: -2px; }

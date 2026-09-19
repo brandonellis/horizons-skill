@@ -81,6 +81,34 @@ test('a reassessment appends history and updates both ledger and embedded curren
   assert.deepEqual(data.ledger.assessments[0], { id: 'first', grade: 'B+' });
 });
 
+test('a retraction recorded in the ledger must be printed on the page as the panel error rate', async context => {
+  const data = await fixture(context);
+  data.ledger.assessments.push({ id: 'second', grade: 'B+', findings: [{ id: 'phantom', scope: 'code', status: 'retracted', blocking: false, contradictedBy: ['src/limits.mjs at the cited commit enforces the cap'], retractedInAssessmentId: 'second' }] });
+  data.ledger.currentAssessmentId = 'second';
+  data.manifest.assessmentId = 'second';
+  const update = async (file, content) => {
+    await writeFile(join(data.root, file), content);
+    data.manifest.files.find(entry => entry.path === file).sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  await update('ledger.json', JSON.stringify(data.ledger));
+  const page = body => `<html>${body}<script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`;
+  // Ledger says retracted, page says nothing: the register would be indistinguishable from one cleaned by remediation.
+  await update('index.html', page('<p>Findings: 0 open.</p>'));
+  await assert.rejects(verifyArtifact(data.path), /retracts phantom but the artifact prints no panel error rate/);
+  // An empty attribute is not a printed rate.
+  await update('index.html', page('<p data-panel-error-rate="">Panel error rate</p>'));
+  await assert.rejects(verifyArtifact(data.path), /prints no panel error rate/);
+  await update('index.html', page('<p data-panel-error-rate="1 of 1">Panel error rate: 1 of 1 findings first seen on the previous card retracted (instrument, not project).</p>'));
+  assert.equal((await verifyArtifact(data.path)).manifest.assessmentId, 'second');
+  // A current assessment with no retraction owes no such line.
+  data.ledger.assessments[1].findings[0].status = 'open';
+  delete data.ledger.assessments[1].findings[0].contradictedBy;
+  await update('ledger.json', JSON.stringify(data.ledger));
+  await update('index.html', page('<p>Findings: 1 open.</p>'));
+  assert.equal((await verifyArtifact(data.path)).manifest.assessmentId, 'second');
+});
+
 test('creation-time audience cannot change silently', async context => {
   const data = await fixture(context); data.manifest.audience = 'Public investors'; await data.save();
   await assert.rejects(verifyArtifact(data.path), /audience changed/);

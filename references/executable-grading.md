@@ -124,7 +124,10 @@ node scripts/verify-artifact.mjs /path/publication-manifest.json --history-lock-
 ```
 
 For imports use `verifyArtifact(manifestPath, { expectedHistoryLockSha256 })`.
-Success must report `historyLockPreservation: "verified"`. A new manifest and a
+Success must report `historyLockPreservation: "verified"`. The verifier also
+refuses a bundle whose current assessment carries a `retracted` finding while
+the page has no `data-panel-error-rate` element; see `report-card.md`, "The
+previous card's findings are re-tested". A new manifest and a
 resealed lock can agree with each other while destroying the original evidence;
 the retained digest rejects that case. Never take the expected hash from the
 updated manifest or replace it with a new digest to make verification pass.

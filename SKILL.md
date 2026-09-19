@@ -69,7 +69,9 @@ entry file/URL. Read it before edits. A refresh or new assessment does not creat
 a dated sibling. An export requires its own purpose and authorization.
 
 Preserve the original baseline, rubric, finding denominator and all historical
-assessments. A new observation is not a new baseline. Preserve a disk history
+assessments. A new observation is not a new baseline. Findings are retired,
+never deleted: a finding shown false keeps its ID and record, gains its
+contradicting evidence, and is never counted as fixed. Preserve a disk history
 lock byte-for-byte; retain its original hash BEFORE writes and finish grading
 verification with `--history-lock-sha256 ORIGINAL_HASH`, requiring preservation
 `verified`. Never reseal an existing lock.

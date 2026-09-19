@@ -177,3 +177,37 @@ test('a later approval cannot reinterpret an earlier assessment', () => {
   const { contract, assessment } = fixture(); contract.approval.approvedAt = '2026-01-03T00:00:00Z';
   assert.throws(() => evaluateAssessment(contract, assessment), /retroactively/);
 });
+
+test('a retraction needs contradicting evidence, blocks nothing, and never counts as resolved', () => {
+  const { contract, assessment } = fixture();
+  const evidence = assessment.findings[0];
+  assessment.findings.push({ id: 'phantom', scope: 'production', status: 'retracted', blocking: true, contradictedBy: ['src/limits.mjs at the cited commit enforces the cap'], retractedInAssessmentId: 'current', evidenceRefs: evidence.evidenceRefs, observedAt: evidence.observedAt, assessmentId: 'current', subject: evidence.subject });
+  const result = evaluateAssessment(contract, assessment);
+  assert.deepEqual(result.scopes.production.blockers, [], 'a retracted finding is not owed, so it cannot block');
+  assert.equal(result.scopes.production.grade, 'A+');
+  assert.deepEqual(result.scopes.production.progress.newRetractedIds, ['phantom']);
+  assert.deepEqual(result.scopes.production.progress.newOpenIds, []);
+  for (const strip of [finding => delete finding.contradictedBy, finding => { finding.contradictedBy = []; }, finding => delete finding.retractedInAssessmentId, finding => { finding.contradictedBy = ['  ']; }]) {
+    const broken = fixture(); broken.assessment.findings.push({ ...assessment.findings.at(-1) }); strip(broken.assessment.findings.at(-1));
+    assert.throws(() => evaluateAssessment(broken.contract, broken.assessment), /contradicting evidence and the retracting assessment/);
+  }
+});
+
+test('retracting an original finding leaves the denominator and the resolved fraction alone', () => {
+  const result = compareFindings(['old', 'never'], [{ id: 'old', status: 'resolved' }, { id: 'never', status: 'open' }], [{ id: 'old', status: 'resolved' }, { id: 'never', status: 'retracted' }, { id: 'extra', status: 'retracted' }]);
+  assert.equal(result.denominator, 2);
+  assert.deepEqual(result.resolvedIds, ['old']);
+  assert.deepEqual(result.retractedIds, ['never']);
+  assert.equal(result.resolvedFraction, 0.5, 'a retraction is not a closure and must not lift the fraction');
+  assert.deepEqual(result.newOpenIds, []);
+  assert.deepEqual(result.newRetractedIds, ['extra']);
+  assert.deepEqual(result.sincePrevious.newlyRetractedIds, ['extra', 'never']);
+  assert.deepEqual(result.sincePrevious.reopenedIds, []);
+});
+
+test('a previously resolved finding that is now retracted is not reported as reopened', () => {
+  const result = compareFindings(['old'], [{ id: 'old', status: 'resolved' }], [{ id: 'old', status: 'retracted' }]);
+  assert.deepEqual(result.sincePrevious.reopenedIds, []);
+  assert.deepEqual(result.sincePrevious.newlyRetractedIds, ['old']);
+  assert.deepEqual(result.resolvedIds, []);
+});

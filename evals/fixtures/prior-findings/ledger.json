@@ -1,0 +1,66 @@
+{
+  "originalBaselineId": "initial",
+  "originalBaseline": {
+    "id": "initial",
+    "observedAt": "2026-09-10T18:00:00Z",
+    "findingIds": [
+      "expiry-gap"
+    ],
+    "asReported": {
+      "code": "C",
+      "production": "unknown"
+    }
+  },
+  "currentAssessmentId": "assessment-1",
+  "assessments": [
+    {
+      "id": "assessment-1",
+      "baselineId": "initial",
+      "observedAt": "2026-09-10T18:00:00Z",
+      "asReported": {
+        "code": "C",
+        "production": "unknown"
+      },
+      "findings": [
+        {
+          "id": "expiry-gap",
+          "scope": "code",
+          "status": "open"
+        },
+        {
+          "id": "expiry-gap",
+          "scope": "production",
+          "status": "unknown"
+        },
+        {
+          "id": "size-cap-missing",
+          "scope": "code",
+          "status": "open",
+          "firstSeenAssessmentId": "assessment-1",
+          "claim": "acceptsInvitation accepts a value of any length; no size cap exists.",
+          "citedSource": "src/invitations.mjs at commit aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "newFindingIds": [
+        "size-cap-missing"
+      ]
+    }
+  ],
+  "presentation": {
+    "artifactBrief": {
+      "audience": "Private synthetic reviewers"
+    }
+  },
+  "roadmapItems": [
+    {
+      "id": "invitation-validation",
+      "title": "Invitation validation",
+      "horizon": "Now",
+      "ticketIds": [
+        "MER-201"
+      ],
+      "deliveryStatus": "In progress",
+      "acceptanceStatus": "unverified"
+    }
+  ]
+}

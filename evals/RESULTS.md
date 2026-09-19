@@ -3,6 +3,49 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-19 · v2.3.0 prior findings re-tested
+
+New scenario 21 and fixture `fixtures/prior-findings/`: the complete-grade
+project with one more recorded finding, `size-cap-missing`, first seen in
+assessment-1, whose claim the source at the very commit it cites contradicts
+(`MAX_VALUE_LENGTH = 64` is enforced). The scenario exists to catch a grader
+that audits forward from the current revision and never re-tests what the
+previous panel said, so a false finding either rides along as open forever or
+is dropped without a trace. Run records and the checker's line-by-line result
+are in `2026-09-19-prior-findings-results.json`.
+
+- **21, lead, final bytes:** all five expectations and three prohibitions met,
+  21 of 21 scripted checks. Re-tested all three prior findings before grading
+  (held 1 / fixed 0 / retracted 1 / unknown 1), retracted `size-cap-missing`
+  with the contradicting evidence and the retracting assessment named, left
+  the assessment-1 record byte-identical, kept the denominator at 1, computed
+  code C and production Incomplete, appended exactly one assessment, printed
+  the panel error rate as `1 of 1` in a `data-panel-error-rate` element, and
+  verified with the retained original lock
+  `3b61f4385031b96016e23f2bf323f2643408398859c7e884ed88187b783902f7`.
+- **21, lead, candidate before the verifier rule:** met every scenario line
+  and printed the error rate in prose unprompted. Kept as the evidence that
+  the prose rule produced the behaviour on the lead model.
+- **21, supporting model, candidate:** four of five. Retracted correctly in the
+  ledger and preserved everything it should, but printed **no** error rate or
+  re-test count on the page. That is the failure the state exists to prevent,
+  and it is what turned a prose rule into a verifier rule: `verify-artifact`
+  now refuses a bundle whose current assessment retracts a finding while the
+  page carries no `data-panel-error-rate` element. The lead re-run above
+  passes under it; the supporting run was not repeated, since the rule is
+  code and has its own helper test.
+- **The checker itself was wrong twice** before it was right: it flagged the
+  negations "retracted, not fixed" and "not counted as fixed" as affirmative
+  claims, and it looked for letters only inside the assessment record when the
+  fixture permits a sibling `verdict-2.json`. Both were checker defects, not
+  skill defects, and are recorded here because a grader that grades graders
+  should say when it was the one that erred.
+
+151 helper tests and `git diff --check` pass. Both archives build. This is
+synthetic local coverage under the approved single-agent method: not a
+multi-auditor qualification, not a hosted-publication check, no browser or
+live probes.
+
 ## 2026-09-14 · v2.2.1 import regression
 
 The hosted-demo check exposed an import-time failure in the new CLI modules:

@@ -241,6 +241,14 @@ Rules that apply even without the reference loaded:
   the activation gap as a count, every ratchet's size and direction. Those
   answer "did it improve"; letters answer "how good is this", and the card
   never fuses the two.
+- **The previous assessment's findings are re-tested before fan-out.** Every
+  finding it left open, partial or unknown gets exactly one of held / fixed /
+  retracted / unknown against the current revision. A retraction keeps the
+  record and its ID, gains the contradicting evidence, is never counted as a
+  fix, and the retraction fraction is printed as the panel's own error rate
+  in an element carrying `data-panel-error-rate="<n> of <N>"`; the verifier
+  refuses a bundle that retracts in the ledger and prints nothing on the
+  page. Retire findings, never delete them.
 - **The original baseline persists until an approved rebaseline**; an instrument
   or scope mismatch is prompted, never carried quietly. Freeze its
   scope, criteria, anchors, finding denominator and A+ checks, with no run-count

@@ -104,7 +104,11 @@ export function evaluateAssessment(contract, assessment) {
   }
   for (const finding of assessment.findings) {
     requireValue(contract.scopes.includes(finding.scope) && finding.id, 'Unknown finding scope or ID');
-    requireValue(['resolved', 'partial', 'open', 'unknown'].includes(finding.status) && typeof finding.blocking === 'boolean', `Invalid finding ${finding.id}`);
+    requireValue(['resolved', 'partial', 'open', 'unknown', 'retracted'].includes(finding.status) && typeof finding.blocking === 'boolean', `Invalid finding ${finding.id}`);
+    // A retraction says the finding was never true as written. It is not a
+    // closure, so it earns none of the evidence-freshness pass `resolved` gets,
+    // and it must carry what contradicts it and which assessment said so.
+    if (finding.status === 'retracted') requireValue(Array.isArray(finding.contradictedBy) && finding.contradictedBy.length > 0 && finding.contradictedBy.every(reference => typeof reference === 'string' && reference.trim()) && typeof finding.retractedInAssessmentId === 'string' && finding.retractedInAssessmentId.trim(), `Retracted finding ${finding.id} needs contradicting evidence and the retracting assessment`);
   }
   for (const gap of assessment.coverageGaps ?? []) requireValue(contract.scopes.includes(gap.scope) && gap.reason, 'Invalid coverage gap');
   const cells = contract.cells.map(cell => {
@@ -130,7 +134,7 @@ export function evaluateAssessment(contract, assessment) {
     const states = assessment.findings.filter(finding => finding.scope === scope).map(finding => ({ ...finding, status: finding.status === 'resolved' && evidenceResult({ ...finding, result: 'pass' }, assessment, scope, contract.findingEvidenceMaxAgeHours, true) !== 'pass' ? 'unknown' : finding.status }));
     for (const id of contract.initialFindingIds) requireValue(states.some(finding => finding.id === id), `Missing original finding ${id} in ${scope}; use unknown, not omission`);
     const progress = compareFindings(contract.initialFindingIds, null, states);
-    const blockers = states.filter(finding => finding.status !== 'resolved' && (contract.initialFindingIds.includes(finding.id) || finding.blocking)).map(finding => finding.id).sort();
+    const blockers = states.filter(finding => finding.status !== 'resolved' && finding.status !== 'retracted' && (contract.initialFindingIds.includes(finding.id) || finding.blocking)).map(finding => finding.id).sort();
     const incomplete = mandatory.some(cell => cell.incomplete) || states.some(finding => finding.status === 'unknown' && (contract.initialFindingIds.includes(finding.id) || finding.blocking)) || (assessment.coverageGaps ?? []).some(gap => gap.scope === scope);
     const limitingRank = Math.min(...mandatory.map(cell => TIERS.indexOf(cell.verifiedTier)));
     let grade = TIERS[limitingRank];
@@ -150,18 +154,34 @@ export function compareFindings(initialIds, previous, current) {
   for (const [name, states] of [['current', current], ['previous', previous]]) {
     if (states === null) continue;
     unique(states.map(state => state.id), `${name} findings`);
-    for (const state of states) requireValue(['resolved', 'partial', 'open', 'unknown'].includes(state.status), `Invalid ${name} finding status`);
+    for (const state of states) requireValue(['resolved', 'partial', 'open', 'unknown', 'retracted'].includes(state.status), `Invalid ${name} finding status`);
     for (const id of initialIds) requireValue(states.some(state => state.id === id), `Missing original ${name} finding ${id}`);
   }
   const cohort = current.filter(state => initialIds.includes(state.id));
   const ids = status => cohort.filter(state => state.status === status).map(state => state.id).sort();
   const resolvedIds = ids('resolved');
+  const retractedIds = ids('retracted');
+  const outside = current.filter(state => !initialIds.includes(state.id));
   const before = previous === null ? null : new Set(previous.filter(state => initialIds.includes(state.id) && state.status === 'resolved').map(state => state.id));
+  const previouslyRetracted = previous === null ? new Set() : new Set(previous.filter(state => state.status === 'retracted').map(state => state.id));
+  // The denominator never shrinks and a retraction never joins the resolved
+  // count: `resolvedFraction` is still resolved over ALL original findings.
+  // Retractions are reported beside it so a reader can see how many of the
+  // original findings turned out to be the panel's error rather than the
+  // project's debt, without that error ever reading as progress.
   return {
-    denominator: initialIds.length, resolvedIds, partialIds: ids('partial'), openIds: ids('open'), unknownIds: ids('unknown'),
+    denominator: initialIds.length, resolvedIds, partialIds: ids('partial'), openIds: ids('open'), unknownIds: ids('unknown'), retractedIds,
     resolvedFraction: initialIds.length ? resolvedIds.length / initialIds.length : null,
-    newOpenIds: current.filter(state => !initialIds.includes(state.id) && state.status !== 'resolved').map(state => state.id).sort(),
-    sincePrevious: before === null ? null : { newlyResolvedIds: resolvedIds.filter(id => !before.has(id)), reopenedIds: [...before].filter(id => !resolvedIds.includes(id)).sort() },
+    newOpenIds: outside.filter(state => state.status !== 'resolved' && state.status !== 'retracted').map(state => state.id).sort(),
+    newRetractedIds: outside.filter(state => state.status === 'retracted').map(state => state.id).sort(),
+    sincePrevious: before === null ? null : {
+      newlyResolvedIds: resolvedIds.filter(id => !before.has(id)),
+      // A finding that was resolved before and is retracted now was never
+      // owed, so it is not "reopened": it moved from one non-debt state to
+      // another and appears under newlyRetractedIds instead.
+      reopenedIds: [...before].filter(id => !resolvedIds.includes(id) && !retractedIds.includes(id)).sort(),
+      newlyRetractedIds: current.filter(state => state.status === 'retracted' && !previouslyRetracted.has(state.id)).map(state => state.id).sort(),
+    },
   };
 }
 

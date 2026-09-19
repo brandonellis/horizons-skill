@@ -121,12 +121,14 @@
 
   var findingRegisters = Array.from(shell.querySelectorAll("[data-finding-register]"));
   function selectFindingFilter(register, value) {
-    if (!["all", "remaining", "fixed", "partial", "open", "unknown"].includes(value)) return;
+    if (!["all", "remaining", "fixed", "partial", "open", "unknown", "retracted"].includes(value)) return;
     var findingRows = Array.from(register.querySelectorAll("[data-finding-id]"));
     var shown = 0;
     findingRows.forEach(function (row) {
       var status = row.getAttribute("data-finding-status");
-      var matches = value === "all" || (value === "remaining" ? status !== "fixed" : status === value);
+      // "Remaining" is work still owed. A retracted finding was never true, so it
+      // is neither remaining nor fixed; it appears under its own filter and "all".
+      var matches = value === "all" || (value === "remaining" ? status !== "fixed" && status !== "retracted" : status === value);
       row.hidden = !matches;
       if (matches) shown += 1;
     });

@@ -175,8 +175,9 @@ being cheaper. See [the execution contract](references/execution-contract.md).
 - `references/report-card.md` is `grade` mode: the auditor fan-out, the five
   dimensions, the twin verdict, the measurement band, the versioned
   instrument, the letter-move classes, the scale ladder, the learning-loop
-  lens for projects that run models or agents, the exception register, and
-  the rules for filing findings.
+  lens for projects that run models or agents, the exception register, the
+  rules for filing findings, and the re-test of the previous card's findings
+  that produces the panel's own error rate.
 - `references/grade-anchors.md` is the calibration sheet `grade` carries into
   every auditor prompt: letter anchors per dimension, plus the instrument
   and coverage manifest templates.
