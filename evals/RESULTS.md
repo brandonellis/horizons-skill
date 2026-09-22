@@ -3,6 +3,61 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-22 · v2.4.0 release verification
+
+The final runtime candidate passed scenario 22 on configured `gpt-6-astra`
+(high) and `gpt-5.6-sol` (medium), each in a fresh isolated context. Both invoked
+the usage helper, retained unknown totals, counted replacements, stopped at the
+whole-run ceilings, selected the available same-provider child defaults without
+asking for a profile, and kept all required independent audits pending. Both
+fixture directories were independently confirmed byte-for-byte unchanged.
+
+Configured lead `gpt-6-astra` (high) also completed scenario 15 under its approved
+single-agent method. It read the supplied code, ticket and runtime snapshots,
+appended assessment-2, updated the canonical artifact and verified the 13-file
+manifest using the original history-lock hash. Independent checks replayed the
+assessment engine and matched code C / production Incomplete, preserved all
+eight read-only inputs and assessment-1, retained the original denominator and
+Now placement, and distinguished tracker Done from failed/unverified acceptance.
+No model substitution, delegated auditors, runtime probes or publication occurred.
+
+All 158 helper tests and `git diff --check` passed. Both distribution archives
+build and include the routing references and usage helper without test fixtures.
+Exact configured models, effort, candidate fingerprint and verification outcomes
+are in `2026-09-22-v2.4.0-results.json`. Backend model identity, evaluator token
+usage, cost and precise durations were not independently exposed and are not
+inferred from the synthetic usage fixture. No browser check, full-panel
+qualification, live quota integration or measured production savings is claimed.
+
+## 2026-09-22 · local whole-run budget and routing update
+
+Scenario 22 ran once in an isolated Codex-hosted subagent with no inherited
+conversation, expected answer or evaluation files. The configured lead was
+inherited; exact backend identity and token/cost telemetry were not exposed to
+the maintainer. The agent received the scenario query verbatim, the candidate
+skill path, and only the synthetic `run-budget` fixture in its working directory.
+Permitted work was read-only local inspection and the usage helper; no children,
+network, artifact writes or grading. This was one checkpoint task, not a full
+assessment or a model-comparison benchmark.
+
+All four expectations were met: the helper reported 580 observed tokens with
+unknown exact total, two child starts including the replacement, exceeded/reached
+ceilings and unknown exact cost. The response retained all three independent
+audits as pending, selected available 5.6 support models without a profile-choice
+question, and preserved the selected lead. No prohibited action was observed.
+Run metadata and limitations are in `2026-09-22-budget-results.json`.
+
+158 helper tests and `git diff --check` passed, including seven new usage tests
+covering retries, partial counters, ceilings, graph validity and subset accounting.
+The standalone skill-creator Python validator could not start because PyYAML is
+absent; the repository's own frontmatter and packaging checks passed. Existing
+host-specific `argument-hint` metadata was preserved. No dependencies installed.
+
+This is a local unreleased update. No cross-model qualification, full grading
+run, live quota integration, actual token savings or host-enforced cap is claimed.
+The release-required multi-model and complete lead grading evaluations remain
+required before publishing a release.
+
 ## 2026-09-19 · v2.3.0 prior findings re-tested
 
 New scenario 21 and fixture `fixtures/prior-findings/`: the complete-grade

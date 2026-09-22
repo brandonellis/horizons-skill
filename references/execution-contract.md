@@ -76,9 +76,11 @@ files are not demoted to data merely because discovery also reads them.
 ## Model roles and selection
 
 Horizons does not require a particular model or provider. Preserve the user's
-selection and the host's configured defaults. Do not change model settings,
-switch providers or silently route delegated work to another model. Use an
-established routing choice only within its authorized roles and budget.
+selected lead and any explicit child-model assignments. For unpinned child roles,
+apply the same-provider defaults in `model-routing.md` when the host supports
+selection; state the resolved route in the allocation without a new permission
+round. Host restrictions take precedence. Do not change global model settings or
+switch providers. Reuse an established routing choice within its roles and budget.
 
 When model selection is available and authorized, assign scope resolution,
 grading and final synthesis to a strong reasoning model that can reconcile
@@ -86,6 +88,16 @@ tickets, code and runtime evidence against the established rubric. Smaller
 models may handle bounded extraction or summarization; the lead must check
 their source references and coverage before those findings affect grades.
 An extraction role does not authorize scope decisions or final grades.
+
+Optimize the whole run, including lead context, children, retries, verification
+and synthesis. A cheaper model still consumes resources; concurrency is not a
+total-spend limit. Before delegation read `run-budget.md`, record the smallest
+sufficient task allocation and reuse it across resumptions. Preserve independent
+auditors for required grading, and use the existing affected-scope workflow for
+refreshes. Model routing stays within the selection and authorization above.
+Report measured aggregate usage or explicitly unavailable usage at handoff;
+never translate token counts or API dollars into subscription allowance without
+host-provided accounting.
 
 A model name or price is not proof of fitness. Continue with the selected model
 where the required work is supported; do not demand an upgrade based on its

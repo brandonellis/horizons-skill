@@ -294,6 +294,11 @@ Rules that apply even without the reference loaded:
 Apply the execution contract first. Scan only the selected project and sources,
 in parallel where possible; authenticated access alone does not select a source:
 
+Use direct tools for listings, pagination, fetching and counts. Under
+`run-budget.md`, retrieve each shared source once per required observation
+identity and let scoped agents inspect that snapshot. Parallel work must fit
+the whole-run allocation; parallelism alone does not justify spawning agents.
+
 1. **Repo docs**: `CLAUDE.md`, `AGENTS.md`, `README*`, `docs/**`, any
    `*roadmap*`, `*strategy*`, `*vision*`, `*plan*`, `*priorities*`, `PROGRESS`,
    `DECISIONS`, ADR files (case-insensitive, exclude node_modules/vendor).

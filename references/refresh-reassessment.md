@@ -8,6 +8,12 @@ Apply `execution-contract.md` first: clarify uncertain data or grading scope
 before the dependent work. An explicit partial request does not authorize a
 full-estate reassessment.
 
+## Contents
+
+- Decide what needs checking
+- Verify, then grade
+- Artifact checks
+
 ## Decide what needs checking
 
 1. Read the original baseline, previous assessment, criterion/finding links and
@@ -39,6 +45,13 @@ full-estate reassessment.
    explicit delivery-only refresh says `Grading not reassessed`.
 
 ## Verify, then grade
+
+Allocate agents only to affected scopes and dependencies established above,
+following `run-budget.md`. Reuse permitted source snapshots and perform bounded
+checks for unresolved relevance; an unmapped change is not verified unaffected.
+Do not turn a refresh into a full assessment by default or claim that a fresh
+subset updates the entire panel. An explicitly requested full assessment still
+requires its established coverage and independent auditors.
 
 Use `report-card.md`, `grade-anchors.md`, `baseline-ledger.md` and
 `executable-grading.md` for affected scopes. For bounded reassessments, auditors

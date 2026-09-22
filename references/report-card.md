@@ -90,6 +90,15 @@ verified code progress, but cannot earn an operational grade.
 
 ## The auditor fan-out
 
+Apply `run-budget.md` before starting the panel. Collect shared raw sources once
+and give auditors stable source references, retrieval metadata and scoped access.
+Shared retrieval does not replace independent inspection or judgment. Do not
+share other auditors' interpretations, prior grades or the lead's expected
+verdict. Mechanical collectors return evidence without grades. Each auditor gets
+its required calibration and minimum coverage below; neither is a cost-saving
+omission. A full panel remains full even when its budget cannot finish it: report
+the incomplete coverage rather than silently reducing the assessment method.
+
 One auditor agent per component, plus the cross-cutting lenses that no single
 component owns. On a full assessment two are standing: **testing & CI**, and
 **the scale ladder** (its own section below). A third, **the learning loop**,

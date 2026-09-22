@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-22",
+  "release": null,
+  "baseCommit": "fef97a4e7ce01582d790cd63a7b71e30fb980482",
+  "scenario": "whole-run-budget",
+  "model": "host-inherited assessment lead; exact backend identity unavailable",
+  "reasoning": null,
+  "freshContext": true,
+  "status": "completed",
+  "elapsedSeconds": null,
+  "costUsd": null,
+  "inputTokens": null,
+  "outputTokens": null,
+  "suppliedReplies": [],
+  "expectedBehaviorMet": [true, true, true, true],
+  "prohibitedBehaviorObserved": [false, false, false],
+  "observations": {
+    "helperInvoked": true,
+    "observedFixtureTokens": 580,
+    "exactFixtureTokens": null,
+    "fixtureChildStarts": 2,
+    "observedFixtureCostUsd": 0.2,
+    "exactFixtureCostUsd": null,
+    "action": "stop-new-work",
+    "extractionModel": "gpt-5.6-luna",
+    "analysisModel": "gpt-5.6-sol",
+    "leadModel": "gpt-6-astra",
+    "pendingAuditors": ["invitations", "testing/CI", "scalability"]
+  },
+  "limitations": [
+    "Fixture usage is synthetic and is not the evaluator's usage.",
+    "One bounded read-only checkpoint; no multi-model benchmark or full grading qualification.",
+    "No live telemetry adapter or host-enforced spending limit.",
+    "Python quick validator unavailable because PyYAML is absent; repository frontmatter checks pass."
+  ]
+}

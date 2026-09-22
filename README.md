@@ -199,6 +199,15 @@ being cheaper. See [the execution contract](references/execution-contract.md).
 - `scripts/grade-opportunities.mjs` derives conditional grade plans without changing assessments.
 - `scripts/package-skill.mjs` builds tested Claude Code and portable archives with checksums.
 - `scripts/summarize-evals.mjs` reports local journey measurements without treating unknowns as passes.
+- `references/run-budget.md` bounds delegation and retries across the whole run,
+  shares raw source collection while preserving independent audits, and reports
+  missing usage as unknown. `scripts/summarize-usage.mjs <ledger.json>` summarizes
+  private per-call telemetry; it does not enforce host spending or measure plan allowance.
+- `references/model-routing.md` supplies default Codex and Claude child-model
+  routes, including available Codex 5.6 alternatives. Selected leads and explicit
+  child assignments are preserved; unpinned roles use same-provider defaults
+  without a profile-selection prompt. These starting routes require task-specific
+  qualification before being treated as proven.
 - `demo/` contains synthetic inputs, a before/after artifact, screenshot and recorded walkthrough; `docs/index.html` is its public demo edition.
 - `docs/usability-study.md` defines real-user tasks and measurements; no participant findings are claimed.
 

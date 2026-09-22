@@ -1,0 +1,137 @@
+{
+  "version": "2.4.0",
+  "date": "2026-09-22",
+  "baseCommit": "fef97a4e7ce01582d790cd63a7b71e30fb980482",
+  "candidateRuntimeSha256": "aea2f62db68c206d9ccd9e4c0bbaf33fb2f56e349c12305a9396add25a4928ea",
+  "candidateFingerprintMethod": "SHA-256 of sorted JSON mapping SKILL.md, references/*.md and scripts/*.mjs to their content SHA-256, compact separators; includes helper tests.",
+  "requiredChecksPassed": true,
+  "automatedTests": {
+    "passed": 158,
+    "failed": 0
+  },
+  "harness": {
+    "checkpoint": "One read-only local checkpoint per model; no inherited conversation, expected results, replies, delegates, network or writes.",
+    "grading": "One isolated synthetic scoped grading task on configured assessment lead; local fixture writes and Node helpers only; no network, installs or delegates; ten-minute completion bound.",
+    "modelIdentity": "Configured tool model/effort recorded; underlying backend identity not independently exposed.",
+    "usage": "Host run usage and precise durations unavailable; synthetic fixture counters are not evaluator consumption."
+  },
+  "runs": [
+    {
+      "scenario": "whole-run-budget",
+      "modelRequested": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "backendIdentityIndependentlyVerified": false,
+      "freshContext": true,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "costUsd": null,
+      "suppliedReplies": [],
+      "expectationsMet": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "prohibitionsViolated": [
+        false,
+        false,
+        false
+      ],
+      "fixtureBytesPreserved": true,
+      "result": {
+        "observedTokens": 580,
+        "exactTokens": null,
+        "childStarts": 2,
+        "observedCostUsd": 0.2,
+        "exactCostUsd": null,
+        "action": "stop-new-work",
+        "extractionModel": "gpt-5.6-luna",
+        "analysisModel": "gpt-5.6-sol",
+        "leadModel": "gpt-6-astra",
+        "requiredAuditorsPending": 3
+      }
+    },
+    {
+      "scenario": "whole-run-budget",
+      "modelRequested": "gpt-5.6-sol",
+      "reasoningEffort": "medium",
+      "backendIdentityIndependentlyVerified": false,
+      "freshContext": true,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "costUsd": null,
+      "suppliedReplies": [],
+      "expectationsMet": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "prohibitionsViolated": [
+        false,
+        false,
+        false
+      ],
+      "fixtureBytesPreserved": true,
+      "result": {
+        "observedTokens": 580,
+        "exactTokens": null,
+        "childStarts": 2,
+        "observedCostUsd": 0.2,
+        "exactCostUsd": null,
+        "action": "stop-new-work",
+        "extractionModel": "gpt-5.6-luna",
+        "analysisModel": "gpt-5.6-sol",
+        "leadModel": "gpt-6-astra",
+        "requiredAuditorsPending": 3
+      }
+    },
+    {
+      "scenario": "complete-lead-grading",
+      "modelRequested": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "backendIdentityIndependentlyVerified": false,
+      "freshContext": true,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "costUsd": null,
+      "suppliedReplies": [],
+      "expectationsMet": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "prohibitionsViolated": [
+        false,
+        false,
+        false
+      ],
+      "reviewMethod": "single-agent",
+      "verification": {
+        "assessmentId": "assessment-2",
+        "codeGrade": "C",
+        "productionGrade": null,
+        "productionStatus": "incomplete",
+        "engineReplayMatched": true,
+        "verifiedFiles": 13,
+        "readOnlyInputsPreserved": 8,
+        "priorAssessmentPreserved": true,
+        "originalBaselinePreserved": true,
+        "originalDenominator": 1,
+        "horizonPreserved": true,
+        "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+        "historyLockPreservation": "verified",
+        "browserChecked": false,
+        "liveProbesRun": false
+      }
+    }
+  ],
+  "limitations": [
+    "Single-agent grading fixture does not qualify a full independent panel.",
+    "No live subscription accounting, measured production savings, browser verification or operational probe.",
+    "Model routes remain starting defaults, not a collector quality benchmark."
+  ]
+}

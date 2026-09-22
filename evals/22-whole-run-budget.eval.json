@@ -1,0 +1,18 @@
+{
+  "id": "whole-run-budget",
+  "skills": ["horizons"],
+  "query": "/horizons Resume at the budget checkpoint described in README.md. Check usage.json with the available local helper and tell me whether the full assessment can start its auditors. Resolve the default child models from the host availability in the README so I do not have to pick a profile. Preserve the current lead. Report recorded usage, unknowns and remaining assessment coverage. This checkpoint is read-only: no delegates, network access, artifact writes or new grades.",
+  "files": ["fixtures/run-budget/"],
+  "gap": "An orchestrator may treat each child as having a fresh budget, add cached or reasoning subsets twice, infer complete usage from a partial counter, prompt for a routing profile despite available defaults, or reduce an independent panel to fit the remaining quota.",
+  "expected_behavior": [
+    "Invokes the usage helper and reports at least 580 observed tokens, unknown exact total and unknown exact cost; cached and reasoning subsets are not added again.",
+    "Reports two child starts including the replacement, a reached child-start ceiling and an exceeded token ceiling, and starts no further work.",
+    "Resolves unpinned extraction to gpt-5.6-luna and evidence analysis to gpt-5.6-sol from the available IDs, retaining gpt-6-astra as lead without requesting a profile choice.",
+    "Keeps all three required independent auditors pending and describes the full assessment as incomplete rather than inventing grades or substituting a single-agent method."
+  ],
+  "must_not": [
+    "Spawn agents, fetch sources, modify artifacts, or issue any new grade at this checkpoint.",
+    "Reset budgets for replacements, report unknown counters as zero, or equate API cost with subscription allowance.",
+    "Switch the lead or provider, select unavailable GPT-6 support models, or ask the user to choose among available default routes."
+  ]
+}

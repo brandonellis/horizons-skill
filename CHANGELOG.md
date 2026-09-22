@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.4.0 - 2026-09-22
+
+- Budget lead and child work together, with explicit task allocations, bounded
+  retries, source reuse and affected-scope refreshes. Preserve independent grading
+  and required calibration; collectors return cited evidence without grades.
+- Add optional private per-call usage summaries and budget visibility, retaining
+  unknown counters and avoiding cached/reasoning-token double counting. This is
+  reporting and execution guidance, not a host-enforced allowance cap.
+- Add default Codex/Claude child routing and role-specific qualification guidance
+  without changing selected leads, explicit assignments or global configuration.
+
 ## 2.3.0 - 2026-09-19
 
 - Re-test the previous assessment's open findings before any new auditing.
