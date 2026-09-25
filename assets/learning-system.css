@@ -165,3 +165,71 @@
 
 .ll-inspector > button:first-child { margin-bottom: 18px; }
 .ll-inspector:focus-visible { outline: 2px solid var(--ll-blue); outline-offset: -2px; }
+
+/* Named loop navigation keeps selection separate from camera movement. */
+.ll-graph-intro { padding: 20px 16px; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-graph-intro h3 { margin: 0 0 8px; font: 600 25px/1.2 'Barlow Condensed',sans-serif; }
+.roadmap-shell .ll-graph-intro p { margin: 0; max-width: 70ch; font-size: 14px; }
+.ll-graph-browser { display: grid; grid-template-columns: 190px minmax(0,1fr); }
+.ll-loop-browser { border-right: 1px solid var(--rm-rule); padding: 16px 10px; }
+.ll-loop-browser h4 { margin: 0 6px 12px; font-size: 14px; }
+.ll-loop-options { display: grid; gap: 6px; }
+.roadmap-shell .ll-loop-options button { display: block; width: 100%; text-align: left; padding: 10px; }
+.ll-loop-options button strong { display: block; font-weight: 500; }
+.ll-loop-options button span { display: block; margin-top: 5px; color: var(--rm-muted); font-size: 12px; }
+.ll-graph-stage { min-width: 0; }
+.ll-graph-selection { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; padding: 16px; }
+.roadmap-shell .ll-graph-selection p { margin: 0 0 4px; }
+.roadmap-shell .ll-graph-selection h4 { margin: 0; font: 600 25px/1.2 'Barlow Condensed',sans-serif; }
+.ll-loop-step, .ll-graph-scope { display: flex; flex-wrap: wrap; gap: 6px; }
+.ll-graph-tools .ll-picker { display: none; }
+.ll-graph-tools { justify-content: space-between; }
+.ll-graph-controls { padding: 12px 16px; border-top: 1px solid var(--rm-rule); align-items: center; }
+.ll-graph-controls > span { width: 100%; color: var(--rm-muted); font-size: 12px; }
+.ll-graph-labels .ll-stage-label { color: var(--rm-ink); overflow-wrap: anywhere; }
+.ll-canvas-wrap { height: 500px; }
+.ll-canvas-wrap canvas { height: 340px; }
+.ll-graph-labels { min-height: 120px; }
+.roadmap-shell .ll-graph-labels button { font-size: 12px; }
+@media(max-width: 1100px) {
+ .ll-graph-browser { grid-template-columns: 1fr; }
+ .ll-loop-browser { border-right: 0; border-bottom: 1px solid var(--rm-rule); }
+ .ll-loop-options { grid-template-columns: repeat(2,minmax(0,1fr)); max-height: 220px; overflow-y: auto; padding: 3px; scrollbar-color: var(--rm-muted) var(--rm-soft); }
+}
+@media(max-width: 600px) {
+ .ll-loop-browser { padding: 14px 8px; }
+ .ll-loop-options { grid-template-columns: 1fr; max-height: 180px; }
+ .ll-loop-options button span { font-size: 12px; }
+ .ll-graph-selection { padding: 16px 12px; }
+ .ll-graph-tools { padding: 12px; }
+ .ll-canvas-wrap { height: 540px; }
+ .ll-canvas-wrap canvas { height: 260px; }
+ .ll-graph-labels { grid-template-columns: repeat(2,minmax(0,1fr)); min-height: 250px; }
+ .ll-graph-controls { padding: 12px; }
+}
+
+.ll-walk-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 16px; }
+.ll-walk-controls > span { color: var(--rm-muted); font-size: 12px; }
+.ll-node-numbers { position: absolute; inset: 0; pointer-events: none; }
+.ll-node-numbers span { position: absolute; transform: translate(-50%,-50%); font: 600 12px/1 Barlow,sans-serif; color: var(--rm-ground); background: var(--rm-ink); border-radius: 50%; width: 20px; height: 20px; display: grid; place-items: center; }
+.ll-walk-caption { padding: 16px; border-top: 1px solid var(--rm-rule); background: var(--rm-panel); }
+.ll-walk-caption strong { font-size: 14px; }
+.roadmap-shell .ll-walk-caption p { font-size: 13px; margin: 8px 0 0; }
+.ll-improve { padding: 20px 16px; border-top: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-improve h4 { font: 600 25px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 18px; }
+.ll-improve dl { margin: 0 0 16px; }
+.ll-improve dt { font-size: 13px; font-weight: 600; margin-top: 16px; }
+.ll-improve dd { margin: 4px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+.ll-improve a, .ll-improve summary { min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
+.ll-improve details { margin-top: 12px; }
+.ll-improve li { margin-bottom: 12px; font-size: 14px; }
+.ll-quality-bar { margin-top: 24px; padding: 20px 0; border-top: 1px solid var(--rm-rule); }
+.ll-quality-bar summary { font: 600 23px/1.2 'Barlow Condensed',sans-serif; min-height: 44px; cursor: pointer; }
+.ll-quality-bar p, .ll-quality-bar li { max-width: 75ch; font-size: 15px; }
+.ll-quality-bar li { margin-bottom: 16px; }
+
+.ll-improve > a { display: flex; width: fit-content; }
+
+.ll-decision-brief { padding: 0 16px 12px; }
+.roadmap-shell .ll-decision-brief p { margin: 0 0 10px; font-size: 13px; max-width: 75ch; }
+.ll-improve summary { display: list-item; cursor: pointer; padding-block: 12px; }

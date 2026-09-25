@@ -1,0 +1,224 @@
+{
+  "date": "2026-09-25",
+  "version": "2.5.1",
+  "runtimeCandidateSha256": "4d62904cba00533648bf2dde539e84632a1edc004ebc216173ee6a18d7deeca9",
+  "behaviorCandidateSha256": "ae0d13bde13093662fad395313d3664573df344c76fbb72274a35a37b9e07a23",
+  "fingerprintMethod": "SHA256 sorted path NUL content-SHA256 joined by LF; SKILL.md, references, assets, non-test scripts",
+  "runs": [
+    {
+      "scenario": "23-learning-system",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "elapsedBasis": "277.512 seconds combined with scenario15; individual duration unavailable",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "ae322c590b119cc298066680090e7528d09e2103172347df6ed8b7bb41cafe3e"
+    },
+    {
+      "scenario": "23-learning-system",
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "status": "completed",
+      "elapsedSeconds": 319,
+      "elapsedBasis": "workspace creation through final verification",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "1710fa89e0e7bdcd4c502254634df7650ccd14c462fc00236170780ccfa2a623"
+    },
+    {
+      "scenario": "15-complete-lead-grading",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "codeGrade": "C",
+      "productionGrade": null,
+      "productionStatus": "incomplete",
+      "method": "explicitly approved single-agent",
+      "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+      "artifactVerifiedFiles": 13
+    }
+  ],
+  "budget": {
+    "numericTokenBudget": null,
+    "tokenUsage": null,
+    "cost": null,
+    "childStarts": 2
+  },
+  "selectedLeadCombinedSeconds": 277.512,
+  "suppliedReplies": [],
+  "tools": [
+    "Local file reads and Node helpers",
+    "Maintainer Chrome/Playwright follow-up"
+  ],
+  "helperTests": {
+    "passed": 167,
+    "failed": 0
+  },
+  "browserResults": [
+    {
+      "run": "lead",
+      "width": 1440,
+      "selection": true,
+      "evidenceReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "run": "lead",
+      "width": 390,
+      "selection": true,
+      "evidenceReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "run": "support",
+      "width": 1440,
+      "selection": true,
+      "evidenceReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "run": "support",
+      "width": 390,
+      "selection": true,
+      "evidenceReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "finalRuntimeChecks": [
+    {
+      "width": 1440,
+      "selection": true,
+      "navigation": true,
+      "readAndReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "selection": true,
+      "navigation": true,
+      "readAndReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "selection": true,
+      "navigation": true,
+      "readAndReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "errors": []
+    },
+    {
+      "width": 320,
+      "selection": true,
+      "navigation": true,
+      "readAndReturn": true,
+      "reducedMotion": true,
+      "filter": true,
+      "errors": []
+    },
+    {
+      "motionPixelsChange": true,
+      "narrationAdvances": true,
+      "pauseStops": true
+    }
+  ],
+  "additionalRuntimeChecks": {
+    "results": [
+      {
+        "width": 1440,
+        "qualityChecklist": true,
+        "acceptanceDisclosure": true,
+        "print": true
+      },
+      {
+        "width": 390,
+        "qualityChecklist": true,
+        "acceptanceDisclosure": true,
+        "print": true
+      }
+    ],
+    "viewChangeStopsMotion": true
+  },
+  "limitations": [
+    "Agent browser checks were unavailable or launch failed; maintainer independently checked generated artifacts.",
+    "Final reviewer fixes relocate narration/diagnosis and restore disclosure semantics; behavior runs used the pre-finish candidate, final browser checks cover the corrected runtime.",
+    "Exact selected-lead backend and reasoning metadata, token usage and cost were not exposed.",
+    "Grading is a scoped synthetic single-agent run; no live or full-panel qualification."
+  ]
+}

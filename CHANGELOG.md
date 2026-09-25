@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 2.5.1 - 2026-09-25
+
+- Make 3D loop selection explicit with named navigation, Previous/Next, a focused
+  view and a separate Read evidence action that preserves mobile context.
+- Add a bounded, clearly illustrative spatial walkthrough with numbered stages,
+  Play/Pause, reduced-motion handling and visible stage narration.
+- Show each loop’s exact missing witness and next improvement beside its trace.
+  Link recorded plan acceptance and distinguish proposed quality standards from
+  observed closure, measured benefit and earned grades.
+
+
 ## 2.5.0 - 2026-09-25
 
 - Add a shared learning-system model and renderer for a leadership 2D map,

@@ -1,8 +1,12 @@
 {
   "id": "learning-system",
-  "skills": ["horizons"],
-  "query": "/horizons Improve the existing synthetic learning artifact in fixtures/learning-system/index.html for leadership decisions and progress. Use learning.json as its complete recorded snapshot. Include a clear 2D learning map, an optional 3D WebGL view, an evidence inspector and an evaluation view using the same data. Show which closure was witnessed and which relies on earlier proof. Keep missing evidence and advisory enforcement explicit. Preserve this local canonical path, all recorded observations and their source evidence. This is presentation only: no new grades, live access, installation or publication.",
-  "files": ["fixtures/learning-system/"],
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Improve the existing synthetic learning artifact in fixtures/learning-system/index.html for leadership decisions and progress. Use learning.json as its complete recorded snapshot. Include a clear 2D learning map, an optional 3D WebGL view, an evidence inspector and an evaluation view using the same data. Make selecting a loop obvious and include a labelled animated walkthrough with reduced-motion support. Explain what is missing and the next improvement for the selected loop, with a clearly proposed quality checklist rather than a new grade. Show which closure was witnessed and which relies on earlier proof. Keep missing evidence and advisory enforcement explicit. Preserve this local canonical path, all recorded observations and their source evidence. This is presentation only: no new grades, live access, installation or publication.",
+  "files": [
+    "fixtures/learning-system/"
+  ],
   "gap": "A general visualization task may invent agent relationships, treat activity or a changed artifact as closure, hide the difference between carried and current proof, or turn evaluation coverage and advisory verdicts into an unsupported readiness score.",
   "expected_behavior": [
     "Loads learning-system guidance and uses the existing canonical artifact with a leadership 2D view first and optional 3D exploration.",
@@ -11,7 +15,9 @@
     "Keeps the full inventory denominator when filtering and does not invent cross-loop causal edges or live traffic.",
     "Separates evaluation coverage from verdicts, enforcement and accounting; advisory remains nonbinding.",
     "Keeps keyboard and native controls, no-JavaScript and print text, and a usable fallback when WebGL is unavailable.",
-    "Reports the local artifact and checks actually performed without presenting synthetic records as live observations."
+    "Reports the local artifact and checks actually performed without presenting synthetic records as live observations.",
+    "Provides visible named loop selection, Previous/Next, focused/all-loop context, a labelled bounded walkthrough with Pause and reduced-motion behavior, and an explicit Read evidence action.",
+    "Displays the recorded missing witness and next proof beside the selected loop; improvement standards are proposed acceptance, not measured benefits or an earned maturity grade."
   ],
   "must_not": [
     "Change source learning.json or evidence/learning-observation.json, issue a new grade, invent dates or widen observed scope.",

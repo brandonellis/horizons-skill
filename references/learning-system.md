@@ -98,7 +98,9 @@ Model schema version 1:
 - `loops[]`: stable `id`, `name`, `binding` (`native` or the recorded other binding),
   `summary`, `decision`, `action`, `missing`, `recordedVerdict` (`closed` or
   `not proved`), `proof`, `sourceHref`, `sourceLocator`, nonempty `evidence[]`;
-  optional `tickets`; exactly four `stages[]` in order, with IDs `signal`,
+  optional `tickets`; optional `improvement` with a safe `sourceHref` and an
+  `acceptance` string array copied from an identified existing plan (keep its
+  date and proposal status; never present it as completed evidence); exactly four `stages[]` in order, with IDs `signal`,
   `transform`, `artifact`, `consumption`, and `state`, `label`, `note` each.
 - `metrics[]`: unique `id`, `name`, `value`, `status`, `detail`, `nextProof`,
   nonempty `evidence[]`. Preserve numerators, denominators and observation dates
@@ -116,15 +118,28 @@ checks and deterministic geometry; none is a grading evaluator.
 
 ## Interaction and fallback
 
-Stable identity ordering fixes position between renders. Depth only separates
-recorded binding classes and is explained beside the canvas; distance is not a
-score. Edges follow each declared sequence and do not imply live traffic. Avoid
-force jitter, auto-orbit, decorative particles and animation presented as activity.
-Render on demand; respect reduced motion. Native controls provide selection,
-rotation, zoom and reset. The inspector, textual states and symbols duplicate all
+Stable identity ordering fixes position between renders. Depth separates stages and recorded binding classes for exploration; the spatial
+layout is explicitly illustrative and distance is not a score. Edges follow each declared sequence and do not imply live traffic. Avoid
+force jitter, endless auto-orbit and animation presented as live activity. A short
+guided walkthrough may animate the recorded sequence when requested, visibly
+labelled illustration rather than traffic. Supply Play/Pause, stop offscreen or
+on view/selection changes, and disable automatic movement for reduced motion.
+Render on demand outside the bounded walkthrough. Native controls provide selection,
+rotation, zoom and reset. Show a visible named loop navigator with selected state,
+Previous/Next controls and the selection position. Start 3D focused on one loop;
+make the all-loop context an explicit choice. Selection changes the diagram in
+place, including on phones. A separate Read evidence action focuses the inspector
+and offers a return action; camera movement never changes loop selection. The inspector, textual states and symbols duplicate all
 canvas information. A WebGL failure leaves the map and full text available.
 
 Check all views at desktop and narrow mobile sizes, light/dark, keyboard,
 filters, selection, deep links, no JavaScript, print and forced graphics failure.
 Inspect screenshots for crowded labels as well as overflow; a passing width check
 alone cannot prove visual quality. Keep evidence links and host navigation working.
+
+Show the selected loop’s recorded summary, exact missing witness and next proof
+beside the diagram. An improvement checklist can describe useful feedback, a
+traceable change, verified reuse, measured benefit and reliable operation, but
+label it as proposed acceptance rather than a new grading rubric or earned score.
+Keep measured benefit distinct from closure, and do not imply a return-to-signal
+edge unless the source establishes it.

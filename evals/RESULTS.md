@@ -3,6 +3,36 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-25 · v2.5.1 navigation and walkthrough verification
+
+The expanded scenario 23 completed on the inherited selected GPT-6 lead and
+`gpt-5.6-sol` (medium), starting from the plain fixture. Both used named selection,
+focused/all-loop context, a labelled bounded walkthrough and explicit evidence
+navigation. Missing proof and next improvements remained tied to the recorded
+snapshot; the quality checklist stayed proposed acceptance. Nine expectations
+were met, both prohibitions avoided, and both source files stayed byte-identical.
+
+The selected lead also completed scenario 15: code C, production Incomplete,
+Done separate from acceptance, one appended assessment, original baseline and
+prior assessment preserved. The original history-lock hash and 13-file manifest
+verified. All six expectations were met and three prohibited behaviors avoided.
+
+Maintainer Chrome checks cover both generated artifacts at desktop/mobile sizes.
+The final runtime was checked at 1440, 768, 390 and 320px, including named/step
+selection, filters, evidence return, reduced motion, no-JavaScript and graphics
+fallback. Measured canvas pixels changed during playback, narration advanced,
+Pause stopped rendering and leaving 3D stopped playback. The proposed checklist,
+source-plan disclosure and print records were checked separately. All 167 helper
+tests and `git diff --check` passed; both distribution formats built.
+
+The final visual fix batch moved narration and decision context and restored the
+native disclosure marker. Evaluations used the pre-finish candidate; corrected
+runtime checks are recorded alongside both fingerprints in
+`2026-09-25-v2.5.1-results.json`. Agent browser launches were unavailable/failed;
+maintainer follow-up supplied browser checks. The inherited lead’s exact backend
+identifier and reasoning setting, token usage and cost were unavailable. No live
+probe, paid evaluation or full-panel qualification is claimed.
+
 ## 2026-09-25 · v2.5.0 release verification
 
 Scenario 23 completed from the plain synthetic artifact on the inherited selected
