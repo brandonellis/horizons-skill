@@ -1,3 +1,9 @@
+import {
+  validateWorkLinks,
+  renderWorkLinks,
+  workSummary,
+  actionsFor,
+} from "./render-work-links.mjs";
 /** Render recorded assessment freshness; never compute a grade or infer comparability. */
 const esc = (v) =>
   String(v ?? "").replace(
@@ -24,7 +30,7 @@ function link(v) {
 }
 export function renderGradeRegister(
   model,
-  { id = "component-grades", title = "Where we stand" } = {},
+  { id = "component-grades", title = "Where we stand", work = null } = {},
 ) {
   if (
     !/^[a-z][a-z\d_-]*$/.test(id) ||
@@ -58,11 +64,39 @@ export function renderGradeRegister(
     )
       throw Error("Recorded requirements must be strings");
   }
+  validateWorkLinks(work);
+  // Only deduplicate exact recorded acceptance; retain every unmatched requirement.
+  const unmatched = (c) => {
+    const linked = new Set(
+      actionsFor(work, "component", c.id).map((a) => a.acceptance),
+    );
+    return c.requirements.filter((r) => !linked.has(r));
+  };
   const rows = model.components
     .map(
       (c) =>
-        `<details class="fg-row" data-component-id="${esc(c.id)}" data-grade-state="${esc(c.status)}" name="${id}-review"><summary><span class="fg-name">${esc(c.name)}<small>${c.status === "assessed" ? "Reviewed" : c.status === "incomplete" ? "Review incomplete" : "Earlier review"}</small></span><span class="fg-grade" data-current="${c.status === "assessed"}">${esc(c.status === "assessed" ? c.grade : c.status === "incomplete" ? "Incomplete" : "Not renewed")}<small>${esc(c.status === "assessed" ? c.observedOn : "Current review")}</small></span><span class="fg-prior">${esc(c.previous?.grade ?? "Not recorded")}<small>${esc(c.previous?.observedOn ?? "No dated earlier grade")}</small></span><span class="fg-proof">${esc(c.nextProof)}<small>Open review and required proof</small></span></summary><div class="fg-detail"><div><h3>Why this assessment stands</h3><p>${esc(c.rationale)}</p><a href="${link(c.sourceHref)}">Full assessment evidence</a></div><div><h3>Required for the next review</h3>${c.requirements.length ? "<ol>" + c.requirements.map((r) => "<li>" + esc(r) + "</li>").join("") + "</ol>" : "<p>No additional acceptance criteria were recorded.</p>"}</div></div></details>`,
+        `<details class="fg-row" id="${id}-${esc(c.id)}" data-component-id="${esc(c.id)}" data-grade-state="${esc(c.status)}" name="${id}-review"><summary><span class="fg-name">${esc(c.name)}<small>${c.status === "assessed" ? "Reviewed" : c.status === "incomplete" ? "Review incomplete" : "Earlier review"}</small></span><span class="fg-grade" data-current="${c.status === "assessed"}">${esc(c.status === "assessed" ? c.grade : c.status === "incomplete" ? "Incomplete" : "Not renewed")}<small>${esc(c.status === "assessed" ? c.observedOn : "Current review")}</small></span><span class="fg-prior">${esc(c.previous?.grade ?? "Not recorded")}<small>${esc(c.previous?.observedOn ?? "No dated earlier grade")}</small></span><span class="fg-proof">${esc(c.nextProof)}<small>${
+          work
+            ? (() => {
+                const w = workSummary(work, "component", c.id);
+                return `${w.open} open · ${w.done} marked Done · ${w.unmapped} actions not mapped`;
+              })()
+            : "Open review and required proof"
+        }</small></span></summary><div class="fg-detail${unmatched(c).length ? "" : " fg-detail-consolidated"}"><div><h3>Why this assessment stands</h3><p>${esc(c.rationale)}</p><a href="${link(c.sourceHref)}">Full assessment evidence</a></div>${
+          unmatched(c).length
+            ? "<div><h3>Required for the next review</h3><ol>" +
+              unmatched(c)
+                .map((r) => "<li>" + esc(r) + "</li>")
+                .join("") +
+              "</ol></div>"
+            : work
+              ? ""
+              : "<div><h3>Required for the next review</h3><p>No additional acceptance criteria were recorded.</p></div>"
+        }</div>${work ? `<div class="fg-linked-work"><h3>Work behind this assessment</h3>${renderWorkLinks(work, { kind: "component", id: c.id })}</div>` : ""}</details>`,
     )
     .join("");
-  return `<section id="${id}" class="fg-grades"><div class="rm-structure-heading"><h2>${esc(title)}</h2><p>Assessment snapshot · ${esc(model.observedOn)}</p></div><p>See the judgment, its freshness, and the proof needed next.</p><div class="fg-labels" aria-hidden="true"><span>Component</span><span>Current assessment</span><span>Earlier letter</span><span>Next proof</span></div>${rows}<p class="fg-method">Letters are recorded judgments, not a numeric progress scale. Code quality, operating readiness and measured impact remain separate. This view computes no grade.</p></section>`;
+  const pending = model.components.filter((c) => c.status === "incomplete"),
+    prior = model.components.filter((c) => c.status === "not-reassessed");
+  const attention = `<div class="fg-attention"><div><h3>${pending.length ? pending.length + " reviews need evidence" : "Review the next required proof"}</h3><p>${pending.length ? "Complete these reviews before drawing a current conclusion." : "Work and verification remain separate from the recorded letters."}</p></div><ul>${[...pending, ...prior].map((c) => `<li><a href="#${id}-${esc(c.id)}"><strong>${esc(c.name)}</strong><span>${esc(c.status === "incomplete" ? "Complete review" : "Renew dated assessment")}</span></a><p>${esc(c.nextProof)}</p></li>`).join("") || "<li>Expand a component for its mapped work and acceptance.</li>"}</ul></div>`;
+  return `<section id="${id}" class="fg-grades"><div class="rm-structure-heading"><h2>${esc(title)}</h2><p>Assessment snapshot · ${esc(model.observedOn)}</p></div>${attention}<p class="fg-register-intro">Recorded assessments · open a row for the evidence and linked work. Tracker progress does not change a letter.</p><div class="fg-labels" aria-hidden="true"><span>Component</span><span>Current assessment</span><span>Earlier letter</span><span>Next proof</span></div>${rows}<p class="fg-method">Letters are recorded judgments, not a numeric progress scale. Code quality, operating readiness and measured impact remain separate. This view computes no grade.</p></section>`;
 }

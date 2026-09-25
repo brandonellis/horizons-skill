@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 2.7.0 - 2026-09-25
+
+- Connect assessment, learning and evaluation gaps to dated tracker work with
+  real links, status, owner, prerequisite provenance and explicit acceptance.
+- Keep Done delivery separate from operating proof and make unmapped actions
+  visible without inventing tickets or changing assessments.
+- Lead the grade register with incomplete reviews and the learning view with
+  the selected proof boundary and next action. Label stage evidence directly
+  on the chain and place the independent feedback return beside it.
+- Preserve host colors and roadmap/timeline layouts; retain optional named 3D,
+  explicit playback, keyboard navigation and complete print/text records.
+- Add a tracker-neutral synthetic fixture, validation and behavioral scenario.
+
 ## 2.6.0 - 2026-09-25
 
 - Add a recorded-grade register that separates current assessment status from

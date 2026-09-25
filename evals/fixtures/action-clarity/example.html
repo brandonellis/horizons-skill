@@ -1,0 +1,2632 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Synthetic review</title><style id="brand-tokens">.roadmap-shell{--rm-ground:#f4f5f6;--rm-panel:#fff;--rm-ink:#18252a;--rm-muted:#53636a;--rm-rule:#b8c3ca;--rm-soft:#e6edf1;--rm-link:#245a83;--rm-focus:#245a83;--rm-warn:#804812;--rm-success:#23644f;background:var(--rm-ground);color:var(--rm-ink);font:16px/1.5 sans-serif;padding:24px}.roadmap-shell *{box-sizing:border-box}#approved-roadmap,#approved-gantt{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--rm-rule);padding:16px;text-align:left}a{color:var(--rm-link)}[hidden]{display:none!important}</style><style>/* Leadership learning system: shared snapshot, three equivalent representations. */
+.roadmap-shell .ll-system { --ll-blue: var(--rm-link); --ll-green: #23644f; --ll-amber: #815013; --ll-pale: #e8eef5; margin-block: 40px; color: var(--rm-ink); }
+:root[data-theme="dark"] .roadmap-shell .ll-system { --ll-green: #99d6ba; --ll-amber: #efc17e; --ll-pale: #243748; }
+.ll-system *, .ll-system *::before, .ll-system *::after { box-sizing: border-box; }
+.roadmap-shell .ll-heading { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; border-top: 2px solid var(--rm-ink); padding-top: 24px; }
+.roadmap-shell .ll-heading h2 { margin: 0; font-size: 38px; line-height: 1.1; }
+.roadmap-shell .ll-heading p { max-width: 62ch; margin: 10px 0 0; }
+.ll-assessment { text-align: right; flex-shrink: 0; }
+.ll-assessment strong { font: 600 38px/1.05 'Barlow Condensed',sans-serif; display: block; color: var(--ll-blue); }
+.ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { display: block; font-size: 13px; margin-top: 5px; color: var(--rm-muted); }
+.roadmap-shell .ll-scope { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 18px 0 24px; color: var(--rm-muted); font-size: 13px; }
+.ll-scope a { color: var(--rm-link); }
+.roadmap-shell .ll-reading { display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; padding: 22px 0; border-block: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-reading h3 { font: 600 23px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-reading p { margin: 0; max-width: 65ch; font-size: 15px; }
+.ll-close-count { color: var(--ll-blue); font-weight: 600; }
+.ll-reading a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; }
+.ll-toolbar { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 16px; }
+.ll-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.roadmap-shell .ll-system button { font: 500 14px/1.3 Barlow,system-ui,sans-serif; color: var(--rm-ink); background: transparent; border: 1px solid var(--rm-rule); border-radius: 4px; min-height: 44px; padding: 9px 13px; cursor: pointer; }
+.roadmap-shell .ll-system button:hover { background: var(--rm-soft); }
+.roadmap-shell .ll-system button[aria-pressed="true"] { background: var(--ll-pale); color: var(--ll-blue); border-color: var(--ll-blue); }
+.roadmap-shell .ll-system :is(button,a,select):focus-visible { outline: 3px solid var(--rm-focus); outline-offset: 3px; }
+.roadmap-shell .ll-system button:disabled { color: var(--rm-muted); cursor: default; border-style: dashed; }
+.ll-filter { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.ll-filter input { width: 18px; height: 18px; accent-color: var(--ll-blue); }
+.ll-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 310px; border-block: 1px solid var(--rm-rule); }
+.ll-main { min-width: 0; }
+.ll-inspector { padding: 24px; border-left: 1px solid var(--rm-rule); background: var(--rm-panel); min-width: 0; }
+.roadmap-shell .ll-inspector h3 { font: 600 27px/1.15 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-inspector p { margin: 12px 0; font-size: 15px; }
+.ll-inspector .ll-small, .ll-small { font-size: 13px; color: var(--rm-muted); }
+.ll-state { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--rm-muted); }
+.ll-state[data-state="observed"] { color: var(--ll-green); }
+.ll-state[data-state="carried"],.ll-state[data-state="attention"] { color: var(--ll-amber); }
+.ll-state svg { flex: 0 0 15px; }
+.ll-map { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.roadmap-shell .ll-map :is(th,td) { border: 0; border-bottom: 1px solid var(--rm-rule); padding: 0; text-align: left; vertical-align: middle; background: transparent; }
+.roadmap-shell .ll-map thead th { height: 50px; padding: 8px; font-size: 12px; line-height: 1.2; font-weight: 500; color: var(--rm-muted); text-align: center; }
+.roadmap-shell .ll-map thead th:first-child { width: 34%; text-align: left; padding-left: 16px; }
+.roadmap-shell .ll-map th.ll-loop-name { font-weight: 500; }
+.roadmap-shell .ll-map th.ll-loop-name button { width: 100%; text-align: left; border: 0; border-radius: 0; min-height: 59px; padding: 10px 12px 10px 16px; font-size: 15px; }
+.ll-loop-name small { display: block; font-size: 11px; font-weight: 400; color: var(--rm-muted); margin-top: 3px; }
+.ll-map tr[data-selected="true"] { background: var(--ll-pale); }
+.ll-map td { position: relative; text-align: center !important; }
+.ll-map td:not(:last-child)::after { content: ''; position: absolute; top: 50%; left: 66%; width: 68%; border-top: 1px dashed var(--rm-rule); pointer-events: none; }
+.ll-map td[data-linked="true"]::after { border-top-style: solid; border-color: var(--ll-blue); }
+.roadmap-shell .ll-map .ll-node { position: relative; z-index: 1; border: 0; padding: 8px; width: 44px; height: 44px; border-radius: 50%; color: var(--rm-muted); }
+.roadmap-shell .ll-map .ll-node[data-state="observed"] { color: var(--ll-green); }
+.roadmap-shell .ll-map .ll-node[data-state="carried"],.roadmap-shell .ll-map .ll-node[data-state="attention"] { color: var(--ll-amber); }
+.ll-node svg { width: 22px; height: 22px; display: block; margin: auto; }
+.ll-legend { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 16px; font-size: 12px; }
+.ll-caption { padding: 0 16px 18px; font-size: 13px; color: var(--rm-muted); }
+.ll-trace { list-style: none; padding: 0; margin: 20px 0; }
+.ll-trace li { position: relative; padding: 0 0 18px 25px; border-left: 1px solid var(--rm-rule); margin-left: 7px; }
+.ll-trace li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.ll-trace li > svg { position: absolute; left: -8px; top: 2px; width: 16px; height: 16px; background: var(--rm-panel); color: var(--rm-muted); }
+.ll-trace li[data-state="observed"] > svg { color: var(--ll-green); }
+.ll-trace li[data-state="carried"] > svg,.ll-trace li[data-state="attention"] > svg { color: var(--ll-amber); }
+.ll-trace strong { display: block; font-size: 13px; }
+.ll-trace span { display: block; font-size: 14px; margin-top: 4px; overflow-wrap: anywhere; }
+.ll-trace .ll-stage-note { color: var(--rm-muted); font-size: 12px; }
+.ll-trace li[data-active="true"] strong { color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.roadmap-shell .ll-next { border-top: 1px solid var(--rm-rule); padding-top: 16px; margin-top: 20px; }
+.roadmap-shell .ll-next h4 { font-size: 15px; margin: 0; }
+.ll-inspector a { overflow-wrap: anywhere; }
+.ll-inspector .ll-source-link { display: inline-flex; align-items: center; min-height: 44px; }
+.ll-inspector details { margin-top: 18px; }
+.ll-inspector summary { min-height: 44px; padding-block: 10px; font-size: 14px; cursor: pointer; }
+.ll-inspector details p { font-size: 13px; overflow-wrap: anywhere; }
+.ll-graph-tools { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--rm-rule); align-items: center; }
+.ll-graph-tools label { font-size: 13px; flex: 1 1 180px; }
+.ll-graph-tools select { width: 100%; font: inherit; color: var(--rm-ink); background: var(--rm-panel); border: 1px solid var(--rm-rule); min-height: 44px; margin-top: 5px; padding: 8px; border-radius: 4px; }
+.ll-graph-controls { display: flex; gap: 5px; flex-wrap: wrap; }
+.ll-canvas-wrap { position: relative; height: 485px; overflow: hidden; background: var(--rm-ground); }
+.ll-canvas-wrap canvas { display: block; width: 100%; height: calc(100% - 76px); cursor: grab; touch-action: pan-y; }
+.ll-canvas-wrap canvas:active { cursor: grabbing; }
+.ll-graph-labels { position: absolute; inset: auto 12px 12px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; pointer-events: none; }
+.roadmap-shell .ll-graph-labels button { min-height: 52px; padding: 6px; font-size: 11px; background: var(--rm-ground); pointer-events: auto; border: 1px solid var(--rm-rule); text-align: left; }
+.ll-graph-labels button strong, .ll-graph-labels button span { display: block; }
+.ll-graph-labels button span { margin-top: 3px; color: var(--rm-muted); }
+.ll-graph-labels .ll-plane-label { position: absolute; color: var(--rm-muted); font-size: 11px; transform: translateX(-50%); white-space: nowrap; }
+.ll-camera-note { margin: 0 !important; padding: 12px 16px; font-size: 12px !important; color: var(--rm-muted); border-top: 1px solid var(--rm-rule); }
+.ll-evaluations { padding: 22px 24px; }
+.roadmap-shell .ll-evaluations h3 { font: 600 25px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-evaluations > p { margin: 0 0 22px; font-size: 14px; color: var(--rm-muted); }
+.ll-eval-table { border-collapse: collapse; width: 100%; }
+.roadmap-shell .ll-eval-table :is(th,td) { text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--rm-rule); padding: 13px 10px 13px 0; vertical-align: top; font-size: 14px; }
+.roadmap-shell .ll-eval-table thead th { font-size: 12px; font-weight: 500; color: var(--rm-muted); }
+.roadmap-shell .ll-eval-table tbody th { font-weight: 500; width: 35%; }
+.roadmap-shell .ll-eval-table button { padding: 0; border: 0; border-radius: 0; text-align: left; min-height: 44px; color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.ll-eval-table td strong { display: block; font-size: 17px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.ll-eval-table td span { display: block; font-size: 12px; margin-top: 4px; color: var(--rm-muted); }
+.ll-eval-table tr[data-selected="true"] { background: var(--ll-pale); }
+.roadmap-shell .ll-runs { margin-top: 32px; }
+.ll-run { padding: 15px 0; border-bottom: 1px solid var(--rm-rule); }
+.ll-run header { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.ll-run header strong { font-weight: 600; }
+.ll-run header span { color: var(--ll-amber); }
+.ll-run code { font-size: 12px; }
+.roadmap-shell .ll-run p { margin: 7px 0 0; font-size: 13px; }
+.roadmap-shell .ll-run small { font-size: 12px; color: var(--rm-muted); }
+.ll-evidence-list { padding-left: 18px; }
+.ll-evidence-list li { margin: 8px 0; font-size: 13px; overflow-wrap: anywhere; }
+.ll-footnote { margin: 16px 0 !important; font-size: 13px !important; color: var(--rm-muted); }
+.ll-legacy { margin-top: 28px; border-block: 1px solid var(--rm-rule); padding: 12px 0; }
+.ll-legacy > summary { min-height: 44px; padding: 10px 0; cursor: pointer; font-weight: 500; }
+.ll-legacy > .ll-historical-note { padding: 16px; background: var(--rm-soft); }
+.ll-system [hidden] { display: none !important; }
+.ll-noscript { margin: 20px 0; }
+.ll-noscript article { border-top: 1px solid var(--rm-rule); padding: 16px 0; }
+.ll-noscript h3 { margin: 0 0 6px; }
+.ll-noscript p { max-width: 75ch; }
+@media(max-width: 1100px) {
+ .ll-workspace { grid-template-columns: minmax(0,1fr) 280px; }
+ .ll-inspector { padding: 20px; }
+ .ll-map thead th:first-child { width: 39% !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 14px; padding-left: 10px; }
+}
+@media(max-width: 800px) {
+ .ll-workspace { grid-template-columns: 1fr; }
+ .ll-inspector { border-left: 0; border-top: 1px solid var(--rm-rule); }
+ .ll-reading { grid-template-columns: 1fr !important; gap: 16px !important; }
+ .ll-inspector .ll-trace { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+ .ll-map thead th:first-child { width: 35% !important; }
+ .ll-canvas-wrap { height: 410px; }
+}
+@media(max-width: 480px) {
+ .roadmap-shell .ll-heading h2 { font-size: 31px; }
+ .ll-assessment strong { font-size: 32px; }
+ .ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { max-width: 105px; }
+ .ll-heading { gap: 12px !important; }
+ .ll-heading p { font-size: 15px; }
+ .ll-map thead th { font-size: 10px !important; padding: 6px 1px !important; overflow-wrap: anywhere; }
+ .ll-map thead th:first-child { width: 34% !important; padding-left: 8px !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 13px; min-height: 70px; padding: 10px 8px; }
+ .ll-loop-name small { font-size: 10px; }
+ .roadmap-shell .ll-map .ll-node { width: 40px; min-height: 44px; padding: 8px; }
+ .ll-inspector { padding: 20px 12px; }
+ .ll-inspector .ll-trace { display: block; }
+ .ll-tabs { gap: 4px; }
+ .roadmap-shell .ll-tabs button { padding: 9px 10px; font-size: 13px; }
+ .ll-evaluations { padding: 20px 10px; }
+ .ll-graph-tools { padding: 12px; }
+ .ll-canvas-wrap { height: 350px; }
+ .ll-graph-labels { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .ll-canvas-wrap canvas { height: calc(100% - 128px); }
+ .ll-legend { padding: 14px 8px; gap: 8px 12px; }
+ .ll-scope { margin-bottom: 16px !important; }
+}
+@media(prefers-reduced-motion: reduce) { .ll-system * { scroll-behavior: auto !important; transition: none !important; } }
+@media print {
+ .ll-system .ll-enhanced, .ll-toolbar, .ll-legacy { display: none !important; }
+ .ll-system .ll-noscript { display: block !important; }
+ .ll-reading { grid-template-columns: 1fr !important; }
+ .ll-heading { break-after: avoid; }
+ .ll-noscript article { break-inside: avoid; }
+}
+
+.ll-agent-inventory { margin-top: 24px; }
+.ll-agent-inventory summary { min-height: 44px; cursor: pointer; padding-block: 10px; }
+.ll-agent-inventory :is(th,td,a) { overflow-wrap: anywhere; }
+
+.ll-inspector > button:first-child { margin-bottom: 18px; }
+.ll-inspector:focus-visible { outline: 2px solid var(--ll-blue); outline-offset: -2px; }
+
+/* Named loop navigation keeps selection separate from camera movement. */
+.ll-graph-intro { padding: 20px 16px; border-bottom: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-graph-intro h3 { margin: 0 0 8px; font: 600 25px/1.2 'Barlow Condensed',sans-serif; }
+.roadmap-shell .ll-graph-intro p { margin: 0; max-width: 70ch; font-size: 14px; }
+.ll-graph-browser { display: grid; grid-template-columns: 190px minmax(0,1fr); }
+.ll-loop-browser { border-right: 1px solid var(--rm-rule); padding: 16px 10px; }
+.ll-loop-browser h4 { margin: 0 6px 12px; font-size: 14px; }
+.ll-loop-options { display: grid; gap: 6px; }
+.roadmap-shell .ll-loop-options button { display: block; width: 100%; text-align: left; padding: 10px; }
+.ll-loop-options button strong { display: block; font-weight: 500; }
+.ll-loop-options button span { display: block; margin-top: 5px; color: var(--rm-muted); font-size: 12px; }
+.ll-graph-stage { min-width: 0; }
+.ll-graph-selection { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; padding: 16px; }
+.roadmap-shell .ll-graph-selection p { margin: 0 0 4px; }
+.roadmap-shell .ll-graph-selection h4 { margin: 0; font: 600 25px/1.2 'Barlow Condensed',sans-serif; }
+.ll-loop-step, .ll-graph-scope { display: flex; flex-wrap: wrap; gap: 6px; }
+.ll-graph-tools .ll-picker { display: none; }
+.ll-graph-tools { justify-content: space-between; }
+.ll-graph-controls { padding: 12px 16px; border-top: 1px solid var(--rm-rule); align-items: center; }
+.ll-graph-controls > span { width: 100%; color: var(--rm-muted); font-size: 12px; }
+.ll-graph-labels .ll-stage-label { color: var(--rm-ink); overflow-wrap: anywhere; }
+.ll-canvas-wrap { height: 500px; }
+.ll-canvas-wrap canvas { height: 340px; }
+.ll-graph-labels { min-height: 120px; }
+.roadmap-shell .ll-graph-labels button { font-size: 12px; }
+@media(max-width: 1100px) {
+ .ll-graph-browser { grid-template-columns: 1fr; }
+ .ll-loop-browser { border-right: 0; border-bottom: 1px solid var(--rm-rule); }
+ .ll-loop-options { grid-template-columns: repeat(2,minmax(0,1fr)); max-height: 220px; overflow-y: auto; padding: 3px; scrollbar-color: var(--rm-muted) var(--rm-soft); }
+}
+@media(max-width: 600px) {
+ .ll-loop-browser { padding: 14px 8px; }
+ .ll-loop-options { grid-template-columns: 1fr; max-height: 180px; }
+ .ll-loop-options button span { font-size: 12px; }
+ .ll-graph-selection { padding: 16px 12px; }
+ .ll-graph-tools { padding: 12px; }
+ .ll-canvas-wrap { height: 540px; }
+ .ll-canvas-wrap canvas { height: 260px; }
+ .ll-graph-labels { grid-template-columns: repeat(2,minmax(0,1fr)); min-height: 250px; }
+ .ll-graph-controls { padding: 12px; }
+}
+
+.ll-walk-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 16px; }
+.ll-walk-controls > span { color: var(--rm-muted); font-size: 12px; }
+.ll-node-numbers { position: absolute; inset: 0; pointer-events: none; }
+.ll-node-numbers span { position: absolute; transform: translate(-50%,-50%); font: 600 12px/1 Barlow,sans-serif; color: var(--rm-ground); background: var(--rm-ink); border-radius: 50%; width: 20px; height: 20px; display: grid; place-items: center; }
+.ll-walk-caption { padding: 16px; border-top: 1px solid var(--rm-rule); background: var(--rm-panel); }
+.ll-walk-caption strong { font-size: 14px; }
+.roadmap-shell .ll-walk-caption p { font-size: 13px; margin: 8px 0 0; }
+.ll-improve { padding: 20px 16px; border-top: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-improve h4 { font: 600 25px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 18px; }
+.ll-improve dl { margin: 0 0 16px; }
+.ll-improve dt { font-size: 13px; font-weight: 600; margin-top: 16px; }
+.ll-improve dd { margin: 4px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+.ll-improve a, .ll-improve summary { min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
+.ll-improve details { margin-top: 12px; }
+.ll-improve li { margin-bottom: 12px; font-size: 14px; }
+.ll-quality-bar { margin-top: 24px; padding: 20px 0; border-top: 1px solid var(--rm-rule); }
+.ll-quality-bar summary { font: 600 23px/1.2 'Barlow Condensed',sans-serif; min-height: 44px; cursor: pointer; }
+.ll-quality-bar p, .ll-quality-bar li { max-width: 75ch; font-size: 15px; }
+.ll-quality-bar li { margin-bottom: 16px; }
+
+.ll-improve > a { display: flex; width: fit-content; }
+
+.ll-decision-brief { padding: 0 16px 12px; }
+.roadmap-shell .ll-decision-brief p { margin: 0 0 10px; font-size: 13px; max-width: 75ch; }
+.ll-improve summary { display: list-item; cursor: pointer; padding-block: 12px; }
+/* Inherit every brand, theme and state color from the existing artifact. */
+.fg-grades,
+.fl-system {
+  color: var(--rm-ink);
+  font-family: Barlow, system-ui, sans-serif;
+}
+.fg-intro,
+.fl-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 20px 0;
+}
+.fg-intro p,
+.fl-intro p {
+  margin: 0;
+  max-width: 68ch;
+}
+.fg-intro p:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 14px;
+  color: var(--rm-muted);
+}
+.fg-labels,
+.fg-row > summary {
+  display: grid;
+  grid-template-columns:
+    minmax(160px, 1.05fr) minmax(120px, 0.7fr) minmax(110px, 0.65fr)
+    minmax(240px, 1.8fr);
+  gap: 24px;
+  align-items: center;
+}
+.fg-labels {
+  padding: 12px 20px;
+  color: var(--rm-muted);
+  font-size: 13px;
+  background: var(--rm-soft);
+  border-top: 1px solid var(--rm-rule);
+}
+.roadmap-shell .fg-row {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--rm-rule);
+  border-radius: 0;
+  background: var(--rm-panel);
+  padding: 0;
+}
+.roadmap-shell .fg-row > summary {
+  padding: 18px 20px;
+  list-style: none;
+  cursor: pointer;
+  min-height: 90px;
+}
+.fg-row > summary::-webkit-details-marker {
+  display: none;
+}
+.fg-row > summary:hover,
+.fg-row[open] > summary {
+  background: var(--rm-soft);
+}
+.fg-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.fg-row small {
+  display: block;
+  font:
+    13px/1.5 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-muted);
+  margin-top: 3px;
+}
+.fg-grade {
+  font:
+    600 30px/1.1 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.fg-grade[data-current="false"] {
+  font:
+    600 16px/1.3 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-warn);
+}
+.fg-prior {
+  font-size: 18px;
+}
+.fg-proof {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.fg-proof small {
+  color: var(--rm-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.fg-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  padding: 24px 28px 32px;
+  border-top: 1px solid var(--rm-rule);
+}
+.fg-detail h3 {
+  margin-top: 0;
+}
+.fg-detail p,
+.fg-detail li {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+.fg-detail ol {
+  padding-left: 22px;
+}
+.fg-detail li + li {
+  margin-top: 10px;
+}
+.fg-lenses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rm-rule);
+  margin-top: 20px;
+}
+.fg-lenses a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  padding: 20px;
+  text-decoration: none;
+  background: var(--rm-soft);
+}
+.fg-lenses a + a {
+  border-left: 1px solid var(--rm-rule);
+}
+.fg-lenses strong {
+  font-size: 19px;
+  color: var(--rm-ink);
+}
+.fg-lenses span {
+  color: var(--rm-warn);
+}
+.fg-lenses small {
+  grid-column: 1/-1;
+  color: var(--rm-muted);
+}
+.fg-method {
+  font-size: 14px;
+  color: var(--rm-muted);
+  max-width: 90ch;
+  margin: 20px 0;
+}
+.fl-system {
+  --fl-accent: var(--rm-link);
+  --fl-proof: var(--rm-success);
+  --fl-gap: var(--rm-warn);
+  padding: 0;
+  margin: 48px 0;
+}
+.fl-system p {
+  max-width: 75ch;
+}
+.fl-system button,
+.fl-system select {
+  font:
+    500 15px/1.35 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-ink);
+  background: var(--rm-panel);
+  border: 1px solid var(--rm-rule);
+  border-radius: 6px;
+  min-height: 44px;
+  padding: 9px 14px;
+  cursor: pointer;
+}
+.fl-system button:hover {
+  background: var(--rm-soft);
+  border-color: var(--rm-link);
+}
+.fl-system button:disabled {
+  cursor: default;
+  color: var(--rm-muted);
+  border-color: var(--rm-rule);
+}
+.fl-system button[aria-pressed="true"] {
+  color: var(--rm-link);
+  border-color: var(--rm-link);
+  background: var(--rm-soft);
+}
+.fl-system :is(button, a, select, summary, canvas):focus-visible,
+.fg-grades :is(summary, a):focus-visible {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+.fl-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  padding: 18px 0;
+  border-block: 1px solid var(--rm-rule);
+  font-size: 15px;
+}
+.fl-summary span {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.fl-summary small {
+  color: var(--rm-muted);
+}
+.fl-summary strong {
+  font-size: 19px;
+  font-weight: 600;
+}
+.fl-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 24px 0 20px;
+}
+.fl-tabs,
+.fl-display {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fl-tabs button {
+  font-weight: 600;
+}
+.fl-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  border: 1px solid var(--rm-rule);
+  background: var(--rm-panel);
+}
+.fl-diagram-main {
+  min-width: 0;
+  padding: 24px;
+}
+.fl-diagram-heading h3 {
+  font:
+    600 28px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 8px;
+}
+.fl-diagram-heading p {
+  font-size: 14px;
+  color: var(--rm-muted);
+  margin: 0;
+  min-height: 42px;
+}
+.fl-stage {
+  height: 360px;
+  position: relative;
+  margin: 12px 0;
+  isolation: isolate;
+}
+.fl-stage canvas,
+.fl-lines,
+.fl-node-labels,
+.fl-edge-labels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.fl-stage canvas {
+  z-index: 0;
+  touch-action: pan-y;
+}
+.fl-lines {
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+.fl-node-labels,
+.fl-edge-labels {
+  pointer-events: none;
+  z-index: 2;
+}
+.fl-node-labels button,
+.fl-edge-labels button {
+  position: absolute;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 0.18s ease-out,
+    border-color 0.18s ease-out;
+}
+.fl-node-labels button {
+  width: 150px;
+  padding: 13px 10px;
+  min-height: 74px;
+  text-align: left;
+  background: var(--rm-ground);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.fl-node-labels small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--rm-muted);
+  margin-top: 5px;
+}
+.fl-node-labels button[data-proof="observed"] {
+  border-color: var(--rm-success);
+}
+.fl-node-labels button[aria-pressed="true"] {
+  border: 2px solid var(--rm-link);
+  padding: 12px 9px;
+}
+.fl-edge-labels button {
+  font-size: 13px;
+  padding: 3px 8px;
+  min-height: 30px;
+  border-color: transparent;
+  background: var(--rm-panel);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.fl-edge-labels button[aria-pressed="true"] {
+  border-color: var(--rm-link);
+}
+.fl-inspector {
+  padding: 24px;
+  border-left: 1px solid var(--rm-rule);
+  background: var(--rm-ground);
+  min-width: 0;
+}
+.fl-inspector h3 {
+  font:
+    600 26px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 12px;
+}
+.fl-inspector h4 {
+  font:
+    600 16px/1.4 Barlow,
+    system-ui,
+    sans-serif;
+  margin: 24px 0 6px;
+}
+.fl-inspector p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+.fl-inspector small {
+  color: var(--rm-muted);
+}
+.fl-inspector a {
+  overflow-wrap: anywhere;
+}
+.fl-inspector .fl-state {
+  display: inline-block;
+  padding: 5px 9px;
+  border: 1px dashed var(--rm-rule);
+  font-size: 13px;
+  color: var(--rm-warn);
+  margin-bottom: 8px;
+}
+.fl-inspector .fl-inspector-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.fl-inspector .fl-source {
+  display: block;
+  margin-top: 22px;
+  font-size: 14px;
+}
+.fl-motion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-block: 1px solid var(--rm-rule);
+  padding: 14px 0;
+}
+.fl-motion span {
+  font-size: 14px;
+  color: var(--rm-muted);
+  line-height: 1.5;
+}
+.fl-camera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.fl-camera button {
+  font-size: 13px;
+  padding: 8px 10px;
+}
+.fl-handoffs {
+  margin-top: 24px;
+}
+.fl-handoffs h4 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+.fl-handoffs > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.fl-handoffs button {
+  text-align: left;
+}
+.fl-handoffs small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--rm-muted);
+  margin-top: 3px;
+}
+.fl-return {
+  margin-top: 20px;
+  padding: 14px 0;
+  border-top: 1px dashed var(--rm-warn);
+  font-size: 14px;
+  color: var(--rm-warn);
+}
+.fl-return p {
+  margin: 6px 0;
+  color: var(--rm-muted);
+}
+.fl-loop-picker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+.fl-loop-picker label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+}
+.fl-loop-picker select {
+  max-width: 100%;
+  min-width: 210px;
+}
+.fl-loop-picker > span {
+  font-size: 13px;
+  color: var(--rm-muted);
+}
+.fl-inventory {
+  margin-top: 24px;
+}
+.fl-inventory h3 {
+  font:
+    600 24px/1.3 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin-bottom: 6px;
+}
+.fl-inventory > p {
+  font-size: 14px;
+  color: var(--rm-muted);
+  margin-top: 0;
+}
+.fl-inventory > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.fl-inventory button {
+  text-align: left;
+  font-size: 14px;
+}
+.fl-inventory small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--rm-muted);
+  margin-top: 6px;
+}
+.fl-eval-heading {
+  margin: 12px 0 24px;
+}
+.fl-eval-heading h3 {
+  font:
+    600 28px/1.2 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 8px;
+}
+.fl-eval-labels,
+.fl-metric > summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 20px;
+  align-items: center;
+}
+.fl-eval-labels {
+  padding: 12px 20px;
+  font-size: 13px;
+  background: var(--rm-soft);
+  color: var(--rm-muted);
+}
+.roadmap-shell .fl-metric {
+  border: 0;
+  border-bottom: 1px solid var(--rm-rule);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: var(--rm-panel);
+}
+.roadmap-shell .fl-metric > summary {
+  padding: 20px;
+  list-style: none;
+  cursor: pointer;
+}
+.fl-metric > summary::-webkit-details-marker {
+  display: none;
+}
+.fl-metric > summary:after {
+  content: none;
+}
+.fl-metric > summary strong {
+  font:
+    600 22px/1.2 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+}
+.fl-metric > summary > span:last-child {
+  font-size: 14px;
+  color: var(--rm-muted);
+}
+.fl-metric > div {
+  padding: 0 20px 24px;
+  max-width: 80ch;
+}
+.fl-metric li {
+  overflow-wrap: anywhere;
+}
+.fl-metric[open] > summary,
+.fl-metric > summary:hover {
+  background: var(--rm-soft);
+}
+.fl-records .ll-noscript {
+  display: block !important;
+}
+.fl-records article + article {
+  border-top: 1px solid var(--rm-rule);
+  padding-top: 24px;
+}
+.fl-records article {
+  break-inside: avoid;
+}
+.fl-records li {
+  overflow-wrap: anywhere;
+}
+.fl-system .ll-agent-inventory {
+  overflow: auto;
+}
+.fl-system .ll-run {
+  padding: 20px;
+  background: var(--rm-panel);
+  border: 1px solid var(--rm-rule);
+  margin: 12px 0;
+}
+.fl-system .ll-run header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.fl-system .ll-run small {
+  overflow-wrap: anywhere;
+}
+/* Optional focus polish without changing roadmap placement or geometry. */
+#roadmap-nnl [data-roadmap-item],
+#roadmap-timeline [data-roadmap-item] {
+  transition:
+    box-shadow 0.18s ease-out,
+    outline-color 0.18s ease-out;
+}
+#roadmap-nnl [data-roadmap-item]:focus-visible,
+#roadmap-timeline [data-roadmap-item]:focus-visible {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+@media (max-width: 1050px) {
+  .fl-workspace {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .fl-diagram-main,
+  .fl-inspector {
+    padding: 18px;
+  }
+  .fl-node-labels button {
+    width: 124px;
+    font-size: 14px;
+  }
+  .fl-node-labels small {
+    font-size: 11px;
+  }
+  .fg-labels,
+  .fg-row > summary {
+    gap: 14px;
+    grid-template-columns: 1fr 0.8fr 0.65fr 1.3fr;
+  }
+  .fl-inventory > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .fl-workspace {
+    grid-template-columns: 1fr;
+  }
+  .fl-inspector {
+    border-left: 0;
+    border-top: 1px solid var(--rm-rule);
+  }
+  .fl-inspector [data-flow-inspector] {
+    max-width: 70ch;
+  }
+  .fl-stage {
+    height: 390px;
+  }
+  .fg-labels {
+    display: none;
+  }
+  .fg-row > summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+  .fg-name {
+    font-size: 18px;
+  }
+  .fg-proof {
+    grid-column: 1/-1;
+  }
+  .fg-prior:before {
+    content: "Earlier letter: ";
+    font-size: 13px;
+    color: var(--rm-muted);
+  }
+  .fg-prior small {
+    display: inline;
+    margin-left: 7px;
+  }
+  .fg-detail {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+  .fg-lenses a {
+    grid-template-columns: 1fr;
+  }
+  .fg-intro,
+  .fl-intro {
+    display: block;
+  }
+  .fg-intro p + p {
+    margin-top: 12px;
+  }
+  .fl-intro a {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  .fl-summary {
+    gap: 12px 20px;
+  }
+  .fl-inventory > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fl-eval-labels {
+    display: none;
+  }
+  .fl-metric > summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fl-metric > summary > span:last-child {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 440px) {
+  .fl-diagram-main {
+    padding: 12px;
+  }
+  .fl-node-labels button {
+    width: 118px;
+    min-height: 74px;
+    font-size: 14px;
+  }
+  .fl-node-labels small {
+    font-size: 12px;
+  }
+  .fl-stage {
+    height: 455px;
+  }
+  .fl-toolbar {
+    padding-top: 18px;
+  }
+  .fl-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  .fl-tabs button:last-child {
+    grid-column: 1/-1;
+  }
+  .fl-loop-picker label {
+    display: block;
+    width: 100%;
+  }
+  .fl-loop-picker select {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .fl-motion {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fl-motion button {
+    width: 100%;
+  }
+  .fg-lenses {
+    grid-template-columns: 1fr;
+  }
+  .fg-lenses a + a {
+    border-left: 0;
+    border-top: 1px solid var(--rm-rule);
+  }
+  .fg-row > summary {
+    padding: 16px;
+  }
+  .fl-summary span {
+    flex-wrap: wrap;
+  }
+  .fl-handoffs > div {
+    grid-template-columns: 1fr;
+  }
+  .fl-inventory > div {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fl-inspector {
+    padding: 18px;
+  }
+  .fl-edge-labels button {
+    font-size: 12px;
+    max-width: 140px;
+    white-space: normal;
+  }
+  .fg-grade {
+    font-size: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fl-system *,
+  #roadmap-nnl [data-roadmap-item],
+  #roadmap-timeline [data-roadmap-item] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media print {
+  .fl-enhanced {
+    display: none !important;
+  }
+  .fl-records,
+  .fl-records .ll-noscript {
+    display: block !important;
+  }
+  .fl-records > * {
+    display: block !important;
+  }
+  .fg-row > div {
+    display: grid !important;
+  }
+  .fg-lenses a {
+    color: inherit;
+  }
+  .fg-row {
+    break-inside: avoid;
+  }
+  .fl-records summary {
+    font-weight: 700;
+  }
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels button {
+  transform: translate(-50%, 24px);
+  min-height: 54px;
+  padding: 8px;
+  font-size: 14px;
+  width: 132px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels small {
+  font-size: 11px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels button[aria-pressed="true"] {
+  padding: 7px;
+}
+@media (max-width: 440px) {
+  .fl-node-labels button {
+    width: 104px;
+  }
+  .fl-stage[data-dimension="3d"] .fl-node-labels button {
+    width: 104px;
+    font-size: 13px;
+  }
+  .fl-stage[data-dimension="3d"] .fl-node-labels small {
+    font-size: 11px;
+  }
+}
+.roadmap-shell .fl-system .fl-node-labels button {
+  background: var(--rm-ground);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.roadmap-shell .fl-system .fl-edge-labels button {
+  background: var(--rm-panel);
+  min-height: 40px;
+}
+.roadmap-shell .fl-system .fl-edge-labels button[aria-pressed="true"],
+.roadmap-shell .fl-system .fl-node-labels button[aria-pressed="true"] {
+  background: var(--rm-soft);
+}
+.fl-inspector details {
+  margin-top: 20px;
+}
+.fl-inspector details li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.fl-inspector details li + li {
+  margin-top: 8px;
+}
+.fl-node-labels small {
+  overflow-wrap: anywhere;
+}
+/* Stable labels keep the spatial diagram readable at every camera angle. */
+.fl-stage[data-dimension="3d"] {
+  height: auto;
+  min-height: 480px;
+  padding-top: 320px;
+}
+.fl-stage[data-dimension="3d"] :is(canvas, .fl-lines, .fl-edge-labels) {
+  height: 320px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: auto;
+  width: 100%;
+  padding: 8px 0;
+}
+.roadmap-shell .fl-stage[data-dimension="3d"] .fl-node-labels button {
+  position: static;
+  transform: none;
+  min-height: 66px;
+  width: 100%;
+  font-size: 14px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels small {
+  font-size: 12px;
+}
+.fl-inspector .fl-state {
+  padding: 0;
+  border: 0;
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+@media print {
+  .fl-system details::details-content,
+  .fg-grades details::details-content {
+    content-visibility: visible !important;
+    display: block !important;
+  }
+}
+/* The stable handoff list carries names when perspective would collide labels. */
+.fl-stage[data-dimension="3d"] .fl-edge-labels {
+  display: none;
+}
+/* Decision, evidence boundary, and owned work use the inherited visual system. */
+.fg-attention {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.6fr);
+  gap: 32px;
+  margin: 24px 0 32px;
+  padding: 24px 0;
+  border-bottom: 2px solid var(--rm-ink);
+}
+.fg-attention h3 {
+  font:
+    600 28px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 12px;
+}
+.fg-attention > div > p {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--rm-muted);
+}
+.fg-attention ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fg-attention li + li {
+  border-top: 1px solid var(--rm-rule);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+.fg-attention li a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+}
+.fg-attention a strong {
+  font-size: 18px;
+  color: var(--rm-ink);
+}
+.fg-attention a span {
+  color: var(--rm-warn);
+  font-size: 14px;
+}
+.fg-attention li p {
+  margin: 6px 0 0;
+  font-size: 15px;
+}
+.fg-register-intro {
+  font-size: 14px;
+  color: var(--rm-muted);
+  margin-bottom: 20px;
+}
+.fg-prior {
+  color: var(--rm-muted);
+  font-size: 16px;
+}
+.fg-linked-work {
+  padding: 0 24px 24px;
+}
+.fg-linked-work > h3 {
+  margin-top: 0;
+}
+.fg-row:target {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+.fl-decision {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  border-block: 1px solid var(--rm-rule);
+  padding: 20px 0;
+  margin: 0 0 24px;
+}
+.fl-decision strong {
+  font:
+    600 25px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+}
+.fl-decision > div:first-child strong {
+  color: var(--rm-warn);
+}
+.fl-decision p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 8px 0;
+  max-width: 65ch;
+}
+.fl-decision > div:last-child > span {
+  font-weight: 600;
+}
+.fl-primary-work {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+.fl-diagram-heading p {
+  min-height: 0;
+}
+.fl-action-clarity .fl-workspace {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+.fl-action-clarity .fl-stage[data-flow="inside"][data-dimension="2d"] {
+  height: 260px;
+  margin: 8px 0;
+}
+.fl-action-clarity
+  .fl-stage[data-flow="inside"][data-dimension="2d"]
+  .fl-node-labels
+  button {
+  width: 21%;
+  min-height: 132px;
+  padding: 12px 8px;
+  font-size: 15px;
+  border-radius: 4px;
+}
+.fl-node-proof {
+  display: block;
+  font:
+    600 12px/1.4 Barlow,
+    system-ui,
+    sans-serif;
+  margin-top: 12px;
+  color: var(--rm-warn);
+}
+[data-proof="observed"] > .fl-node-proof {
+  color: var(--rm-success);
+}
+[data-proof="carried"] > .fl-node-proof {
+  color: var(--rm-muted);
+}
+.fl-action-clarity .fl-return {
+  margin: 0 0 20px;
+  padding: 16px 0;
+  border-top: 1px dashed var(--rm-warn);
+  border-bottom: 1px dashed var(--rm-warn);
+}
+.fl-action-clarity .fl-return strong {
+  font-size: 16px;
+}
+.fl-action-clarity .fl-motion {
+  padding: 12px 0;
+  align-items: flex-start;
+}
+.fl-action-clarity .fl-motion button {
+  white-space: nowrap;
+}
+.fl-action-clarity .fl-evidence-navigation {
+  margin: 12px 0;
+}
+.fl-action-clarity .fl-inspector h4 {
+  margin-top: 20px;
+}
+.fl-action-clarity .fl-inspector {
+  padding: 20px;
+}
+.fl-action-clarity .fl-inspector > button {
+  margin-top: 20px;
+}
+.fl-action-clarity .fl-edge-labels button {
+  font-size: 12px;
+  max-width: 155px;
+  white-space: normal;
+}
+.fl-action-clarity .fl-handoffs {
+  margin-top: 20px;
+}
+.fl-action-clarity .fl-handoffs h4 {
+  margin-bottom: 8px;
+}
+.fl-action-clarity .fl-worklist {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rm-rule);
+  scroll-margin-top: 80px;
+}
+.fl-worklist > h3 {
+  font:
+    600 28px/1.2 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 8px;
+}
+.fl-action-clarity .fl-inventory {
+  margin-top: 32px;
+}
+.fl-action-clarity .fl-inventory > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+}
+.fl-action-clarity .fl-inventory button {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--rm-rule);
+  min-height: 80px;
+}
+.fl-action-clarity .fl-inventory button[aria-pressed="true"] {
+  box-shadow: inset 0 -2px 0 var(--rm-link);
+}
+.hw-observed {
+  font-size: 13px;
+  color: var(--rm-muted);
+  margin: 0 0 16px;
+}
+.hw-action {
+  padding: 20px 0;
+}
+.hw-action + .hw-action {
+  border-top: 1px solid var(--rm-rule);
+}
+.hw-action-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+}
+.hw-action-title h4 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.hw-action-title > span {
+  font-size: 13px;
+  color: var(--rm-muted);
+}
+.hw-tickets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.hw-tickets li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px;
+  gap: 6px 24px;
+  padding: 12px 0;
+}
+.hw-tickets li > a {
+  font-size: 15px;
+  line-height: 1.5;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.hw-tickets a strong {
+  font-weight: 600;
+  margin-right: 8px;
+}
+.hw-tickets li > span {
+  font-size: 14px;
+  color: var(--rm-link);
+}
+.hw-tickets li[data-work-status="completed"] > span {
+  color: var(--rm-muted);
+}
+.hw-tickets small {
+  grid-column: 1/-1;
+  color: var(--rm-muted);
+  font-size: 13px;
+}
+.hw-acceptance {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 90ch !important;
+  margin: 12px 0;
+}
+.hw-unmapped {
+  color: var(--rm-warn);
+  font-size: 14px;
+}
+.hw-delivery-note {
+  font-size: 13px;
+  color: var(--rm-muted);
+  margin: 8px 0;
+}
+.hw-work details {
+  margin-top: 12px;
+  font-size: 14px;
+}
+.hw-work details p {
+  line-height: 1.5;
+}
+.hw-work details summary {
+  cursor: pointer;
+  min-height: 32px;
+}
+.hw-prerequisites {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 4px 0 12px;
+}
+.hw-prerequisites ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+.hw-prerequisites li + li {
+  margin-top: 8px;
+}
+.hw-prerequisites small {
+  display: block;
+  color: var(--rm-muted);
+}
+.fl-work-records {
+  margin: 24px 0;
+}
+.fl-work-records > section + section {
+  margin-top: 24px;
+}
+.fl-work-records .hw-action {
+  padding-block: 12px;
+}
+.hw-work a:focus-visible {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+@media (max-width: 1050px) {
+  .fl-action-clarity .fl-workspace {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
+  .fl-action-clarity .fl-diagram-main {
+    padding: 16px;
+  }
+  .fl-action-clarity .fl-inventory > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .fl-action-clarity
+    .fl-stage[data-flow="inside"][data-dimension="2d"]
+    .fl-node-labels
+    button {
+    font-size: 14px;
+  }
+}
+@media (max-width: 800px) {
+  .fg-attention,
+  .fl-decision {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .fg-attention > div > p {
+    max-width: 65ch;
+  }
+  .fg-attention {
+    padding-top: 16px;
+  }
+  .fl-action-clarity .fl-workspace {
+    grid-template-columns: 1fr;
+  }
+  .fl-action-clarity .fl-inventory > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fg-linked-work {
+    padding-inline: 20px;
+  }
+}
+@media (max-width: 440px) {
+  .fg-attention li a {
+    display: block;
+  }
+  .fg-attention li a span {
+    display: block;
+    margin-top: 4px;
+  }
+  .fl-action-clarity .fl-stage[data-flow="inside"][data-dimension="2d"] {
+    height: 620px;
+  }
+  .fl-action-clarity
+    .fl-stage[data-flow="inside"][data-dimension="2d"]
+    .fl-node-labels
+    button {
+    width: calc(100% - 48px);
+    min-height: 120px;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  .fl-action-clarity
+    .fl-stage[data-flow="inside"][data-dimension="2d"]
+    .fl-node-labels
+    small {
+    font-size: 13px;
+  }
+  .fl-node-proof {
+    margin-top: 6px;
+  }
+  .hw-tickets li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .hw-tickets li > span {
+    grid-row: 2;
+  }
+  .hw-tickets li > small {
+    grid-row: 3;
+  }
+  .hw-action-title {
+    gap: 12px;
+  }
+  .fl-decision {
+    margin-bottom: 20px;
+  }
+  .fl-decision p {
+    font-size: 15px;
+  }
+  .fl-worklist {
+    padding-block: 24px;
+  }
+  .fl-action-clarity .fl-diagram-main {
+    padding: 12px;
+  }
+}
+@media print {
+  .fl-work-records,
+  .fl-work-records::details-content {
+    display: block !important;
+    content-visibility: visible !important;
+  }
+  .fl-work-records > * {
+    display: block !important;
+  }
+  .hw-action {
+    break-inside: avoid;
+  }
+  .fg-linked-work {
+    display: block !important;
+  }
+  .fg-attention {
+    break-inside: avoid;
+  }
+}
+
+.fl-action-clarity
+  .fl-stage[data-flow="inside"][data-dimension="2d"][data-narrow="true"] {
+  height: 620px;
+}
+.fl-action-clarity
+  .fl-stage[data-flow="inside"][data-dimension="2d"][data-narrow="true"]
+  .fl-node-labels
+  button {
+  width: calc(100% - 48px);
+  min-height: 120px;
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.fg-detail.fg-detail-consolidated {
+  grid-template-columns: 1fr;
+  padding-bottom: 12px;
+}
+.fg-detail-consolidated > div {
+  max-width: 90ch;
+}
+.fl-inspector {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.fl-action-clarity
+  .fl-stage[data-flow="system"][data-dimension="2d"][data-narrow="true"] {
+  height: 380px;
+}
+.fl-action-clarity
+  .fl-stage[data-flow="system"][data-dimension="2d"][data-narrow="true"]
+  .fl-node-labels
+  button {
+  width: calc(100% - 48px);
+  min-height: 100px;
+  font-size: 16px;
+}
+.fl-action-clarity
+  .fl-stage[data-flow="system"][data-dimension="2d"][data-narrow="true"]
+  .fl-edge-labels
+  button {
+  max-width: calc(100% - 32px);
+}
+</style></head><body><main class="roadmap-shell"><h1>Synthetic review</h1><section id="approved-roadmap"><h2>Roadmap</h2><table><thead><tr><th>Stream</th><th>Now</th><th>Next</th><th>Later</th></tr></thead><tbody><tr><th>Product</th><td>Review quality</td><td>Reuse memory</td><td>Broader coverage</td></tr></tbody></table></section><section id="approved-gantt"><h2>Timeline</h2><table><thead><tr><th>Initiative</th><th>September</th><th>October</th></tr></thead><tbody><tr><th>Review quality</th><td>Source-stated window</td><td>No commitment</td></tr></tbody></table></section><section id="grade-view" class="fg-grades"><div class="rm-structure-heading"><h2>Where we stand</h2><p>Assessment snapshot · 2026-09-25</p></div><div class="fg-attention"><div><h3>1 reviews need evidence</h3><p>Complete these reviews before drawing a current conclusion.</p></div><ul><li><a href="#grade-view-storage"><strong>Storage</strong><span>Complete review</span></a><p>Complete the required storage review.</p></li></ul></div><p class="fg-register-intro">Recorded assessments · open a row for the evidence and linked work. Tracker progress does not change a letter.</p><div class="fg-labels" aria-hidden="true"><span>Component</span><span>Current assessment</span><span>Earlier letter</span><span>Next proof</span></div><details class="fg-row" id="grade-view-runtime" data-component-id="runtime" data-grade-state="assessed" name="grade-view-review"><summary><span class="fg-name">Runtime<small>Reviewed</small></span><span class="fg-grade" data-current="true">B<small>2026-09-25</small></span><span class="fg-prior">B<small>2026-09-20</small></span><span class="fg-proof">Retain an enforced release decision.<small>0 open · 1 marked Done · 0 actions not mapped</small></span></summary><div class="fg-detail"><div><h3>Why this assessment stands</h3><p>Source checks support the recorded code judgment. Operations are not graded.</p><a href="evidence/grade-observation.json">Full assessment evidence</a></div><div><h3>Required for the next review</h3><ol><li>Join the verdict to the release decision.</li></ol></div></div><div class="fg-linked-work"><h3>Work behind this assessment</h3><div class="hw-work" data-work-target="component:runtime"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="memory-proof"><div class="hw-action-title"><h4>Prove the next consumer used the changed memory</h4><span>Verify</span></div><ul class="hw-tickets"><li data-work-ticket="SYN-17" data-work-status="completed"><a href="https://tracker.example.test/issues/SYN-17"><strong>SYN-17</strong> Persist memory provenance for later readers</a><span>Done</span><small>Casey · updated 2026-09-24</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Retain a current producer, changed memory record and exact later reader in the chosen scope.</p><p class="hw-delivery-note">Marked Done in the tracker. The proof requirement remains separate.</p><details><summary>Why this work is linked</summary><p>The completed ticket supplies provenance. Its Done state does not establish a fresh operating example.</p><ul><li><a href="evidence/work-observation.json">Synthetic provenance ticket acceptance</a></li></ul></details></article></div></div></details><details class="fg-row" id="grade-view-storage" data-component-id="storage" data-grade-state="incomplete" name="grade-view-review"><summary><span class="fg-name">Storage<small>Review incomplete</small></span><span class="fg-grade" data-current="false">Incomplete<small>Current review</small></span><span class="fg-prior">B+<small>2026-09-20</small></span><span class="fg-proof">Complete the required storage review.<small>1 open · 0 marked Done · 0 actions not mapped</small></span></summary><div class="fg-detail"><div><h3>Why this assessment stands</h3><p>Required review breadth was not completed.</p><a href="evidence/grade-observation.json">Full assessment evidence</a></div><div><h3>Required for the next review</h3><ol><li>Review the remaining isolation paths.</li></ol></div></div><div class="fg-linked-work"><h3>Work behind this assessment</h3><div class="hw-work" data-work-target="component:storage"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="review-improvement"><div class="hw-action-title"><h4>Trace one approved review into a later result</h4><span>Verify</span></div><div class="hw-prerequisites"><strong>Before this work</strong><ul><li><a href="https://tracker.example.test/issues/SYN-19">SYN-19</a> · Todo · Unassigned · The description requires human approval before the changed review is used. <small>Dependency stated in description</small></li></ul></div><ul class="hw-tickets"><li data-work-ticket="SYN-18" data-work-status="started"><a href="https://tracker.example.test/issues/SYN-18"><strong>SYN-18</strong> Measure a linked review improvement</a><span>In progress</span><small>Riley · updated 2026-09-25</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Join the approved finding, changed output and dated later consumer.</p><details><summary>Why this work is linked</summary><p>The ticket explicitly requests the same evidence join as this gap.</p><ul><li><a href="evidence/work-observation.json">Synthetic acceptance and prerequisite</a></li></ul></details></article></div></div></details><p class="fg-method">Letters are recorded judgments, not a numeric progress scale. Code quality, operating readiness and measured impact remain separate. This view computes no grade.</p></section><section id="learning-view" class="ll-system fl-system fl-action-clarity" data-learning-connections aria-labelledby="learning-view-heading"><div class="rm-structure-heading"><h2 id="learning-view-heading">How the system learns</h2><p>Connections, evidence and the next improvement</p></div><div class="fl-intro"><p>See what works, where proof stops, and the work needed to close the gap.</p><a href="evidence/learning-observation.json">Snapshot · 2026-09-25</a></div><div class="fl-summary"><span><strong>3</strong> declared loops</span><span><strong>2</strong> with recorded four-link closure</span><span>Synthetic source and staging observations</span><span>Grade <strong>Not currently assessed</strong></span></div><p>Production: Not measured</p><div class="fl-enhanced" hidden><div class="fl-toolbar"><div role="group" aria-label="Learning views" class="fl-tabs"><button type="button" data-flow-view="inside" aria-pressed="true">Inside a loop</button><button type="button" data-flow-view="system" aria-pressed="false">Between loops</button><button type="button" data-flow-view="eval" aria-pressed="false">Evaluations & agents</button></div><div role="group" aria-label="Diagram display" class="fl-display"><button type="button" data-flow-dimension="2d" aria-pressed="true">2D map</button><button type="button" data-flow-dimension="3d" aria-pressed="false">3D explore</button></div></div><div data-flow-diagrams><div class="fl-loop-picker" hidden><label>Learning loop <select data-flow-loop><option value="release_review">Release review</option><option value="account_memory">Account memory</option><option value="quality_review">Quality review</option></select></label><button type="button" data-flow-previous>Previous</button><button type="button" data-flow-next>Next</button><span data-flow-position></span></div><div class="fl-decision" data-flow-decision></div><div class="fl-workspace"><div class="fl-diagram-main"><div class="fl-diagram-heading"><h3 data-flow-heading>How loops feed one another</h3><p data-flow-subtitle></p></div><div class="fl-stage"><canvas hidden tabindex="0" aria-label="3D learning relationships. Drag or use arrow keys to rotate; plus and minus zoom; Home resets."></canvas><svg class="fl-lines" aria-hidden="true"></svg><div class="fl-node-labels"></div><div class="fl-edge-labels"></div></div><div class="fl-return" hidden></div><p class="fl-evidence-navigation"><button type="button" data-flow-read-evidence>Read selected evidence</button></p><div class="fl-motion"><button type="button" data-flow-play aria-pressed="false">Play signal path</button><span data-flow-caption aria-live="polite">Illustrative path, not live activity.</span></div><div class="fl-camera" hidden aria-label="3D camera"><button type="button" data-flow-camera="left">Rotate left</button><button type="button" data-flow-camera="right">Rotate right</button><button type="button" data-flow-camera="in">Zoom in</button><button type="button" data-flow-camera="out">Zoom out</button><button type="button" data-flow-camera="reset">Reset</button></div><p data-flow-gl-status role="status"></p><div class="fl-handoffs"><h4>Select a handoff</h4><div><button type="button" data-flow-edge="corrections">Corrections<small>Quality review to Account memory</small></button><button type="button" data-flow-edge="reuse_outcomes">Reuse outcomes<small>Account memory to Quality review</small></button></div></div></div><aside class="fl-inspector" aria-label="Selected connection or stage" tabindex="-1"><div data-flow-inspector></div><button type="button" data-flow-return>Return to diagram</button></aside></div><section class="fl-worklist" aria-label="Work to close this gap"><h3>Work to close this gap</h3><div data-flow-work></div></section><div class="fl-inventory"><h3>Explore all 3 loops</h3><p>Loops without recorded handoffs remain available here. Shared artifacts alone do not establish a handoff.</p><div><button type="button" data-flow-loop-open="release_review">Release review<small>Closure not proved</small></button><button type="button" data-flow-loop-open="account_memory">Account memory<small>Closure uses earlier proof</small></button><button type="button" data-flow-loop-open="quality_review">Quality review<small>Closure re-witnessed</small></button></div></div></div><div data-flow-evaluations hidden><div class="fl-eval-heading"><h3>Coverage, verdicts and enforcement</h3><p>Read each measure separately. A suite declaration is not an executed test, and an advisory gate does not enforce its verdict.</p></div><div class="fl-eval-labels" aria-hidden="true"><span>Measure</span><span>Recorded value</span><span>What it means</span></div><details class="fl-metric"><summary><span>Agent coverage</span><strong>3 / 5</strong><span>Source coverage</span></summary><div><p>Three of five synthetic agents have a fixture; execution is separate.</p><h4>Next proof</h4><p>Run the uncovered roles against reviewed cases.</p><ul><li>Synthetic registry and fixture manifest.</li></ul><p class="hw-unmapped">No action-to-ticket mapping recorded for this item.</p></div></details><details class="fl-metric"><summary><span>Release enforcement</span><strong>Advisory</strong><span>Decision unproved</span></summary><div><p>A blocking evaluation result has not been shown to stop a release.</p><h4>Next proof</h4><p>Retain a witnessed release decision.</p><ul><li>Synthetic recorded gate configuration.</li></ul><p class="hw-unmapped">No action-to-ticket mapping recorded for this item.</p></div></details><div class="ll-runs"><h3>Recorded suite verdicts</h3><article class="ll-run"><header><strong>Synthetic evaluator</strong><span>Block</span></header><p>Acceptance check missed</p><small>September 25 · 10:00 UTC · Run <code>synthetic-run-1</code></small><details><summary>Verdict context</summary><p>One fixture failed its recorded acceptance. No release effect was observed.</p><p>Accounting: Not measured</p></details></article></div></div></div><details class="ll-quality-bar" id="learning-view-quality-bar"><summary>What would make this a world-class learning loop?</summary><p>This is an improvement checklist, not an assessment or an automatic grade. A closed evidence chain is the beginning; dependable learning also needs:</p><ol><li><strong>Useful feedback.</strong> Representative signals with known origin, scope and coverage; human agreement checked where judgment is involved.</li><li><strong>A traceable change.</strong> A versioned change attributable to that feedback, with approval where required.</li><li><strong>Verified reuse.</strong> A later run or decision consumes that exact changed version, in the same scope.</li><li><strong>Measured benefit.</strong> A held-out or controlled comparison shows improvement without unacceptable regressions. Set the metric and acceptance threshold before measuring.</li><li><strong>Reliable operation.</strong> Repeated evidence on the intended tier, monitored failures, complete cost accounting, enforced quality gates and a working rollback.</li></ol><p>These claims need their own proof. Activity, a completed ticket and one successful historical example do not establish them.</p></details><details class="fl-work-records"><summary>All linked work and tracker status</summary><section><h3>Release review</h3><p class="hw-unmapped">No action-to-ticket mapping recorded for this item.</p></section><section><h3>Account memory</h3><div class="hw-work" data-work-target="loop:account_memory"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="memory-proof"><div class="hw-action-title"><h4>Prove the next consumer used the changed memory</h4><span>Verify</span></div><ul class="hw-tickets"><li data-work-ticket="SYN-17" data-work-status="completed"><a href="https://tracker.example.test/issues/SYN-17"><strong>SYN-17</strong> Persist memory provenance for later readers</a><span>Done</span><small>Casey · updated 2026-09-24</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Retain a current producer, changed memory record and exact later reader in the chosen scope.</p><p class="hw-delivery-note">Marked Done in the tracker. The proof requirement remains separate.</p><details><summary>Why this work is linked</summary><p>The completed ticket supplies provenance. Its Done state does not establish a fresh operating example.</p><ul><li><a href="evidence/work-observation.json">Synthetic provenance ticket acceptance</a></li></ul></details></article><article class="hw-action" data-work-action="repeat-benefit"><div class="hw-action-title"><h4>Measure benefit across a repeated cycle</h4><span>Verify</span></div><ul class="hw-tickets"></ul><p class="hw-unmapped">Ticket not mapped in this review</p><p class="hw-acceptance"><strong>Proof needed:</strong> Link a later outcome back to the next signal and compare the result.</p><details><summary>Why this work is linked</summary><p>No follow-up ticket is mapped in the recorded inputs.</p><ul><li><a href="evidence/learning-observation.json">Recorded repeated-return gap</a></li></ul></details></article></div></section><section><h3>Quality review</h3><div class="hw-work" data-work-target="loop:quality_review"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="review-improvement"><div class="hw-action-title"><h4>Trace one approved review into a later result</h4><span>Verify</span></div><div class="hw-prerequisites"><strong>Before this work</strong><ul><li><a href="https://tracker.example.test/issues/SYN-19">SYN-19</a> · Todo · Unassigned · The description requires human approval before the changed review is used. <small>Dependency stated in description</small></li></ul></div><ul class="hw-tickets"><li data-work-ticket="SYN-18" data-work-status="started"><a href="https://tracker.example.test/issues/SYN-18"><strong>SYN-18</strong> Measure a linked review improvement</a><span>In progress</span><small>Riley · updated 2026-09-25</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Join the approved finding, changed output and dated later consumer.</p><details><summary>Why this work is linked</summary><p>The ticket explicitly requests the same evidence join as this gap.</p><ul><li><a href="evidence/work-observation.json">Synthetic acceptance and prerequisite</a></li></ul></details></article></div></section></details><template data-work-template="loop:release_review"><p class="hw-unmapped">No action-to-ticket mapping recorded for this item.</p></template><template data-work-template="loop:account_memory"><div class="hw-work" data-work-target="loop:account_memory"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="memory-proof"><div class="hw-action-title"><h4>Prove the next consumer used the changed memory</h4><span>Verify</span></div><ul class="hw-tickets"><li data-work-ticket="SYN-17" data-work-status="completed"><a href="https://tracker.example.test/issues/SYN-17"><strong>SYN-17</strong> Persist memory provenance for later readers</a><span>Done</span><small>Casey · updated 2026-09-24</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Retain a current producer, changed memory record and exact later reader in the chosen scope.</p><p class="hw-delivery-note">Marked Done in the tracker. The proof requirement remains separate.</p><details><summary>Why this work is linked</summary><p>The completed ticket supplies provenance. Its Done state does not establish a fresh operating example.</p><ul><li><a href="evidence/work-observation.json">Synthetic provenance ticket acceptance</a></li></ul></details></article><article class="hw-action" data-work-action="repeat-benefit"><div class="hw-action-title"><h4>Measure benefit across a repeated cycle</h4><span>Verify</span></div><ul class="hw-tickets"></ul><p class="hw-unmapped">Ticket not mapped in this review</p><p class="hw-acceptance"><strong>Proof needed:</strong> Link a later outcome back to the next signal and compare the result.</p><details><summary>Why this work is linked</summary><p>No follow-up ticket is mapped in the recorded inputs.</p><ul><li><a href="evidence/learning-observation.json">Recorded repeated-return gap</a></li></ul></details></article></div></template><template data-work-template="loop:quality_review"><div class="hw-work" data-work-target="loop:quality_review"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="review-improvement"><div class="hw-action-title"><h4>Trace one approved review into a later result</h4><span>Verify</span></div><div class="hw-prerequisites"><strong>Before this work</strong><ul><li><a href="https://tracker.example.test/issues/SYN-19">SYN-19</a> · Todo · Unassigned · The description requires human approval before the changed review is used. <small>Dependency stated in description</small></li></ul></div><ul class="hw-tickets"><li data-work-ticket="SYN-18" data-work-status="started"><a href="https://tracker.example.test/issues/SYN-18"><strong>SYN-18</strong> Measure a linked review improvement</a><span>In progress</span><small>Riley · updated 2026-09-25</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Join the approved finding, changed output and dated later consumer.</p><details><summary>Why this work is linked</summary><p>The ticket explicitly requests the same evidence join as this gap.</p><ul><li><a href="evidence/work-observation.json">Synthetic acceptance and prerequisite</a></li></ul></details></article></div></template><template data-work-template="edge:corrections"><div class="hw-work" data-work-target="edge:corrections"><p class="hw-observed">Example Tracker checked 2026-09-25 21:00 UTC</p><article class="hw-action" data-work-action="review-improvement"><div class="hw-action-title"><h4>Trace one approved review into a later result</h4><span>Verify</span></div><div class="hw-prerequisites"><strong>Before this work</strong><ul><li><a href="https://tracker.example.test/issues/SYN-19">SYN-19</a> · Todo · Unassigned · The description requires human approval before the changed review is used. <small>Dependency stated in description</small></li></ul></div><ul class="hw-tickets"><li data-work-ticket="SYN-18" data-work-status="started"><a href="https://tracker.example.test/issues/SYN-18"><strong>SYN-18</strong> Measure a linked review improvement</a><span>In progress</span><small>Riley · updated 2026-09-25</small></li></ul><p class="hw-acceptance"><strong>Proof needed:</strong> Join the approved finding, changed output and dated later consumer.</p><details><summary>Why this work is linked</summary><p>The ticket explicitly requests the same evidence join as this gap.</p><ul><li><a href="evidence/work-observation.json">Synthetic acceptance and prerequisite</a></li></ul></details></article></div></template><template data-work-template="edge:reuse_outcomes"><p class="hw-unmapped">No action-to-ticket mapping recorded for this item.</p></template><details class="fl-records"><summary>Complete evidence records</summary><div class="ll-noscript"><p>Complete text records. Interactive views appear when JavaScript is available.</p><article id="learning-view-record-release_review"><h3>Release review</h3><p><strong>Closure not proved.</strong> The evaluation verdict exists; a binding release decision is not demonstrated.</p><ol><li><strong>Signal · Observed:</strong> Release signal. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Evaluation suite. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Recorded verdict. Recorded in this synthetic observation.</li><li><strong>Later use · Not demonstrated:</strong> Release decision. The stage is declared; execution is not demonstrated.</li></ol><p><strong>Missing now:</strong> Binding release decision.</p><p><strong>Next proof:</strong> Witness a release decision consuming the verdict.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.release_review</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><article id="learning-view-record-account_memory"><h3>Account memory</h3><p><strong>Closure uses earlier proof.</strong> Capture is current; consumption evidence comes from an earlier observation.</p><ol><li><strong>Signal · Observed:</strong> User correction. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Memory screening. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Changed memory. Recorded in this synthetic observation.</li><li><strong>Later use · Earlier evidence:</strong> Later plan. Witness from the previous snapshot; not re-witnessed.</li></ol><p><strong>Missing now:</strong> A fresh consuming run.</p><p><strong>Next proof:</strong> Record a later consumer using the new memory.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.account_memory</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><article id="learning-view-record-quality_review"><h3>Quality review</h3><p><strong>Closure re-witnessed.</strong> A changed fixture was consumed in a later recorded evaluation.</p><ol><li><strong>Signal · Observed:</strong> Human disagreement. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Review. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Changed fixture. Recorded in this synthetic observation.</li><li><strong>Later use · Observed:</strong> Later suite. Recorded in this synthetic observation.</li></ol><p><strong>Missing now:</strong> None in this recorded witness. Test adequacy is separate.</p><p><strong>Next proof:</strong> Measure whether the new fixture catches the intended regression.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.quality_review</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><h3>Evaluation records</h3><article><h4>Agent coverage · 3 / 5</h4><p>Source coverage. Three of five synthetic agents have a fixture; execution is separate.</p><p>Next proof: Run the uncovered roles against reviewed cases.</p></article><article><h4>Release enforcement · Advisory</h4><p>Decision unproved. A blocking evaluation result has not been shown to stop a release.</p><p>Next proof: Retain a witnessed release decision.</p></article><h3>Recorded suite verdicts</h3><article class="ll-run"><header><strong>Synthetic evaluator</strong><span>Block</span></header><p>Acceptance check missed</p><small>September 25 · 10:00 UTC · Run <code>synthetic-run-1</code></small><details><summary>Verdict context</summary><p>One fixture failed its recorded acceptance. No release effect was observed.</p><p>Accounting: Not measured</p></details></article></div><h3>Cross-loop handoffs</h3><ul><li>Quality review to Account memory: Corrections · declared. Quality review supplies proposed corrections to memory. Missing: No joined transfer retained. Next proof: Join a reviewer output to the exact memory consumer. Evidence: Synthetic wiring declaration.</li><li>Account memory to Quality review: Reuse outcomes · declared. Memory reuse outcomes feed the next quality review. Missing: Feedback return has not been witnessed. Next proof: Retain an outcome and the review that consumed it. Evidence: Synthetic wiring declaration.</li></ul><h3>Feedback returns</h3><ul><li>Release review: not-applicable. This path controls a release; no feedback cycle is declared. <a href="evidence/wiring.json">Return evidence</a></li></ul><a href="evidence/wiring.json">Declared wiring source</a></details><p class="ll-footnote">Snapshot 2026-09-25. Motion is illustrative. A four-link closure does not establish repeated benefit. This view issues no grade.</p><script type="application/json" data-learning-model>{"schemaVersion":1,"assessmentId":"synthetic-learning-observation-1","observedOn":"2026-09-25","grade":null,"scope":"Synthetic source and staging observations","production":"Not measured","sourceHref":"evidence/learning-observation.json","closedCount":2,"declaredCount":3,"loops":[{"id":"release_review","name":"Release review","binding":"native","recordedVerdict":"not proved","proof":"unproved","summary":"The evaluation verdict exists; a binding release decision is not demonstrated.","action":"Witness a release decision consuming the verdict.","decision":"Prove enforcement","missing":"Binding release decision.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.release_review","stages":[{"id":"signal","label":"Release signal","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Evaluation suite","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Recorded verdict","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Release decision","state":"unknown","note":"The stage is declared; execution is not demonstrated."}]},{"id":"account_memory","name":"Account memory","binding":"native","recordedVerdict":"closed","proof":"carried","summary":"Capture is current; consumption evidence comes from an earlier observation.","action":"Record a later consumer using the new memory.","decision":"Re-witness consumption","missing":"A fresh consuming run.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.account_memory","stages":[{"id":"signal","label":"User correction","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Memory screening","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Changed memory","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Later plan","state":"carried","note":"Witness from the previous snapshot; not re-witnessed."}]},{"id":"quality_review","name":"Quality review","binding":"native","recordedVerdict":"closed","proof":"observed","summary":"A changed fixture was consumed in a later recorded evaluation.","action":"Measure whether the new fixture catches the intended regression.","decision":"Verify test quality","missing":"None in this recorded witness. Test adequacy is separate.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.quality_review","stages":[{"id":"signal","label":"Human disagreement","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Review","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Changed fixture","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Later suite","state":"observed","note":"Recorded in this synthetic observation."}]}],"metrics":[{"id":"coverage","name":"Agent coverage","value":"3 / 5","status":"Source coverage","detail":"Three of five synthetic agents have a fixture; execution is separate.","nextProof":"Run the uncovered roles against reviewed cases.","evidence":["Synthetic registry and fixture manifest."]},{"id":"gate","name":"Release enforcement","value":"Advisory","status":"Decision unproved","detail":"A blocking evaluation result has not been shown to stop a release.","nextProof":"Retain a witnessed release decision.","evidence":["Synthetic recorded gate configuration."]}],"runs":[{"id":"synthetic-run-1","model":"Synthetic evaluator","time":"September 25 · 10:00 UTC","verdict":"Block","reason":"Acceptance check missed","detail":"One fixture failed its recorded acceptance. No release effect was observed.","accounting":"Not measured"}]}</script><script type="application/json" data-learning-topology>{"schemaVersion":1,"sourceHref":"evidence/wiring.json","edges":[{"id":"corrections","from":"quality_review","to":"account_memory","label":"Corrections","channel":"corrections","state":"declared","description":"Quality review supplies proposed corrections to memory.","missing":"No joined transfer retained.","nextProof":"Join a reviewer output to the exact memory consumer.","evidence":["Synthetic wiring declaration."]},{"id":"reuse_outcomes","from":"account_memory","to":"quality_review","label":"Reuse outcomes","channel":"reuse_outcomes","state":"declared","description":"Memory reuse outcomes feed the next quality review.","missing":"Feedback return has not been witnessed.","nextProof":"Retain an outcome and the review that consumed it.","evidence":["Synthetic wiring declaration."]}],"nodeNotes":{"quality_review":"Earlier closure evidence","account_memory":"Historical chain witnessed"},"returns":[{"loopId":"release_review","state":"not-applicable","note":"This path controls a release; no feedback cycle is declared.","sourceHref":"evidence/wiring.json"}]}</script></section></main><script>(() => {
+  "use strict";
+  function openGradeHash() {
+    const row = document.getElementById(location.hash.slice(1));
+    if (row?.matches("details.fg-row")) row.open = true;
+  }
+  window.addEventListener("hashchange", openGradeHash);
+  openGradeHash();
+  const root = document.querySelector("[data-learning-connections]");
+  if (!root) return;
+  const model = JSON.parse(
+      root.querySelector("[data-learning-model]").textContent,
+    ),
+    topology = JSON.parse(
+      root.querySelector("[data-learning-topology]").textContent,
+    );
+  const q = (s) => root.querySelector(s),
+    all = (s) => [...root.querySelectorAll(s)],
+    make = (tag, text, attrs = {}) => {
+      const e = document.createElement(tag);
+      if (text !== null) e.textContent = text;
+      for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+      return e;
+    };
+  const stateLabels = {
+      observed: "Evidence witnessed",
+      carried: "Earlier evidence",
+      unknown: "Proof missing",
+      attention: "Needs interpretation",
+    },
+    stages = ["Signal", "Transform", "Changed artifact", "Later use"];
+  let view = "inside",
+    dimension = "2d",
+    selected =
+      model.loops.find((l) => l.proof === "observed")?.id || model.loops[0]?.id,
+    edge = topology.edges[0]?.id,
+    activeStage = 0,
+    angle = -0.18,
+    tilt = 0.1,
+    zoom = 1,
+    frame = 0,
+    playing = false,
+    step = -1,
+    progress = 0,
+    gl = null,
+    program = null,
+    buffer = null,
+    lost = false;
+  const canvas = q("canvas"),
+    stage = q(".fl-stage"),
+    svg = q(".fl-lines"),
+    labels = q(".fl-node-labels"),
+    edgeLabels = q(".fl-edge-labels"),
+    inspector = q("[data-flow-inspector]");
+  if (!model.loops.length) {
+    q(".fl-enhanced").hidden = true;
+    return;
+  }
+  const loop = (id) => model.loops.find((l) => l.id === id),
+    label = (id) => loop(id)?.name || id;
+  function paragraph(parent, title, text) {
+    parent.append(make("h4", title), make("p", text));
+  }
+  function source(parent, text, url) {
+    parent.append(make("a", text, { href: url, class: "fl-source" }));
+  }
+  function stop() {
+    cancelAnimationFrame(frame);
+    playing = false;
+    q("[data-flow-play]").textContent = "Play signal path";
+    q("[data-flow-play]").setAttribute("aria-pressed", "false");
+  }
+  function announce(text) {
+    q("[data-flow-caption]").textContent = text;
+  }
+  function currentLoop() {
+    return loop(selected);
+  }
+  function workFor(kind, id) {
+    const target = q("[data-flow-work]");
+    if (!target) return;
+    target.replaceChildren();
+    const template = all("[data-work-template]").find(
+      (t) => t.dataset.workTemplate === kind + ":" + id,
+    );
+    if (template) target.append(template.content.cloneNode(true));
+  }
+  function decision(title, gap, next, kind, id) {
+    const d = q("[data-flow-decision]");
+    if (!d) return;
+    d.replaceChildren(make("div", null), make("div", null));
+    d.children[0].append(make("strong", title), make("p", gap));
+    d.children[1].append(make("span", "Next action"), make("p", next));
+    workFor(kind, id);
+    const first = q(
+      "[data-flow-work] .hw-tickets li:not([data-work-status=completed]):not([data-work-status=canceled]) a",
+    );
+    if (first) {
+      const a = first.cloneNode(true);
+      a.className = "fl-primary-work";
+      d.children[1].append(a);
+    } else
+      d.children[1].append(
+        make("a", "See required work", { href: "#" + root.id + "-work" }),
+      );
+  }
+  function showEdge(id) {
+    edge = id;
+    const e = topology.edges.find((x) => x.id === id);
+    if (!e) {
+      decision(
+        "No recorded handoffs",
+        "No cross-loop relationship is established by this snapshot.",
+        "Choose a named loop to inspect its evidence and required work.",
+        "edge",
+        "",
+      );
+      inspector.replaceChildren(
+        make("h3", "No recorded handoffs"),
+        make(
+          "p",
+          "Choose a named loop to inspect its own stages. No cross-loop relationship is inferred from shared artifacts.",
+        ),
+      );
+      return;
+    }
+    inspector.replaceChildren(
+      make(
+        "span",
+        e.state === "observed"
+          ? "Handoff witnessed"
+          : "Declared handoff · execution unproved",
+        { class: "fl-state" },
+      ),
+      make("h3", label(e.from) + " to " + label(e.to)),
+      make("p", e.description),
+    );
+    paragraph(
+      inspector,
+      "What crosses this connection",
+      e.label + " · channel " + e.channel,
+    );
+    paragraph(inspector, "Where proof stops", e.missing);
+    paragraph(inspector, "Next proof", e.nextProof);
+    decision(
+      e.state === "observed"
+        ? "Transfer witnessed"
+        : "Transfer not yet witnessed",
+      e.missing,
+      e.nextProof,
+      "edge",
+      id,
+    );
+    paragraph(inspector, "Recorded sources", e.evidence.join("; "));
+    if (e.witness)
+      paragraph(
+        inspector,
+        "Transfer witness",
+        e.witness.producer +
+          " → " +
+          e.witness.payload +
+          " → " +
+          e.witness.consumer +
+          " · " +
+          e.witness.observedOn +
+          " · " +
+          e.witness.scope,
+      );
+    const actions = make("div", null, { class: "fl-inspector-actions" });
+    for (const id of [e.from, e.to])
+      actions.append(
+        make("button", "Open " + label(id), {
+          type: "button",
+          "data-flow-loop-open": id,
+        }),
+      );
+    inspector.append(actions);
+    source(inspector, "View the declared wiring", topology.sourceHref);
+    inspector.prepend(inspector.querySelector("h3"));
+    all("[data-flow-edge]").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.flowEdge === edge)),
+    );
+  }
+  function showStage(index) {
+    activeStage = index;
+    const l = currentLoop(),
+      s = l.stages[index];
+    inspector.replaceChildren(
+      make("span", stateLabels[s.state], { class: "fl-state" }),
+      make("h3", index + 1 + ". " + stages[index]),
+      make("p", s.label),
+    );
+    decision(
+      l.proof === "observed"
+        ? "Evidence chain recorded"
+        : l.proof === "carried"
+          ? "Earlier closure evidence"
+          : "Chain not yet proved",
+      l.missing,
+      l.action,
+      "loop",
+      l.id,
+    );
+    paragraph(inspector, "Recorded evidence", s.note);
+    paragraph(inspector, "Loop context", l.summary);
+
+    if (l.improvement) {
+      const d = make("details"),
+        o = make("ol");
+      d.append(make("summary", "Acceptance from the earlier improvement plan"));
+      l.improvement.acceptance.forEach((x) => o.append(make("li", x)));
+      d.append(o);
+      source(d, "Open the recorded plan", l.improvement.sourceHref);
+      inspector.append(d);
+    }
+    source(inspector, "Open this loop’s evidence", l.sourceHref);
+    inspector.prepend(inspector.querySelector("h3"));
+    if (l.planTask && document.getElementById("learning-plan-" + l.planTask))
+      source(
+        inspector,
+        "Earlier improvement plan · " + l.planTask,
+        "#learning-plan-" + l.planTask,
+      );
+  }
+  function showLoopInfo(id) {
+    selected = id;
+    const l = currentLoop();
+    decision(
+      l.proof === "observed"
+        ? "Evidence chain recorded"
+        : "Chain not yet proved",
+      l.missing,
+      l.action,
+      "loop",
+      l.id,
+    );
+    inspector.replaceChildren(
+      make(
+        "span",
+        l.proof === "observed"
+          ? "Closure witnessed"
+          : l.proof === "carried"
+            ? "Closure from earlier evidence"
+            : "Closure not proved",
+        { class: "fl-state" },
+      ),
+      make("h3", l.name),
+      make("p", l.summary),
+    );
+    paragraph(inspector, "What is missing", l.missing);
+    paragraph(inspector, "Next improvement", l.action);
+    inspector.append(
+      make("button", "Look inside this loop", {
+        type: "button",
+        "data-flow-loop-open": id,
+      }),
+    );
+    source(inspector, "Recorded loop evidence", l.sourceHref);
+    inspector.prepend(inspector.querySelector("h3"));
+  }
+  function sync() {
+    all("[data-flow-view]").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.flowView === view)),
+    );
+    all("[data-flow-dimension]").forEach((b) =>
+      b.setAttribute(
+        "aria-pressed",
+        String(b.dataset.flowDimension === dimension),
+      ),
+    );
+    q("[data-flow-diagrams]").hidden = view === "eval";
+    q("[data-flow-evaluations]").hidden = view !== "eval";
+    q(".fl-display").hidden = view === "eval";
+    q(".fl-loop-picker").hidden = view !== "inside";
+    q(".fl-handoffs").hidden = view !== "system";
+    q(".fl-return").hidden = view !== "inside";
+    q(".fl-camera").hidden = dimension !== "3d";
+    canvas.hidden = dimension !== "3d";
+    stage.dataset.dimension = dimension;
+    stage.dataset.flow = view;
+    const workPanel = q(".fl-worklist");
+    if (workPanel) workPanel.id = root.id + "-work";
+    const l = currentLoop(),
+      i = model.loops.findIndex((l) => l.id === selected);
+    q("[data-flow-loop]").value = selected;
+    q("[data-flow-position]").textContent =
+      "Loop " + (i + 1) + " of " + model.loops.length;
+    q("[data-flow-previous]").disabled = i === 0;
+    q("[data-flow-next]").disabled = i === model.loops.length - 1;
+    q("[data-flow-heading]").textContent =
+      view === "inside" ? l.name : "How loops feed one another";
+    q("[data-flow-subtitle]").textContent =
+      view === "inside"
+        ? l.proof !== "unproved"
+          ? "Four-link closure recorded" +
+            (l.proof === "carried" ? " from earlier evidence" : "") +
+            ". Repeated benefit requires its own evidence."
+          : "Select a stage to inspect the exact missing witness."
+        : topology.edges.length +
+          " recorded handoffs. Declared and witnessed transfers remain distinct.";
+    q(".fl-return").replaceChildren(
+      make(
+        "strong",
+        (topology.returns || []).find((r) => r.loopId === selected)?.state ===
+          "not-applicable"
+          ? "A control path, not a feedback cycle"
+          : (topology.returns || []).find((r) => r.loopId === selected)
+                ?.state === "observed"
+            ? "Feedback return: witnessed"
+            : "Feedback return: not established",
+      ),
+      make(
+        "p",
+        (topology.returns || []).find((r) => r.loopId === selected)?.state ===
+          "not-applicable"
+          ? (topology.returns || []).find((r) => r.loopId === selected)?.note ||
+              "No feedback return is recorded."
+          : (topology.returns || []).find((r) => r.loopId === selected)?.note ||
+              "No repeated return is established by this four-stage record. A proposed check is to link the later outcome to the next input and compare the result.",
+      ),
+    );
+    const feedback = (topology.returns || []).find(
+      (r) => r.loopId === selected,
+    );
+    if (feedback) {
+      source(q(".fl-return"), "Return evidence", feedback.sourceHref);
+      if (feedback.witness)
+        q(".fl-return").append(
+          make(
+            "p",
+            feedback.witness.laterOutcome +
+              " → " +
+              feedback.witness.nextSignal +
+              " · " +
+              feedback.witness.observedOn +
+              " · " +
+              feedback.witness.scope,
+          ),
+        );
+    }
+    all("[data-flow-loop-open]").forEach((b) =>
+      b.setAttribute(
+        "aria-pressed",
+        String(view === "inside" && b.dataset.flowLoopOpen === selected),
+      ),
+    );
+  }
+  function switchView(next) {
+    stop();
+    view = next;
+    sync();
+    if (view === "system") showEdge(edge);
+    if (view === "inside") showStage(0);
+    announce("Illustrative path, not live activity.");
+    draw();
+  }
+  function openLoop(id) {
+    stop();
+    selected = id;
+    view = "inside";
+    activeStage = 0;
+    sync();
+    showStage(0);
+    draw();
+    announce(label(id) + ". Select a stage for evidence.");
+  }
+  function color(name) {
+    const p = make("i", null, { style: "color:var(" + name + ")" });
+    root.append(p);
+    const a = getComputedStyle(p)
+      .color.match(/[\d.]+/g)
+      .map(Number);
+    p.remove();
+    return [a[0] / 255, a[1] / 255, a[2] / 255, 1];
+  }
+  function initGL() {
+    gl = canvas.getContext("webgl", {
+      alpha: false,
+      antialias: true,
+      preserveDrawingBuffer: true,
+    });
+    if (!gl) throw Error("Unavailable");
+    const shader = (type, source) => {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, source);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error("Shader");
+      return s;
+    };
+    const v = shader(
+        gl.VERTEX_SHADER,
+        "attribute vec3 p;attribute vec4 c;attribute float size;varying vec4 col;void main(){gl_Position=vec4(p,1.0);gl_PointSize=size;col=c;}",
+      ),
+      f = shader(
+        gl.FRAGMENT_SHADER,
+        "precision mediump float;varying vec4 col;uniform float point;void main(){if(point>0.5){vec2 uv=(gl_PointCoord-vec2(0.5))*2.0;float d=dot(uv,uv);if(d>1.0)discard;vec3 normal=vec3(uv,sqrt(1.0-d));float light=.5+.5*max(0.0,dot(normal,normalize(vec3(-.4,-.5,1.0))));gl_FragColor=vec4(col.rgb*light,col.a);}else{gl_FragColor=col;}}",
+      );
+    program = gl.createProgram();
+    gl.attachShader(program, v);
+    gl.attachShader(program, f);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS))
+      throw Error("Program");
+    buffer = gl.createBuffer();
+    gl.deleteShader(v);
+    gl.deleteShader(f);
+  }
+  function setDimension(next) {
+    stop();
+    dimension = next;
+    if (next === "3d") {
+      try {
+        if (!gl) initGL();
+        q("[data-flow-gl-status]").textContent =
+          "Drag the space or use the camera controls. Depth helps exploration; distance is not a score.";
+      } catch {
+        dimension = "2d";
+        q("[data-flow-gl-status]").textContent =
+          "3D is unavailable here. The 2D map shows the same connections and evidence.";
+      }
+    } else q("[data-flow-gl-status]").textContent = "";
+    sync();
+    draw();
+  }
+  function graphData() {
+    const w = stage.clientWidth,
+      narrow = w < 420,
+      l = currentLoop();
+    let nodes, connections;
+    if (view === "system") {
+      const ids = [
+        ...new Set(topology.edges.flatMap((e) => [e.from, e.to])),
+      ].sort();
+      nodes = ids.map((id, i) => {
+        const a = (i / Math.max(ids.length, 1)) * Math.PI * 2 - Math.PI / 2,
+          p = topology.layout?.[id] || {
+            x: ids.length === 1 ? 0.5 : 0.23 + (i % 2) * 0.54,
+            y:
+              ids.length <= 2
+                ? 0.45
+                : 0.18 +
+                  (Math.floor(i / 2) /
+                    Math.max(1, Math.ceil(ids.length / 2) - 1)) *
+                    0.6,
+            z: (i % 2 ? 1 : -1) * 0.6,
+          };
+        return {
+          id,
+          ...p,
+          ...(narrow
+            ? ids.length === 2
+              ? { x: 0.5, y: i === 0 ? 0.18 : 0.78 }
+              : { x: p.x < 0.5 ? 0.23 : 0.77 }
+            : {}),
+          name: label(id),
+          note: topology.nodeNotes?.[id] || "Select for evidence",
+          proof: "unknown",
+        };
+      });
+      connections = topology.edges.map((e) => ({
+        ...e,
+        proof: e.state === "observed" ? "observed" : "unknown",
+      }));
+    } else {
+      nodes = l.stages.map((s, i) => ({
+        id: s.id,
+        name: i + 1 + ". " + stages[i],
+        note: s.label.replace(/\//g, " / ").replace(/([a-z])([A-Z])/g, "$1 $2"),
+        proof: s.state,
+        x:
+          dimension === "3d"
+            ? [0.2, 0.8, 0.8, 0.2][i]
+            : narrow
+              ? 0.5
+              : [0.105, 0.368, 0.632, 0.895][i],
+        y:
+          dimension === "3d"
+            ? [0.19, 0.19, 0.78, 0.78][i]
+            : narrow
+              ? [0.12, 0.36, 0.6, 0.84][i]
+              : 0.45,
+        z: [-0.7, 0.7, -0.5, 0.5][i],
+        stage: i,
+      }));
+      connections = l.stages.slice(0, 3).map((s, i) => ({
+        id: "stage-" + i,
+        from: s.id,
+        to: l.stages[i + 1].id,
+        label: ["Transform", "Save change", "Reuse"][i],
+        proof:
+          s.state === "observed" && l.stages[i + 1].state === "observed"
+            ? "observed"
+            : "unknown",
+      }));
+    }
+    if (
+      view === "system" &&
+      dimension === "2d" &&
+      narrow &&
+      connections.length
+    ) {
+      const focused = connections.find((e) => e.id === edge) || connections[0];
+      nodes = [focused.from, focused.to].map((id, i) => ({
+        ...nodes.find((n) => n.id === id),
+        x: 0.5,
+        y: i ? 0.8 : 0.18,
+      }));
+      connections = [focused];
+    }
+    return { nodes, connections, narrow };
+  }
+  function project(n, w, h) {
+    if (dimension === "2d") return { ...n, px: n.x * w, py: n.y * h, depth: 0 };
+    const x = (n.x - 0.5) * 3,
+      y = (0.5 - n.y) * 2.7,
+      z = n.z,
+      rx = x * Math.cos(angle) + z * Math.sin(angle),
+      rz = -x * Math.sin(angle) + z * Math.cos(angle),
+      ry = y * Math.cos(tilt) - rz * Math.sin(tilt),
+      depth = y * Math.sin(tilt) + rz * Math.cos(tilt),
+      p = 5 / (5 - depth);
+    return {
+      ...n,
+      px: w / 2 + rx * w * 0.225 * p * zoom,
+      py: h * 0.44 - ry * h * 0.22 * p * zoom,
+      depth: depth / 10,
+    };
+  }
+  function route(e, nodes, w, h) {
+    const a = nodes.find((n) => n.id === e.from),
+      b = nodes.find((n) => n.id === e.to);
+    let sx = a.px,
+      sy = a.py,
+      ex = b.px,
+      ey = b.py;
+    const dx = ex - sx,
+      dy = ey - sy;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      const g =
+        dimension === "3d"
+          ? 20
+          : view === "inside"
+            ? w * 0.102
+            : w < 420
+              ? 51
+              : 70;
+      sx += Math.sign(dx) * g;
+      ex -= Math.sign(dx) * g;
+    } else {
+      const g = dimension === "3d" ? 20 : view === "inside" ? 61 : 49;
+      sy += Math.sign(dy) * g;
+      ey -= Math.sign(dy) * g;
+    }
+    let cx = (sx + ex) / 2,
+      cy = (sy + ey) / 2;
+    if (
+      view === "system" &&
+      topology.edges.some((other) => other.from === e.to && other.to === e.from)
+    ) {
+      cx -= dy * 0.32;
+      cy += dx * 0.32;
+    } else if (view === "system" && Math.abs(dy) < 30) {
+      cy += (sy > h * 0.5 ? 1 : -1) * h * 0.13;
+    }
+    if (view === "inside" && dimension === "3d" && e.id === "stage-0")
+      cy -= h * 0.13;
+    if (view === "inside" && dimension === "3d" && e.id === "stage-2")
+      cy += h * 0.12;
+    return {
+      a,
+      b,
+      sx,
+      sy,
+      ex,
+      ey,
+      cx,
+      cy,
+      at: (t) => ({
+        px: (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cx + t * t * ex,
+        py: (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * cy + t * t * ey,
+        depth: a.depth + (b.depth - a.depth) * t,
+      }),
+    };
+  }
+  const NS = "http://www.w3.org/2000/svg";
+  function sv(tag, attrs) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    return e;
+  }
+  function draw() {
+    if (view === "eval" || root.closest("[data-view]")?.hidden) return;
+    stage.dataset.narrow = String(stage.clientWidth < 420);
+    const w = stage.clientWidth,
+      h = dimension === "3d" ? 320 : stage.clientHeight;
+    if (!w || !h) return;
+    if (view === "system")
+      q("[data-flow-subtitle]").textContent =
+        dimension === "2d" && w < 420 && topology.edges.length
+          ? "Selected handoff · choose another connection from the list below."
+          : topology.edges.length +
+            " recorded handoffs. Declared and witnessed transfers remain distinct.";
+    const data = graphData(),
+      nodes = data.nodes.map((n) => project(n, w, h));
+    const focus = document.activeElement,
+      focusKey = labels.contains(focus)
+        ? focus.dataset.flowNode
+        : edgeLabels.contains(focus)
+          ? focus.dataset.flowEdge
+          : null;
+    svg.replaceChildren();
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    const defs = sv("defs", {}),
+      marker = sv("marker", {
+        id: "flow-arrow",
+        viewBox: "0 0 10 10",
+        refX: 8,
+        refY: 5,
+        markerWidth: 7,
+        markerHeight: 7,
+        orient: "auto-start-reverse",
+      });
+    marker.append(
+      sv("path", {
+        d: "M1 1 L9 5 L1 9",
+        fill: "none",
+        stroke: "var(--rm-muted)",
+        "stroke-width": 1.5,
+      }),
+    );
+    defs.append(marker);
+    svg.append(defs);
+    labels.replaceChildren();
+    edgeLabels.replaceChildren();
+    const routes = [];
+    for (const e of data.connections) {
+      const r = route(e, nodes, w, h);
+      routes.push({ ...r, e });
+      const active =
+        view === "system"
+          ? edge === e.id
+          : activeStage === Number(e.id.slice(-1));
+      svg.append(
+        sv("path", {
+          d: `M${r.sx} ${r.sy} Q${r.cx} ${r.cy} ${r.ex} ${r.ey}`,
+          fill: "none",
+          stroke: active ? "var(--rm-link)" : "var(--rm-muted)",
+          "stroke-width": active ? 2.2 : 1.5,
+          "stroke-dasharray": e.proof === "observed" ? "none" : "5 5",
+          "marker-end": "url(#flow-arrow)",
+          opacity: dimension === "3d" ? 0.45 : 1,
+        }),
+      );
+      if (view === "system") {
+        const p = r.at(0.5),
+          b = make(
+            "button",
+            e.label + (e.state === "observed" ? " · witnessed" : " · unproved"),
+            {
+              type: "button",
+              "data-flow-edge": e.id,
+              "aria-pressed": String(edge === e.id),
+            },
+          );
+        b.style.left = p.px + "px";
+        if (
+          data.narrow &&
+          dimension === "2d" &&
+          topology.edges.some(
+            (other) => other.from === e.to && other.to === e.from,
+          )
+        ) {
+          const offset = data.connections.indexOf(e) % 2 ? -0.13 : 0.13;
+          p.py += h * offset;
+        }
+        b.style.left = p.px + "px";
+        b.style.top = p.py - 8 + "px";
+        edgeLabels.append(b);
+      }
+    }
+    for (const n of nodes) {
+      const b = make("button", null, {
+        type: "button",
+        "data-flow-node": n.id,
+        "data-proof": n.proof,
+        "aria-pressed": String(
+          view === "inside" ? n.stage === activeStage : n.id === selected,
+        ),
+        "aria-label": n.name + ". " + n.note,
+      });
+      b.append(
+        make(
+          "span",
+          (dimension === "3d" && view === "system"
+            ? nodes.indexOf(n) + 1 + ". "
+            : "") + n.name,
+        ),
+        make("small", n.note),
+      );
+      b.style.left = n.px + "px";
+      b.style.top = n.py + "px";
+      if (view === "inside")
+        b.append(
+          make("strong", stateLabels[n.proof], { class: "fl-node-proof" }),
+        );
+      labels.append(b);
+      if (dimension === "3d") {
+        const ntext = sv("text", {
+          x: n.px,
+          y: n.py + 5,
+          "text-anchor": "middle",
+          fill: "var(--rm-panel)",
+          "font-size": 14,
+          "font-weight": 600,
+        });
+        ntext.textContent = String(nodes.indexOf(n) + 1);
+        svg.append(ntext);
+        if (view === "inside") {
+          const title = sv("text", {
+            x: n.px,
+            y: n.py - 28,
+            "text-anchor": "middle",
+            fill: "var(--rm-ink)",
+            "font-size": 13,
+            "font-weight": 600,
+          });
+          title.textContent = stages[n.stage];
+          svg.append(title);
+        }
+      }
+    }
+    if (dimension === "3d" && gl && !lost) {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(...color("--rm-panel"));
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(program);
+      const c = color("--rm-link"),
+        base = color("--rm-muted"),
+        proof = color("--rm-success"),
+        vertex = (p, col, size = 1) => [
+          (p.px / w) * 2 - 1,
+          1 - (p.py / h) * 2,
+          p.depth,
+          ...col,
+          size * dpr,
+        ];
+      const render = (array, kind, points) => {
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array(array),
+          gl.DYNAMIC_DRAW,
+        );
+        for (const [name, count, offset] of [
+          ["p", 3, 0],
+          ["c", 4, 3],
+          ["size", 1, 7],
+        ]) {
+          const loc = gl.getAttribLocation(program, name);
+          gl.enableVertexAttribArray(loc);
+          gl.vertexAttribPointer(loc, count, gl.FLOAT, false, 32, offset * 4);
+        }
+        gl.uniform1f(gl.getUniformLocation(program, "point"), points ? 1 : 0);
+        gl.drawArrays(kind, 0, array.length / 8);
+      };
+      const lines = [];
+      for (const r of routes)
+        for (let i = 0; i < 24; i++) {
+          if (r.e.proof !== "observed" && i % 3 === 2) continue;
+          lines.push(
+            ...vertex(r.at(i / 24), base),
+            ...vertex(r.at((i + 1) / 24), base),
+          );
+        }
+      render(lines, gl.LINES, false);
+      render(
+        [...nodes]
+          .sort((a, b) => b.depth - a.depth)
+          .flatMap((n) => vertex(n, n.proof === "observed" ? proof : c, 38)),
+        gl.POINTS,
+        true,
+      );
+      if (playing && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const r = routes.find(
+          (r) =>
+            r.e.id ===
+            (view === "system"
+              ? topology.edges.map((e) => e.id)[step]
+              : ["stage-0", "stage-1", "stage-2"][step]),
+        );
+        if (r) render(vertex(r.at(progress), c, 12), gl.POINTS, true);
+      }
+    } else if (
+      playing &&
+      !matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      const r = routes.find(
+        (r) =>
+          r.e.id ===
+          (view === "system"
+            ? topology.edges.map((e) => e.id)[step]
+            : ["stage-0", "stage-1", "stage-2"][step]),
+      );
+      if (r) {
+        const p = r.at(progress);
+        svg.append(
+          sv("circle", { cx: p.px, cy: p.py, r: 5, fill: "var(--rm-link)" }),
+        );
+      }
+    }
+    if (focusKey && (!playing || document.activeElement !== document.body)) {
+      const target = [...labels.children, ...edgeLabels.children].find(
+        (b) => (b.dataset.flowNode || b.dataset.flowEdge) === focusKey,
+      );
+      target?.focus({ preventScroll: true });
+    }
+  }
+  function play() {
+    if (view === "system" && !topology.edges.length) {
+      announce("No handoffs recorded. Choose a loop to inspect its stages.");
+      return;
+    }
+    if (playing) {
+      stop();
+      draw();
+      return;
+    }
+    playing = true;
+    step = -1;
+    q("[data-flow-play]").textContent = "Pause signal path";
+    q("[data-flow-play]").setAttribute("aria-pressed", "true");
+    const start = performance.now(),
+      order =
+        view === "system"
+          ? topology.edges.map((e) => e.id)
+          : ["stage-0", "stage-1", "stage-2"];
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const tick = (now) => {
+      if (!playing) return;
+      const t = (now - start) / 2400,
+        index = Math.min(order.length - 1, Math.floor(t));
+      progress = Math.min(1, t - index);
+      if (index !== step) {
+        step = index;
+        if (view === "system") {
+          showEdge(order[index]);
+          announce(
+            "Illustration: " +
+              topology.edges.find((e) => e.id === order[index]).description +
+              " " +
+              (topology.edges.find((e) => e.id === order[index]).state ===
+              "observed"
+                ? "Witnessed in the recorded scope."
+                : "Transfer remains unproved."),
+          );
+        } else {
+          showStage(Math.min(3, index + 1));
+          announce(
+            "Illustration: " +
+              stages[index] +
+              " to " +
+              stages[index + 1] +
+              ". " +
+              stateLabels[currentLoop().stages[index + 1].state] +
+              ".",
+          );
+        }
+      }
+      if (!reduced && dimension === "3d")
+        angle = -0.18 + Math.sin(t * 0.65) * 0.16;
+      draw();
+      if (t < order.length) frame = requestAnimationFrame(tick);
+      else {
+        stop();
+        announce(
+          "Walkthrough complete. Motion illustrates declared paths, not live activity.",
+        );
+        draw();
+      }
+    };
+    frame = requestAnimationFrame(tick);
+  }
+  function camera(action) {
+    stop();
+    if (action === "left") angle -= 0.12;
+    if (action === "right") angle += 0.12;
+    if (action === "up") tilt -= 0.08;
+    if (action === "down") tilt += 0.08;
+    if (action === "in") zoom = Math.min(1.25, zoom + 0.08);
+    if (action === "out") zoom = Math.max(0.7, zoom - 0.08);
+    if (action === "reset") {
+      angle = -0.18;
+      tilt = 0.1;
+      zoom = 1;
+    }
+    angle = Math.max(-0.7, Math.min(0.7, angle));
+    tilt = Math.max(-0.4, Math.min(0.4, tilt));
+    draw();
+  }
+  root.addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-flow-read-evidence")) {
+      stop();
+      q(".fl-inspector").focus();
+      q(".fl-inspector").scrollIntoView({ block: "start" });
+    } else if (b.hasAttribute("data-flow-return")) {
+      const target = q("[data-flow-read-evidence]");
+      target.focus();
+      stage.scrollIntoView({ block: "center" });
+    } else if (b.dataset.flowView) switchView(b.dataset.flowView);
+    else if (b.dataset.flowDimension) setDimension(b.dataset.flowDimension);
+    else if (b.dataset.flowLoopOpen) {
+      openLoop(b.dataset.flowLoopOpen);
+      q(".fl-loop-picker").scrollIntoView({ block: "nearest" });
+    } else if (b.dataset.flowEdge) {
+      stop();
+      showEdge(b.dataset.flowEdge);
+      draw();
+    } else if (b.dataset.flowNode) {
+      stop();
+      if (view === "inside")
+        showStage(
+          currentLoop().stages.findIndex((s) => s.id === b.dataset.flowNode),
+        );
+      else showLoopInfo(b.dataset.flowNode);
+      draw();
+    } else if (b.hasAttribute("data-flow-play")) play();
+    else if (b.dataset.flowCamera) camera(b.dataset.flowCamera);
+    else if (
+      b.hasAttribute("data-flow-previous") ||
+      b.hasAttribute("data-flow-next")
+    ) {
+      const i = model.loops.findIndex((l) => l.id === selected),
+        next = i + (b.hasAttribute("data-flow-next") ? 1 : -1);
+      if (model.loops[next]) openLoop(model.loops[next].id);
+    }
+  });
+  q("[data-flow-loop]").addEventListener("change", (e) =>
+    openLoop(e.target.value),
+  );
+  canvas.addEventListener("keydown", (e) => {
+    const keys = {
+      ArrowLeft: "left",
+      ArrowRight: "right",
+      ArrowUp: "up",
+      ArrowDown: "down",
+      "+": "in",
+      "=": "in",
+      "-": "out",
+      Home: "reset",
+    };
+    if (keys[e.key]) {
+      e.preventDefault();
+      camera(keys[e.key]);
+    }
+  });
+  let drag = null;
+  canvas.addEventListener("pointerdown", (e) => {
+    stop();
+    drag = [e.clientX, e.clientY];
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    angle = Math.max(
+      -0.7,
+      Math.min(0.7, angle + (e.clientX - drag[0]) * 0.003),
+    );
+    tilt = Math.max(-0.4, Math.min(0.4, tilt + (e.clientY - drag[1]) * 0.002));
+    drag = [e.clientX, e.clientY];
+    draw();
+  });
+  for (const name of ["pointerup", "pointercancel"])
+    canvas.addEventListener(name, () => (drag = null));
+  canvas.addEventListener("webglcontextlost", (e) => {
+    e.preventDefault();
+    lost = true;
+    stop();
+    setDimension("2d");
+    q("[data-flow-gl-status]").textContent =
+      "3D graphics were interrupted. The same map and evidence remain available in 2D.";
+  });
+  canvas.addEventListener("webglcontextrestored", () => {
+    lost = false;
+    gl = null;
+  });
+  new ResizeObserver(() => draw()).observe(stage);
+  new MutationObserver(() => draw()).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) stop();
+  }).observe(stage);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+  });
+  document.addEventListener("roadmap:viewchange", () => {
+    stop();
+    requestAnimationFrame(draw);
+  });
+  function deepLink() {
+    const prefix = "#" + root.id + "-record-";
+    if (location.hash.startsWith(prefix)) {
+      const id = location.hash.slice(prefix.length);
+      if (loop(id)) {
+        openLoop(id);
+        q(".fl-loop-picker").scrollIntoView({ block: "start" });
+      }
+    }
+  }
+  window.addEventListener("hashchange", deepLink);
+  if (!model.loops.length) {
+    q(".fl-enhanced").hidden = true;
+    return;
+  }
+  q(".fl-enhanced").hidden = false;
+  sync();
+  if (view === "system") showEdge(edge);
+  else showStage(0);
+  draw();
+  deepLink();
+})();
+</script></body></html>

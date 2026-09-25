@@ -294,3 +294,18 @@ See the [synthetic example](evals/fixtures/evidence-clarity/example.html),
 [grade guidance](references/progress-layout.md) and
 [connection schema](references/learning-system.md). The existing renderers remain
 available; these are optional compositions using the host's visual tokens.
+
+### Work that closes an evidence gap
+
+The grade register and connected learning renderer accept the same optional
+`work` model. Each action links recorded tracker tickets to a component, loop,
+handoff or evaluation measure, with dated status, owner, prerequisites and exact
+acceptance. Done is delivery evidence; it does not change a grade or establish a
+runtime witness. Unmapped work remains visible without inventing a ticket.
+
+Incomplete reviews lead the register. Selected chains show stage evidence and
+an independent feedback-return boundary alongside the next action. Optional 3D
+uses the same facts, with explicit playback and named stages.
+
+See the [synthetic action example](evals/fixtures/action-clarity/example.html)
+and [mapping guidance](references/learning-system.md#connect-proof-gaps-to-owned-work).

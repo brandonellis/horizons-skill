@@ -1,5 +1,11 @@
 (() => {
   "use strict";
+  function openGradeHash() {
+    const row = document.getElementById(location.hash.slice(1));
+    if (row?.matches("details.fg-row")) row.open = true;
+  }
+  window.addEventListener("hashchange", openGradeHash);
+  openGradeHash();
   const root = document.querySelector("[data-learning-connections]");
   if (!root) return;
   const model = JSON.parse(
@@ -23,7 +29,7 @@
       attention: "Needs interpretation",
     },
     stages = ["Signal", "Transform", "Changed artifact", "Later use"];
-  let view = topology.edges.length ? "system" : "inside",
+  let view = "inside",
     dimension = "2d",
     selected =
       model.loops.find((l) => l.proof === "observed")?.id || model.loops[0]?.id,
@@ -70,10 +76,45 @@
   function currentLoop() {
     return loop(selected);
   }
+  function workFor(kind, id) {
+    const target = q("[data-flow-work]");
+    if (!target) return;
+    target.replaceChildren();
+    const template = all("[data-work-template]").find(
+      (t) => t.dataset.workTemplate === kind + ":" + id,
+    );
+    if (template) target.append(template.content.cloneNode(true));
+  }
+  function decision(title, gap, next, kind, id) {
+    const d = q("[data-flow-decision]");
+    if (!d) return;
+    d.replaceChildren(make("div", null), make("div", null));
+    d.children[0].append(make("strong", title), make("p", gap));
+    d.children[1].append(make("span", "Next action"), make("p", next));
+    workFor(kind, id);
+    const first = q(
+      "[data-flow-work] .hw-tickets li:not([data-work-status=completed]):not([data-work-status=canceled]) a",
+    );
+    if (first) {
+      const a = first.cloneNode(true);
+      a.className = "fl-primary-work";
+      d.children[1].append(a);
+    } else
+      d.children[1].append(
+        make("a", "See required work", { href: "#" + root.id + "-work" }),
+      );
+  }
   function showEdge(id) {
     edge = id;
     const e = topology.edges.find((x) => x.id === id);
     if (!e) {
+      decision(
+        "No recorded handoffs",
+        "No cross-loop relationship is established by this snapshot.",
+        "Choose a named loop to inspect its evidence and required work.",
+        "edge",
+        "",
+      );
       inspector.replaceChildren(
         make("h3", "No recorded handoffs"),
         make(
@@ -101,6 +142,15 @@
     );
     paragraph(inspector, "Where proof stops", e.missing);
     paragraph(inspector, "Next proof", e.nextProof);
+    decision(
+      e.state === "observed"
+        ? "Transfer witnessed"
+        : "Transfer not yet witnessed",
+      e.missing,
+      e.nextProof,
+      "edge",
+      id,
+    );
     paragraph(inspector, "Recorded sources", e.evidence.join("; "));
     if (e.witness)
       paragraph(
@@ -140,11 +190,20 @@
       make("h3", index + 1 + ". " + stages[index]),
       make("p", s.label),
     );
-    paragraph(inspector, "Loop context", l.summary);
+    decision(
+      l.proof === "observed"
+        ? "Evidence chain recorded"
+        : l.proof === "carried"
+          ? "Earlier closure evidence"
+          : "Chain not yet proved",
+      l.missing,
+      l.action,
+      "loop",
+      l.id,
+    );
     paragraph(inspector, "Recorded evidence", s.note);
-    paragraph(inspector, "What is missing", l.missing);
-    paragraph(inspector, "Next improvement", l.action);
-    if (l.tickets) paragraph(inspector, "Linked work", l.tickets);
+    paragraph(inspector, "Loop context", l.summary);
+
     if (l.improvement) {
       const d = make("details"),
         o = make("ol");
@@ -166,6 +225,15 @@
   function showLoopInfo(id) {
     selected = id;
     const l = currentLoop();
+    decision(
+      l.proof === "observed"
+        ? "Evidence chain recorded"
+        : "Chain not yet proved",
+      l.missing,
+      l.action,
+      "loop",
+      l.id,
+    );
     inspector.replaceChildren(
       make(
         "span",
@@ -209,6 +277,9 @@
     q(".fl-camera").hidden = dimension !== "3d";
     canvas.hidden = dimension !== "3d";
     stage.dataset.dimension = dimension;
+    stage.dataset.flow = view;
+    const workPanel = q(".fl-worklist");
+    if (workPanel) workPanel.id = root.id + "-work";
     const l = currentLoop(),
       i = model.loops.findIndex((l) => l.id === selected);
     q("[data-flow-loop]").value = selected;
@@ -396,23 +467,45 @@
         name: i + 1 + ". " + stages[i],
         note: s.label.replace(/\//g, " / ").replace(/([a-z])([A-Z])/g, "$1 $2"),
         proof: s.state,
-        x: [0.2, 0.8, 0.8, 0.2][i],
-        y: [0.19, 0.19, 0.78, 0.78][i],
+        x:
+          dimension === "3d"
+            ? [0.2, 0.8, 0.8, 0.2][i]
+            : narrow
+              ? 0.5
+              : [0.105, 0.368, 0.632, 0.895][i],
+        y:
+          dimension === "3d"
+            ? [0.19, 0.19, 0.78, 0.78][i]
+            : narrow
+              ? [0.12, 0.36, 0.6, 0.84][i]
+              : 0.45,
         z: [-0.7, 0.7, -0.5, 0.5][i],
         stage: i,
       }));
-      connections = l.stages
-        .slice(0, 3)
-        .map((s, i) => ({
-          id: "stage-" + i,
-          from: s.id,
-          to: l.stages[i + 1].id,
-          label: ["Transform", "Save change", "Reuse"][i],
-          proof:
-            s.state === "observed" && l.stages[i + 1].state === "observed"
-              ? "observed"
-              : "unknown",
-        }));
+      connections = l.stages.slice(0, 3).map((s, i) => ({
+        id: "stage-" + i,
+        from: s.id,
+        to: l.stages[i + 1].id,
+        label: ["Transform", "Save change", "Reuse"][i],
+        proof:
+          s.state === "observed" && l.stages[i + 1].state === "observed"
+            ? "observed"
+            : "unknown",
+      }));
+    }
+    if (
+      view === "system" &&
+      dimension === "2d" &&
+      narrow &&
+      connections.length
+    ) {
+      const focused = connections.find((e) => e.id === edge) || connections[0];
+      nodes = [focused.from, focused.to].map((id, i) => ({
+        ...nodes.find((n) => n.id === id),
+        x: 0.5,
+        y: i ? 0.8 : 0.18,
+      }));
+      connections = [focused];
     }
     return { nodes, connections, narrow };
   }
@@ -443,11 +536,18 @@
     const dx = ex - sx,
       dy = ey - sy;
     if (Math.abs(dx) > Math.abs(dy)) {
-      const g = dimension === "3d" ? 20 : w < 420 ? 51 : 70;
+      const g =
+        dimension === "3d"
+          ? 20
+          : view === "inside"
+            ? w * 0.102
+            : w < 420
+              ? 51
+              : 70;
       sx += Math.sign(dx) * g;
       ex -= Math.sign(dx) * g;
     } else {
-      const g = dimension === "3d" ? 20 : 49;
+      const g = dimension === "3d" ? 20 : view === "inside" ? 61 : 49;
       sy += Math.sign(dy) * g;
       ey -= Math.sign(dy) * g;
     }
@@ -462,8 +562,10 @@
     } else if (view === "system" && Math.abs(dy) < 30) {
       cy += (sy > h * 0.5 ? 1 : -1) * h * 0.13;
     }
-    if (view === "inside" && e.id === "stage-0") cy -= h * 0.13;
-    if (view === "inside" && e.id === "stage-2") cy += h * 0.12;
+    if (view === "inside" && dimension === "3d" && e.id === "stage-0")
+      cy -= h * 0.13;
+    if (view === "inside" && dimension === "3d" && e.id === "stage-2")
+      cy += h * 0.12;
     return {
       a,
       b,
@@ -488,9 +590,16 @@
   }
   function draw() {
     if (view === "eval" || root.closest("[data-view]")?.hidden) return;
+    stage.dataset.narrow = String(stage.clientWidth < 420);
     const w = stage.clientWidth,
       h = dimension === "3d" ? 320 : stage.clientHeight;
     if (!w || !h) return;
+    if (view === "system")
+      q("[data-flow-subtitle]").textContent =
+        dimension === "2d" && w < 420 && topology.edges.length
+          ? "Selected handoff · choose another connection from the list below."
+          : topology.edges.length +
+            " recorded handoffs. Declared and witnessed transfers remain distinct.";
     const data = graphData(),
       nodes = data.nodes.map((n) => project(n, w, h));
     const focus = document.activeElement,
@@ -544,11 +653,15 @@
       );
       if (view === "system") {
         const p = r.at(0.5),
-          b = make("button", e.label, {
-            type: "button",
-            "data-flow-edge": e.id,
-            "aria-pressed": String(edge === e.id),
-          });
+          b = make(
+            "button",
+            e.label + (e.state === "observed" ? " · witnessed" : " · unproved"),
+            {
+              type: "button",
+              "data-flow-edge": e.id,
+              "aria-pressed": String(edge === e.id),
+            },
+          );
         b.style.left = p.px + "px";
         if (
           data.narrow &&
@@ -586,6 +699,10 @@
       );
       b.style.left = n.px + "px";
       b.style.top = n.py + "px";
+      if (view === "inside")
+        b.append(
+          make("strong", stateLabels[n.proof], { class: "fl-node-proof" }),
+        );
       labels.append(b);
       if (dimension === "3d") {
         const ntext = sv("text", {
@@ -598,6 +715,18 @@
         });
         ntext.textContent = String(nodes.indexOf(n) + 1);
         svg.append(ntext);
+        if (view === "inside") {
+          const title = sv("text", {
+            x: n.px,
+            y: n.py - 28,
+            "text-anchor": "middle",
+            fill: "var(--rm-ink)",
+            "font-size": 13,
+            "font-weight": 600,
+          });
+          title.textContent = stages[n.stage];
+          svg.append(title);
+        }
       }
     }
     if (dimension === "3d" && gl && !lost) {
@@ -774,9 +903,15 @@
   root.addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (!b) return;
-    if (b.hasAttribute("data-flow-read-evidence")) { stop(); q(".fl-inspector").focus(); q(".fl-inspector").scrollIntoView({block:"start"}); }
-    else if (b.hasAttribute("data-flow-return")) { const target=q("[data-flow-read-evidence]"); target.focus(); stage.scrollIntoView({block:"center"}); }
-    else if (b.dataset.flowView) switchView(b.dataset.flowView);
+    if (b.hasAttribute("data-flow-read-evidence")) {
+      stop();
+      q(".fl-inspector").focus();
+      q(".fl-inspector").scrollIntoView({ block: "start" });
+    } else if (b.hasAttribute("data-flow-return")) {
+      const target = q("[data-flow-read-evidence]");
+      target.focus();
+      stage.scrollIntoView({ block: "center" });
+    } else if (b.dataset.flowView) switchView(b.dataset.flowView);
     else if (b.dataset.flowDimension) setDimension(b.dataset.flowDimension);
     else if (b.dataset.flowLoopOpen) {
       openLoop(b.dataset.flowLoopOpen);

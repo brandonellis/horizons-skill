@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-25T21:00:00Z",
+  "tracker": {
+    "name": "Example Tracker"
+  },
+  "sourceHref": "evidence/work-observation.json",
+  "tickets": [
+    {
+      "id": "SYN-17",
+      "title": "Persist memory provenance for later readers",
+      "url": "https://tracker.example.test/issues/SYN-17",
+      "status": "Done",
+      "statusType": "completed",
+      "assignee": "Casey",
+      "updatedAt": "2026-09-24T12:00:00Z"
+    },
+    {
+      "id": "SYN-18",
+      "title": "Measure a linked review improvement",
+      "url": "https://tracker.example.test/issues/SYN-18",
+      "status": "In progress",
+      "statusType": "started",
+      "assignee": "Riley",
+      "updatedAt": "2026-09-25T12:00:00Z"
+    },
+    {
+      "id": "SYN-19",
+      "title": "Record human approval for the changed review",
+      "url": "https://tracker.example.test/issues/SYN-19",
+      "status": "Todo",
+      "statusType": "unstarted",
+      "assignee": null,
+      "updatedAt": "2026-09-25T12:00:00Z"
+    }
+  ],
+  "actions": [
+    {
+      "id": "memory-proof",
+      "title": "Prove the next consumer used the changed memory",
+      "kind": "verify",
+      "targets": [
+        {
+          "kind": "loop",
+          "id": "account_memory"
+        },
+        {
+          "kind": "component",
+          "id": "runtime"
+        }
+      ],
+      "ticketIds": [
+        "SYN-17"
+      ],
+      "acceptance": "Retain a current producer, changed memory record and exact later reader in the chosen scope.",
+      "rationale": "The completed ticket supplies provenance. Its Done state does not establish a fresh operating example.",
+      "evidenceRefs": [
+        {
+          "href": "evidence/work-observation.json",
+          "note": "Synthetic provenance ticket acceptance"
+        }
+      ]
+    },
+    {
+      "id": "review-improvement",
+      "title": "Trace one approved review into a later result",
+      "kind": "verify",
+      "targets": [
+        {
+          "kind": "loop",
+          "id": "quality_review"
+        },
+        {
+          "kind": "edge",
+          "id": "corrections"
+        },
+        {
+          "kind": "component",
+          "id": "storage"
+        }
+      ],
+      "ticketIds": [
+        "SYN-18"
+      ],
+      "acceptance": "Join the approved finding, changed output and dated later consumer.",
+      "rationale": "The ticket explicitly requests the same evidence join as this gap.",
+      "prerequisites": [
+        {
+          "ticketId": "SYN-19",
+          "basis": "ticket-description",
+          "note": "The description requires human approval before the changed review is used."
+        }
+      ],
+      "evidenceRefs": [
+        {
+          "href": "evidence/work-observation.json",
+          "note": "Synthetic acceptance and prerequisite"
+        }
+      ]
+    },
+    {
+      "id": "repeat-benefit",
+      "title": "Measure benefit across a repeated cycle",
+      "kind": "verify",
+      "targets": [
+        {
+          "kind": "loop",
+          "id": "account_memory"
+        }
+      ],
+      "ticketIds": [],
+      "acceptance": "Link a later outcome back to the next signal and compare the result.",
+      "rationale": "No follow-up ticket is mapped in the recorded inputs.",
+      "evidenceRefs": [
+        {
+          "href": "evidence/learning-observation.json",
+          "note": "Recorded repeated-return gap"
+        }
+      ]
+    }
+  ]
+}

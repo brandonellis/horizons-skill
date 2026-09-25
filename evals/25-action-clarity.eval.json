@@ -1,0 +1,25 @@
+{
+  "id": "action-clarity",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Improve fixtures/action-clarity/index.html so leadership sees incomplete reviews, where proof stops in each learning chain, and the work needed to activate or complete it. Use grades.json, learning.json, topology.json and work.json as the complete recorded inputs. Link the real recorded tracker URLs with status, owner, prerequisites and the acceptance that connects each ticket to its gap. Keep untracked work visible, and keep tracker Done separate from verified operating proof. Preserve the current palette, Now/Next/Later and timeline layouts, all source observations and the canonical file. Keep optional 3D, readable 2D, keyboard navigation, print and text fallbacks. Presentation only: no new grades, runtime access, installations, tracker changes or publication.",
+  "files": [
+    "fixtures/action-clarity/"
+  ],
+  "gap": "A cosmetic refresh can leave proof gaps remote from the diagram, show only ticket IDs, invent missing work or mistake a completed implementation ticket for operating closure.",
+  "expected_behavior": [
+    "Preserves the approved roadmap, timeline, brand and source observations.",
+    "Leads with incomplete review status while keeping the old Storage B+ dated as history.",
+    "Shows stage evidence states and the unproved repeated return directly beside the selected chain.",
+    "Links SYN-17 with its Done status and Casey owner without treating it as fresh operating closure.",
+    "Links SYN-18 to its exact acceptance and SYN-19 prerequisite, retaining the unknown owner.",
+    "Keeps the repeated-benefit work explicitly unmapped and creates no tracker item.",
+    "Retains accessible selection, optional 3D, explicit playback and complete no-JavaScript/print records."
+  ],
+  "must_not": [
+    "Rewrite grades, source models, roadmap commitments or tracker state.",
+    "Invent owners, ticket IDs, causal edges, completed operating proof or predicted grades.",
+    "Install, access runtime, run paid evaluations or publish."
+  ]
+}

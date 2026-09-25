@@ -1,6 +1,6 @@
 ---
 name: horizons
-description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, source-backed learning-loop and evaluation views, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify tickets and proof needed to raise existing grades. Answer roadmap questions directly without creating an artifact.
+description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, source-backed learning-loop and evaluation views, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify dated tracker work, prerequisites and proof needed to complete learning loops or raise existing grades. Answer roadmap questions directly without creating an artifact.
 argument-hint: "[create · refresh [<url>] · move · gantt · wsjf [<source>] · grade [<url>] · score [<url>] · priorities · help]"
 ---
 

@@ -1,0 +1,207 @@
+{
+  "date": "2026-09-25",
+  "version": "2.7.0",
+  "baseCommit": "159c3a3208e8a7010d86e6d4baff76971dc2c409",
+  "evaluatedRuntimeFingerprint": "3cede48d65e21d77019da7c914bab9d6d613630e801243b0e564702c2596fb9d",
+  "finalRuntimeFingerprint": "d1377bd68650b5897835fc0f73f51d646393c62932872ed07bab8c8a9f47ad92",
+  "fingerprintMethod": "SHA256 of sorted runtime relative path NUL SHA256(content) NUL; runtime includes SKILL.md, references, assets and non-test scripts",
+  "runs": [
+    {
+      "scenario": "25-action-clarity",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "exactDeployedBackend": null,
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "elapsedBasis": "Completion measured in agent notes; unavailable where not independently timed.",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "217e51efe47823c14caa9ca14214889a087dfdc82dea8d8c69faca21953e81b3",
+      "originalRegionsByteIdentical": true,
+      "paletteTokensAndRoadmapTablesPreserved": true
+    },
+    {
+      "scenario": "25-action-clarity",
+      "model": "gpt-5.6-sol (requested)",
+      "exactDeployedBackend": null,
+      "reasoning": "medium requested",
+      "status": "completed",
+      "elapsedSeconds": 243,
+      "elapsedBasis": "Implementation/verification window only; initial instruction reads were not timed.",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "6999d9bcf428ab4f66133b22910bf39f988cbc18a19e6953e8ae692d227d7a75",
+      "originalRegionsByteIdentical": false,
+      "paletteTokensAndRoadmapTablesPreserved": true
+    },
+    {
+      "scenario": "15-complete-lead-grading",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "codeGrade": "C",
+      "productionGrade": null,
+      "productionStatus": "incomplete",
+      "method": "explicitly approved single-agent",
+      "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+      "artifactVerifiedFiles": 13,
+      "assessmentAppendedOnce": true
+    }
+  ],
+  "tools": {
+    "agents": "Local shell, Node, supplied skill and recorded fixtures; installed local Playwright/Chrome. No auditors, live probes, installations, tracker writes or publication.",
+    "maintainer": "Node tests, local Chrome, original-lock artifact verification and static diff review."
+  },
+  "budget": {
+    "userTokenLimit": null,
+    "userCostLimit": null,
+    "userTimeLimit": null,
+    "aggregateTokens": null,
+    "aggregateCost": null
+  },
+  "suppliedReplies": [],
+  "postBehaviorChanges": [
+    "Reviewer correction focuses narrow network views on the selected directed handoff and wraps long source locators.",
+    "Exact duplicate grade acceptance moves into the linked action record while unmatched requirements remain visible.",
+    "Static records also retain actions mapped only to a handoff or evaluation metric.",
+    "Guidance documents narrow focus and acceptance consolidation; final examples rebuilt with final runtime."
+  ],
+  "runtimeChecks": [
+    {
+      "width": 1440,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 768,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 390,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 320,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "variant": "empty",
+      "passed": true
+    },
+    {
+      "variant": "no-edges",
+      "passed": true
+    },
+    {
+      "variant": "no-js",
+      "passed": true
+    },
+    {
+      "variant": "no-webgl",
+      "passed": true
+    },
+    {
+      "variant": "reduced",
+      "passed": true
+    },
+    {
+      "variant": "print",
+      "passed": true
+    }
+  ],
+  "leadArtifactBrowserChecks": {
+    "passed": true,
+    "checks": [
+      "desktop",
+      "dark-system-preference with inherited palette",
+      "390px mobile without body overflow",
+      "keyboard grade disclosure",
+      "loop selection",
+      "evidence focus and return",
+      "handoff prerequisite",
+      "3D camera and 2D return",
+      "evaluation view",
+      "grade deep link",
+      "print work records",
+      "no-JavaScript evidence",
+      "forced graphics failure"
+    ],
+    "errors": []
+  },
+  "tests": {
+    "passed": 186,
+    "failed": 0,
+    "diffCheck": "passed"
+  },
+  "limitations": [
+    "Selected lead exact backend and reasoning were unavailable. Supporting orchestration requested gpt-5.6-sol at medium; the agent self-description echoed generic GPT-6 system wording, so no independently measured deployed-backend identity is claimed.",
+    "Supporting trial preserves palette token values and original roadmap table structures/content, but expands the surrounding stylesheet and section intros; those wrappers are not byte-identical.",
+    "Grading browser checks were excluded by the fixture Node-only restriction and disclosed; artifact integrity and executable grading were completed.",
+    "Behavior trials used the recorded candidate before reviewer/integration fixes. Final shared runtime received separate browser and unit checks; model trials are not represented as reruns on the final bytes.",
+    "Supporting browser harness first corrected a sandbox launch and two selector/initial-selection assumptions; these were harness failures, not artifact behavior changes.",
+    "No participant usability study, runtime improvement, updated grade or live tracker claim is made by the synthetic evaluation.",
+    "Python skill-creator validator unavailable because PyYAML is not installed; repository validation and packaging are used without installing dependencies."
+  ]
+}

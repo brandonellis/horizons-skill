@@ -12,6 +12,7 @@ Preserve the current audience, visual contract and canonical hub.
 - Reusable renderer
 - Interaction and fallback
 - Connected loops and explicit feedback returns
+- Connect proof gaps to owned work
 
 ## Leadership reading order
 
@@ -192,3 +193,48 @@ use stable text controls when projected labels would overlap, especially on
 phones. Playback follows the named edge, offers Pause, and is explicitly an
 illustration. Start still; reduced motion suppresses moving geometry. Preserve
 keyboard selection, text records, print and graphics-failure access.
+
+## Connect proof gaps to owned work
+
+Lead with what works, where proof stops and the next action. Put evidence states
+on the stages themselves and the unproved return beside the chain. Optional
+spatial depth must retain stage names and the same proof boundary. Do not make
+readers open an inspector to discover that a chain is incomplete.
+
+When requested, inspect the connected tracker and record its actual name, URLs,
+status, assignee, update time and acceptance. Map a ticket because its acceptance
+covers the missing witness, not because its title sounds related. Read full
+records for selected matches. Scope and date a bounded search; say **not mapped
+in this review**, never assert no ticket exists from an incomplete search.
+
+Pass optional `work` in `renderLearningConnections` and `renderGradeRegister`
+options. `scripts/render-work-links.mjs` renders the same tracker-neutral action
+model in both surfaces. Keep the model separate from recorded grades and learning
+observations. It has `schemaVersion: 1`, ISO `observedAt`, `tracker: {name}`,
+`sourceHref`, `tickets[]` and `actions[]`:
+
+- Tickets: unique `id`, `title`, safe `url`, exact `status`, normalized
+  `statusType` (`backlog`, `unstarted`, `started`, `completed`, `canceled`,
+  `unknown`), optional `assignee` and dated `updatedAt`. Unknown owners stay
+  unassigned; canceled work never becomes verified completion.
+- Actions: stable `id`, concise `title`, `kind` (`activate`, `build`, `verify`,
+  `decide`, `review`), `targets: [{kind, id}]` with loop/component/edge/metric
+  targets, `ticketIds`, exact required `acceptance`, mapping `rationale`, and
+  nonempty `evidenceRefs: [{href, note}]`.
+- Optional action `prerequisites: [{ticketId, basis, note}]` distinguishes an
+  actual `tracker-relation` from a dependency stated in a `ticket-description`.
+  Do not manufacture tracker blocking relations from prose.
+- Empty `ticketIds` means work is not mapped. Show that gap alongside its
+  acceptance; creating or editing tracker work requires a separate instruction.
+
+A Done ticket can provide implementation while operating proof remains missing.
+Keep both visible. Do not reopen completed work, silently grant activation,
+change runtime flags, or move a grade from a ticket status. Show the actual
+prerequisite or build-or-park decision before a proposed activation. Preserve
+source-date conflicts: a freshly read ticket may describe an older runtime
+observation, which must not overwrite the newer assessment snapshot.
+
+On a narrow connected view, focus on one selected producer-to-consumer handoff
+when a full network would collide. Keep every recorded handoff available in the
+named selection list and state that the map is focused. This changes layout, not
+relationship data; preserve the complete records for print and no JavaScript.

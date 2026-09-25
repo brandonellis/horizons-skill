@@ -207,3 +207,15 @@ it on an approved existing layout. Visual polish preserves the Now/Next/Later
 matrix, Gantt geometry, theme colors and brand palette unless the user explicitly
 asks to replace them. Changes to grades or learning diagrams do not authorize a
 whole-artifact identity redesign.
+
+Lead the grade register with reviews that still need evidence, then retain the
+complete comparable rows. Keep dated prior letters visually subordinate to the
+current result and next proof. Native disclosure exposes mapped work and exact
+acceptance. A current tracker status belongs to its own observation date; it
+cannot refresh a grade or resolve an incomplete review. Optional `work` uses the
+tracker-neutral model in `learning-system.md`; retain unmapped requirements.
+
+When linked work repeats a recorded requirement verbatim, present its acceptance
+once beside the ticket, status and owner. Retain unmatched requirements explicitly;
+never drop a requirement merely because another action sounds related. Name
+work by its purpose instead of generic numbered checks.

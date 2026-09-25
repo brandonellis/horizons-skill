@@ -3,6 +3,33 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-25 · v2.7.0 action and tracker clarity
+
+Scenario 25 completed on the inherited selected lead and the explicitly requested
+`gpt-5.6-sol` supporting configuration (medium). Both updated the canonical
+synthetic artifact and preserved the recorded inputs, original roadmap/timeline
+regions and palette. All seven expectations were met: dated prior grades,
+visible proof boundaries, real recorded links/status/owners, description-based
+prerequisite, unmapped work, separate Done/proof and accessible text/print paths.
+All three prohibited behaviors were avoided.
+
+The lead also completed scenario 15 under the approved single-agent method:
+code C, production Incomplete, exactly one appended assessment, original
+baseline/history preserved, and a 13-file artifact verified against the original
+pinned lock. All six expectations were met and three prohibitions avoided.
+
+Both model runs used local Chrome checks. Maintainer checks of the final shared
+runtime covered 1440, 768, 390 and 320px, explicit changing WebGL pixels,
+keyboard/focus navigation, reduced motion, graphics failure, empty inventory,
+absent handoffs, print and no JavaScript. All 186 automated tests passed.
+
+The model trials preceded the final reviewer fixes for narrow handoffs and
+duplicate acceptance, plus an additional static-record coverage fix. Those
+changes received final runtime/unit checks, not unclaimed model reruns.
+Candidate fingerprints, outcomes, requested versus exposed model identity,
+timing limits and harness corrections are in `2026-09-25-v2.7.0-results.json`.
+No new user replies were supplied and no usage-cap compliance is claimed.
+
 ## 2026-09-25 · v2.6.0 assessment and connection clarity
 
 Scenario 24 completed on the inherited selected GPT-6 lead and `gpt-5.6-sol`
