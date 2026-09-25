@@ -279,3 +279,18 @@ evidence readable. The shared renderer presents recorded judgments and never
 invents relationships or issues a grade. See
 [learning-system guidance](references/learning-system.md) and the
 [synthetic fixture](evals/fixtures/learning-system/README.md).
+
+### Assessment freshness and connected loops
+
+Keep the incumbent Now/Next/Later and Gantt layout, palette and typography when
+clarifying grades or learning. `renderGradeRegister` separates a current result
+from an older dated letter and names the next required proof.
+`renderLearningConnections` separates directional handoffs between loops from
+the four stages inside one loop and from evidence of a feedback return. It
+includes selectable evidence, optional 3D, explicit illustrative playback and
+print/no-JavaScript records. Neither renderer computes grades or infers traffic.
+
+See the [synthetic example](evals/fixtures/evidence-clarity/example.html),
+[grade guidance](references/progress-layout.md) and
+[connection schema](references/learning-system.md). The existing renderers remain
+available; these are optional compositions using the host's visual tokens.

@@ -25,6 +25,7 @@ the roadmap's visuals with full audit text.
 - Scope and provenance rules
 - Reusable implementation
 - One verification round, one fix batch
+- Assessment freshness before decorative grade tiles
 
 ## The approved reading order
 
@@ -183,3 +184,26 @@ and closed archive records still print their static transcripts.
 Print reveals scopes, filtered items, formats and archived evidence rather than
 silently printing a subset. On mobile, keep the reading order and make component
 rows readable as labelled records. Never shrink a desktop table into tiny type.
+
+## Assessment freshness before decorative grade tiles
+
+When a current review is incomplete, make **Incomplete** the current result and
+show the last letter with its original date as history. Do not let an older large
+letter visually stand in for a current assessment. Put the component, current
+review, dated earlier judgment and next required proof in one scan path; disclose
+the rationale and recorded acceptance inline. Qualitative letters are not a
+numeric progress scale, and a missing review is not a failed system.
+
+`scripts/render-grade-register.mjs` supplies `renderGradeRegister(model, options)`;
+`assets/evidence-clarity.css` inherits the existing host tokens. The model has
+`observedOn` and `components[]`: unique `id`, `name`, `status` (`assessed`,
+`incomplete`, `not-reassessed`), current `grade` and `observedOn` only when assessed,
+optional `previous: {grade, observedOn}`, `rationale`, concise `nextProof`, recorded
+`requirements[]`, and `sourceHref`. It renders supplied judgments and refuses a
+current grade on an incomplete record. It never computes or upgrades a grade.
+
+Use this register when it improves the requested assessment view; do not impose
+it on an approved existing layout. Visual polish preserves the Now/Next/Later
+matrix, Gantt geometry, theme colors and brand palette unless the user explicitly
+asks to replace them. Changes to grades or learning diagrams do not authorize a
+whole-artifact identity redesign.

@@ -11,6 +11,7 @@ Preserve the current audience, visual contract and canonical hub.
 - Evidence contract
 - Reusable renderer
 - Interaction and fallback
+- Connected loops and explicit feedback returns
 
 ## Leadership reading order
 
@@ -18,8 +19,10 @@ Lead with the decision: which capability is demonstrated, what evidence is
 missing, who can supply it when known, and what decision that evidence enables.
 Show the observation date and environment beside the conclusion. Then provide:
 
-1. A two-dimensional learning map: one declared loop per row, with signal,
-   transform, changed artifact and later consumption as columns.
+1. A two-dimensional learning map: when handoffs are recorded, show connected
+   loops and a separate selected-loop stage view (see Connected loops below).
+   Otherwise use one declared loop per row, with signal, transform, changed
+   artifact and later consumption as columns.
 2. An evidence inspector: the selected sequence, exact missing witness, linked
    work, next proof and source references. Selection must work by keyboard.
 3. An evaluation matrix separating inventory coverage, measured verdicts, human
@@ -126,8 +129,9 @@ labelled illustration rather than traffic. Supply Play/Pause, stop offscreen or
 on view/selection changes, and disable automatic movement for reduced motion.
 Render on demand outside the bounded walkthrough. Native controls provide selection,
 rotation, zoom and reset. Show a visible named loop navigator with selected state,
-Previous/Next controls and the selection position. Start 3D focused on one loop;
-make the all-loop context an explicit choice. Selection changes the diagram in
+Previous/Next controls and the selection position. In the four-stage evidence matrix, start 3D focused on one loop and make the
+all-loop context an explicit choice. In the connected composition below, retain
+the selected Between loops or Inside a loop view when changing dimension. Selection changes the diagram in
 place, including on phones. A separate Read evidence action focuses the inspector
 and offers a return action; camera movement never changes loop selection. The inspector, textual states and symbols duplicate all
 canvas information. A WebGL failure leaves the map and full text available.
@@ -143,3 +147,48 @@ traceable change, verified reuse, measured benefit and reliable operation, but
 label it as proposed acceptance rather than a new grading rubric or earned score.
 Keep measured benefit distinct from closure, and do not imply a return-to-signal
 edge unless the source establishes it.
+
+## Connected loops and explicit feedback returns
+
+A row of evidence stages is not a system map. When the source declares handoffs,
+show **between loops** separately from **inside one loop**. Label each directional
+handoff with what crosses it (a hypothesis, correction, outcome or changed
+artifact), and let selection explain its provenance, missing witness and next
+proof. A shared artifact or an agent inventory alone does not establish a handoff.
+Source-declared wiring, enabled runtime and witnessed transfer are distinct.
+
+Four-link closure does not establish a recurring feedback return or measured
+benefit. Show an unproved return as a gap or proposed check, not an operating
+edge. Control paths may have no feedback return. Keep them as control paths.
+The improvement view should state the missing link, required evidence and dated
+acceptance from an existing plan; broader quality checks remain proposed.
+
+For this composition, import `renderLearningConnections` from
+`scripts/render-learning-connections.mjs` and supply `(learningModel, topology)`.
+Include `assets/learning-system.css`, `assets/evidence-clarity.css` and
+`assets/learning-connections.js`; omit the old `learning-system.js` controller.
+The original four-stage renderer remains available for an evidence matrix.
+All new surfaces inherit the host's color tokens and typography. A request to
+clarify loops does not authorize replacing the roadmap, Gantt or brand identity.
+
+The explicit topology is separate from the immutable learning observation:
+
+- `schemaVersion: 1`, safe `sourceHref`, and `edges` (empty when none are known).
+- Every edge has unique `id`, recorded loop IDs `from` / `to`, `label`, `channel`,
+  `state: declared | observed`, `description`, `missing`, `nextProof`, and a
+  nonempty `evidence` list. An observed edge additionally requires `witness`
+  identifying `producer`, `payload`, `consumer`, `observedOn` and `scope`.
+- Optional `nodeNotes` maps loop IDs to sourced runtime/binding explanations.
+  Optional `layout` maps IDs to finite `{x,y,z}` positions; x/y lie in 0..1.
+  Layout is illustrative, never evidence or a score.
+- Optional `returns` entries have `loopId`, `state: unproved | observed |
+  not-applicable`, `note` and `sourceHref`. An observed return requires a witness
+  joining `laterOutcome` to `nextSignal`, with `observedOn` and `scope`.
+  Do not infer an observed return from a loop's closed verdict.
+
+2D and WebGL project the same topology. Keep the full loop inventory accessible
+without manufacturing connections for isolated loops. Number spatial points and
+use stable text controls when projected labels would overlap, especially on
+phones. Playback follows the named edge, offers Pause, and is explicitly an
+illustration. Start still; reduced motion suppresses moving geometry. Preserve
+keyboard selection, text records, print and graphics-failure access.

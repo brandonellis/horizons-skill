@@ -3,6 +3,35 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-25 · v2.6.0 assessment and connection clarity
+
+Scenario 24 completed on the inherited selected GPT-6 lead and `gpt-5.6-sol`
+(requested medium). Both updated the canonical synthetic artifact, preserving
+roadmap, timeline, brand tokens and recorded inputs. Current incomplete review
+and previous dated letter stayed distinct. Two declared handoffs, three loop
+identities and two different closure evidence states remained intact. All seven
+expectations were met and all three prohibited behaviors avoided.
+
+The selected lead also completed scenario 15: code C, production Incomplete,
+Done separate from acceptance, one appended assessment, original baseline and
+prior assessment unchanged. The original lock digest and 13-file manifest
+verified. All six expectations were met and three prohibitions avoided.
+
+Maintainer Chrome checks covered both generated artifacts at desktop and phone
+widths. The final shared runtime passed 1440, 768, 390 and 320px checks, explicit
+Play/Pause with changing canvas pixels, evidence focus/return, empty inventory,
+absent handoffs, reduced motion, no JavaScript, print and graphics fallback.
+All 178 tests and diff checks passed; both distribution formats built.
+
+The lead supplied extra evidence navigation and loop context during integration;
+those are now reusable. Final phone-label and integration fixes followed the
+behavior trials and received separate runtime checks. Candidate fingerprints,
+per-expectation outcomes, exposed/requested model metadata and limitations are
+in `2026-09-25-v2.6.0-results.json`. Exact lead backend, reasoning, aggregate usage
+and first-use timings were unavailable. No new user replies were supplied.
+Agent browser checks and the Python validator were unavailable; maintainer
+browser checks and the full repository test suite are recorded separately.
+
 ## 2026-09-25 · v2.5.1 navigation and walkthrough verification
 
 The expanded scenario 23 completed on the inherited selected GPT-6 lead and

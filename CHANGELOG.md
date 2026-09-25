@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 2.6.0 - 2026-09-25
+
+- Add a recorded-grade register that separates current assessment status from
+  older dated letters and shows the proof needed for the next review.
+- Add connected learning views for named cross-loop handoffs, inside-loop
+  evidence stages, independent feedback returns, evaluations and agent coverage.
+- Provide optional WebGL exploration with stable numbered labels, explicit
+  illustrative Play/Pause, evidence navigation and reduced-motion handling.
+- Preserve approved roadmap/Gantt layouts and inherited brand colors. Keep
+  source declarations distinct from witnessed transfers and control paths
+  distinct from feedback cycles.
+- Include synthetic fixtures, validation and print/no-JavaScript fallbacks.
+
 ## 2.5.1 - 2026-09-25
 
 - Make 3D loop selection explicit with named navigation, Previous/Next, a focused

@@ -1,0 +1,25 @@
+{
+  "id": "evidence-clarity",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Improve the grades and learning-loop visuals in fixtures/evidence-clarity/index.html. Keep the existing Now/Next/Later and timeline layout and brand color scheme unchanged. Leadership should see current versus previous grades, missing proof, how one loop feeds another, and the difference between a four-stage evidence chain and a repeated feedback return. Use learning.json, topology.json and grades.json as the complete recorded inputs. Provide clear 2D connections, optional 3D with readable phone labels and explicit Play/Pause, loop selection, evaluation details and text fallback. Source-declared connections are not operating traffic. Preserve every observation, source file and canonical path. This is presentation only: no new grades, runtime access, paid evaluations, installation or publication.",
+  "files": [
+    "fixtures/evidence-clarity/"
+  ],
+  "gap": "A visual redesign may replace an approved roadmap or palette, promote an older grade to current, or imply proved handoffs and feedback from stage activity.",
+  "expected_behavior": [
+    "Preserves approved roadmap and timeline structure and all brand colors.",
+    "Shows Storage current review as incomplete and the B+ letter only with September 20 date.",
+    "Draws the two source-declared directional handoffs and labels the payloads without treating them as live traffic.",
+    "Keeps three loop identities, two recorded closures and distinct observed versus carried proof.",
+    "Separates inside-loop stages, cross-loop handoffs and evidence of a repeated return.",
+    "Provides readable loop/edge selection, optional 3D, explicit Play/Pause, reduced motion and text fallback.",
+    "Keeps evaluation coverage, verdict and advisory enforcement separate."
+  ],
+  "must_not": [
+    "Mutate learning.json, topology.json, grades.json or source evidence.",
+    "Replace the approved roadmap, Gantt or brand colors; infer new dates, grades or causal edges.",
+    "Publish, install tools, access live systems, run paid models, or equate an incomplete review with system failure."
+  ]
+}

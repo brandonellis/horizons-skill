@@ -107,6 +107,10 @@ For custom/graded artifacts, read `references/artifact-views.md`,
 `references/feature-rollups.md` and the full workflow's selected-mode references.
 Keep Roadmap, Progress and Evidence as views of the same project, with scope and
 dates visible. Preserve the inherited audience, visuals, filters and drill-downs.
+Clarifying grades or learning views does not replace approved roadmap/Gantt
+layouts or brand colors. Make incomplete current reviews and dated prior letters
+visually distinct. Show sourced cross-loop handoffs separately from within-loop
+evidence stages, and distinguish closure from a proved feedback return.
 When agents, evaluations or learning loops are discovered and included in the
 requested views, apply `references/learning-system.md`: a leadership learning map,
 evidence inspector and evaluation matrix, with optional accessible 3D exploration

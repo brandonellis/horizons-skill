@@ -1,0 +1,896 @@
+/* Inherit every brand, theme and state color from the existing artifact. */
+.fg-grades,
+.fl-system {
+  color: var(--rm-ink);
+  font-family: Barlow, system-ui, sans-serif;
+}
+.fg-intro,
+.fl-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 20px 0;
+}
+.fg-intro p,
+.fl-intro p {
+  margin: 0;
+  max-width: 68ch;
+}
+.fg-intro p:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 14px;
+  color: var(--rm-muted);
+}
+.fg-labels,
+.fg-row > summary {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.05fr) minmax(120px, 0.7fr) minmax(
+      110px,
+      0.65fr
+    ) minmax(240px, 1.8fr);
+  gap: 24px;
+  align-items: center;
+}
+.fg-labels {
+  padding: 12px 20px;
+  color: var(--rm-muted);
+  font-size: 13px;
+  background: var(--rm-soft);
+  border-top: 1px solid var(--rm-rule);
+}
+.roadmap-shell .fg-row {
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--rm-rule);
+  border-radius: 0;
+  background: var(--rm-panel);
+  padding: 0;
+}
+.roadmap-shell .fg-row > summary {
+  padding: 18px 20px;
+  list-style: none;
+  cursor: pointer;
+  min-height: 90px;
+}
+.fg-row > summary::-webkit-details-marker {
+  display: none;
+}
+.fg-row > summary:hover,
+.fg-row[open] > summary {
+  background: var(--rm-soft);
+}
+.fg-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.fg-row small {
+  display: block;
+  font:
+    13px/1.5 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-muted);
+  margin-top: 3px;
+}
+.fg-grade {
+  font:
+    600 30px/1.1 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.fg-grade[data-current="false"] {
+  font:
+    600 16px/1.3 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-warn);
+}
+.fg-prior {
+  font-size: 18px;
+}
+.fg-proof {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.fg-proof small {
+  color: var(--rm-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.fg-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  padding: 24px 28px 32px;
+  border-top: 1px solid var(--rm-rule);
+}
+.fg-detail h3 {
+  margin-top: 0;
+}
+.fg-detail p,
+.fg-detail li {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+.fg-detail ol {
+  padding-left: 22px;
+}
+.fg-detail li + li {
+  margin-top: 10px;
+}
+.fg-lenses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rm-rule);
+  margin-top: 20px;
+}
+.fg-lenses a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  padding: 20px;
+  text-decoration: none;
+  background: var(--rm-soft);
+}
+.fg-lenses a + a {
+  border-left: 1px solid var(--rm-rule);
+}
+.fg-lenses strong {
+  font-size: 19px;
+  color: var(--rm-ink);
+}
+.fg-lenses span {
+  color: var(--rm-warn);
+}
+.fg-lenses small {
+  grid-column: 1/-1;
+  color: var(--rm-muted);
+}
+.fg-method {
+  font-size: 14px;
+  color: var(--rm-muted);
+  max-width: 90ch;
+  margin: 20px 0;
+}
+.fl-system {
+  --fl-accent: var(--rm-link);
+  --fl-proof: var(--rm-success);
+  --fl-gap: var(--rm-warn);
+  padding: 0;
+  margin: 48px 0;
+}
+.fl-system p {
+  max-width: 75ch;
+}
+.fl-system button,
+.fl-system select {
+  font:
+    500 15px/1.35 Barlow,
+    system-ui,
+    sans-serif;
+  color: var(--rm-ink);
+  background: var(--rm-panel);
+  border: 1px solid var(--rm-rule);
+  border-radius: 6px;
+  min-height: 44px;
+  padding: 9px 14px;
+  cursor: pointer;
+}
+.fl-system button:hover {
+  background: var(--rm-soft);
+  border-color: var(--rm-link);
+}
+.fl-system button:disabled {
+  cursor: default;
+  color: var(--rm-muted);
+  border-color: var(--rm-rule);
+}
+.fl-system button[aria-pressed="true"] {
+  color: var(--rm-link);
+  border-color: var(--rm-link);
+  background: var(--rm-soft);
+}
+.fl-system :is(button, a, select, summary, canvas):focus-visible,
+.fg-grades :is(summary, a):focus-visible {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+.fl-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  padding: 18px 0;
+  border-block: 1px solid var(--rm-rule);
+  font-size: 15px;
+}
+.fl-summary span {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.fl-summary small {
+  color: var(--rm-muted);
+}
+.fl-summary strong {
+  font-size: 19px;
+  font-weight: 600;
+}
+.fl-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 24px 0 20px;
+}
+.fl-tabs,
+.fl-display {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fl-tabs button {
+  font-weight: 600;
+}
+.fl-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  border: 1px solid var(--rm-rule);
+  background: var(--rm-panel);
+}
+.fl-diagram-main {
+  min-width: 0;
+  padding: 24px;
+}
+.fl-diagram-heading h3 {
+  font:
+    600 28px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 8px;
+}
+.fl-diagram-heading p {
+  font-size: 14px;
+  color: var(--rm-muted);
+  margin: 0;
+  min-height: 42px;
+}
+.fl-stage {
+  height: 360px;
+  position: relative;
+  margin: 12px 0;
+  isolation: isolate;
+}
+.fl-stage canvas,
+.fl-lines,
+.fl-node-labels,
+.fl-edge-labels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.fl-stage canvas {
+  z-index: 0;
+  touch-action: pan-y;
+}
+.fl-lines {
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+.fl-node-labels,
+.fl-edge-labels {
+  pointer-events: none;
+  z-index: 2;
+}
+.fl-node-labels button,
+.fl-edge-labels button {
+  position: absolute;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 0.18s ease-out,
+    border-color 0.18s ease-out;
+}
+.fl-node-labels button {
+  width: 150px;
+  padding: 13px 10px;
+  min-height: 74px;
+  text-align: left;
+  background: var(--rm-ground);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.fl-node-labels small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--rm-muted);
+  margin-top: 5px;
+}
+.fl-node-labels button[data-proof="observed"] {
+  border-color: var(--rm-success);
+}
+.fl-node-labels button[aria-pressed="true"] {
+  border: 2px solid var(--rm-link);
+  padding: 12px 9px;
+}
+.fl-edge-labels button {
+  font-size: 13px;
+  padding: 3px 8px;
+  min-height: 30px;
+  border-color: transparent;
+  background: var(--rm-panel);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.fl-edge-labels button[aria-pressed="true"] {
+  border-color: var(--rm-link);
+}
+.fl-inspector {
+  padding: 24px;
+  border-left: 1px solid var(--rm-rule);
+  background: var(--rm-ground);
+  min-width: 0;
+}
+.fl-inspector h3 {
+  font:
+    600 26px/1.15 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 12px;
+}
+.fl-inspector h4 {
+  font:
+    600 16px/1.4 Barlow,
+    system-ui,
+    sans-serif;
+  margin: 24px 0 6px;
+}
+.fl-inspector p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+.fl-inspector small {
+  color: var(--rm-muted);
+}
+.fl-inspector a {
+  overflow-wrap: anywhere;
+}
+.fl-inspector .fl-state {
+  display: inline-block;
+  padding: 5px 9px;
+  border: 1px dashed var(--rm-rule);
+  font-size: 13px;
+  color: var(--rm-warn);
+  margin-bottom: 8px;
+}
+.fl-inspector .fl-inspector-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.fl-inspector .fl-source {
+  display: block;
+  margin-top: 22px;
+  font-size: 14px;
+}
+.fl-motion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-block: 1px solid var(--rm-rule);
+  padding: 14px 0;
+}
+.fl-motion span {
+  font-size: 14px;
+  color: var(--rm-muted);
+  line-height: 1.5;
+}
+.fl-camera {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.fl-camera button {
+  font-size: 13px;
+  padding: 8px 10px;
+}
+.fl-handoffs {
+  margin-top: 24px;
+}
+.fl-handoffs h4 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+.fl-handoffs > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.fl-handoffs button {
+  text-align: left;
+}
+.fl-handoffs small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--rm-muted);
+  margin-top: 3px;
+}
+.fl-return {
+  margin-top: 20px;
+  padding: 14px 0;
+  border-top: 1px dashed var(--rm-warn);
+  font-size: 14px;
+  color: var(--rm-warn);
+}
+.fl-return p {
+  margin: 6px 0;
+  color: var(--rm-muted);
+}
+.fl-loop-picker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+.fl-loop-picker label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+}
+.fl-loop-picker select {
+  max-width: 100%;
+  min-width: 210px;
+}
+.fl-loop-picker > span {
+  font-size: 13px;
+  color: var(--rm-muted);
+}
+.fl-inventory {
+  margin-top: 24px;
+}
+.fl-inventory h3 {
+  font:
+    600 24px/1.3 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin-bottom: 6px;
+}
+.fl-inventory > p {
+  font-size: 14px;
+  color: var(--rm-muted);
+  margin-top: 0;
+}
+.fl-inventory > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.fl-inventory button {
+  text-align: left;
+  font-size: 14px;
+}
+.fl-inventory small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--rm-muted);
+  margin-top: 6px;
+}
+.fl-eval-heading {
+  margin: 12px 0 24px;
+}
+.fl-eval-heading h3 {
+  font:
+    600 28px/1.2 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+  margin: 0 0 8px;
+}
+.fl-eval-labels,
+.fl-metric > summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 20px;
+  align-items: center;
+}
+.fl-eval-labels {
+  padding: 12px 20px;
+  font-size: 13px;
+  background: var(--rm-soft);
+  color: var(--rm-muted);
+}
+.roadmap-shell .fl-metric {
+  border: 0;
+  border-bottom: 1px solid var(--rm-rule);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: var(--rm-panel);
+}
+.roadmap-shell .fl-metric > summary {
+  padding: 20px;
+  list-style: none;
+  cursor: pointer;
+}
+.fl-metric > summary::-webkit-details-marker {
+  display: none;
+}
+.fl-metric > summary:after {
+  content: none;
+}
+.fl-metric > summary strong {
+  font:
+    600 22px/1.2 "Barlow Condensed",
+    Barlow,
+    sans-serif;
+}
+.fl-metric > summary > span:last-child {
+  font-size: 14px;
+  color: var(--rm-muted);
+}
+.fl-metric > div {
+  padding: 0 20px 24px;
+  max-width: 80ch;
+}
+.fl-metric li {
+  overflow-wrap: anywhere;
+}
+.fl-metric[open] > summary,
+.fl-metric > summary:hover {
+  background: var(--rm-soft);
+}
+.fl-records .ll-noscript {
+  display: block !important;
+}
+.fl-records article + article {
+  border-top: 1px solid var(--rm-rule);
+  padding-top: 24px;
+}
+.fl-records article {
+  break-inside: avoid;
+}
+.fl-records li {
+  overflow-wrap: anywhere;
+}
+.fl-system .ll-agent-inventory {
+  overflow: auto;
+}
+.fl-system .ll-run {
+  padding: 20px;
+  background: var(--rm-panel);
+  border: 1px solid var(--rm-rule);
+  margin: 12px 0;
+}
+.fl-system .ll-run header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.fl-system .ll-run small {
+  overflow-wrap: anywhere;
+}
+/* Optional focus polish without changing roadmap placement or geometry. */
+#roadmap-nnl [data-roadmap-item],
+#roadmap-timeline [data-roadmap-item] {
+  transition:
+    box-shadow 0.18s ease-out,
+    outline-color 0.18s ease-out;
+}
+#roadmap-nnl [data-roadmap-item]:focus-visible,
+#roadmap-timeline [data-roadmap-item]:focus-visible {
+  outline: 2px solid var(--rm-focus);
+  outline-offset: 3px;
+}
+@media (max-width: 1050px) {
+  .fl-workspace {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .fl-diagram-main,
+  .fl-inspector {
+    padding: 18px;
+  }
+  .fl-node-labels button {
+    width: 124px;
+    font-size: 14px;
+  }
+  .fl-node-labels small {
+    font-size: 11px;
+  }
+  .fg-labels,
+  .fg-row > summary {
+    gap: 14px;
+    grid-template-columns: 1fr 0.8fr 0.65fr 1.3fr;
+  }
+  .fl-inventory > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .fl-workspace {
+    grid-template-columns: 1fr;
+  }
+  .fl-inspector {
+    border-left: 0;
+    border-top: 1px solid var(--rm-rule);
+  }
+  .fl-inspector [data-flow-inspector] {
+    max-width: 70ch;
+  }
+  .fl-stage {
+    height: 390px;
+  }
+  .fg-labels {
+    display: none;
+  }
+  .fg-row > summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+  .fg-name {
+    font-size: 18px;
+  }
+  .fg-proof {
+    grid-column: 1/-1;
+  }
+  .fg-prior:before {
+    content: "Earlier letter: ";
+    font-size: 13px;
+    color: var(--rm-muted);
+  }
+  .fg-prior small {
+    display: inline;
+    margin-left: 7px;
+  }
+  .fg-detail {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+  .fg-lenses a {
+    grid-template-columns: 1fr;
+  }
+  .fg-intro,
+  .fl-intro {
+    display: block;
+  }
+  .fg-intro p + p {
+    margin-top: 12px;
+  }
+  .fl-intro a {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  .fl-summary {
+    gap: 12px 20px;
+  }
+  .fl-inventory > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fl-eval-labels {
+    display: none;
+  }
+  .fl-metric > summary {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fl-metric > summary > span:last-child {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 440px) {
+  .fl-diagram-main {
+    padding: 12px;
+  }
+  .fl-node-labels button {
+    width: 118px;
+    min-height: 74px;
+    font-size: 14px;
+  }
+  .fl-node-labels small {
+    font-size: 12px;
+  }
+  .fl-stage {
+    height: 455px;
+  }
+  .fl-toolbar {
+    padding-top: 18px;
+  }
+  .fl-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  .fl-tabs button:last-child {
+    grid-column: 1/-1;
+  }
+  .fl-loop-picker label {
+    display: block;
+    width: 100%;
+  }
+  .fl-loop-picker select {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .fl-motion {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fl-motion button {
+    width: 100%;
+  }
+  .fg-lenses {
+    grid-template-columns: 1fr;
+  }
+  .fg-lenses a + a {
+    border-left: 0;
+    border-top: 1px solid var(--rm-rule);
+  }
+  .fg-row > summary {
+    padding: 16px;
+  }
+  .fl-summary span {
+    flex-wrap: wrap;
+  }
+  .fl-handoffs > div {
+    grid-template-columns: 1fr;
+  }
+  .fl-inventory > div {
+    grid-template-columns: 1fr 1fr;
+  }
+  .fl-inspector {
+    padding: 18px;
+  }
+  .fl-edge-labels button {
+    font-size: 12px;
+    max-width: 140px;
+    white-space: normal;
+  }
+  .fg-grade {
+    font-size: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fl-system *,
+  #roadmap-nnl [data-roadmap-item],
+  #roadmap-timeline [data-roadmap-item] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media print {
+  .fl-enhanced {
+    display: none !important;
+  }
+  .fl-records,
+  .fl-records .ll-noscript {
+    display: block !important;
+  }
+  .fl-records > * {
+    display: block !important;
+  }
+  .fg-row > div {
+    display: grid !important;
+  }
+  .fg-lenses a {
+    color: inherit;
+  }
+  .fg-row {
+    break-inside: avoid;
+  }
+  .fl-records summary {
+    font-weight: 700;
+  }
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels button {
+  transform: translate(-50%, 24px);
+  min-height: 54px;
+  padding: 8px;
+  font-size: 14px;
+  width: 132px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels small {
+  font-size: 11px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels button[aria-pressed="true"] {
+  padding: 7px;
+}
+@media (max-width: 440px) {
+  .fl-node-labels button {
+    width: 104px;
+  }
+  .fl-stage[data-dimension="3d"] .fl-node-labels button {
+    width: 104px;
+    font-size: 13px;
+  }
+  .fl-stage[data-dimension="3d"] .fl-node-labels small {
+    font-size: 11px;
+  }
+}
+.roadmap-shell .fl-system .fl-node-labels button {
+  background: var(--rm-ground);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.roadmap-shell .fl-system .fl-edge-labels button {
+  background: var(--rm-panel);
+  min-height: 40px;
+}
+.roadmap-shell .fl-system .fl-edge-labels button[aria-pressed="true"],
+.roadmap-shell .fl-system .fl-node-labels button[aria-pressed="true"] {
+  background: var(--rm-soft);
+}
+.fl-inspector details {
+  margin-top: 20px;
+}
+.fl-inspector details li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.fl-inspector details li + li {
+  margin-top: 8px;
+}
+.fl-node-labels small {
+  overflow-wrap: anywhere;
+}
+/* Stable labels keep the spatial diagram readable at every camera angle. */
+.fl-stage[data-dimension="3d"] {
+  height: auto;
+  min-height: 480px;
+  padding-top: 320px;
+}
+.fl-stage[data-dimension="3d"] :is(canvas, .fl-lines, .fl-edge-labels) {
+  height: 320px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  height: auto;
+  width: 100%;
+  padding: 8px 0;
+}
+.roadmap-shell .fl-stage[data-dimension="3d"] .fl-node-labels button {
+  position: static;
+  transform: none;
+  min-height: 66px;
+  width: 100%;
+  font-size: 14px;
+}
+.fl-stage[data-dimension="3d"] .fl-node-labels small {
+  font-size: 12px;
+}
+.fl-inspector .fl-state {
+  padding: 0;
+  border: 0;
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+@media print {
+  .fl-system details::details-content,
+  .fg-grades details::details-content {
+    content-visibility: visible !important;
+    display: block !important;
+  }
+}
+/* The stable handoff list carries names when perspective would collide labels. */
+.fl-stage[data-dimension="3d"] .fl-edge-labels {
+  display: none;
+}

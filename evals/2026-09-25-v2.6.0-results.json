@@ -1,0 +1,224 @@
+{
+  "date": "2026-09-25",
+  "version": "2.6.0",
+  "baseCommit": "d738931b7bc51db5cb75ea289f422abbc954ba86",
+  "firstBehaviorCandidateSha256": "d0893310719f3500dfdbed1cdfc91595b276193907fe3e447c0b647ba661c9fe",
+  "finalBehaviorCandidateSha256": "e556f664694e52558e420d59f57cbabcd62a443778f3f826e4abb58d958955bf",
+  "runtimeCandidateSha256": "d38dcb0a9d2758d6f6d8efed2d34f5a402c624619d3986e4b072a7d85a0e2ecd",
+  "fingerprintMethod": "SHA256 of sorted relative path NUL raw content NUL for SKILL.md, references, assets and non-test scripts",
+  "runs": [
+    {
+      "scenario": "24-evidence-clarity",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "modelIdentifierBasis": "inherited session identity",
+      "exactDeployedBackend": null,
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "elapsedBasis": "Lead measured 392 seconds combined across both scenarios and rerender, excluding initial reads.",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "e5658d87d2aede69585c9d38f5f8a244ad5e80188d3af3fd79a58efa2dd07cf1",
+      "browserBy": "maintainer follow-up at 1440 and 320px"
+    },
+    {
+      "scenario": "24-evidence-clarity",
+      "model": "gpt-5.6-sol",
+      "modelIdentifierBasis": "explicit orchestration request",
+      "exactDeployedBackend": null,
+      "reasoning": "medium",
+      "status": "completed",
+      "elapsedSeconds": null,
+      "elapsedBasis": "Initial run measured 425 seconds from fixture creation; final rerender duration unavailable.",
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "artifactSha256": "63ca8c5106f3b9c3aff98e63b97ec5592512968dafa137af818820b589071b01",
+      "browserBy": "maintainer follow-up at 1440 and 320px"
+    },
+    {
+      "scenario": "15-complete-lead-grading",
+      "model": "inherited selected GPT-6; exact backend unavailable",
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "codeGrade": "C",
+      "productionGrade": null,
+      "productionStatus": "incomplete",
+      "method": "explicitly approved single-agent",
+      "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+      "artifactVerifiedFiles": 13,
+      "assessmentAppendedOnce": true
+    }
+  ],
+  "tools": {
+    "agents": "Local shell, Node and supplied skill files; no delegated auditors, live access, installs or publication.",
+    "maintainer": "Node tests, local Playwright/Chrome and artifact verifier."
+  },
+  "budget": {
+    "userTokenLimit": null,
+    "userCostLimit": null,
+    "userTimeLimit": null,
+    "aggregateTokens": null,
+    "aggregateCost": null,
+    "note": "No cap compliance claimed; model usage telemetry unavailable."
+  },
+  "suppliedReplies": [],
+  "postBehaviorChanges": [
+    "Reusable evidence-focus/return controls and selected loop summary absorb integration work observed in the lead trial.",
+    "Connected-view guidance keeps the selected view when changing 2D/3D; the older stage matrix still starts focused.",
+    "Stable handoff list replaces projected 3D edge labels to prevent collisions.",
+    "Synthetic example shell allows its original tables to scroll on phones; evaluated original source brand block stayed unchanged."
+  ],
+  "runtimeChecks": [
+    {
+      "width": 1440,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 768,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 390,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 320,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "variant": "empty",
+      "passed": true
+    },
+    {
+      "variant": "no-edges",
+      "passed": true
+    },
+    {
+      "variant": "no-js",
+      "passed": true
+    },
+    {
+      "variant": "no-webgl",
+      "passed": true
+    },
+    {
+      "variant": "reduced",
+      "passed": true
+    },
+    {
+      "variant": "print",
+      "passed": true
+    }
+  ],
+  "modelArtifactBrowserChecks": [
+    {
+      "who": "lead",
+      "width": 1440,
+      "sourcePreserved": true,
+      "protectedRegionsPreserved": true,
+      "webglMotion": true,
+      "errors": []
+    },
+    {
+      "who": "lead",
+      "width": 320,
+      "sourcePreserved": true,
+      "protectedRegionsPreserved": true,
+      "webglMotion": true,
+      "errors": []
+    },
+    {
+      "who": "support",
+      "width": 1440,
+      "sourcePreserved": true,
+      "protectedRegionsPreserved": true,
+      "webglMotion": true,
+      "errors": []
+    },
+    {
+      "who": "support",
+      "width": 320,
+      "sourcePreserved": true,
+      "protectedRegionsPreserved": true,
+      "webglMotion": true,
+      "errors": []
+    }
+  ],
+  "tests": {
+    "passed": 178,
+    "failed": 0,
+    "diffCheck": "passed",
+    "portablePackage": "built",
+    "claudeCodePackage": "built"
+  },
+  "limitations": [
+    "Agent browser tools were unavailable; maintainer follow-up supplied actual browser coverage.",
+    "The first supporting run tried an unpackaged maintainer test fixture and could not run it; direct supplied-data checks completed and the maintainer full suite passed.",
+    "Skill-creator Python quick validator could not run because PyYAML is unavailable; no dependency was installed. Repository format and packaging tests passed.",
+    "Behavior trials used the recorded candidate fingerprints before final integration fixes; the shipped runtime was checked separately.",
+    "No participant usability study or live-system learning claim is made."
+  ]
+}
