@@ -122,3 +122,12 @@ test('null or omitted labels retain unknown work type without losing delivery', 
   assert.throws(() => classifyWork('Bug'), /array/);
   assert.throws(() => classifyWork([null]), /string names/);
 });
+
+test('completed detail follows outstanding work in one collapsed history group',()=>{
+ const model=buildFeatureRollups(input({issues:[issue('ENG-1'),issue('ENG-2',{projectId:'engine-project',statusType:'started',completedAt:null})]}));
+ const before=JSON.stringify(model),h=renderFeatureDetail(model.features[0]);
+ assert(h.indexOf('Additional work and follow-ups')<h.indexOf('Completed delivery'));
+ assert.match(h,/<details class="rm-completed-work">/);assert(h.includes('ENG-1'));assert(h.includes('ENG-2'));
+ const p=renderFeatureProgress(model);assert.match(p,/<details class="rm-delivery-summary">/);
+ assert.equal(JSON.stringify(model),before);
+});

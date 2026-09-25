@@ -309,3 +309,13 @@ uses the same facts, with explicit playback and named stages.
 
 See the [synthetic action example](evals/fixtures/action-clarity/example.html)
 and [mapping guidance](references/learning-system.md#connect-proof-gaps-to-owned-work).
+
+### Team handoffs and completed work
+
+Optional operating context and team guides give each loop a concrete start,
+proposed role responsibilities, ordered steps, completion evidence and blocker
+route. They preserve original execution provenance when data moves environments.
+Completed ticket detail is collapsed while outstanding proof stays visible.
+Feature evidence puts remaining work before one counted delivery disclosure.
+See the [team-handoff fixture](evals/fixtures/team-guide/README.md) and
+[learning guidance](references/learning-system.md#team-instructions-and-environment-transitions).

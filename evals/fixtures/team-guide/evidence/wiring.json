@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "sourceHref": "evidence/wiring.json",
+  "edges": [
+    {
+      "id": "corrections",
+      "from": "quality_review",
+      "to": "account_memory",
+      "label": "Corrections",
+      "channel": "corrections",
+      "state": "declared",
+      "description": "Quality review supplies proposed corrections to memory.",
+      "missing": "No joined transfer retained.",
+      "nextProof": "Join a reviewer output to the exact memory consumer.",
+      "evidence": [
+        "Synthetic wiring declaration."
+      ]
+    },
+    {
+      "id": "reuse_outcomes",
+      "from": "account_memory",
+      "to": "quality_review",
+      "label": "Reuse outcomes",
+      "channel": "reuse_outcomes",
+      "state": "declared",
+      "description": "Memory reuse outcomes feed the next quality review.",
+      "missing": "Feedback return has not been witnessed.",
+      "nextProof": "Retain an outcome and the review that consumed it.",
+      "evidence": [
+        "Synthetic wiring declaration."
+      ]
+    }
+  ],
+  "nodeNotes": {
+    "quality_review": "Earlier closure evidence",
+    "account_memory": "Historical chain witnessed"
+  },
+  "returns": [
+    {
+      "loopId": "release_review",
+      "state": "not-applicable",
+      "note": "This path controls a release; no feedback cycle is declared.",
+      "sourceHref": "evidence/wiring.json"
+    }
+  ]
+}

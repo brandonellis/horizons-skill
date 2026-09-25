@@ -79,3 +79,17 @@ short Progress rows and work-record lists. Inline `assets/feature-rollups.css`.
 Generate one canonical `feature-work-<id>` Evidence disclosure per feature;
 roadmap details can reuse the body without duplicate IDs. No browser automation
 or tracker connection is required for users to run these helpers.
+
+## Keep completed delivery available without dominating the review
+
+Lead feature evidence with remaining original requirements, open follow-ups and
+unknown status. Group completed ticket detail under one counted, collapsed
+Completed delivery disclosure, preserving the original category breakdown inside.
+Keep dated milestones visible where they explain progress. Recent-delivery rows
+can be a compact expandable summary on Progress rather than another full list.
+
+A Done ticket does not hide an unverified acceptance, unresolved dependency or
+missing operating proof. Keep that action visible and disclose the completed
+implementation separately. Do not delete records, change counts, disable links
+or move roadmap items to achieve a quieter page. Print and native text access
+must retain the full evidence.

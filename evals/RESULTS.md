@@ -3,6 +3,30 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-25 · v2.8.0 team guidance and quieter completion
+
+Scenario 26 ran on the selected Codex lead and the requested `gpt-5.6-sol`
+supporting configuration (medium). The lead preserved original regions and
+recorded inputs. The first supporting trial retained roadmap content but changed
+its layout, fonts and palette modes, failing the preservation expectation. That
+failure is recorded, not treated as a pass. Explicit region-preservation guidance
+and one bounded correction restored the original regions. The corrected result
+meets all seven expectations and avoids all three prohibited behaviors; it is an
+assisted correction, not a fresh blind trial.
+
+The lead also completed scenario 15 from source review through assessment-2:
+code C, production Incomplete, exactly one appended assessment, preserved
+baseline/history and 13-file original-lock verification. All six expectations
+were met and three prohibited behaviors avoided.
+
+The final shared runtime passed 189 tests and browser checks at 1440, 768, 390
+and 320px, including keyboard/focus, WebGL motion, reduced motion, graphics
+failure, empty inventory, absent handoffs, print and no JavaScript. Final link,
+proof-date, summary and print corrections received maintainer checks. These are
+not represented as full model reruns. Exact requested versus exposed model
+identity, fingerprints, correction history and limitations are recorded in
+`2026-09-25-v2.8.0-results.json`. No new user reply or usage-cap claim applies.
+
 ## 2026-09-25 · v2.7.0 action and tracker clarity
 
 Scenario 25 completed on the inherited selected lead and the explicitly requested

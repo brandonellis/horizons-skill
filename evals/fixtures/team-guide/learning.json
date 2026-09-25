@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "assessmentId": "synthetic-learning-observation-1",
+  "observedOn": "2026-09-25",
+  "grade": null,
+  "scope": "Synthetic source and staging observations",
+  "production": "Not measured",
+  "sourceHref": "evidence/learning-observation.json",
+  "closedCount": 2,
+  "declaredCount": 3,
+  "loops": [
+    {
+      "id": "release_review",
+      "name": "Release review",
+      "binding": "native",
+      "recordedVerdict": "not proved",
+      "proof": "unproved",
+      "summary": "The evaluation verdict exists; a binding release decision is not demonstrated.",
+      "action": "Witness a release decision consuming the verdict.",
+      "decision": "Prove enforcement",
+      "missing": "Binding release decision.",
+      "tickets": "SYN-101",
+      "evidence": [
+        "Synthetic dated observation; no live system or customer data."
+      ],
+      "sourceHref": "evidence/learning-observation.json",
+      "sourceLocator": "loops.release_review",
+      "stages": [
+        {
+          "id": "signal",
+          "label": "Release signal",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "transform",
+          "label": "Evaluation suite",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "artifact",
+          "label": "Recorded verdict",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "consumption",
+          "label": "Release decision",
+          "state": "unknown",
+          "note": "The stage is declared; execution is not demonstrated."
+        }
+      ]
+    },
+    {
+      "id": "account_memory",
+      "name": "Account memory",
+      "binding": "native",
+      "recordedVerdict": "closed",
+      "proof": "carried",
+      "summary": "Capture is current; consumption evidence comes from an earlier observation.",
+      "action": "Record a later consumer using the new memory.",
+      "decision": "Re-witness consumption",
+      "missing": "A fresh consuming run.",
+      "tickets": "SYN-101",
+      "evidence": [
+        "Synthetic dated observation; no live system or customer data."
+      ],
+      "sourceHref": "evidence/learning-observation.json",
+      "sourceLocator": "loops.account_memory",
+      "stages": [
+        {
+          "id": "signal",
+          "label": "User correction",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "transform",
+          "label": "Memory screening",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "artifact",
+          "label": "Changed memory",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "consumption",
+          "label": "Later plan",
+          "state": "carried",
+          "note": "Witness from the previous snapshot; not re-witnessed."
+        }
+      ]
+    },
+    {
+      "id": "quality_review",
+      "name": "Quality review",
+      "binding": "native",
+      "recordedVerdict": "closed",
+      "proof": "observed",
+      "summary": "A changed fixture was consumed in a later recorded evaluation.",
+      "action": "Measure whether the new fixture catches the intended regression.",
+      "decision": "Verify test quality",
+      "missing": "None in this recorded witness. Test adequacy is separate.",
+      "tickets": "SYN-101",
+      "evidence": [
+        "Synthetic dated observation; no live system or customer data."
+      ],
+      "sourceHref": "evidence/learning-observation.json",
+      "sourceLocator": "loops.quality_review",
+      "stages": [
+        {
+          "id": "signal",
+          "label": "Human disagreement",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "transform",
+          "label": "Review",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "artifact",
+          "label": "Changed fixture",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        },
+        {
+          "id": "consumption",
+          "label": "Later suite",
+          "state": "observed",
+          "note": "Recorded in this synthetic observation."
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "coverage",
+      "name": "Agent coverage",
+      "value": "3 / 5",
+      "status": "Source coverage",
+      "detail": "Three of five synthetic agents have a fixture; execution is separate.",
+      "nextProof": "Run the uncovered roles against reviewed cases.",
+      "evidence": [
+        "Synthetic registry and fixture manifest."
+      ]
+    },
+    {
+      "id": "gate",
+      "name": "Release enforcement",
+      "value": "Advisory",
+      "status": "Decision unproved",
+      "detail": "A blocking evaluation result has not been shown to stop a release.",
+      "nextProof": "Retain a witnessed release decision.",
+      "evidence": [
+        "Synthetic recorded gate configuration."
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "synthetic-run-1",
+      "model": "Synthetic evaluator",
+      "time": "September 25 · 10:00 UTC",
+      "verdict": "Block",
+      "reason": "Acceptance check missed",
+      "detail": "One fixture failed its recorded acceptance. No release effect was observed.",
+      "accounting": "Not measured"
+    }
+  ]
+}

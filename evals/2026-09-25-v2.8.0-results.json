@@ -1,0 +1,204 @@
+{
+  "date": "2026-09-25",
+  "version": "2.8.0",
+  "baseCommit": "42db1c432bffaa950b123351feff8b37d79a94be",
+  "evaluatedRuntimeFingerprint": "68636c5ee025fdd78ea214c07b7739d80c4411d43e822854f17e1486f8caaee6",
+  "supportCorrectionRuntimeFingerprint": "eea75dafa4d0eb913996840a293516491a1e20ba0bc892d3be6c9e4e05853c3e",
+  "finalRuntimeFingerprint": "3ee2d032487c4dbd61ae610c48801566e86b312db7a8f44a3dce468765367d27",
+  "fingerprintMethod": "SHA256 of sorted runtime relative path NUL SHA256(content) NUL; runtime includes SKILL.md, references, assets and non-test scripts",
+  "runs": [
+    {
+      "scenario": "26-team-guide",
+      "model": "inherited selected Codex lead",
+      "exactDeployedBackend": null,
+      "reasoning": null,
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "originalProtectedRegionsByteIdentical": true,
+      "artifactSha256": "5bbc8e79888aa88695b8b4ae771d36849262887c5db9ef9db9b2276b889b63b9",
+      "firstTrial": {
+        "status": "passed",
+        "scopeRegressions": 0
+      }
+    },
+    {
+      "scenario": "26-team-guide",
+      "model": "gpt-5.6-sol (requested)",
+      "exactDeployedBackend": null,
+      "reasoning": "medium requested",
+      "status": "completed after one bounded correction",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "historyPreserved": true,
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "sourceBytesPreserved": true,
+      "originalProtectedRegionsByteIdentical": true,
+      "artifactSha256": "6586fa4ab29a248f4a0a84d4940a840b78e94f134c61a5a2f606e1789b640b5f",
+      "firstTrial": {
+        "status": "failed preservation expectation",
+        "scopeRegressions": 1,
+        "artifactSha256": "529ebcfba05a36b3acbf43ca32a722aeead915c42345b8f80ab8e2456ab69c17",
+        "finding": "Replaced incumbent roadmap/timeline tables with grids, changed typography and added a new dark palette despite preservation scope.",
+        "correction": "Stronger preservation guidance plus one bounded supporting correction restored original protected regions; initial failure retained in this report."
+      }
+    },
+    {
+      "scenario": "15-complete-lead-grading",
+      "model": "inherited selected Codex lead",
+      "exactDeployedBackend": null,
+      "status": "completed",
+      "method": "explicitly approved single-agent",
+      "codeGrade": "C",
+      "productionGrade": null,
+      "productionStatus": "incomplete",
+      "historyPreserved": true,
+      "assessmentAppendedOnce": true,
+      "artifactVerifiedFiles": 13,
+      "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ]
+    }
+  ],
+  "tools": {
+    "agents": "Local shell, Node, supplied skill and recorded fixtures; installed Playwright/Chrome. No live probes, tracker writes, installations or publication.",
+    "maintainer": "Node tests, local Chrome, original-lock verification and static diff review."
+  },
+  "budget": {
+    "userTokenLimit": null,
+    "userCostLimit": null,
+    "userTimeLimit": null,
+    "aggregateTokens": null,
+    "aggregateCost": null
+  },
+  "suppliedReplies": [],
+  "postBehaviorChanges": [
+    "Grade summary emphasizes proof actions instead of completed ticket counts.",
+    "Standalone feature CSS exposes nested completed work in print.",
+    "Reviewer fixes remove a duplicate team-action destination, separate distinct links and place the proof date after the heading.",
+    "Preservation guidance strengthened after supporting trial scope regression; one bounded correction recorded.",
+    "Final synthetic example rebuilt with final shared renderers."
+  ],
+  "runtimeChecks": [
+    {
+      "width": 1440,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 768,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 390,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "width": 320,
+      "noErrors": true,
+      "noOverflow": true,
+      "webglMotion": true
+    },
+    {
+      "variant": "empty",
+      "passed": true
+    },
+    {
+      "variant": "no-edges",
+      "passed": true
+    },
+    {
+      "variant": "no-js",
+      "passed": true
+    },
+    {
+      "variant": "no-webgl",
+      "passed": true
+    },
+    {
+      "variant": "reduced",
+      "passed": true
+    },
+    {
+      "variant": "print",
+      "passed": true
+    }
+  ],
+  "leadArtifactBrowserChecks": {
+    "started": "2026-09-25T22:36:55.393Z",
+    "desktopOverflow": false,
+    "guide": "Use the existing correction in the next plan\n\nProduction internal-team organization\n\nSYN-17 owner: Casey. Reviewer and engineering roles below are proposed, not assigned.\n\nStart here: Select an account with migrated memory and identify the expected correction.\n\nReviewer\n\nRead existing feedback and memory. Reuse a valid correction before creating another.\n\nEngineering\n\nRecover the signal, run, changed memory and later reader. Retain staging origin and timestamps for migrated links.\n\nReviewer + engineering\n\nIf later use is missing, inspect the next needed production plan and attach the exact memory reference and dated reader.\n\nComplete when\nThe existing chain is preserved with original environment and dates.\nA post-move production consumer references the exact memory before current production reuse is claimed.\n\nIf blocked: Assign the missing link and a follow-up ticket; keep repeated-benefit work explicitly unmapped.\n\nInstruction basis and evidence template\n\nExample Tracker checked 2026-09-25 21:00 UTC\n\nProve the next consumer used the changed memory\nVerify\nCompleted implementation \u00b7 1 ticket\n\nProof needed: Retain a current producer, changed memory record and exact later reader in the chosen scope.\n\nWhy this work is linked\nMeasure benefit across a repeated cycle\nVerify\n\nTicket not mapped in this review\n\nProof needed: Link a later outcome back to the next signal and compare the result.\n\nWhy this work is linked",
+    "reviewGuide": "Use an approved review correction\n\nProduction internal-team organization\n\nSYN-18 owner: Riley. SYN-19 is unassigned; proposed roles are not new assignments.\n\nStart here: Choose an existing review and its exact output.\n\nHuman reviewer\n\nCompare the review to the output and record the correction with its source.\n\nDecision owner\n\nResolve SYN-19 approval before the changed review is used.\n\nEngineering + output owner\n\nJoin the approved finding, changed output and a dated later consumer.\n\nComplete when\nThe approval, finding, changed output and exact later use are linked.\n\nIf blocked: Keep the missing approval visible and name its owner; do not infer approval from migrated data.\n\nInstruction basis and evidence template\n\nExample Tracker checked 2026-09-25 21:00 UTC\n\nTrace one approved review into a later result\nVerify\nBefore this work\nSYN-19 \u00b7 Todo \u00b7 Unassigned \u00b7 The description requires human approval before the changed review is used.\nDependency stated in description\nSYN-18 Measure a linked review improvement\nIn progress\nRiley \u00b7 updated 2026-09-25\n\nProof needed: Join the approved finding, changed output and dated later consumer.\n\nWhy this work is linked",
+    "handoff": "Quality review to Account memory\nDeclared handoff \u00b7 execution unproved\n\nQuality review supplies proposed corrections to memory.\n\nWhat crosses this connection\n\nCorrections \u00b7 channel corrections\n\nWhere proof stops\n\nNo joined transfer retained.\n\nNext proof\n\nJoin a reviewer output to the exact memory consumer.\n\nRecorded sources\n\nSynthetic wiring declaration.\n\nOpen Quality review\nOpen Account memory\nView the declared wiring",
+    "mobileOverflow": false,
+    "keyboardSelection": "quality_review",
+    "deepLink": "",
+    "printDone": true,
+    "graphics": "Drag the space or use the camera controls. Depth helps exploration; distance is not a score.",
+    "nojsText": true,
+    "forcedGraphicsFailure": "3D is unavailable here. The 2D map shows the same connections and evidence.",
+    "errors": [],
+    "finished": "2026-09-25T22:36:56.713Z"
+  },
+  "tests": {
+    "passed": 189,
+    "failed": 0,
+    "diffCheck": "passed"
+  },
+  "limitations": [
+    "Exact selected lead backend/reasoning and supporting deployed backend were not exposed. Supporting orchestration requested gpt-5.6-sol medium; no independently verified backend identity is claimed.",
+    "First supporting trial failed preservation despite retaining original content. The corrected result is an assisted retry, not a fresh blind pass.",
+    "Trials used recorded candidate bytes; final runtime changes received separate browser/unit checks, not unclaimed full model reruns.",
+    "Grading browser checks were excluded by fixture Node-only instructions; source execution, history and artifact integrity completed.",
+    "No live runtime improvement, user usability study, new production grade or tracker mutation is claimed.",
+    "Aggregate tokens, cost and comparable end-to-end timings unavailable. Supporting first trial notes measured 376 seconds, excluding subsequent correction.",
+    "Python skill validator unavailable because PyYAML is not installed; repository checks and packaging used without dependency installation."
+  ]
+}

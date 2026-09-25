@@ -79,7 +79,9 @@ export function renderGradeRegister(
           work
             ? (() => {
                 const w = workSummary(work, "component", c.id);
-                return `${w.open} open · ${w.done} marked Done · ${w.unmapped} actions not mapped`;
+                return w.actions
+                  ? `${w.actions} proof actions${w.unmapped ? " · " + w.unmapped + " without a mapped ticket" : ""}`
+                  : "Open required proof · no actions mapped";
               })()
             : "Open review and required proof"
         }</small></span></summary><div class="fg-detail${unmatched(c).length ? "" : " fg-detail-consolidated"}"><div><h3>Why this assessment stands</h3><p>${esc(c.rationale)}</p><a href="${link(c.sourceHref)}">Full assessment evidence</a></div>${
