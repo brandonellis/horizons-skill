@@ -1,0 +1,456 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthetic learning-system example</title><style>.roadmap-shell {
+  --rm-ground: #fafaf7;
+  --rm-panel: #ffffff;
+  --rm-ink: #1c2321;
+  --rm-muted: #56625d;
+  --rm-rule: #ccd2ca;
+  --rm-soft: #eff1ec;
+  --rm-link: #245d94;
+  --rm-focus: #245d94;
+  --rm-warn: #804812;
+  --rm-warn-bg: #f7efe1;
+  --rm-space: 4px;
+  min-height: 100vh;
+  padding: 0 32px 48px;
+  background: var(--rm-ground);
+  color: var(--rm-ink);
+  font: 16px/1.5 Barlow, system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-theme="dark"] .roadmap-shell {
+  --rm-ground: #141a18;
+  --rm-panel: #1b2320;
+  --rm-ink: #e8eee9;
+  --rm-muted: #b1bdb4;
+  --rm-rule: #425048;
+  --rm-soft: #222e27;
+  --rm-link: #a2c9f2;
+  --rm-focus: #a2c9f2;
+  --rm-warn: #f3c391;
+  --rm-warn-bg: #332a20;
+  color-scheme: dark;
+}
+.roadmap-shell *, .roadmap-shell *::before, .roadmap-shell *::after { box-sizing: border-box; }
+.roadmap-shell [hidden] { display: none !important; }
+.rm-container { max-width: 1200px; margin: auto; min-width: 0; }
+.roadmap-shell a { color: var(--rm-link); text-underline-offset: 3px; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input { font: inherit; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input[type="search"] {
+  min-height: 44px; border: 1px solid var(--rm-rule); border-radius: 6px;
+  padding: 8px 12px; color: var(--rm-ink); background: var(--rm-panel); max-width: 100%;
+}
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell summary { cursor: pointer; }
+.roadmap-shell button:hover, .roadmap-shell select:hover { border-color: var(--rm-ink); }
+.roadmap-shell button:disabled { cursor: default; color: var(--rm-muted); border-color: var(--rm-rule); background: var(--rm-soft); }
+.roadmap-shell input::placeholder { color: var(--rm-muted); opacity: 1; }
+.roadmap-shell :is(a, button, select, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--rm-focus); outline-offset: 3px;
+}
+.roadmap-shell ::selection { background: var(--rm-ink); color: var(--rm-ground); }
+.roadmap-shell h1, .roadmap-shell h2, .roadmap-shell h3, .roadmap-shell p { margin: 0; }
+.roadmap-shell h1 { font: 700 30px/1.1 "Barlow Condensed", Barlow, sans-serif; letter-spacing: -.01em; }
+.roadmap-shell h2 { font: 600 28px/1.15 "Barlow Condensed", Barlow, sans-serif; text-wrap: balance; }
+.roadmap-shell h3 { font-size: 17px; line-height: 1.3; }
+.roadmap-shell h4 { font-size: 16px; line-height: 1.3; margin: 0; }
+.rm-small { font-size: 13px; font-weight: 400; }
+.roadmap-shell code, .rm-grade, .rm-number { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.rm-mast { display: flex; align-items: center; gap: 32px; min-height: 84px; border-bottom: 1px solid var(--rm-rule); }
+.rm-brand { display: flex; align-items: baseline; gap: 12px; flex: 1; }
+.rm-brand p { color: var(--rm-muted); font-size: 14px; }
+.roadmap-shell .view-tabs { display: flex; gap: 4px; overflow-x: auto; max-width: 100%; border: 0; padding: 0; }
+.roadmap-shell .view-tabs a {
+  color: var(--rm-muted); text-decoration: none; display: inline-flex; align-items: center;
+  min-height: 52px; padding: 12px 16px; white-space: nowrap; border-bottom: 2px solid transparent;
+}
+.roadmap-shell .view-tabs a[aria-selected="true"] { color: var(--rm-ink); border-bottom-color: currentColor; font-weight: 600; }
+.roadmap-shell .view-tabs a:hover { color: var(--rm-ink); background: var(--rm-soft); }
+.rm-context { padding: 24px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-context-top, .rm-section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+.rm-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.rm-control label { font-weight: 600; }
+.rm-source-grid { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-source-grid span { display: block; }
+.rm-source-grid dd { margin: 4px 0 0; }
+.rm-source-grid .rm-status { display: inline-flex; }
+.rm-source-grid code { color: var(--rm-ink); overflow-wrap: anywhere; }
+.rm-status { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--rm-rule); padding: 4px 10px; border-radius: 4px; font-size: 13px; color: var(--rm-muted); }
+.rm-status-warning { background: var(--rm-warn-bg); color: var(--rm-warn); border-color: transparent; }
+.rm-scope-panel, .rm-roadmap-panel, .rm-evidence-panel { padding-top: 28px; }
+.rm-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; }
+.rm-intro p, .rm-description { color: var(--rm-muted); max-width: 72ch; margin-top: 8px; }
+.rm-notice { background: var(--rm-soft); padding: 16px 20px; margin-top: 20px; font-size: 14px; }
+.rm-notice strong { color: var(--rm-ink); }
+.rm-progress-band { display: grid; grid-template-columns: 1fr 1.4fr 1fr; margin-top: 24px; border-block: 1px solid var(--rm-rule); }
+.rm-progress-step { padding: 20px 24px 20px 0; min-width: 0; }
+.rm-progress-step + .rm-progress-step { border-left: 1px solid var(--rm-rule); padding-left: 24px; }
+.rm-progress-step dt { color: var(--rm-muted); font-size: 13px; }
+.rm-progress-step dd { margin: 8px 0 0; font-size: 24px; font-weight: 600; line-height: 1.15; }
+.rm-progress-step .rm-grade { font-size: 30px; }
+.rm-progress-step p { margin-top: 8px; font-size: 13px; color: var(--rm-muted); }
+.rm-measurements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-measurements dt { font-size: 14px; }
+.rm-measurements dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.rm-measurements p { font-size: 12px; color: var(--rm-muted); margin-top: 4px; }
+.rm-section { margin-top: 32px; }
+.rm-table-region { overflow-x: auto; max-width: 100%; margin-top: 16px; scrollbar-color: var(--rm-muted) var(--rm-soft); }
+.rm-table { border-collapse: collapse; width: 100%; text-align: left; }
+.rm-table caption { text-align: left; font-size: 13px; color: var(--rm-muted); padding-bottom: 12px; }
+.rm-table th, .rm-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--rm-rule); vertical-align: top; }
+.rm-table thead th { color: var(--rm-muted); font-size: 12px; font-weight: 500; }
+.rm-table tbody th { font-weight: 600; min-width: 140px; }
+.rm-table td { font-size: 14px; }
+.rm-table td small { display: block; color: var(--rm-muted); font-size: 12px; margin-top: 4px; }
+.rm-component-table th:nth-child(1) { width: 22%; }
+.rm-component-table th:nth-child(2), .rm-component-table th:nth-child(3) { width: 16%; }
+.rm-component-table th:nth-child(4) { width: 46%; }
+.rm-proof-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 0; list-style: none; margin: 20px 0 0; }
+.rm-proof-list li { border-top: 2px solid var(--rm-ink); padding-top: 16px; }
+.rm-proof-list p { font-size: 14px; color: var(--rm-muted); margin-top: 8px; }
+.rm-proof-list dl { margin: 16px 0 0; font-size: 13px; }
+.rm-proof-list dt { font-weight: 600; }
+.rm-proof-list dd { margin: 4px 0 12px; color: var(--rm-muted); }
+.rm-toolbar { display: flex; align-items: end; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
+.rm-toolbar label { display: grid; gap: 6px; font-size: 13px; }
+.rm-toolbar input[type="search"] { width: 260px; }
+.rm-toolbar .rm-count { margin-left: auto; color: var(--rm-muted); font-size: 13px; align-self: center; }
+.rm-nnl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rm-horizon { min-width: 0; }
+.rm-horizon-header { padding-bottom: 16px; border-bottom: 2px solid var(--rm-ink); }
+.rm-horizon-header p { font-size: 13px; color: var(--rm-muted); margin-top: 6px; }
+.rm-item { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); overflow-wrap: anywhere; }
+.rm-item > summary { list-style: none; display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-weight: 600; }
+.rm-item > summary::-webkit-details-marker { display: none; }
+.rm-item > summary::after { content: "+"; margin-left: auto; flex-shrink: 0; color: var(--rm-muted); font-weight: 400; }
+.rm-item[open] > summary::after { content: "−"; }
+.rm-item .rm-item-preview { color: var(--rm-muted); font-size: 14px; margin: 4px 0 10px; }
+.rm-item-body { font-size: 14px; padding-top: 12px; }
+.rm-item-body p { margin-bottom: 12px; }
+.rm-item-body ul { margin: 12px 0; padding-left: 20px; }
+.rm-item-body li + li { margin-top: 8px; }
+.rm-item-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--rm-muted); }
+.rm-empty { padding: 24px; border: 1px dashed var(--rm-rule); color: var(--rm-muted); }
+.rm-history-record { margin-top: 16px; border-top: 1px solid var(--rm-rule); padding-top: 8px; }
+.rm-history-record > summary { padding: 14px 0; min-height: 48px; font-weight: 600; }
+.rm-history-record > summary span { color: var(--rm-muted); font-size: 14px; font-weight: 400; margin-left: 12px; }
+.rm-history-source { padding: 8px 0 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-history-source code { overflow-wrap: anywhere; font-size: 11px; }
+.rm-archive-frame { width: 100%; min-height: 800px; border: 1px solid var(--rm-rule); background: var(--rm-panel); }
+.rm-print-archive { display: none; }
+.rm-footer { border-top: 1px solid var(--rm-rule); padding-top: 20px; margin-top: 40px; font-size: 12px; color: var(--rm-muted); }
+.rm-footer p + p { margin-top: 6px; }
+.rm-plain-navigation { padding-top: 16px; }
+@media (max-width: 860px) {
+  .rm-mast { gap: 16px; flex-wrap: wrap; padding: 20px 0 0; }
+  .rm-mast .view-tabs { order: 3; width: 100%; }
+  .rm-proof-list { grid-template-columns: 1fr; gap: 16px; }
+  .rm-proof-list li { border-top-width: 1px; }
+  .rm-proof-list dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; }
+  .rm-proof-list dd { margin: 0; }
+  .rm-nnl { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 540px) {
+  .roadmap-shell { padding: 0 20px 32px; }
+  .rm-brand { display: block; }
+  .rm-brand p { margin-top: 4px; }
+  .rm-context { padding: 20px 0; }
+  .rm-control { display: grid; gap: 8px; width: 100%; }
+  .rm-control select { width: 100%; }
+  .rm-progress-band { grid-template-columns: 1fr; }
+  .rm-progress-step, .rm-progress-step + .rm-progress-step { padding: 16px 0; border-left: 0; }
+  .rm-progress-step + .rm-progress-step { border-top: 1px solid var(--rm-rule); }
+  .rm-progress-step dd { font-size: 22px; }
+  .rm-measurements { grid-template-columns: 1fr; gap: 16px; }
+  .rm-source-grid { gap: 12px; }
+  .rm-source-grid > div { width: 100%; }
+  .rm-component-table thead { display: none; }
+  .rm-component-table, .rm-component-table tbody, .rm-component-table tr { display: block; }
+  .rm-component-table tr { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); }
+  .rm-component-table tbody th, .rm-component-table td { display: block; border: 0; padding: 4px 0; min-width: 0; }
+  .rm-component-table td[data-label]::before { content: attr(data-label) ": "; color: var(--rm-muted); }
+  .rm-toolbar label, .rm-toolbar input[type="search"] { width: 100%; }
+  .rm-toolbar .rm-count { margin-left: 0; }
+}
+@media print {
+  .roadmap-shell, :root[data-theme="dark"] .roadmap-shell {
+    --rm-ground: #fff; --rm-panel: #fff; --rm-ink: #111; --rm-muted: #444;
+    --rm-rule: #999; --rm-soft: #f4f4f4; --rm-link: #174976;
+    padding: 0; min-height: 0; color-scheme: light;
+  }
+  .roadmap-shell :is([data-view], [data-assessment-scope], [data-roadmap-format])[hidden] { display: block !important; }
+  .roadmap-shell [data-roadmap-item][hidden] { display: revert !important; }
+  .roadmap-shell :is(.view-tabs, [data-enhance-control], .rm-toolbar, .rm-plain-navigation, .rm-empty, .rm-archive-frame) { display: none !important; }
+  .rm-mast { min-height: 60px; }
+  .rm-scope-panel + .rm-scope-panel, .rm-history-record, .rm-evidence-panel, .rm-roadmap-panel { break-before: page; }
+  .rm-print-archive { display: block; white-space: pre-wrap; font: 11px/1.5 sans-serif; }
+  .roadmap-shell details::details-content { content-visibility: visible; display: block; }
+  .rm-nnl { grid-template-columns: 1fr; }
+  .rm-table-region { overflow: visible; }
+}
+
+/* Leadership learning system: shared snapshot, three equivalent representations. */
+.roadmap-shell .ll-system { --ll-blue: var(--rm-link); --ll-green: #23644f; --ll-amber: #815013; --ll-pale: #e8eef5; margin-block: 40px; color: var(--rm-ink); }
+:root[data-theme="dark"] .roadmap-shell .ll-system { --ll-green: #99d6ba; --ll-amber: #efc17e; --ll-pale: #243748; }
+.ll-system *, .ll-system *::before, .ll-system *::after { box-sizing: border-box; }
+.roadmap-shell .ll-heading { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; border-top: 2px solid var(--rm-ink); padding-top: 24px; }
+.roadmap-shell .ll-heading h2 { margin: 0; font-size: 38px; line-height: 1.1; }
+.roadmap-shell .ll-heading p { max-width: 62ch; margin: 10px 0 0; }
+.ll-assessment { text-align: right; flex-shrink: 0; }
+.ll-assessment strong { font: 600 38px/1.05 'Barlow Condensed',sans-serif; display: block; color: var(--ll-blue); }
+.ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { display: block; font-size: 13px; margin-top: 5px; color: var(--rm-muted); }
+.roadmap-shell .ll-scope { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 18px 0 24px; color: var(--rm-muted); font-size: 13px; }
+.ll-scope a { color: var(--rm-link); }
+.roadmap-shell .ll-reading { display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; padding: 22px 0; border-block: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-reading h3 { font: 600 23px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-reading p { margin: 0; max-width: 65ch; font-size: 15px; }
+.ll-close-count { color: var(--ll-blue); font-weight: 600; }
+.ll-reading a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; }
+.ll-toolbar { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 16px; }
+.ll-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.roadmap-shell .ll-system button { font: 500 14px/1.3 Barlow,system-ui,sans-serif; color: var(--rm-ink); background: transparent; border: 1px solid var(--rm-rule); border-radius: 4px; min-height: 44px; padding: 9px 13px; cursor: pointer; }
+.roadmap-shell .ll-system button:hover { background: var(--rm-soft); }
+.roadmap-shell .ll-system button[aria-pressed="true"] { background: var(--ll-pale); color: var(--ll-blue); border-color: var(--ll-blue); }
+.roadmap-shell .ll-system :is(button,a,select):focus-visible { outline: 3px solid var(--rm-focus); outline-offset: 3px; }
+.roadmap-shell .ll-system button:disabled { color: var(--rm-muted); cursor: default; border-style: dashed; }
+.ll-filter { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.ll-filter input { width: 18px; height: 18px; accent-color: var(--ll-blue); }
+.ll-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 310px; border-block: 1px solid var(--rm-rule); }
+.ll-main { min-width: 0; }
+.ll-inspector { padding: 24px; border-left: 1px solid var(--rm-rule); background: var(--rm-panel); min-width: 0; }
+.roadmap-shell .ll-inspector h3 { font: 600 27px/1.15 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-inspector p { margin: 12px 0; font-size: 15px; }
+.ll-inspector .ll-small, .ll-small { font-size: 13px; color: var(--rm-muted); }
+.ll-state { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--rm-muted); }
+.ll-state[data-state="observed"] { color: var(--ll-green); }
+.ll-state[data-state="carried"],.ll-state[data-state="attention"] { color: var(--ll-amber); }
+.ll-state svg { flex: 0 0 15px; }
+.ll-map { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.roadmap-shell .ll-map :is(th,td) { border: 0; border-bottom: 1px solid var(--rm-rule); padding: 0; text-align: left; vertical-align: middle; background: transparent; }
+.roadmap-shell .ll-map thead th { height: 50px; padding: 8px; font-size: 12px; line-height: 1.2; font-weight: 500; color: var(--rm-muted); text-align: center; }
+.roadmap-shell .ll-map thead th:first-child { width: 34%; text-align: left; padding-left: 16px; }
+.roadmap-shell .ll-map th.ll-loop-name { font-weight: 500; }
+.roadmap-shell .ll-map th.ll-loop-name button { width: 100%; text-align: left; border: 0; border-radius: 0; min-height: 59px; padding: 10px 12px 10px 16px; font-size: 15px; }
+.ll-loop-name small { display: block; font-size: 11px; font-weight: 400; color: var(--rm-muted); margin-top: 3px; }
+.ll-map tr[data-selected="true"] { background: var(--ll-pale); }
+.ll-map td { position: relative; text-align: center !important; }
+.ll-map td:not(:last-child)::after { content: ''; position: absolute; top: 50%; left: 66%; width: 68%; border-top: 1px dashed var(--rm-rule); pointer-events: none; }
+.ll-map td[data-linked="true"]::after { border-top-style: solid; border-color: var(--ll-blue); }
+.roadmap-shell .ll-map .ll-node { position: relative; z-index: 1; border: 0; padding: 8px; width: 44px; height: 44px; border-radius: 50%; color: var(--rm-muted); }
+.roadmap-shell .ll-map .ll-node[data-state="observed"] { color: var(--ll-green); }
+.roadmap-shell .ll-map .ll-node[data-state="carried"],.roadmap-shell .ll-map .ll-node[data-state="attention"] { color: var(--ll-amber); }
+.ll-node svg { width: 22px; height: 22px; display: block; margin: auto; }
+.ll-legend { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 16px; font-size: 12px; }
+.ll-caption { padding: 0 16px 18px; font-size: 13px; color: var(--rm-muted); }
+.ll-trace { list-style: none; padding: 0; margin: 20px 0; }
+.ll-trace li { position: relative; padding: 0 0 18px 25px; border-left: 1px solid var(--rm-rule); margin-left: 7px; }
+.ll-trace li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.ll-trace li > svg { position: absolute; left: -8px; top: 2px; width: 16px; height: 16px; background: var(--rm-panel); color: var(--rm-muted); }
+.ll-trace li[data-state="observed"] > svg { color: var(--ll-green); }
+.ll-trace li[data-state="carried"] > svg,.ll-trace li[data-state="attention"] > svg { color: var(--ll-amber); }
+.ll-trace strong { display: block; font-size: 13px; }
+.ll-trace span { display: block; font-size: 14px; margin-top: 4px; overflow-wrap: anywhere; }
+.ll-trace .ll-stage-note { color: var(--rm-muted); font-size: 12px; }
+.ll-trace li[data-active="true"] strong { color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.roadmap-shell .ll-next { border-top: 1px solid var(--rm-rule); padding-top: 16px; margin-top: 20px; }
+.roadmap-shell .ll-next h4 { font-size: 15px; margin: 0; }
+.ll-inspector a { overflow-wrap: anywhere; }
+.ll-inspector .ll-source-link { display: inline-flex; align-items: center; min-height: 44px; }
+.ll-inspector details { margin-top: 18px; }
+.ll-inspector summary { min-height: 44px; padding-block: 10px; font-size: 14px; cursor: pointer; }
+.ll-inspector details p { font-size: 13px; overflow-wrap: anywhere; }
+.ll-graph-tools { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--rm-rule); align-items: center; }
+.ll-graph-tools label { font-size: 13px; flex: 1 1 180px; }
+.ll-graph-tools select { width: 100%; font: inherit; color: var(--rm-ink); background: var(--rm-panel); border: 1px solid var(--rm-rule); min-height: 44px; margin-top: 5px; padding: 8px; border-radius: 4px; }
+.ll-graph-controls { display: flex; gap: 5px; flex-wrap: wrap; }
+.ll-canvas-wrap { position: relative; height: 485px; overflow: hidden; background: var(--rm-ground); }
+.ll-canvas-wrap canvas { display: block; width: 100%; height: calc(100% - 76px); cursor: grab; touch-action: pan-y; }
+.ll-canvas-wrap canvas:active { cursor: grabbing; }
+.ll-graph-labels { position: absolute; inset: auto 12px 12px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; pointer-events: none; }
+.roadmap-shell .ll-graph-labels button { min-height: 52px; padding: 6px; font-size: 11px; background: var(--rm-ground); pointer-events: auto; border: 1px solid var(--rm-rule); text-align: left; }
+.ll-graph-labels button strong, .ll-graph-labels button span { display: block; }
+.ll-graph-labels button span { margin-top: 3px; color: var(--rm-muted); }
+.ll-graph-labels .ll-plane-label { position: absolute; color: var(--rm-muted); font-size: 11px; transform: translateX(-50%); white-space: nowrap; }
+.ll-camera-note { margin: 0 !important; padding: 12px 16px; font-size: 12px !important; color: var(--rm-muted); border-top: 1px solid var(--rm-rule); }
+.ll-evaluations { padding: 22px 24px; }
+.roadmap-shell .ll-evaluations h3 { font: 600 25px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-evaluations > p { margin: 0 0 22px; font-size: 14px; color: var(--rm-muted); }
+.ll-eval-table { border-collapse: collapse; width: 100%; }
+.roadmap-shell .ll-eval-table :is(th,td) { text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--rm-rule); padding: 13px 10px 13px 0; vertical-align: top; font-size: 14px; }
+.roadmap-shell .ll-eval-table thead th { font-size: 12px; font-weight: 500; color: var(--rm-muted); }
+.roadmap-shell .ll-eval-table tbody th { font-weight: 500; width: 35%; }
+.roadmap-shell .ll-eval-table button { padding: 0; border: 0; border-radius: 0; text-align: left; min-height: 44px; color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.ll-eval-table td strong { display: block; font-size: 17px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.ll-eval-table td span { display: block; font-size: 12px; margin-top: 4px; color: var(--rm-muted); }
+.ll-eval-table tr[data-selected="true"] { background: var(--ll-pale); }
+.roadmap-shell .ll-runs { margin-top: 32px; }
+.ll-run { padding: 15px 0; border-bottom: 1px solid var(--rm-rule); }
+.ll-run header { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.ll-run header strong { font-weight: 600; }
+.ll-run header span { color: var(--ll-amber); }
+.ll-run code { font-size: 12px; }
+.roadmap-shell .ll-run p { margin: 7px 0 0; font-size: 13px; }
+.roadmap-shell .ll-run small { font-size: 12px; color: var(--rm-muted); }
+.ll-evidence-list { padding-left: 18px; }
+.ll-evidence-list li { margin: 8px 0; font-size: 13px; overflow-wrap: anywhere; }
+.ll-footnote { margin: 16px 0 !important; font-size: 13px !important; color: var(--rm-muted); }
+.ll-legacy { margin-top: 28px; border-block: 1px solid var(--rm-rule); padding: 12px 0; }
+.ll-legacy > summary { min-height: 44px; padding: 10px 0; cursor: pointer; font-weight: 500; }
+.ll-legacy > .ll-historical-note { padding: 16px; background: var(--rm-soft); }
+.ll-system [hidden] { display: none !important; }
+.ll-noscript { margin: 20px 0; }
+.ll-noscript article { border-top: 1px solid var(--rm-rule); padding: 16px 0; }
+.ll-noscript h3 { margin: 0 0 6px; }
+.ll-noscript p { max-width: 75ch; }
+@media(max-width: 1100px) {
+ .ll-workspace { grid-template-columns: minmax(0,1fr) 280px; }
+ .ll-inspector { padding: 20px; }
+ .ll-map thead th:first-child { width: 39% !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 14px; padding-left: 10px; }
+}
+@media(max-width: 800px) {
+ .ll-workspace { grid-template-columns: 1fr; }
+ .ll-inspector { border-left: 0; border-top: 1px solid var(--rm-rule); }
+ .ll-reading { grid-template-columns: 1fr !important; gap: 16px !important; }
+ .ll-inspector .ll-trace { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+ .ll-map thead th:first-child { width: 35% !important; }
+ .ll-canvas-wrap { height: 410px; }
+}
+@media(max-width: 480px) {
+ .roadmap-shell .ll-heading h2 { font-size: 31px; }
+ .ll-assessment strong { font-size: 32px; }
+ .ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { max-width: 105px; }
+ .ll-heading { gap: 12px !important; }
+ .ll-heading p { font-size: 15px; }
+ .ll-map thead th { font-size: 10px !important; padding: 6px 1px !important; overflow-wrap: anywhere; }
+ .ll-map thead th:first-child { width: 34% !important; padding-left: 8px !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 13px; min-height: 70px; padding: 10px 8px; }
+ .ll-loop-name small { font-size: 10px; }
+ .roadmap-shell .ll-map .ll-node { width: 40px; min-height: 44px; padding: 8px; }
+ .ll-inspector { padding: 20px 12px; }
+ .ll-inspector .ll-trace { display: block; }
+ .ll-tabs { gap: 4px; }
+ .roadmap-shell .ll-tabs button { padding: 9px 10px; font-size: 13px; }
+ .ll-evaluations { padding: 20px 10px; }
+ .ll-graph-tools { padding: 12px; }
+ .ll-canvas-wrap { height: 350px; }
+ .ll-graph-labels { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .ll-canvas-wrap canvas { height: calc(100% - 128px); }
+ .ll-legend { padding: 14px 8px; gap: 8px 12px; }
+ .ll-scope { margin-bottom: 16px !important; }
+}
+@media(prefers-reduced-motion: reduce) { .ll-system * { scroll-behavior: auto !important; transition: none !important; } }
+@media print {
+ .ll-system .ll-enhanced, .ll-toolbar, .ll-legacy { display: none !important; }
+ .ll-system .ll-noscript { display: block !important; }
+ .ll-reading { grid-template-columns: 1fr !important; }
+ .ll-heading { break-after: avoid; }
+ .ll-noscript article { break-inside: avoid; }
+}
+
+.ll-agent-inventory { margin-top: 24px; }
+.ll-agent-inventory summary { min-height: 44px; cursor: pointer; padding-block: 10px; }
+.ll-agent-inventory :is(th,td,a) { overflow-wrap: anywhere; }
+
+.ll-inspector > button:first-child { margin-bottom: 18px; }
+.ll-inspector:focus-visible { outline: 2px solid var(--ll-blue); outline-offset: -2px; }
+</style></head><body><main class="roadmap-shell"><div class="rm-container"><section class="ll-system" id="learning-system" data-learning-system aria-labelledby="learning-system-heading">
+ <header class="ll-heading"><div><h2 id="learning-system-heading">How the system learns</h2><p>Follow the evidence from a signal to a change the system actually uses.</p></div><div class="ll-assessment"><strong>Unassessed</strong><span>No grade recorded<br>September 25, 2026</span></div></header>
+ <p class="ll-scope"><span>Synthetic source and staging observations</span><span>Production: Not measured</span><a href="evidence/learning-observation.json">Assessment source</a></p>
+ <div class="ll-reading"><div><h3><span class="ll-close-count">2 of 3</span> declared loops have closure evidence</h3><p>1 re-witnessed · 1 using earlier proof · 1 not proved. These counts describe the full recorded inventory.</p></div><div><h3>Prove enforcement</h3><p>Witness a release decision consuming the verdict.</p><a href="#learning-system-record-release_review" data-focus-loop="release_review">Trace the missing proof</a></div></div>
+ <div class="ll-toolbar ll-enhanced" hidden><div class="ll-tabs" role="group" aria-label="Learning system view"><button type="button" data-ll-view="map" aria-pressed="true">Learning map</button><button type="button" data-ll-view="graph" aria-pressed="false">Explore in 3D</button><button type="button" data-ll-view="eval" aria-pressed="false">Evaluations</button></div><label class="ll-filter"><input type="checkbox" data-ll-gaps>Show missing or earlier proof</label></div>
+ <div class="ll-workspace ll-enhanced" hidden><div class="ll-main"><div data-ll-panel="map"><table class="ll-map"><caption class="rm-visually-hidden">Four evidence stages for every declared loop. Select a loop or stage to inspect its proof.</caption><thead><tr><th scope="col">Declared loop</th><th scope="col">Signal</th><th scope="col">Transform</th><th scope="col">Changed artifact</th><th scope="col">Later use</th></tr></thead><tbody><tr data-loop-row="release_review"><th scope="row" class="ll-loop-name"><button type="button" data-loop-select="release_review" aria-controls="learning-system-inspector">Release review<small>Closure not proved</small></button></th><td data-linked="true"><button type="button" class="ll-node" data-loop-select="release_review" data-stage="0" data-state="observed" aria-label="Release review: Signal — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="true"><button type="button" class="ll-node" data-loop-select="release_review" data-stage="1" data-state="observed" aria-label="Release review: Transform — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="false"><button type="button" class="ll-node" data-loop-select="release_review" data-stage="2" data-state="observed" aria-label="Release review: Changed artifact — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="false"><button type="button" class="ll-node" data-loop-select="release_review" data-stage="3" data-state="unknown" aria-label="Release review: Later use — Not demonstrated" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke-dasharray="3 3"/><path d="M7 10h6"/></svg></button></td></tr><tr data-loop-row="account_memory"><th scope="row" class="ll-loop-name"><button type="button" data-loop-select="account_memory" aria-controls="learning-system-inspector">Account memory<small>Closure uses earlier proof</small></button></th><td data-linked="true"><button type="button" class="ll-node" data-loop-select="account_memory" data-stage="0" data-state="observed" aria-label="Account memory: Signal — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="true"><button type="button" class="ll-node" data-loop-select="account_memory" data-stage="1" data-state="observed" aria-label="Account memory: Transform — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="false"><button type="button" class="ll-node" data-loop-select="account_memory" data-stage="2" data-state="observed" aria-label="Account memory: Changed artifact — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="false"><button type="button" class="ll-node" data-loop-select="account_memory" data-stage="3" data-state="carried" aria-label="Account memory: Later use — Earlier evidence" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 5v5l3 2"/></svg></button></td></tr><tr data-loop-row="quality_review"><th scope="row" class="ll-loop-name"><button type="button" data-loop-select="quality_review" aria-controls="learning-system-inspector">Quality review<small>Closure re-witnessed</small></button></th><td data-linked="true"><button type="button" class="ll-node" data-loop-select="quality_review" data-stage="0" data-state="observed" aria-label="Quality review: Signal — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="true"><button type="button" class="ll-node" data-loop-select="quality_review" data-stage="1" data-state="observed" aria-label="Quality review: Transform — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="true"><button type="button" class="ll-node" data-loop-select="quality_review" data-stage="2" data-state="observed" aria-label="Quality review: Changed artifact — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td><td data-linked="false"><button type="button" class="ll-node" data-loop-select="quality_review" data-stage="3" data-state="observed" aria-label="Quality review: Later use — Observed" aria-controls="learning-system-inspector"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg></button></td></tr></tbody></table><div class="ll-legend" aria-label="Evidence states"><span class="ll-state" data-state="observed"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="m6 10 2.5 2.5 5-5"/></svg>Observed</span><span class="ll-state" data-state="carried"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M10 5v5l3 2"/></svg>Earlier evidence</span><span class="ll-state" data-state="unknown"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7" stroke-dasharray="3 3"/><path d="M7 10h6"/></svg>Not demonstrated</span><span class="ll-state" data-state="attention"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m10 2 8 15H2Z"/><path d="M10 7v4m0 2v1"/></svg>Needs interpretation</span></div><p class="ll-caption" data-ll-count>All 3 declared loops. A missing witness is not an observed failure.</p></div>
+ <div data-ll-panel="graph" hidden><div class="ll-graph-tools"><label>Selected loop<select data-ll-loop aria-label="Choose a loop"><option value="release_review">Release review</option><option value="account_memory">Account memory</option><option value="quality_review">Quality review</option></select></label><div class="ll-graph-controls" role="group" aria-label="3D camera"><button type="button" data-camera="left" aria-label="Rotate left">Left</button><button type="button" data-camera="right" aria-label="Rotate right">Right</button><button type="button" data-camera="in" aria-label="Zoom in">+</button><button type="button" data-camera="out" aria-label="Zoom out">−</button><button type="button" data-camera="reset">Reset</button></div></div><div class="ll-canvas-wrap"><canvas tabindex="0" aria-label="3D learning map. Use arrow keys to rotate, plus or minus to zoom, and Home to reset. Choose a loop from the control above for its accessible trace." aria-describedby="learning-system-3d-help"></canvas><div class="ll-graph-labels"></div></div><p class="ll-camera-note" id="learning-system-3d-help">Drag to rotate. Depth separates recorded native and legacy bindings; distance is not a score. Lines follow each declared sequence and do not imply live traffic.</p><p class="ll-caption" data-ll-gl-status role="status"></p></div>
+ <div data-ll-panel="eval" class="ll-evaluations" hidden><h3>Can we trust the evaluations?</h3><p>Coverage, verdicts and enforcement are separate questions. Select a measure for its evidence and next proof.</p><table class="ll-eval-table"><thead><tr><th scope="col">Question</th><th scope="col">Recorded observation</th></tr></thead><tbody><tr data-metric-row="coverage"><th scope="row"><button type="button" data-metric-select="coverage" aria-controls="learning-system-inspector">Agent coverage</button></th><td><strong>3 / 5</strong><span>Source coverage</span></td></tr><tr data-metric-row="gate"><th scope="row"><button type="button" data-metric-select="gate" aria-controls="learning-system-inspector">Release enforcement</button></th><td><strong>Advisory</strong><span>Decision unproved</span></td></tr></tbody></table><div class="ll-runs"><h3>Recorded suite verdicts</h3><article class="ll-run"><header><strong>Synthetic evaluator</strong><span>Block</span></header><p>Acceptance check missed</p><small>September 25 · 10:00 UTC · Run <code>synthetic-run-1</code></small><details><summary>Verdict context</summary><p>One fixture failed its recorded acceptance. No release effect was observed.</p><p>Accounting: Not measured</p></details></article></div></div></div><aside class="ll-inspector" id="learning-system-inspector" aria-label="Selected evidence"><div data-ll-detail></div></aside></div>
+ <p class="rm-visually-hidden" role="status" aria-live="polite" data-ll-announcement></p>
+ <div class="ll-noscript"><p>Complete text records. Interactive views appear when JavaScript is available.</p><article id="learning-system-record-release_review"><h3>Release review</h3><p><strong>Closure not proved.</strong> The evaluation verdict exists; a binding release decision is not demonstrated.</p><ol><li><strong>Signal · Observed:</strong> Release signal. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Evaluation suite. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Recorded verdict. Recorded in this synthetic observation.</li><li><strong>Later use · Not demonstrated:</strong> Release decision. The stage is declared; execution is not demonstrated.</li></ol><p><strong>Next proof:</strong> Witness a release decision consuming the verdict.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.release_review</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><article id="learning-system-record-account_memory"><h3>Account memory</h3><p><strong>Closure uses earlier proof.</strong> Capture is current; consumption evidence comes from an earlier observation.</p><ol><li><strong>Signal · Observed:</strong> User correction. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Memory screening. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Changed memory. Recorded in this synthetic observation.</li><li><strong>Later use · Earlier evidence:</strong> Later plan. Witness from the previous snapshot; not re-witnessed.</li></ol><p><strong>Next proof:</strong> Record a later consumer using the new memory.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.account_memory</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><article id="learning-system-record-quality_review"><h3>Quality review</h3><p><strong>Closure re-witnessed.</strong> A changed fixture was consumed in a later recorded evaluation.</p><ol><li><strong>Signal · Observed:</strong> Human disagreement. Recorded in this synthetic observation.</li><li><strong>Transform · Observed:</strong> Review. Recorded in this synthetic observation.</li><li><strong>Changed artifact · Observed:</strong> Changed fixture. Recorded in this synthetic observation.</li><li><strong>Later use · Observed:</strong> Later suite. Recorded in this synthetic observation.</li></ol><p><strong>Next proof:</strong> Measure whether the new fixture catches the intended regression.</p><p><a href="evidence/learning-observation.json">Recorded assessment</a> · loops.quality_review</p><details><summary>Supporting evidence</summary><ul><li>Synthetic dated observation; no live system or customer data.</li></ul></details></article><h3>Evaluation records</h3><article><h4>Agent coverage · 3 / 5</h4><p>Source coverage. Three of five synthetic agents have a fixture; execution is separate.</p><p>Next proof: Run the uncovered roles against reviewed cases.</p></article><article><h4>Release enforcement · Advisory</h4><p>Decision unproved. A blocking evaluation result has not been shown to stop a release.</p><p>Next proof: Retain a witnessed release decision.</p></article><h3>Recorded suite verdicts</h3><article class="ll-run"><header><strong>Synthetic evaluator</strong><span>Block</span></header><p>Acceptance check missed</p><small>September 25 · 10:00 UTC · Run <code>synthetic-run-1</code></small><details><summary>Verdict context</summary><p>One fixture failed its recorded acceptance. No release effect was observed.</p><p>Accounting: Not measured</p></details></article></div>
+ <p class="ll-footnote">Snapshot: September 25, 2026. This view presents recorded evidence; it does not issue a new grade or check live systems. Filtered views keep the full inventory denominator.</p>
+ <script type="application/json" id="learning-system-data">{"schemaVersion":1,"assessmentId":"synthetic-learning-observation-1","observedOn":"2026-09-25","grade":null,"scope":"Synthetic source and staging observations","production":"Not measured","sourceHref":"evidence/learning-observation.json","closedCount":2,"declaredCount":3,"loops":[{"id":"release_review","name":"Release review","binding":"native","recordedVerdict":"not proved","proof":"unproved","summary":"The evaluation verdict exists; a binding release decision is not demonstrated.","action":"Witness a release decision consuming the verdict.","decision":"Prove enforcement","missing":"Binding release decision.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.release_review","stages":[{"id":"signal","label":"Release signal","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Evaluation suite","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Recorded verdict","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Release decision","state":"unknown","note":"The stage is declared; execution is not demonstrated."}]},{"id":"account_memory","name":"Account memory","binding":"native","recordedVerdict":"closed","proof":"carried","summary":"Capture is current; consumption evidence comes from an earlier observation.","action":"Record a later consumer using the new memory.","decision":"Re-witness consumption","missing":"A fresh consuming run.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.account_memory","stages":[{"id":"signal","label":"User correction","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Memory screening","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Changed memory","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Later plan","state":"carried","note":"Witness from the previous snapshot; not re-witnessed."}]},{"id":"quality_review","name":"Quality review","binding":"native","recordedVerdict":"closed","proof":"observed","summary":"A changed fixture was consumed in a later recorded evaluation.","action":"Measure whether the new fixture catches the intended regression.","decision":"Verify test quality","missing":"None in this recorded witness. Test adequacy is separate.","tickets":"SYN-101","evidence":["Synthetic dated observation; no live system or customer data."],"sourceHref":"evidence/learning-observation.json","sourceLocator":"loops.quality_review","stages":[{"id":"signal","label":"Human disagreement","state":"observed","note":"Recorded in this synthetic observation."},{"id":"transform","label":"Review","state":"observed","note":"Recorded in this synthetic observation."},{"id":"artifact","label":"Changed fixture","state":"observed","note":"Recorded in this synthetic observation."},{"id":"consumption","label":"Later suite","state":"observed","note":"Recorded in this synthetic observation."}]}],"metrics":[{"id":"coverage","name":"Agent coverage","value":"3 / 5","status":"Source coverage","detail":"Three of five synthetic agents have a fixture; execution is separate.","nextProof":"Run the uncovered roles against reviewed cases.","evidence":["Synthetic registry and fixture manifest."]},{"id":"gate","name":"Release enforcement","value":"Advisory","status":"Decision unproved","detail":"A blocking evaluation result has not been shown to stop a release.","nextProof":"Retain a witnessed release decision.","evidence":["Synthetic recorded gate configuration."]}],"runs":[{"id":"synthetic-run-1","model":"Synthetic evaluator","time":"September 25 · 10:00 UTC","verdict":"Block","reason":"Acceptance check missed","detail":"One fixture failed its recorded acceptance. No release effect was observed.","accounting":"Not measured"}],"geometry":[{"id":"account_memory:signal","loopId":"account_memory","stageId":"signal","x":-2.325,"y":0.52,"z":-0.55,"state":"observed"},{"id":"account_memory:transform","loopId":"account_memory","stageId":"transform","x":-0.775,"y":0.52,"z":-0.55,"state":"observed"},{"id":"account_memory:artifact","loopId":"account_memory","stageId":"artifact","x":0.775,"y":0.52,"z":-0.55,"state":"observed"},{"id":"account_memory:consumption","loopId":"account_memory","stageId":"consumption","x":2.325,"y":0.52,"z":-0.55,"state":"carried"},{"id":"quality_review:signal","loopId":"quality_review","stageId":"signal","x":-2.325,"y":0,"z":-0.55,"state":"observed"},{"id":"quality_review:transform","loopId":"quality_review","stageId":"transform","x":-0.775,"y":0,"z":-0.55,"state":"observed"},{"id":"quality_review:artifact","loopId":"quality_review","stageId":"artifact","x":0.775,"y":0,"z":-0.55,"state":"observed"},{"id":"quality_review:consumption","loopId":"quality_review","stageId":"consumption","x":2.325,"y":0,"z":-0.55,"state":"observed"},{"id":"release_review:signal","loopId":"release_review","stageId":"signal","x":-2.325,"y":-0.52,"z":-0.55,"state":"observed"},{"id":"release_review:transform","loopId":"release_review","stageId":"transform","x":-0.775,"y":-0.52,"z":-0.55,"state":"observed"},{"id":"release_review:artifact","loopId":"release_review","stageId":"artifact","x":0.775,"y":-0.52,"z":-0.55,"state":"observed"},{"id":"release_review:consumption","loopId":"release_review","stageId":"consumption","x":2.325,"y":-0.52,"z":-0.55,"state":"unknown"}]}</script></section></div></main><script>(function () {
+ 'use strict';
+ const stageNames=['Signal','Transform','Changed artifact','Later use'];
+ const stateNames={observed:'Observed',carried:'Earlier evidence',unknown:'Not demonstrated',attention:'Needs interpretation'};
+ const proofNames={observed:'Closure re-witnessed',carried:'Closure uses earlier proof',unproved:'Closure not proved'};
+ function el(tag,text,attrs={}) { const e=document.createElement(tag);if(text!=null)e.textContent=text;for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);return e; }
+ function icon(state) {
+  const ns='http://www.w3.org/2000/svg',s=document.createElementNS(ns,'svg');s.setAttribute('viewBox','0 0 20 20');s.setAttribute('aria-hidden','true');s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','1.6');
+  const add=(tag,attrs)=>{const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);s.append(e);};
+  if(state==='attention'){add('path',{d:'m10 2 8 15H2Z'});add('path',{d:'M10 7v4m0 2v1'});}
+  else {add('circle',{cx:10,cy:10,r:8,...(state==='unknown'?{'stroke-dasharray':'3 3'}:{})});add('path',{d:state==='observed'?'m6 10 2.5 2.5 5-5':state==='carried'?'M10 5v5l3 2':'M7 10h6'});}
+  return s;
+ }
+ class LearningGraph {
+  constructor(root,model,onSelect) {
+   this.root=root;this.model=model;this.onSelect=onSelect;this.canvas=root.querySelector('canvas');this.labels=root.querySelector('.ll-graph-labels');this.status=root.querySelector('[data-ll-gl-status]');this.angle=-.32;this.tilt=.16;this.zoom=1;this.selected=model.loops[0]?.id;this.gaps=false;this.active=false;
+   this.gl=this.canvas.getContext('webgl',{alpha:false,antialias:true,preserveDrawingBuffer:true});if(!this.gl)throw new Error('WebGL unavailable');this.init();
+   this.canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.status.textContent='The 3D view paused because graphics became unavailable. The learning map and text evidence remain available.';});
+   this.canvas.addEventListener('webglcontextrestored',()=>{this.lost=false;this.init();this.status.textContent='3D view restored.';this.draw();});
+   let drag=null;
+   this.canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&!e.isPrimary)return;drag={x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY};this.canvas.setPointerCapture(e.pointerId);});
+   this.canvas.addEventListener('pointermove',e=>{if(!drag)return;this.angle+=(e.clientX-drag.x)*.006;this.tilt=Math.max(-.65,Math.min(.65,this.tilt+(e.clientY-drag.y)*.004));drag.x=e.clientX;drag.y=e.clientY;this.draw();});
+   this.canvas.addEventListener('pointerup',e=>{if(drag&&Math.hypot(e.clientX-drag.startX,e.clientY-drag.startY)<6){const r=this.canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;const hit=(this.projected||[]).map(n=>({...n,d:Math.hypot(n.px-x,n.py-y)})).filter(n=>n.d<24).sort((a,b)=>a.d-b.d)[0];if(hit)this.onSelect(hit.loopId,stageNames.indexOf(hit.stageLabel));}drag=null;});
+   this.canvas.addEventListener('pointercancel',()=>{drag=null;});
+   this.canvas.addEventListener('keydown',e=>{const actions={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down','+':'in','=':'in','-':'out',Home:'reset'};if(actions[e.key]){e.preventDefault();this.camera(actions[e.key]);}});
+   this.resize=new ResizeObserver(()=>{if(this.active)this.draw();});this.resize.observe(this.canvas.parentElement);
+   this.theme=new MutationObserver(()=>{if(this.active)this.draw();});this.theme.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+   this.labels.addEventListener('click',e=>{const b=e.target.closest('[data-graph-loop]');if(b)this.onSelect(b.dataset.graphLoop,Number(b.dataset.graphStage));});
+  }
+  init(){
+   const gl=this.gl; const shader=(type,source)=>{const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error('Graphics shader unavailable');return s;};
+   const vs=shader(gl.VERTEX_SHADER,'attribute vec3 p; attribute vec4 c; attribute float size; attribute float state; varying vec4 color; varying float kind; void main(){gl_Position=vec4(p,1.0);gl_PointSize=size;color=c;kind=state;}');
+   const fs=shader(gl.FRAGMENT_SHADER,'precision mediump float; varying vec4 color; varying float kind; uniform float points; void main(){if(points>0.5){vec2 p=gl_PointCoord-vec2(0.5);float d=length(p);if(d>0.48)discard;if(kind>0.5&&d<0.30)discard;if(kind>1.5&&mod(atan(p.y,p.x)+3.14159,1.0472)>0.67)discard;}gl_FragColor=color;}');
+   const program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Graphics program unavailable');this.program=program;this.buffer=gl.createBuffer();gl.deleteShader(vs);gl.deleteShader(fs);
+  }
+  camera(action){if(action==='left')this.angle-=.2;if(action==='right')this.angle+=.2;if(action==='up')this.tilt=Math.max(-.65,this.tilt-.12);if(action==='down')this.tilt=Math.min(.65,this.tilt+.12);if(action==='in')this.zoom=Math.min(1.65,this.zoom+.12);if(action==='out')this.zoom=Math.max(.6,this.zoom-.12);if(action==='reset'){this.angle=-.32;this.tilt=.16;this.zoom=1;}this.draw();}
+  color(value){const probe=el('span',null,{style:'color:'+value});this.root.append(probe);const rgb=getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);probe.remove();return [rgb[0]/255,rgb[1]/255,rgb[2]/255,1];}
+  draw(){
+   if(!this.active||this.lost)return;const gl=this.gl,r=this.canvas.getBoundingClientRect();if(!r.width||!r.height)return;
+   const dpr=Math.min(devicePixelRatio||1,2);this.canvas.width=Math.round(r.width*dpr);this.canvas.height=Math.round(r.height*dpr);gl.viewport(0,0,this.canvas.width,this.canvas.height);
+   const css=getComputedStyle(this.root),bg=this.color(css.getPropertyValue('--rm-ground')),base=this.color(css.getPropertyValue('--rm-muted')),observed=this.color(css.getPropertyValue('--ll-green')),carried=this.color(css.getPropertyValue('--ll-amber')),selectedColor=this.color(css.getPropertyValue('--ll-blue'));
+   gl.clearColor(...bg);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(this.program);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+   const visible=this.model.loops.filter(l=>!this.gaps||l.proof!=='observed'),keys=new Set(visible.map(l=>l.id)),aspect=r.width/r.height;
+   const scale=Math.min(.34,1.65/Math.max(3,this.model.loops.length*.52))*this.zoom;
+   const project=n=>{const x=n.x*Math.cos(this.angle)+n.z*Math.sin(this.angle),z=-n.x*Math.sin(this.angle)+n.z*Math.cos(this.angle),y=n.y*Math.cos(this.tilt)-z*Math.sin(this.tilt),depth=n.y*Math.sin(this.tilt)+z*Math.cos(this.tilt),perspective=9/(9-depth);return{x:x*scale*perspective/Math.max(1,aspect*.66),y:y*scale*perspective-.02,z:depth/20};};
+   const nodes=this.model.geometry.filter(n=>keys.has(n.loopId)).map(n=>{const p=project(n);return{...n,...p,px:(p.x+1)*r.width/2,py:(1-p.y)*r.height/2,stageLabel:stageNames[['signal','transform','artifact','consumption'].indexOf(n.stageId)]};});this.projected=nodes;
+   const colorFor=n=>n.state==='observed'?observed:(n.state==='carried'||n.state==='attention')?carried:base;
+   const vertex=(n,color,size=1,state=0)=>[n.x,n.y,n.z,...color,size*dpr,state];
+   const lines=[];
+   for(const l of visible){const chain=nodes.filter(n=>n.loopId===l.id);for(let i=0;i<chain.length-1;i++){const a=chain[i],b=chain[i+1],solid=a.state==='observed'&&b.state==='observed';const c=[...(l.id===this.selected?selectedColor:base)];c[3]=l.id===this.selected?1:.85;const segs=solid?1:10;for(let j=0;j<segs;j++){const t0=j/segs,t1=(j+(solid?1:.45))/segs;const pos=t=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,z:a.z+(b.z-a.z)*t});lines.push(...vertex(pos(t0),c),...vertex(pos(t1),c));}}}
+   const draw=(data,primitive,isPoints)=>{gl.bindBuffer(gl.ARRAY_BUFFER,this.buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.DYNAMIC_DRAW);for(const [name,count,offset]of [['p',3,0],['c',4,3],['size',1,7],['state',1,8]]){const loc=gl.getAttribLocation(this.program,name);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,count,gl.FLOAT,false,36,offset*4);}gl.uniform1f(gl.getUniformLocation(this.program,'points'),isPoints?1:0);gl.drawArrays(primitive,0,data.length/9);};
+   draw(lines,gl.LINES,false);const points=[];for(const n of [...nodes].sort((a,b)=>b.z-a.z)){const c=[...colorFor(n)];c[3]=1;points.push(...vertex(n,c,n.loopId===this.selected?19:11,n.state==='unknown'?2:n.state==='observed'?0:1));}draw(points,gl.POINTS,true);
+   this.labels.replaceChildren();
+   for(const n of nodes.filter(n=>n.loopId===this.selected)){const loop=this.model.loops.find(l=>l.id===n.loopId),i=['signal','transform','artifact','consumption'].indexOf(n.stageId),b=el('button',n.stageLabel+' · '+stateNames[n.state],{'type':'button','data-graph-loop':n.loopId,'data-graph-stage':i,'aria-label':loop.name+', '+n.stageLabel+', '+stateNames[n.state]});b.replaceChildren(el('strong',(i+1)+'. '+n.stageLabel),el('span',stateNames[n.state]));this.labels.append(b);}
+   this.status.textContent=visible.length+' of '+this.model.declaredCount+' declared loops shown. Selected: '+(this.model.loops.find(l=>l.id===this.selected)?.name||'none')+'.';
+  }
+ }
+ document.querySelectorAll('[data-learning-system]').forEach(root=>{
+  let model;try{model=JSON.parse(root.querySelector('script[type="application/json"]').textContent);}catch{return;}
+  const detail=root.querySelector('[data-ll-detail]'),announcement=root.querySelector('[data-ll-announcement]'),panels=[...root.querySelectorAll('[data-ll-panel]')],gaps=root.querySelector('[data-ll-gaps]');
+  let selected=model.loops.find(l=>l.proof!=='observed')?.id||model.loops[0]?.id,view='map',graph=null;
+  const announce=s=>{announcement.textContent=s;};
+  const addEvidence=(parent,items,sourceHref,locator)=>{const d=el('details'),s=el('summary','Supporting evidence');d.append(s);const ul=el('ul',null,{class:'ll-evidence-list'});items.forEach(t=>ul.append(el('li',t)));d.append(ul);if(locator)d.append(el('p',locator,{class:'ll-small'}));d.append(el('a','Open recorded source',{href:sourceHref,class:'ll-source-link'}));parent.append(d);};
+  function revealDetail(origin=document.activeElement){
+   if(!matchMedia('(max-width: 800px)').matches)return;
+   const back=el('button','Back to '+(view==='eval'?'evaluations':view==='graph'?'3D view':'learning map'),{type:'button'});
+   back.addEventListener('click',()=>{const target=origin?.isConnected?origin:root.querySelector('[data-ll-loop]');target.focus({preventScroll:true});target.scrollIntoView({block:'center'});});
+   detail.prepend(back);detail.setAttribute('tabindex','-1');detail.focus({preventScroll:true});detail.scrollIntoView({block:'start'});
+  }
+  function selectLoop(id,stage=0){const origin=document.activeElement;showLoop(id,stage);revealDetail(origin);}
+  function showLoop(id,stage=0,shouldAnnounce=true){
+   const loop=model.loops.find(l=>l.id===id);if(!loop)return;if(gaps.checked&&loop.proof==='observed'){gaps.checked=false;gaps.dispatchEvent(new Event('change'));}selected=id;detail.replaceChildren();detail.append(el('h3',loop.name));const state=el('span',proofNames[loop.proof],{class:'ll-state','data-state':loop.proof==='observed'?'observed':loop.proof==='carried'?'carried':'unknown'});detail.append(state,el('p',loop.summary));
+   const trace=el('ol',null,{class:'ll-trace','aria-label':'Recorded evidence sequence'});loop.stages.forEach((s,i)=>{const li=el('li',null,{'data-state':s.state,'data-active':String(i===stage)});li.append(icon(s.state),el('strong',stageNames[i]+' · '+stateNames[s.state]),el('span',s.label),el('span',s.note,{class:'ll-stage-note'}));trace.append(li);});detail.append(trace);
+   const next=el('div',null,{class:'ll-next'});next.append(el('h4','Next proof'),el('p',loop.action));if(loop.tickets)next.append(el('p','Linked work: '+loop.tickets,{class:'ll-small'}));if(loop.planTask&&document.getElementById('learning-plan-'+loop.planTask))next.append(el('a','Earlier plan · '+loop.planTask,{href:'#learning-plan-'+loop.planTask,class:'ll-source-link'}));detail.append(next);
+   addEvidence(detail,loop.evidence,loop.sourceHref,loop.sourceLocator);detail.append(el('p','Recorded '+model.observedOn+' · '+model.scope,{class:'ll-small'}));
+   root.querySelectorAll('[data-loop-row]').forEach(r=>{r.dataset.selected=String(r.dataset.loopRow===id);r.querySelector('.ll-loop-name button').setAttribute('aria-pressed',String(r.dataset.loopRow===id));});root.querySelector('[data-ll-loop]').value=id;
+   if(graph){graph.selected=id;graph.draw();}if(shouldAnnounce)announce(loop.name+'. '+proofNames[loop.proof]+'. Next proof: '+loop.action);
+  }
+  function showMetric(id){const m=model.metrics.find(x=>x.id===id);if(!m)return;detail.replaceChildren();detail.append(el('h3',m.name),el('span',m.status,{class:'ll-state'}),el('p',m.value),el('p',m.detail));const n=el('div',null,{class:'ll-next'});n.append(el('h4','Next proof'),el('p',m.nextProof));detail.append(n);addEvidence(detail,m.evidence,model.sourceHref,'Assessment '+model.assessmentId);root.querySelectorAll('[data-metric-row]').forEach(r=>r.dataset.selected=String(r.dataset.metricRow===id));announce(m.name+': '+m.value+'. '+m.status);}
+  function switchView(next){view=next;panels.forEach(p=>p.hidden=p.dataset.llPanel!==view);root.querySelectorAll('[data-ll-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.llView===view)));gaps.closest('label').hidden=view==='eval';if(graph)graph.active=view==='graph';if(view==='eval'){if(model.metrics.length)showMetric(model.metrics[0].id);else{detail.replaceChildren(el('h3','No evaluation observations'),el('p','This snapshot does not include evaluation measurements.'));}}else{showLoop(selected,0,false);if(view==='graph'){try{if(!graph)graph=new LearningGraph(root,model,selectLoop);graph.active=true;graph.selected=selected;graph.gaps=gaps.checked;graph.draw();}catch{root.querySelector('[data-ll-gl-status]').textContent='3D graphics are unavailable here. Use the learning map for the same loops, states and evidence.';root.querySelector('canvas').hidden=true;}}}announce(view==='graph'?'3D view. Choose a loop or use the camera controls.':view==='map'?'Learning map. Four evidence stages per loop.':'Evaluation measurements and recorded verdicts.');}
+  root.addEventListener('click',e=>{const b=e.target.closest('button');if(b){if(b.dataset.llView)switchView(b.dataset.llView);if(b.dataset.loopSelect)selectLoop(b.dataset.loopSelect,Number(b.dataset.stage)||0);if(b.dataset.metricSelect){showMetric(b.dataset.metricSelect);revealDetail(b);}if(b.dataset.camera&&graph)graph.camera(b.dataset.camera);}const f=e.target.closest('[data-focus-loop]');if(f){e.preventDefault();switchView('map');showLoop(f.dataset.focusLoop);detail.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}});
+  root.querySelector('[data-ll-loop]').addEventListener('change',e=>selectLoop(e.target.value));
+  gaps.addEventListener('change',()=>{const visible=model.loops.filter(l=>!gaps.checked||l.proof!=='observed');root.querySelectorAll('[data-loop-row]').forEach(r=>r.hidden=!visible.some(l=>l.id===r.dataset.loopRow));root.querySelector('[data-ll-count]').textContent=visible.length+' of '+model.declaredCount+' declared loops shown. Closure remains '+model.closedCount+' of '+model.declaredCount+' for the full inventory.';if(visible.length&&!visible.some(l=>l.id===selected))showLoop(visible[0].id);if(graph){graph.gaps=gaps.checked;graph.draw();}announce(root.querySelector('[data-ll-count]').textContent);});
+  function revealRecord(){const prefix='#'+root.id+'-record-';if(location.hash.startsWith(prefix)){const id=location.hash.slice(prefix.length);switchView('map');showLoop(id);root.scrollIntoView({block:'start'});}}
+  window.addEventListener('hashchange',revealRecord);root.querySelectorAll('.ll-enhanced').forEach(e=>e.hidden=false);root.querySelector('.ll-noscript').hidden=true;if(selected)showLoop(selected,0,false);else detail.append(el('h3','No loop selected'),el('p','No declared loops in this snapshot.'));
+  revealRecord();
+ });
+})();
+</script></body></html>

@@ -1,0 +1,167 @@
+/* Leadership learning system: shared snapshot, three equivalent representations. */
+.roadmap-shell .ll-system { --ll-blue: var(--rm-link); --ll-green: #23644f; --ll-amber: #815013; --ll-pale: #e8eef5; margin-block: 40px; color: var(--rm-ink); }
+:root[data-theme="dark"] .roadmap-shell .ll-system { --ll-green: #99d6ba; --ll-amber: #efc17e; --ll-pale: #243748; }
+.ll-system *, .ll-system *::before, .ll-system *::after { box-sizing: border-box; }
+.roadmap-shell .ll-heading { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; border-top: 2px solid var(--rm-ink); padding-top: 24px; }
+.roadmap-shell .ll-heading h2 { margin: 0; font-size: 38px; line-height: 1.1; }
+.roadmap-shell .ll-heading p { max-width: 62ch; margin: 10px 0 0; }
+.ll-assessment { text-align: right; flex-shrink: 0; }
+.ll-assessment strong { font: 600 38px/1.05 'Barlow Condensed',sans-serif; display: block; color: var(--ll-blue); }
+.ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { display: block; font-size: 13px; margin-top: 5px; color: var(--rm-muted); }
+.roadmap-shell .ll-scope { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 18px 0 24px; color: var(--rm-muted); font-size: 13px; }
+.ll-scope a { color: var(--rm-link); }
+.roadmap-shell .ll-reading { display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; padding: 22px 0; border-block: 1px solid var(--rm-rule); }
+.roadmap-shell .ll-reading h3 { font: 600 23px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-reading p { margin: 0; max-width: 65ch; font-size: 15px; }
+.ll-close-count { color: var(--ll-blue); font-weight: 600; }
+.ll-reading a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; }
+.ll-toolbar { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; margin: 22px 0 16px; }
+.ll-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.roadmap-shell .ll-system button { font: 500 14px/1.3 Barlow,system-ui,sans-serif; color: var(--rm-ink); background: transparent; border: 1px solid var(--rm-rule); border-radius: 4px; min-height: 44px; padding: 9px 13px; cursor: pointer; }
+.roadmap-shell .ll-system button:hover { background: var(--rm-soft); }
+.roadmap-shell .ll-system button[aria-pressed="true"] { background: var(--ll-pale); color: var(--ll-blue); border-color: var(--ll-blue); }
+.roadmap-shell .ll-system :is(button,a,select):focus-visible { outline: 3px solid var(--rm-focus); outline-offset: 3px; }
+.roadmap-shell .ll-system button:disabled { color: var(--rm-muted); cursor: default; border-style: dashed; }
+.ll-filter { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.ll-filter input { width: 18px; height: 18px; accent-color: var(--ll-blue); }
+.ll-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 310px; border-block: 1px solid var(--rm-rule); }
+.ll-main { min-width: 0; }
+.ll-inspector { padding: 24px; border-left: 1px solid var(--rm-rule); background: var(--rm-panel); min-width: 0; }
+.roadmap-shell .ll-inspector h3 { font: 600 27px/1.15 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-inspector p { margin: 12px 0; font-size: 15px; }
+.ll-inspector .ll-small, .ll-small { font-size: 13px; color: var(--rm-muted); }
+.ll-state { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; line-height: 1.35; color: var(--rm-muted); }
+.ll-state[data-state="observed"] { color: var(--ll-green); }
+.ll-state[data-state="carried"],.ll-state[data-state="attention"] { color: var(--ll-amber); }
+.ll-state svg { flex: 0 0 15px; }
+.ll-map { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.roadmap-shell .ll-map :is(th,td) { border: 0; border-bottom: 1px solid var(--rm-rule); padding: 0; text-align: left; vertical-align: middle; background: transparent; }
+.roadmap-shell .ll-map thead th { height: 50px; padding: 8px; font-size: 12px; line-height: 1.2; font-weight: 500; color: var(--rm-muted); text-align: center; }
+.roadmap-shell .ll-map thead th:first-child { width: 34%; text-align: left; padding-left: 16px; }
+.roadmap-shell .ll-map th.ll-loop-name { font-weight: 500; }
+.roadmap-shell .ll-map th.ll-loop-name button { width: 100%; text-align: left; border: 0; border-radius: 0; min-height: 59px; padding: 10px 12px 10px 16px; font-size: 15px; }
+.ll-loop-name small { display: block; font-size: 11px; font-weight: 400; color: var(--rm-muted); margin-top: 3px; }
+.ll-map tr[data-selected="true"] { background: var(--ll-pale); }
+.ll-map td { position: relative; text-align: center !important; }
+.ll-map td:not(:last-child)::after { content: ''; position: absolute; top: 50%; left: 66%; width: 68%; border-top: 1px dashed var(--rm-rule); pointer-events: none; }
+.ll-map td[data-linked="true"]::after { border-top-style: solid; border-color: var(--ll-blue); }
+.roadmap-shell .ll-map .ll-node { position: relative; z-index: 1; border: 0; padding: 8px; width: 44px; height: 44px; border-radius: 50%; color: var(--rm-muted); }
+.roadmap-shell .ll-map .ll-node[data-state="observed"] { color: var(--ll-green); }
+.roadmap-shell .ll-map .ll-node[data-state="carried"],.roadmap-shell .ll-map .ll-node[data-state="attention"] { color: var(--ll-amber); }
+.ll-node svg { width: 22px; height: 22px; display: block; margin: auto; }
+.ll-legend { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 16px; font-size: 12px; }
+.ll-caption { padding: 0 16px 18px; font-size: 13px; color: var(--rm-muted); }
+.ll-trace { list-style: none; padding: 0; margin: 20px 0; }
+.ll-trace li { position: relative; padding: 0 0 18px 25px; border-left: 1px solid var(--rm-rule); margin-left: 7px; }
+.ll-trace li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.ll-trace li > svg { position: absolute; left: -8px; top: 2px; width: 16px; height: 16px; background: var(--rm-panel); color: var(--rm-muted); }
+.ll-trace li[data-state="observed"] > svg { color: var(--ll-green); }
+.ll-trace li[data-state="carried"] > svg,.ll-trace li[data-state="attention"] > svg { color: var(--ll-amber); }
+.ll-trace strong { display: block; font-size: 13px; }
+.ll-trace span { display: block; font-size: 14px; margin-top: 4px; overflow-wrap: anywhere; }
+.ll-trace .ll-stage-note { color: var(--rm-muted); font-size: 12px; }
+.ll-trace li[data-active="true"] strong { color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.roadmap-shell .ll-next { border-top: 1px solid var(--rm-rule); padding-top: 16px; margin-top: 20px; }
+.roadmap-shell .ll-next h4 { font-size: 15px; margin: 0; }
+.ll-inspector a { overflow-wrap: anywhere; }
+.ll-inspector .ll-source-link { display: inline-flex; align-items: center; min-height: 44px; }
+.ll-inspector details { margin-top: 18px; }
+.ll-inspector summary { min-height: 44px; padding-block: 10px; font-size: 14px; cursor: pointer; }
+.ll-inspector details p { font-size: 13px; overflow-wrap: anywhere; }
+.ll-graph-tools { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--rm-rule); align-items: center; }
+.ll-graph-tools label { font-size: 13px; flex: 1 1 180px; }
+.ll-graph-tools select { width: 100%; font: inherit; color: var(--rm-ink); background: var(--rm-panel); border: 1px solid var(--rm-rule); min-height: 44px; margin-top: 5px; padding: 8px; border-radius: 4px; }
+.ll-graph-controls { display: flex; gap: 5px; flex-wrap: wrap; }
+.ll-canvas-wrap { position: relative; height: 485px; overflow: hidden; background: var(--rm-ground); }
+.ll-canvas-wrap canvas { display: block; width: 100%; height: calc(100% - 76px); cursor: grab; touch-action: pan-y; }
+.ll-canvas-wrap canvas:active { cursor: grabbing; }
+.ll-graph-labels { position: absolute; inset: auto 12px 12px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; pointer-events: none; }
+.roadmap-shell .ll-graph-labels button { min-height: 52px; padding: 6px; font-size: 11px; background: var(--rm-ground); pointer-events: auto; border: 1px solid var(--rm-rule); text-align: left; }
+.ll-graph-labels button strong, .ll-graph-labels button span { display: block; }
+.ll-graph-labels button span { margin-top: 3px; color: var(--rm-muted); }
+.ll-graph-labels .ll-plane-label { position: absolute; color: var(--rm-muted); font-size: 11px; transform: translateX(-50%); white-space: nowrap; }
+.ll-camera-note { margin: 0 !important; padding: 12px 16px; font-size: 12px !important; color: var(--rm-muted); border-top: 1px solid var(--rm-rule); }
+.ll-evaluations { padding: 22px 24px; }
+.roadmap-shell .ll-evaluations h3 { font: 600 25px/1.2 'Barlow Condensed',sans-serif; margin: 0 0 8px; }
+.roadmap-shell .ll-evaluations > p { margin: 0 0 22px; font-size: 14px; color: var(--rm-muted); }
+.ll-eval-table { border-collapse: collapse; width: 100%; }
+.roadmap-shell .ll-eval-table :is(th,td) { text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--rm-rule); padding: 13px 10px 13px 0; vertical-align: top; font-size: 14px; }
+.roadmap-shell .ll-eval-table thead th { font-size: 12px; font-weight: 500; color: var(--rm-muted); }
+.roadmap-shell .ll-eval-table tbody th { font-weight: 500; width: 35%; }
+.roadmap-shell .ll-eval-table button { padding: 0; border: 0; border-radius: 0; text-align: left; min-height: 44px; color: var(--ll-blue); text-decoration: underline; text-underline-offset: 4px; }
+.ll-eval-table td strong { display: block; font-size: 17px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.ll-eval-table td span { display: block; font-size: 12px; margin-top: 4px; color: var(--rm-muted); }
+.ll-eval-table tr[data-selected="true"] { background: var(--ll-pale); }
+.roadmap-shell .ll-runs { margin-top: 32px; }
+.ll-run { padding: 15px 0; border-bottom: 1px solid var(--rm-rule); }
+.ll-run header { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.ll-run header strong { font-weight: 600; }
+.ll-run header span { color: var(--ll-amber); }
+.ll-run code { font-size: 12px; }
+.roadmap-shell .ll-run p { margin: 7px 0 0; font-size: 13px; }
+.roadmap-shell .ll-run small { font-size: 12px; color: var(--rm-muted); }
+.ll-evidence-list { padding-left: 18px; }
+.ll-evidence-list li { margin: 8px 0; font-size: 13px; overflow-wrap: anywhere; }
+.ll-footnote { margin: 16px 0 !important; font-size: 13px !important; color: var(--rm-muted); }
+.ll-legacy { margin-top: 28px; border-block: 1px solid var(--rm-rule); padding: 12px 0; }
+.ll-legacy > summary { min-height: 44px; padding: 10px 0; cursor: pointer; font-weight: 500; }
+.ll-legacy > .ll-historical-note { padding: 16px; background: var(--rm-soft); }
+.ll-system [hidden] { display: none !important; }
+.ll-noscript { margin: 20px 0; }
+.ll-noscript article { border-top: 1px solid var(--rm-rule); padding: 16px 0; }
+.ll-noscript h3 { margin: 0 0 6px; }
+.ll-noscript p { max-width: 75ch; }
+@media(max-width: 1100px) {
+ .ll-workspace { grid-template-columns: minmax(0,1fr) 280px; }
+ .ll-inspector { padding: 20px; }
+ .ll-map thead th:first-child { width: 39% !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 14px; padding-left: 10px; }
+}
+@media(max-width: 800px) {
+ .ll-workspace { grid-template-columns: 1fr; }
+ .ll-inspector { border-left: 0; border-top: 1px solid var(--rm-rule); }
+ .ll-reading { grid-template-columns: 1fr !important; gap: 16px !important; }
+ .ll-inspector .ll-trace { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+ .ll-map thead th:first-child { width: 35% !important; }
+ .ll-canvas-wrap { height: 410px; }
+}
+@media(max-width: 480px) {
+ .roadmap-shell .ll-heading h2 { font-size: 31px; }
+ .ll-assessment strong { font-size: 32px; }
+ .ll-assessment small { display: block; max-width: 150px; margin-top: 8px; font-size: 11px; color: var(--rm-muted); }
+.ll-assessment span { max-width: 105px; }
+ .ll-heading { gap: 12px !important; }
+ .ll-heading p { font-size: 15px; }
+ .ll-map thead th { font-size: 10px !important; padding: 6px 1px !important; overflow-wrap: anywhere; }
+ .ll-map thead th:first-child { width: 34% !important; padding-left: 8px !important; }
+ .roadmap-shell .ll-map th.ll-loop-name button { font-size: 13px; min-height: 70px; padding: 10px 8px; }
+ .ll-loop-name small { font-size: 10px; }
+ .roadmap-shell .ll-map .ll-node { width: 40px; min-height: 44px; padding: 8px; }
+ .ll-inspector { padding: 20px 12px; }
+ .ll-inspector .ll-trace { display: block; }
+ .ll-tabs { gap: 4px; }
+ .roadmap-shell .ll-tabs button { padding: 9px 10px; font-size: 13px; }
+ .ll-evaluations { padding: 20px 10px; }
+ .ll-graph-tools { padding: 12px; }
+ .ll-canvas-wrap { height: 350px; }
+ .ll-graph-labels { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .ll-canvas-wrap canvas { height: calc(100% - 128px); }
+ .ll-legend { padding: 14px 8px; gap: 8px 12px; }
+ .ll-scope { margin-bottom: 16px !important; }
+}
+@media(prefers-reduced-motion: reduce) { .ll-system * { scroll-behavior: auto !important; transition: none !important; } }
+@media print {
+ .ll-system .ll-enhanced, .ll-toolbar, .ll-legacy { display: none !important; }
+ .ll-system .ll-noscript { display: block !important; }
+ .ll-reading { grid-template-columns: 1fr !important; }
+ .ll-heading { break-after: avoid; }
+ .ll-noscript article { break-inside: avoid; }
+}
+
+.ll-agent-inventory { margin-top: 24px; }
+.ll-agent-inventory summary { min-height: 44px; cursor: pointer; padding-block: 10px; }
+.ll-agent-inventory :is(th,td,a) { overflow-wrap: anywhere; }
+
+.ll-inspector > button:first-child { margin-bottom: 18px; }
+.ll-inspector:focus-visible { outline: 2px solid var(--ll-blue); outline-offset: -2px; }

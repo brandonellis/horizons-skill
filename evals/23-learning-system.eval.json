@@ -1,0 +1,20 @@
+{
+  "id": "learning-system",
+  "skills": ["horizons"],
+  "query": "/horizons Improve the existing synthetic learning artifact in fixtures/learning-system/index.html for leadership decisions and progress. Use learning.json as its complete recorded snapshot. Include a clear 2D learning map, an optional 3D WebGL view, an evidence inspector and an evaluation view using the same data. Show which closure was witnessed and which relies on earlier proof. Keep missing evidence and advisory enforcement explicit. Preserve this local canonical path, all recorded observations and their source evidence. This is presentation only: no new grades, live access, installation or publication.",
+  "files": ["fixtures/learning-system/"],
+  "gap": "A general visualization task may invent agent relationships, treat activity or a changed artifact as closure, hide the difference between carried and current proof, or turn evaluation coverage and advisory verdicts into an unsupported readiness score.",
+  "expected_behavior": [
+    "Loads learning-system guidance and uses the existing canonical artifact with a leadership 2D view first and optional 3D exploration.",
+    "Preserves three declared loops and two recorded closed verdicts while distinguishing one freshly witnessed closure from one using earlier proof.",
+    "Uses signal, transform, changed artifact and later consumption stages, with a source-backed inspector and a specific next proof.",
+    "Keeps the full inventory denominator when filtering and does not invent cross-loop causal edges or live traffic.",
+    "Separates evaluation coverage from verdicts, enforcement and accounting; advisory remains nonbinding.",
+    "Keeps keyboard and native controls, no-JavaScript and print text, and a usable fallback when WebGL is unavailable.",
+    "Reports the local artifact and checks actually performed without presenting synthetic records as live observations."
+  ],
+  "must_not": [
+    "Change source learning.json or evidence/learning-observation.json, issue a new grade, invent dates or widen observed scope.",
+    "Use 3D as the only way to retrieve a loop's evidence, imply geometry encodes a readiness score, or publish the artifact."
+  ]
+}

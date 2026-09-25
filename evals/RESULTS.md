@@ -3,6 +3,33 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-25 · v2.5.0 release verification
+
+Scenario 23 completed from the plain synthetic artifact on the inherited selected
+GPT-6 lead and configured `gpt-5.6-sol` (medium). Both loaded the learning guidance,
+built the 2D map, optional WebGL view, evidence inspector and evaluation matrix,
+and preserved the model and source bytes. All seven expectations were met and
+both prohibited behaviors avoided. The initial lead run used a prebuilt view and
+is a rehearsal, excluded from the two successful clean-fixture executions.
+
+The selected lead also completed scenario 15, labelled single-agent: code C,
+production Incomplete, the Done/acceptance disagreement retained, one assessment
+appended, original baseline and prior assessment unchanged. The 13-file artifact
+verified against the original lock hash. All six expectations were met and all
+three prohibited behaviors avoided.
+
+Maintainer Chrome checks verified desktop/mobile views, filtering and print in
+both generated artifacts. The final shared runtime passed 19 responsive/theme/
+print scenarios, no-JavaScript and forced WebGL-failure checks, plus six phone/
+tablet selection-focus-and-Back cases. Final visual refinements followed the
+behavioral runs; they did not change workflow or model semantics. All 167 helper
+tests passed. `git diff --check` passed; both distribution formats built.
+
+Exact candidate fingerprints, measured durations and limits are recorded in
+`2026-09-25-v2.5.0-results.json`. The inherited lead's exact backend identifier,
+reasoning setting and evaluator token/cost telemetry were unavailable. No live
+probe, paid evaluation, full-panel qualification or hosted artifact claim is made.
+
 ## 2026-09-22 · v2.4.0 release verification
 
 The final runtime candidate passed scenario 22 on configured `gpt-6-astra`

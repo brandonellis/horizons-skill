@@ -1,0 +1,190 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthetic learning record</title><style>.roadmap-shell {
+  --rm-ground: #fafaf7;
+  --rm-panel: #ffffff;
+  --rm-ink: #1c2321;
+  --rm-muted: #56625d;
+  --rm-rule: #ccd2ca;
+  --rm-soft: #eff1ec;
+  --rm-link: #245d94;
+  --rm-focus: #245d94;
+  --rm-warn: #804812;
+  --rm-warn-bg: #f7efe1;
+  --rm-space: 4px;
+  min-height: 100vh;
+  padding: 0 32px 48px;
+  background: var(--rm-ground);
+  color: var(--rm-ink);
+  font: 16px/1.5 Barlow, system-ui, sans-serif;
+  color-scheme: light;
+}
+:root[data-theme="dark"] .roadmap-shell {
+  --rm-ground: #141a18;
+  --rm-panel: #1b2320;
+  --rm-ink: #e8eee9;
+  --rm-muted: #b1bdb4;
+  --rm-rule: #425048;
+  --rm-soft: #222e27;
+  --rm-link: #a2c9f2;
+  --rm-focus: #a2c9f2;
+  --rm-warn: #f3c391;
+  --rm-warn-bg: #332a20;
+  color-scheme: dark;
+}
+.roadmap-shell *, .roadmap-shell *::before, .roadmap-shell *::after { box-sizing: border-box; }
+.roadmap-shell [hidden] { display: none !important; }
+.rm-container { max-width: 1200px; margin: auto; min-width: 0; }
+.roadmap-shell a { color: var(--rm-link); text-underline-offset: 3px; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input { font: inherit; }
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell input[type="search"] {
+  min-height: 44px; border: 1px solid var(--rm-rule); border-radius: 6px;
+  padding: 8px 12px; color: var(--rm-ink); background: var(--rm-panel); max-width: 100%;
+}
+.roadmap-shell button, .roadmap-shell select, .roadmap-shell summary { cursor: pointer; }
+.roadmap-shell button:hover, .roadmap-shell select:hover { border-color: var(--rm-ink); }
+.roadmap-shell button:disabled { cursor: default; color: var(--rm-muted); border-color: var(--rm-rule); background: var(--rm-soft); }
+.roadmap-shell input::placeholder { color: var(--rm-muted); opacity: 1; }
+.roadmap-shell :is(a, button, select, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--rm-focus); outline-offset: 3px;
+}
+.roadmap-shell ::selection { background: var(--rm-ink); color: var(--rm-ground); }
+.roadmap-shell h1, .roadmap-shell h2, .roadmap-shell h3, .roadmap-shell p { margin: 0; }
+.roadmap-shell h1 { font: 700 30px/1.1 "Barlow Condensed", Barlow, sans-serif; letter-spacing: -.01em; }
+.roadmap-shell h2 { font: 600 28px/1.15 "Barlow Condensed", Barlow, sans-serif; text-wrap: balance; }
+.roadmap-shell h3 { font-size: 17px; line-height: 1.3; }
+.roadmap-shell h4 { font-size: 16px; line-height: 1.3; margin: 0; }
+.rm-small { font-size: 13px; font-weight: 400; }
+.roadmap-shell code, .rm-grade, .rm-number { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.rm-mast { display: flex; align-items: center; gap: 32px; min-height: 84px; border-bottom: 1px solid var(--rm-rule); }
+.rm-brand { display: flex; align-items: baseline; gap: 12px; flex: 1; }
+.rm-brand p { color: var(--rm-muted); font-size: 14px; }
+.roadmap-shell .view-tabs { display: flex; gap: 4px; overflow-x: auto; max-width: 100%; border: 0; padding: 0; }
+.roadmap-shell .view-tabs a {
+  color: var(--rm-muted); text-decoration: none; display: inline-flex; align-items: center;
+  min-height: 52px; padding: 12px 16px; white-space: nowrap; border-bottom: 2px solid transparent;
+}
+.roadmap-shell .view-tabs a[aria-selected="true"] { color: var(--rm-ink); border-bottom-color: currentColor; font-weight: 600; }
+.roadmap-shell .view-tabs a:hover { color: var(--rm-ink); background: var(--rm-soft); }
+.rm-context { padding: 24px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-context-top, .rm-section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+.rm-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.rm-control label { font-weight: 600; }
+.rm-source-grid { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-source-grid span { display: block; }
+.rm-source-grid dd { margin: 4px 0 0; }
+.rm-source-grid .rm-status { display: inline-flex; }
+.rm-source-grid code { color: var(--rm-ink); overflow-wrap: anywhere; }
+.rm-status { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--rm-rule); padding: 4px 10px; border-radius: 4px; font-size: 13px; color: var(--rm-muted); }
+.rm-status-warning { background: var(--rm-warn-bg); color: var(--rm-warn); border-color: transparent; }
+.rm-scope-panel, .rm-roadmap-panel, .rm-evidence-panel { padding-top: 28px; }
+.rm-intro { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 24px; }
+.rm-intro p, .rm-description { color: var(--rm-muted); max-width: 72ch; margin-top: 8px; }
+.rm-notice { background: var(--rm-soft); padding: 16px 20px; margin-top: 20px; font-size: 14px; }
+.rm-notice strong { color: var(--rm-ink); }
+.rm-progress-band { display: grid; grid-template-columns: 1fr 1.4fr 1fr; margin-top: 24px; border-block: 1px solid var(--rm-rule); }
+.rm-progress-step { padding: 20px 24px 20px 0; min-width: 0; }
+.rm-progress-step + .rm-progress-step { border-left: 1px solid var(--rm-rule); padding-left: 24px; }
+.rm-progress-step dt { color: var(--rm-muted); font-size: 13px; }
+.rm-progress-step dd { margin: 8px 0 0; font-size: 24px; font-weight: 600; line-height: 1.15; }
+.rm-progress-step .rm-grade { font-size: 30px; }
+.rm-progress-step p { margin-top: 8px; font-size: 13px; color: var(--rm-muted); }
+.rm-measurements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rm-rule); }
+.rm-measurements dt { font-size: 14px; }
+.rm-measurements dd { margin: 4px 0 0; font-size: 15px; font-weight: 600; }
+.rm-measurements p { font-size: 12px; color: var(--rm-muted); margin-top: 4px; }
+.rm-section { margin-top: 32px; }
+.rm-table-region { overflow-x: auto; max-width: 100%; margin-top: 16px; scrollbar-color: var(--rm-muted) var(--rm-soft); }
+.rm-table { border-collapse: collapse; width: 100%; text-align: left; }
+.rm-table caption { text-align: left; font-size: 13px; color: var(--rm-muted); padding-bottom: 12px; }
+.rm-table th, .rm-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--rm-rule); vertical-align: top; }
+.rm-table thead th { color: var(--rm-muted); font-size: 12px; font-weight: 500; }
+.rm-table tbody th { font-weight: 600; min-width: 140px; }
+.rm-table td { font-size: 14px; }
+.rm-table td small { display: block; color: var(--rm-muted); font-size: 12px; margin-top: 4px; }
+.rm-component-table th:nth-child(1) { width: 22%; }
+.rm-component-table th:nth-child(2), .rm-component-table th:nth-child(3) { width: 16%; }
+.rm-component-table th:nth-child(4) { width: 46%; }
+.rm-proof-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 0; list-style: none; margin: 20px 0 0; }
+.rm-proof-list li { border-top: 2px solid var(--rm-ink); padding-top: 16px; }
+.rm-proof-list p { font-size: 14px; color: var(--rm-muted); margin-top: 8px; }
+.rm-proof-list dl { margin: 16px 0 0; font-size: 13px; }
+.rm-proof-list dt { font-weight: 600; }
+.rm-proof-list dd { margin: 4px 0 12px; color: var(--rm-muted); }
+.rm-toolbar { display: flex; align-items: end; flex-wrap: wrap; gap: 16px; margin: 24px 0; }
+.rm-toolbar label { display: grid; gap: 6px; font-size: 13px; }
+.rm-toolbar input[type="search"] { width: 260px; }
+.rm-toolbar .rm-count { margin-left: auto; color: var(--rm-muted); font-size: 13px; align-self: center; }
+.rm-nnl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rm-horizon { min-width: 0; }
+.rm-horizon-header { padding-bottom: 16px; border-bottom: 2px solid var(--rm-ink); }
+.rm-horizon-header p { font-size: 13px; color: var(--rm-muted); margin-top: 6px; }
+.rm-item { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); overflow-wrap: anywhere; }
+.rm-item > summary { list-style: none; display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-weight: 600; }
+.rm-item > summary::-webkit-details-marker { display: none; }
+.rm-item > summary::after { content: "+"; margin-left: auto; flex-shrink: 0; color: var(--rm-muted); font-weight: 400; }
+.rm-item[open] > summary::after { content: "−"; }
+.rm-item .rm-item-preview { color: var(--rm-muted); font-size: 14px; margin: 4px 0 10px; }
+.rm-item-body { font-size: 14px; padding-top: 12px; }
+.rm-item-body p { margin-bottom: 12px; }
+.rm-item-body ul { margin: 12px 0; padding-left: 20px; }
+.rm-item-body li + li { margin-top: 8px; }
+.rm-item-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--rm-muted); }
+.rm-empty { padding: 24px; border: 1px dashed var(--rm-rule); color: var(--rm-muted); }
+.rm-history-record { margin-top: 16px; border-top: 1px solid var(--rm-rule); padding-top: 8px; }
+.rm-history-record > summary { padding: 14px 0; min-height: 48px; font-weight: 600; }
+.rm-history-record > summary span { color: var(--rm-muted); font-size: 14px; font-weight: 400; margin-left: 12px; }
+.rm-history-source { padding: 8px 0 16px; font-size: 13px; color: var(--rm-muted); }
+.rm-history-source code { overflow-wrap: anywhere; font-size: 11px; }
+.rm-archive-frame { width: 100%; min-height: 800px; border: 1px solid var(--rm-rule); background: var(--rm-panel); }
+.rm-print-archive { display: none; }
+.rm-footer { border-top: 1px solid var(--rm-rule); padding-top: 20px; margin-top: 40px; font-size: 12px; color: var(--rm-muted); }
+.rm-footer p + p { margin-top: 6px; }
+.rm-plain-navigation { padding-top: 16px; }
+@media (max-width: 860px) {
+  .rm-mast { gap: 16px; flex-wrap: wrap; padding: 20px 0 0; }
+  .rm-mast .view-tabs { order: 3; width: 100%; }
+  .rm-proof-list { grid-template-columns: 1fr; gap: 16px; }
+  .rm-proof-list li { border-top-width: 1px; }
+  .rm-proof-list dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; }
+  .rm-proof-list dd { margin: 0; }
+  .rm-nnl { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 540px) {
+  .roadmap-shell { padding: 0 20px 32px; }
+  .rm-brand { display: block; }
+  .rm-brand p { margin-top: 4px; }
+  .rm-context { padding: 20px 0; }
+  .rm-control { display: grid; gap: 8px; width: 100%; }
+  .rm-control select { width: 100%; }
+  .rm-progress-band { grid-template-columns: 1fr; }
+  .rm-progress-step, .rm-progress-step + .rm-progress-step { padding: 16px 0; border-left: 0; }
+  .rm-progress-step + .rm-progress-step { border-top: 1px solid var(--rm-rule); }
+  .rm-progress-step dd { font-size: 22px; }
+  .rm-measurements { grid-template-columns: 1fr; gap: 16px; }
+  .rm-source-grid { gap: 12px; }
+  .rm-source-grid > div { width: 100%; }
+  .rm-component-table thead { display: none; }
+  .rm-component-table, .rm-component-table tbody, .rm-component-table tr { display: block; }
+  .rm-component-table tr { padding: 16px 0; border-bottom: 1px solid var(--rm-rule); }
+  .rm-component-table tbody th, .rm-component-table td { display: block; border: 0; padding: 4px 0; min-width: 0; }
+  .rm-component-table td[data-label]::before { content: attr(data-label) ": "; color: var(--rm-muted); }
+  .rm-toolbar label, .rm-toolbar input[type="search"] { width: 100%; }
+  .rm-toolbar .rm-count { margin-left: 0; }
+}
+@media print {
+  .roadmap-shell, :root[data-theme="dark"] .roadmap-shell {
+    --rm-ground: #fff; --rm-panel: #fff; --rm-ink: #111; --rm-muted: #444;
+    --rm-rule: #999; --rm-soft: #f4f4f4; --rm-link: #174976;
+    padding: 0; min-height: 0; color-scheme: light;
+  }
+  .roadmap-shell :is([data-view], [data-assessment-scope], [data-roadmap-format])[hidden] { display: block !important; }
+  .roadmap-shell [data-roadmap-item][hidden] { display: revert !important; }
+  .roadmap-shell :is(.view-tabs, [data-enhance-control], .rm-toolbar, .rm-plain-navigation, .rm-empty, .rm-archive-frame) { display: none !important; }
+  .rm-mast { min-height: 60px; }
+  .rm-scope-panel + .rm-scope-panel, .rm-history-record, .rm-evidence-panel, .rm-roadmap-panel { break-before: page; }
+  .rm-print-archive { display: block; white-space: pre-wrap; font: 11px/1.5 sans-serif; }
+  .roadmap-shell details::details-content { content-visibility: visible; display: block; }
+  .rm-nnl { grid-template-columns: 1fr; }
+  .rm-table-region { overflow: visible; }
+}
+
+.roadmap-shell table{width:100%;border-collapse:collapse}.roadmap-shell td,.roadmap-shell th{padding:16px;text-align:left;border-bottom:1px solid var(--rm-rule)}</style></head><body><main class="roadmap-shell"><div class="rm-container"><h1>Learning evidence</h1><p>Synthetic leadership record · September 25, 2026</p><p>Two of three declared loops have recorded closure evidence. One uses earlier proof.</p><table><caption>Recorded loops</caption><thead><tr><th>Loop</th><th>Verdict</th><th>Proof</th></tr></thead><tbody><tr><th>Release review</th><td>not proved</td><td>unproved</td></tr><tr><th>Account memory</th><td>closed</td><td>carried</td></tr><tr><th>Quality review</th><td>closed</td><td>observed</td></tr></tbody></table><p>Declared evaluation coverage: 3 of 5 agents. Release gate: advisory.</p><p><a href="learning.json">Complete recorded snapshot</a> · <a href="evidence/learning-observation.json">Source observation</a></p></div></main></body></html>

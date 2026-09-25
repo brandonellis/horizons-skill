@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+## 2.5.0 - 2026-09-25
+
+- Add a shared learning-system model and renderer for a leadership 2D map,
+  optional WebGL exploration, evidence inspector and evaluation matrix.
+- Keep observed, earlier, missing and ambiguous evidence distinct across four
+  learning stages; filters preserve the complete discovered denominator.
+- Separate agent inventory, declared coverage, actual model execution, human
+  calibration, verdicts, enforcement and accounting. Retain dated prior grades
+  when a fresh reassessment lacks required proof.
+- Include keyboard/native controls, reduced-motion behavior, no-JavaScript and
+  print records, graphics fallback, a synthetic fixture and behavioral scenario.
+
 ## 2.4.0 - 2026-09-22
 
 - Budget lead and child work together, with explicit task allocations, bounded

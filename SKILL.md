@@ -1,6 +1,6 @@
 ---
 name: horizons
-description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify tickets and proof needed to raise existing grades. Answer roadmap questions directly without creating an artifact.
+description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, source-backed learning-loop and evaluation views, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify tickets and proof needed to raise existing grades. Answer roadmap questions directly without creating an artifact.
 argument-hint: "[create · refresh [<url>] · move · gantt · wsjf [<source>] · grade [<url>] · score [<url>] · priorities · help]"
 ---
 
@@ -35,6 +35,7 @@ this skill does not authorize building, modifying, grading or publishing it.
 | `wsjf [<source>]` | `references/full-workflow.md`, `references/wsjf.md`. Optional, confirmed cost-of-delay ranking, separate from grade opportunities and placement. |
 | `grade [<baseline-url>]` or `score [<baseline-url>]` | `references/full-workflow.md`, `references/report-card.md`, `references/grade-anchors.md`, `references/baseline-ledger.md`, `references/letter-reassessment.md`, `references/executable-grading.md`. Preserve the established method and append an assessment. |
 | `priorities` or “what tickets would raise the grade?” | `references/grade-opportunities.md`. Read the existing assessment, frozen rubric and evidenced ticket mappings. Produce conditional opportunities in the same artifact when modification is requested; a question alone gets the answer in chat. Never issue a new grade. |
+| Learning-loop, agent or evaluation visualization in the artifact | `references/learning-system.md` plus the applicable creation/refresh workflow. Present discovered evidence; optional 3D shares the same model. No implicit runtime access, paid evaluations or new grades. |
 | `help` | Show this table with brief examples and stop. |
 
 `score` means maturity grading, never WSJF. Clarify an ambiguous scoring request.
@@ -106,6 +107,10 @@ For custom/graded artifacts, read `references/artifact-views.md`,
 `references/feature-rollups.md` and the full workflow's selected-mode references.
 Keep Roadmap, Progress and Evidence as views of the same project, with scope and
 dates visible. Preserve the inherited audience, visuals, filters and drill-downs.
+When agents, evaluations or learning loops are discovered and included in the
+requested views, apply `references/learning-system.md`: a leadership learning map,
+evidence inspector and evaluation matrix, with optional accessible 3D exploration
+of the same records. Keep source, runtime and earlier proof distinct.
 
 Use available checks for IDs, links, source coverage, counts, history and models.
 When a browser is available, verify desktop/mobile, keyboard controls, deep links,

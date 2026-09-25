@@ -269,3 +269,13 @@ is not a completed release. Several implementation commits can ship together.
 
 This is a maintainer workflow only. Installing or running the roadmap skill
 does not create commits, tags or releases in the project being assessed.
+
+### Learning and evaluations
+
+Discovered agents and loops can appear as a leadership learning map, a four-stage
+evidence trace and an evaluation matrix. Optional WebGL exploration uses the same
+records and stable positions. Print, no-JavaScript and graphics-failure paths keep
+evidence readable. The shared renderer presents recorded judgments and never
+invents relationships or issues a grade. See
+[learning-system guidance](references/learning-system.md) and the
+[synthetic fixture](evals/fixtures/learning-system/README.md).

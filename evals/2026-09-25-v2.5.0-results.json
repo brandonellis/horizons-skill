@@ -1,0 +1,269 @@
+{
+  "date": "2026-09-25",
+  "version": "2.5.0",
+  "fingerprintMethod": "SHA256(sorted relative path NUL content SHA256 joined by LF) over SKILL.md, references, assets and non-test scripts",
+  "runtimeCandidateSha256": "61355ceee71d91c4d29050b6c1d282f16ed745aaf0c0d8d98c2bf6447585f917",
+  "behaviorCandidateSha256": "dd7a988edc1235bc6dd27e83ede9fadcfa199568eb0193aa28052c73be6b48bb",
+  "runs": [
+    {
+      "scenario": "23-learning-system",
+      "model": "inherited selected GPT-6 lead (exact backend identifier unavailable)",
+      "reasoning": "inherited; not independently exposed",
+      "status": "completed",
+      "elapsedSeconds": 104,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectations": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided"
+      ],
+      "inputWasPlainFixture": true,
+      "sourceHashesPreserved": true,
+      "artifactSha256": "271899da2230008e5f9a302952d8ab174465acdbd0392549db1860fc23bc539c"
+    },
+    {
+      "scenario": "23-learning-system",
+      "model": "gpt-5.6-sol",
+      "reasoning": "medium",
+      "status": "completed",
+      "elapsedSeconds": null,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectations": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided"
+      ],
+      "inputWasPlainFixture": true,
+      "sourceHashesPreserved": true,
+      "artifactSha256": "a798bd9becbfb2aaf09522275efb64a2e9425cd3a69095da4ee7c357090f8b77"
+    },
+    {
+      "scenario": "15-complete-lead-grading",
+      "model": "inherited selected GPT-6 lead (exact backend identifier unavailable)",
+      "reasoning": "inherited; not independently exposed",
+      "status": "completed",
+      "elapsedSeconds": 135,
+      "firstUsefulArtifactSeconds": null,
+      "clarificationRounds": 0,
+      "unsupportedClaims": 0,
+      "scopeRegressions": 0,
+      "historyPreserved": true,
+      "expectations": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "codeGrade": "C",
+      "productionGrade": null,
+      "productionStatus": "incomplete",
+      "method": "explicitly approved single-agent",
+      "originalHistoryLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+      "verdict": {
+        "assessmentId": "assessment-2",
+        "observedAt": "2026-09-11T19:00:00Z",
+        "baselineId": "initial",
+        "contractHash": "72db2b61cda3f22e5b06bd9178256b059cf2149758c3a5d2f15085d9fe2af2db",
+        "cells": [
+          {
+            "id": "code-testing",
+            "component": "invitations",
+            "dimension": "testing",
+            "scope": "code",
+            "mandatory": true,
+            "verifiedTier": "C",
+            "grade": "C",
+            "incomplete": false,
+            "criteria": [
+              {
+                "id": "code-testing-D",
+                "tier": "D",
+                "result": "pass",
+                "test": "Empty invitation value is rejected."
+              },
+              {
+                "id": "code-testing-C",
+                "tier": "C",
+                "result": "pass",
+                "test": "An invitation with a nonempty value and future expiresAt is accepted."
+              },
+              {
+                "id": "code-testing-B",
+                "tier": "B",
+                "result": "fail",
+                "test": "An invitation with a nonempty value and expiresAt in the past is rejected."
+              },
+              {
+                "id": "code-testing-A",
+                "tier": "A",
+                "result": "fail",
+                "test": "A malformed expiresAt is rejected rather than treated as valid."
+              }
+            ],
+            "nextChecks": [
+              {
+                "id": "code-testing-B",
+                "tier": "B",
+                "result": "fail",
+                "test": "An invitation with a nonempty value and expiresAt in the past is rejected."
+              }
+            ]
+          },
+          {
+            "id": "production-testing",
+            "component": "invitations",
+            "dimension": "testing",
+            "scope": "production",
+            "mandatory": true,
+            "verifiedTier": "C",
+            "grade": null,
+            "incomplete": true,
+            "criteria": [
+              {
+                "id": "production-testing-D",
+                "tier": "D",
+                "result": "pass",
+                "test": "Empty invitation value is rejected."
+              },
+              {
+                "id": "production-testing-C",
+                "tier": "C",
+                "result": "pass",
+                "test": "An invitation with a nonempty value and future expiresAt is accepted."
+              },
+              {
+                "id": "production-testing-B",
+                "tier": "B",
+                "result": "unknown",
+                "test": "An invitation with a nonempty value and expiresAt in the past is rejected."
+              },
+              {
+                "id": "production-testing-A",
+                "tier": "A",
+                "result": "unknown",
+                "test": "A malformed expiresAt is rejected rather than treated as valid."
+              }
+            ],
+            "nextChecks": [
+              {
+                "id": "production-testing-B",
+                "tier": "B",
+                "result": "unknown",
+                "test": "An invitation with a nonempty value and expiresAt in the past is rejected."
+              }
+            ]
+          }
+        ],
+        "scopes": {
+          "code": {
+            "status": "assessed",
+            "grade": "C",
+            "limitingCells": [
+              "code-testing"
+            ],
+            "blockers": [
+              "expiry-gap"
+            ],
+            "progress": {
+              "denominator": 1,
+              "resolvedIds": [],
+              "partialIds": [],
+              "openIds": [
+                "expiry-gap"
+              ],
+              "unknownIds": [],
+              "retractedIds": [],
+              "resolvedFraction": 0,
+              "newOpenIds": [],
+              "newRetractedIds": [],
+              "sincePrevious": null
+            },
+            "aPlusCertified": false
+          },
+          "production": {
+            "status": "incomplete",
+            "grade": null,
+            "limitingCells": [
+              "production-testing"
+            ],
+            "blockers": [
+              "expiry-gap"
+            ],
+            "progress": {
+              "denominator": 1,
+              "resolvedIds": [],
+              "partialIds": [],
+              "openIds": [],
+              "unknownIds": [
+                "expiry-gap"
+              ],
+              "retractedIds": [],
+              "resolvedFraction": 0,
+              "newOpenIds": [],
+              "newRetractedIds": [],
+              "sincePrevious": null
+            },
+            "aPlusCertified": false
+          }
+        },
+        "operationalOverall": {
+          "scopes": [
+            "production"
+          ],
+          "grade": null,
+          "aPlusCertified": false
+        }
+      }
+    }
+  ],
+  "tools": [
+    "local filesystem",
+    "Node helpers",
+    "Chrome via Playwright (maintainer follow-up)"
+  ],
+  "budget": {
+    "numericTokenBudget": null,
+    "tokenUsage": null,
+    "cost": null,
+    "delegation": "Two isolated evaluation sessions; selected lead performed a clean-fixture targeted rerun after a prebuilt-fixture rehearsal."
+  },
+  "suppliedReplies": [],
+  "limits": [
+    "Exact inherited lead backend identity and token/cost telemetry were not exposed.",
+    "Initial prebuilt scenario23 execution is recorded as rehearsal, excluded from completion count.",
+    "Behavior runs preceded final visual fixes (phone reveal/Back, header width, graph contrast); final runtime browser checks cover those fixes. No workflow/model change followed.",
+    "Grading scenario is deliberately scoped single-agent; no full-panel, live probes, paid calls or publication qualification."
+  ],
+  "browser": "Parent verified desktop/mobile views, filter and print for both generated artifacts; final shared runtime additionally checked no-JavaScript, forced WebGL failure, light/dark and phone focus/Back."
+}

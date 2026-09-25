@@ -26,6 +26,7 @@ that order, and a grade-only artifact need not fabricate a roadmap.
 - Visual direction: make the decisions easy to see
 - Copy-ready view shell
 - One bounded verification round, when browser tools are available
+- Learning and evaluation evidence
 
 ## Canonical workspace lifecycle
 
@@ -465,3 +466,10 @@ mandatory checks still block replacement/publication under `execution-contract.m
 If artifact
 tools or a browser are unavailable, return the local file and name exactly
 which checks/publishing steps could not run; never claim a hosted result.
+
+## Learning and evaluation evidence
+
+When these systems are in scope, use `learning-system.md` for the shared model,
+2D map, optional WebGL exploration, evaluation matrix and accessible evidence
+trace. Link them to the roadmap through stable IDs. All projections use the same
+dated observations, with historical assessments retained and runtime scope clear.
