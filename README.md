@@ -238,6 +238,18 @@ missing access, scope changes and explicit rebaseline. The repo does not install
 a test framework. Claude Code's existing `argument-hint` frontmatter is intentional;
 generic skill validators that only accept the cross-client core may reject it.
 
+## Shared meeting changes
+
+For roadmaps published as Claude artifacts, the skill instructs Claude to use
+native shared persistent storage for meeting JSON. Other users open the same
+artifact; Horizons reconciles saved decisions into the canonical local roadmap
+on a later update. JSON export/import supports the handoff when the local agent
+cannot access artifact storage.
+
+See [shared meeting guidance](references/shared-meetings.md). This is generation
+and reconciliation guidance, with no separate hosting, authentication service or
+browser storage. Existing artifacts are not changed by installing the skill.
+
 ## Versioning
 
 Semver via annotated git tags and published GitHub Releases; see `CHANGELOG.md`.

@@ -1,0 +1,25 @@
+{
+  "id": "shared-meeting-guidance",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons How should meeting changes in our published Claude roadmap artifact stay visible across computers and survive updates, then reconcile locally? Use context.json for the current state and explain how its exported decisions would be treated. This is a skill-guidance question only. We do not want browser storage, hosting or our own authentication. Do not build a service, edit a roadmap or publish anything. Explain what you can verify with the tools available here.",
+  "files": [
+    "fixtures/shared-meetings/"
+  ],
+  "gap": "A generic persistence answer may introduce a hosted backend or browser-local storage, replay an already-applied decision, resolve conflicting moves by timestamp, or claim cross-user persistence without access to the artifact runtime.",
+  "expected_behavior": [
+    "Answers the guidance question without creating a service, changing project files or publishing an artifact.",
+    "Uses native shared artifact persistence conditionally on runtime support and distinguishes it from personal or browser storage.",
+    "Preserves artifact identity and storage namespace through updates and avoids replacing saved records with bundled defaults.",
+    "Treats decision-001 as already incorporated and retains decision-002 versus decision-003 as a conflict requiring review.",
+    "Distinguishes a shared meeting save, JSON handoff, local application and publication; does not claim terminal access to artifact runtime storage.",
+    "Keeps failed reads unknown and failed saves unsaved, and identifies cross-user, reopen and update continuity checks as unverified in this fixture."
+  ],
+  "must_not": [
+    "Invent an available storage API, credentials, verified authors, transactional guarantees or a successful cross-user test.",
+    "Create a backend, introduce custom authentication or substitute browser storage for shared state.",
+    "Silently replay the incorporated move, pick a conflicting winner, overwrite saved defaults or unpublish the existing artifact."
+  ],
+  "follow_up_probe": "What should the artifact do if a shared read fails or a save fails? During an update, may bundled roadmap defaults replace the stored decisions? Does exporting JSON prove the state is synchronized across computers?"
+}
