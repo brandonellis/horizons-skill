@@ -1,0 +1,140 @@
+{
+  "date": "2026-09-29",
+  "version": "2.8.0",
+  "baseCommit": "17b9330560c6014f67a7f89f7ff3837e2d5188a5",
+  "runtimeFingerprint": "a26a1ba90d8d5925edad0f7a321312197012cb3d298661671d4d6ab8108faa31",
+  "fingerprintMethod": "SHA-256 over sorted packaged relative paths, NUL, bytes, NUL; Claude Code format",
+  "changedScenario": "27-shared-meeting-guidance.eval.json",
+  "runs": [
+    {
+      "role": "assessment-lead",
+      "requestedModel": "inherited selected Codex lead",
+      "exactDeployedModel": null,
+      "reasoning": null,
+      "scenario": "shared-meeting-guidance",
+      "skillLoaded": true,
+      "status": "completed",
+      "expectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "tools": [
+        "local shell reads through functions.exec/exec_command"
+      ],
+      "filesChanged": false,
+      "suppliedReplies": [],
+      "observations": [
+        "Conditional native shared storage with runtime API check; no invented callable API.",
+        "Retained artifact identity, namespace and keys; explicitly forbade bundled defaults overwriting saved records.",
+        "Skipped decision-001; retained decision-002 and decision-003 for review, leaving INV-1 in Next.",
+        "Failed saves retain drafts; failed reads mean unavailable state.",
+        "Distinguished shared saving, JSON handoff, local application and publication.",
+        "Disclosed unavailable live storage, second-user, reopen and update checks.",
+        "Identified incomplete fixture export metadata without inventing it."
+      ]
+    },
+    {
+      "role": "support",
+      "requestedModel": "gpt-5.6-sol",
+      "exactDeployedModel": null,
+      "reasoning": "medium requested",
+      "scenario": "shared-meeting-guidance",
+      "skillLoaded": true,
+      "status": "completed-with-follow-up",
+      "initialExpectedBehavior": [
+        "met",
+        "met",
+        "partial",
+        "met",
+        "partial",
+        "partial"
+      ],
+      "finalExpectedBehavior": [
+        "met",
+        "met",
+        "met",
+        "met",
+        "met",
+        "met"
+      ],
+      "mustNot": [
+        "avoided",
+        "avoided",
+        "avoided"
+      ],
+      "tools": [
+        "local shell file reads"
+      ],
+      "filesChanged": false,
+      "suppliedReplies": [
+        "What should the artifact do if a shared read fails or a save fails? During an update, may bundled roadmap defaults replace the stored decisions? Does exporting JSON prove the state is synchronized across computers?"
+      ],
+      "observations": [
+        "Initial answer selected native shared storage, retained identity/keys, skipped duplicate and preserved conflicting decisions.",
+        "Initial answer disclosed runtime checks unavailable, but omitted explicit read/save failure behavior, defaults overwrite prohibition and export-versus-sync distinction.",
+        "Follow-up probe elicited all omitted safeguards; counted as assisted completion, not a fresh blind pass.",
+        "No candidate instructions were changed to obtain the follow-up response."
+      ]
+    }
+  ],
+  "leadGrading": {
+    "status": "completed",
+    "scenario": "15-complete-lead-grading.eval.json",
+    "requestedModel": "inherited selected Codex lead",
+    "exactDeployedModel": null,
+    "method": "single-agent, explicitly authorized by fixture query",
+    "expectedBehavior": [
+      "met",
+      "met",
+      "met",
+      "met",
+      "met",
+      "met"
+    ],
+    "mustNot": [
+      "avoided",
+      "avoided",
+      "avoided"
+    ],
+    "codeGrade": "C",
+    "productionGrade": null,
+    "productionStatus": "incomplete",
+    "appendedAssessments": 1,
+    "historyLockSha256": "964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0",
+    "verifiedFiles": 13,
+    "historyLockPreservation": "verified",
+    "immutableSourceBytesPreserved": true,
+    "originalBaselineAndPriorAssessmentPreserved": true,
+    "commands": [
+      "node grade-local.mjs",
+      "node <evaluated-skill>/scripts/verify-artifact.mjs publication-manifest.json --history-lock-sha256 964f37dafb4a65e8992753c2c9572392a2bd929684dfbfef95f3116a72cc6cb0"
+    ],
+    "browserChecks": "not run; fixture permits dependency-free Node only",
+    "suppliedReplies": []
+  },
+  "validation": {
+    "automatedTests": {
+      "passed": 189,
+      "failed": 0
+    },
+    "diffCheck": "passed",
+    "privateDataScan": "no matches in 34 candidate files for project identifiers, private paths, known credential shapes"
+  },
+  "limitations": [
+    "Exact deployed model identifiers and aggregate time/token/cost counters unavailable.",
+    "Shared meeting trials tested instruction following using synthetic files, not a generated runtime implementation.",
+    "Live shared saves, second-user access, reopen and update continuity remain unverified.",
+    "The supporting trial required an explicit follow-up probe; omissions remain recorded.",
+    "Earlier team-guidance evaluations and browser checks are preserved in the 2026-09-25 record and were not rerun as new trials.",
+    "Optional Python skill validator could not run because PyYAML is unavailable; repository frontmatter and package tests passed."
+  ]
+}

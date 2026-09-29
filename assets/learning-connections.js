@@ -92,6 +92,19 @@
     d.children[0].append(make("strong", title), make("p", gap));
     d.children[1].append(make("span", "Next action"), make("p", next));
     workFor(kind, id);
+    const teamStart = q("[data-flow-work] [data-team-start]");
+    if (teamStart) {
+      d.children[1].querySelector("span").textContent = "Next team task";
+      d.children[1].querySelector("p").textContent = teamStart.textContent;
+      d.children[1].append(
+        make("a", "Open team instructions", { href: "#" + root.id + "-work" }),
+      );
+    }
+    d.children[0].querySelector("strong").after(
+      make("p", "Recorded proof · " + model.observedOn, {
+        class: "fl-proof-date",
+      }),
+    );
     const first = q(
       "[data-flow-work] .hw-tickets li:not([data-work-status=completed]):not([data-work-status=canceled]) a",
     );
@@ -99,7 +112,7 @@
       const a = first.cloneNode(true);
       a.className = "fl-primary-work";
       d.children[1].append(a);
-    } else
+    } else if (!teamStart)
       d.children[1].append(
         make("a", "See required work", { href: "#" + root.id + "-work" }),
       );

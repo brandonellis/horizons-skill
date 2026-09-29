@@ -1,0 +1,38 @@
+{
+  "observedOn": "2026-09-25",
+  "components": [
+    {
+      "id": "runtime",
+      "name": "Runtime",
+      "status": "assessed",
+      "grade": "B",
+      "observedOn": "2026-09-25",
+      "previous": {
+        "grade": "B",
+        "observedOn": "2026-09-20"
+      },
+      "rationale": "Source checks support the recorded code judgment. Operations are not graded.",
+      "nextProof": "Retain an enforced release decision.",
+      "requirements": [
+        "Join the verdict to the release decision."
+      ],
+      "sourceHref": "evidence/grade-observation.json"
+    },
+    {
+      "id": "storage",
+      "name": "Storage",
+      "status": "incomplete",
+      "grade": null,
+      "previous": {
+        "grade": "B+",
+        "observedOn": "2026-09-20"
+      },
+      "rationale": "Required review breadth was not completed.",
+      "nextProof": "Complete the required storage review.",
+      "requirements": [
+        "Review the remaining isolation paths."
+      ],
+      "sourceHref": "evidence/grade-observation.json"
+    }
+  ]
+}

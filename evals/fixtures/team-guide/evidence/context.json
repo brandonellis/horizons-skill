@@ -1,0 +1,6 @@
+{
+  "statement": "The team reports its staging data is now in production.",
+  "migrationCompletedAt": null,
+  "newRuntimeProof": false,
+  "teamInstructions": "Supplied proposed handoff steps in work.json; no runtime or tracker actions authorized."
+}

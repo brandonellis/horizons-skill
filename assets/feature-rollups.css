@@ -16,3 +16,11 @@
   .rm-feature-rollup-list li { grid-template-columns: 1fr; gap: 6px; }
   .rm-feature-rollup-list span { font-size: 14px; }
 }
+.rm-completed-work { margin-block: 16px; color: var(--rm-muted); }
+.rm-completed-work > summary, .rm-delivery-summary > summary { cursor: pointer; padding-block: 12px; min-height: 44px; font-size: 15px; }
+.rm-completed-work[open] { color: var(--rm-ink); }
+.rm-delivery-summary { border-bottom: 1px solid var(--rm-rule); }
+@media print {
+  .rm-feature-detail details::details-content, .rm-delivery-summary::details-content { display: block !important; content-visibility: visible !important; }
+  .rm-feature-detail details > *, .rm-delivery-summary > * { display: block !important; }
+}

@@ -238,6 +238,18 @@ missing access, scope changes and explicit rebaseline. The repo does not install
 a test framework. Claude Code's existing `argument-hint` frontmatter is intentional;
 generic skill validators that only accept the cross-client core may reject it.
 
+## Shared meeting changes
+
+For roadmaps published as Claude artifacts, the skill instructs Claude to use
+native shared persistent storage for meeting JSON. Other users open the same
+artifact; Horizons reconciles saved decisions into the canonical local roadmap
+on a later update. JSON export/import supports the handoff when the local agent
+cannot access artifact storage.
+
+See [shared meeting guidance](references/shared-meetings.md). This is generation
+and reconciliation guidance, with no separate hosting, authentication service or
+browser storage. Existing artifacts are not changed by installing the skill.
+
 ## Versioning
 
 Semver via annotated git tags and published GitHub Releases; see `CHANGELOG.md`.
@@ -309,3 +321,13 @@ uses the same facts, with explicit playback and named stages.
 
 See the [synthetic action example](evals/fixtures/action-clarity/example.html)
 and [mapping guidance](references/learning-system.md#connect-proof-gaps-to-owned-work).
+
+### Team handoffs and completed work
+
+Optional operating context and team guides give each loop a concrete start,
+proposed role responsibilities, ordered steps, completion evidence and blocker
+route. They preserve original execution provenance when data moves environments.
+Completed ticket detail is collapsed while outstanding proof stays visible.
+Feature evidence puts remaining work before one counted delivery disclosure.
+See the [team-handoff fixture](evals/fixtures/team-guide/README.md) and
+[learning guidance](references/learning-system.md#team-instructions-and-environment-transitions).

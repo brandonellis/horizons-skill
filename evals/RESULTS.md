@@ -3,6 +3,62 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-09-29 · v2.8.0 shared meeting guidance and final release checks
+
+Scenario 27 ran on the inherited selected Codex assessment lead and the requested
+`gpt-5.6-sol` supporting configuration (medium). Both selected native shared
+artifact storage, skipped an already-applied decision, retained conflicting
+moves for review and disclosed missing live runtime access. No project files
+changed. The lead met all six expectations in its first answer. The supporting
+answer omitted explicit read/save failures, defaults-overwrite protection and
+export-versus-sync wording; the recorded follow-up probe elicited those safeguards.
+That is assisted completion, not a fresh blind pass. All three prohibited
+behaviors were avoided; no skill instructions changed during these trials.
+
+The inherited lead completed scenario 15 with code C and production Incomplete.
+It reviewed source and runtime snapshots, executed grading, reconciled Done
+versus acceptance, appended exactly one assessment and updated the canonical
+local artifact. Maintainer verification confirmed all immutable source bytes,
+original baseline and prior assessment unchanged, and verified the 13-file
+manifest against the original lock hash. All six expectations were met and
+three prohibited behaviors avoided.
+
+All 189 repository tests and diff checks passed. Both release packages were
+checksum-verified. The prior team-guidance model and browser evidence remains
+in the September 25 record, including its assisted layout-preservation correction.
+This run does not claim new browser trials of that unchanged implementation.
+
+Exact deployed model identifiers, total elapsed time, tokens and cost were not
+exposed. The generic Python validator lacked PyYAML; repository frontmatter and
+package validation passed. Live cross-user saves, reopening and update continuity
+remain unverified: these are skill-guidance trials, not a hosted runtime test.
+Candidate fingerprint, expected-behavior judgments, follow-up text and grading
+verification are in `2026-09-29-v2.8.0-results.json`.
+
+## 2026-09-25 · v2.8.0 team guidance and quieter completion
+
+Scenario 26 ran on the selected Codex lead and the requested `gpt-5.6-sol`
+supporting configuration (medium). The lead preserved original regions and
+recorded inputs. The first supporting trial retained roadmap content but changed
+its layout, fonts and palette modes, failing the preservation expectation. That
+failure is recorded, not treated as a pass. Explicit region-preservation guidance
+and one bounded correction restored the original regions. The corrected result
+meets all seven expectations and avoids all three prohibited behaviors; it is an
+assisted correction, not a fresh blind trial.
+
+The lead also completed scenario 15 from source review through assessment-2:
+code C, production Incomplete, exactly one appended assessment, preserved
+baseline/history and 13-file original-lock verification. All six expectations
+were met and three prohibited behaviors avoided.
+
+The final shared runtime passed 189 tests and browser checks at 1440, 768, 390
+and 320px, including keyboard/focus, WebGL motion, reduced motion, graphics
+failure, empty inventory, absent handoffs, print and no JavaScript. Final link,
+proof-date, summary and print corrections received maintainer checks. These are
+not represented as full model reruns. Exact requested versus exposed model
+identity, fingerprints, correction history and limitations are recorded in
+`2026-09-25-v2.8.0-results.json`. No new user reply or usage-cap claim applies.
+
 ## 2026-09-25 · v2.7.0 action and tracker clarity
 
 Scenario 25 completed on the inherited selected lead and the explicitly requested

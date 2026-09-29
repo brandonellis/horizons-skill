@@ -122,3 +122,63 @@ test("text and print records retain work mapped only to a handoff or evaluation"
   assert(records.includes("SYN-18"));
   assert(records.includes("SYN-19"));
 });
+
+test("team instructions retain production context without rewriting historic evidence", () => {
+  const w = structuredClone(work);
+  w.operatingContext = {
+    recordedAt: "2026-09-25T22:00:00Z",
+    sourceHref: "evidence/context.json",
+    statement: "The team reports its staging data is now in production.",
+    implication: "Reuse existing evidence before repeating work.",
+    evidenceBoundary:
+      "Origin execution and later production use remain separate.",
+  };
+  w.teamGuides = [
+    {
+      target: { kind: "loop", id: "account_memory" },
+      title: "Complete memory reuse",
+      environment: "Production",
+      ownership: "Suggested reviewer role; not an assignment.",
+      startWith: "Inspect existing memory.",
+      steps: [
+        {
+          role: "Reviewer",
+          instruction:
+            "Check the later output against the recorded correction.",
+        },
+      ],
+      completion: ["A later production read names the exact memory."],
+      blocked: "Assign the missing link.",
+      sourceHref: "evidence/context.json",
+    },
+  ];
+  const before = JSON.stringify(w),
+    h = renderLearningConnections(
+      read("learning.json"),
+      read("topology.json"),
+      { work: w },
+    );
+  assert(
+    h.includes("Origin execution and later production use remain separate."),
+  );
+  assert(h.includes("Check the later output"));
+  assert(h.includes("Complete when"));
+  assert.equal(JSON.stringify(w), before);
+  const bad = structuredClone(w);
+  bad.teamGuides[0].completion = [];
+  assert.throws(() => validateWorkLinks(bad), /Completion evidence/);
+});
+test("Done ticket detail is collapsed while remaining proof stays outside the disclosure", () => {
+  const h = renderWorkLinks(work, { kind: "loop", id: "account_memory" });
+  const completed = h.match(
+    /<details class="hw-completed">[\s\S]*?<\/details>/,
+  )[0];
+  assert(completed.includes("SYN-17"));
+  assert(!completed.includes(" open"));
+  assert(!completed.includes("Retain a current producer"));
+  assert(h.includes("Retain a current producer"));
+  assert(h.includes("Ticket not mapped in this review"));
+  const open = renderWorkLinks(work, { kind: "loop", id: "quality_review" });
+  assert(!open.includes('class="hw-completed"'));
+  assert(open.includes("SYN-18"));
+});

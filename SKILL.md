@@ -31,6 +31,7 @@ this skill does not authorize building, modifying, grading or publishing it.
 | `<artifact-url>` or update | Read that artifact first. Preserve its canonical path/URL, visual contract, evidence and history. Starter artifacts use `references/first-run.md`; other artifacts use `references/full-workflow.md` and its mode-required references. |
 | `refresh` | `references/refresh-summary.md`. Show the evidence delta, then update the same artifact. Starter artifacts use `first-run.md`; assessed or legacy artifacts use `full-workflow.md`. Assessed refresh includes relevant reassessment unless explicitly delivery-only. |
 | `move` or a request to shift items | `references/roadmap-moves.md`. Stage or apply explicit planning decisions between Now, Next and Later. Preview reasons, preserve evidence and dates, and append movement history. |
+| Shared meeting changes, cross-computer saves, or local synchronization | `references/shared-meetings.md`. For Claude artifacts, use native shared persistent storage for meeting JSON and reconcile it through the existing roadmap workflow. No separate service or browser storage. |
 | `gantt` | `references/full-workflow.md`, `references/gantt.md`. Explicit opt-in; preserve sourced dates and the unscheduled shelf. Never choose dates from horizons. |
 | `wsjf [<source>]` | `references/full-workflow.md`, `references/wsjf.md`. Optional, confirmed cost-of-delay ranking, separate from grade opportunities and placement. |
 | `grade [<baseline-url>]` or `score [<baseline-url>]` | `references/full-workflow.md`, `references/report-card.md`, `references/grade-anchors.md`, `references/baseline-ledger.md`, `references/letter-reassessment.md`, `references/executable-grading.md`. Preserve the established method and append an assessment. |
@@ -61,6 +62,9 @@ uses affected-scope reassessment, not an automatic full panel.
   unknown. Never infer ownership, impact, commitments or user approval.
 - An item's source-stated horizon is a commitment or option. Automatic evidence
   refresh cannot move it. User-directed movement is a separate recorded decision.
+- If shared meeting storage is configured, read its pending changes before a
+  refresh or move (`references/shared-meetings.md`). Preserve the artifact identity, storage keys and
+  applied decision IDs. An unavailable store is unknown state, never an empty log.
 - Default to Now / Next / Later without schedule dates. New facts and evidence
   timestamps are not promises. Existing dated timelines retain their dates.
 - Size themes, streams and throughlines to the source material. A small project
@@ -125,8 +129,10 @@ does not block a local artifact; failed mandatory integrity checks do.
 ## Handoff and publication
 
 Report the canonical path, what changed, pending decisions, verification and
-local/hosted status. Proposed moves are unsaved until applied through the update
-workflow; a browser download is a proposal, not a saved roadmap or tracker edit.
+local/hosted status. Distinguish unsaved proposals, decisions saved to the shared
+meeting log, changes applied locally, and published changes. A browser download
+is a proposal, not a saved roadmap or tracker edit. A shared save preserves a
+meeting decision; it does not publish the canonical artifact or edit a tracker.
 
 For grading use Result / Evidence / Verification as specified in the execution
 contract. Include the assessment ID, scope, method, code observations, runtime

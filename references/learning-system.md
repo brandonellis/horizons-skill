@@ -13,6 +13,7 @@ Preserve the current audience, visual contract and canonical hub.
 - Interaction and fallback
 - Connected loops and explicit feedback returns
 - Connect proof gaps to owned work
+- Team instructions and environment transitions
 
 ## Leadership reading order
 
@@ -170,7 +171,12 @@ Include `assets/learning-system.css`, `assets/evidence-clarity.css` and
 `assets/learning-connections.js`; omit the old `learning-system.js` controller.
 The original four-stage renderer remains available for an evidence matrix.
 All new surfaces inherit the host's color tokens and typography. A request to
-clarify loops does not authorize replacing the roadmap, Gantt or brand identity.
+clarify loops does not authorize replacing the roadmap, Gantt or brand identity. For a
+presentation-only refresh, retain the existing roadmap/timeline markup and brand
+style block verbatim when they need no change. Verify those regions before and
+after. Preserving their text while replacing tables with cards is a layout
+change. Do not add a new font family, alternate palette or theme mode unless
+requested; scoped learning and work styles inherit what is already present.
 
 The explicit topology is separate from the immutable learning observation:
 
@@ -238,3 +244,35 @@ On a narrow connected view, focus on one selected producer-to-consumer handoff
 when a full network would collide. Keep every recorded handoff available in the
 named selection list and state that the map is focused. This changes layout, not
 relationship data; preserve the complete records for print and no JavaScript.
+
+## Team instructions and environment transitions
+
+A request for team instructions needs an executable handoff in plain language:
+what to inspect first, who contributes (recorded owner versus suggested role),
+ordered actions, the evidence that completes the item, and the owner/condition
+when blocked. Keep a person's labelling or outcome entry distinct from an
+engineering implementation, a policy decision, and an operating verification.
+Use actual known tool names or UI paths only when sources establish them.
+
+When the team reports moving staging data into production, record that context
+with its source. Carry existing valid evidence forward; inspect the migrated
+records before asking people to repeat work. Retain original execution dates,
+origin environment and migration provenance. Data now stored in production does
+not relabel its historical execution or prove a new production consumer. Dated
+old gaps remain assessment observations until reconciled. An older ticket's
+staging acceptance does not silently become production authorization.
+
+The optional work model supports:
+
+- `operatingContext`: UTC `recordedAt`, safe `sourceHref`, `statement`,
+  `implication`, and `evidenceBoundary`. The connected view shows it beside the
+  dated observation without modifying the learning model.
+- `teamGuides[]`: unique `target: {kind,id}`, `title`, `environment`, `ownership`,
+  `startWith`, ordered `steps: [{role,instruction}]`, nonempty `completion`
+  evidence list, `blocked` action, and safe `sourceHref`. Suggested roles must be
+  labelled as such; never invent assignees or imply instructions were executed.
+
+Completed implementation ticket details are collapsed by default. Their separate
+outstanding acceptance stays visible, as do open tickets and unmapped work.
+Keep native keyboard disclosures, source links, browser-find and complete print
+records. This is a reading preference, not a new work state or a grade change.

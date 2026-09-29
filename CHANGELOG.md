@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+## 2.8.0 - 2026-09-29
+
+- Guide Claude artifacts to persist shared meeting decisions as JSON using native
+  artifact storage, with local reconciliation and stable decision IDs.
+- Preserve stored decisions during artifact updates; document JSON handoff and
+  verification without adding a hosting or authentication service.
+
+- Add source-attributed operating context and team handoff guides with a starting
+  task, proposed roles, ordered steps, completion evidence and blocker route.
+- Preserve original execution provenance and reusable evidence when data moves
+  environments; migration does not manufacture a new runtime witness.
+- Collapse completed implementation detail while retaining open proof, active
+  tickets, prerequisites and unmapped work. Keep complete native/print records.
+- Put remaining feature work before a counted completed-delivery disclosure and
+  use a compact recent-delivery summary on Progress.
+
 ## 2.7.0 - 2026-09-25
 
 - Connect assessment, learning and evaluation gaps to dated tracker work with

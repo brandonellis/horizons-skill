@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "projectId": "meridian-demo",
+  "artifactId": "meeting-roadmap-demo",
+  "storageNamespace": "meridian-demo/decisions",
+  "localRevision": "revision-8",
+  "appliedDecisionIds": ["decision-001"],
+  "items": [{"id":"INV-1","horizon":"Next"}],
+  "exportedDecisions": [
+    {"id":"decision-001","baseRevision":"revision-7","itemId":"INV-1","from":"Later","to":"Next","reason":"Review agreed readiness"},
+    {"id":"decision-002","baseRevision":"revision-8","itemId":"INV-1","from":"Next","to":"Now","reason":"Meeting priority"},
+    {"id":"decision-003","baseRevision":"revision-8","itemId":"INV-1","from":"Next","to":"Later","reason":"Dependency not ready"}
+  ],
+  "availableRuntime": "local files only; no Claude artifact storage or second user"
+}

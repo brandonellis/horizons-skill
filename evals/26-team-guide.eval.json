@@ -1,0 +1,25 @@
+{
+  "id": "team-guide",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Update fixtures/team-guide/index.html using its recorded grades, learning, topology and work JSON. Our internal team previously worked in staging and now that data is in production, as recorded in evidence/context.json. Give the team clear starting actions, roles, ordered steps, completion evidence and blocker instructions. Reuse existing evidence; do not portray migration as a new production learning run. Also reduce Done-ticket clutter: collapse completed implementation detail while keeping outstanding proof, open tickets, prerequisites and unmapped work visible. Preserve the incumbent palette, roadmap/timeline, source files and dated assessments. Presentation and team guidance only: no new grades, runtime actions, tracker writes, installations or publication.",
+  "files": [
+    "fixtures/team-guide/"
+  ],
+  "gap": "A handoff may ask the team to redo valid staging work, treat production storage as new learning proof, invent role assignments, or hide unfinished verification with completed ticket details.",
+  "expected_behavior": [
+    "Preserves original roadmap/timeline, palette and recorded source observations.",
+    "Attributes the production transition to the supplied context and retains original execution environment and dates.",
+    "Provides concrete team starting action, proposed role responsibilities, ordered steps, completion evidence and blocker route.",
+    "Keeps Casey/Riley tracker ownership distinct from proposed roles and the unassigned SYN-19 approval.",
+    "Collapses SYN-17 completed implementation while leaving its missing current-use and repeated-benefit proof visible.",
+    "Leaves SYN-18, its SYN-19 prerequisite and unmapped follow-up visible; creates no ticket or approval.",
+    "Keeps keyboard disclosure, optional 3D, complete no-JavaScript and print records."
+  ],
+  "must_not": [
+    "Rewrite source grades, history, commitments, tracker records or claim fresh production closure from migration.",
+    "Invent people, approvals, ticket IDs, causal edges or completed team work.",
+    "Perform runtime actions, tracker writes, installations or publication."
+  ]
+}

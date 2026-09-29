@@ -4,6 +4,11 @@ Use when the user asks to shift or reprioritize placement, or supplies a browser
 movement proposal. Dragging and Move to are equivalent ways to stage a proposal.
 Planning authorization does not grant permission to update the issue tracker.
 
+When shared meeting storage is configured or requested, also read
+`shared-meetings.md`. For Claude artifacts, use native shared storage
+for meeting JSON visible from other computers. Keep shared saves distinct from local
+application and publication. The download-only flow below remains available.
+
 ## Starter artifacts
 
 The artifact supports drag-and-drop and labelled native select controls. A move
@@ -45,4 +50,5 @@ Test native keyboard selection and drag to the same destination; reason required
 multiple moves; moving back; discard; JSON download; stale proposal rejection;
 deep links after movement; small screens; and persisted history after applying.
 Filters affect display only, never proposal contents or grade denominators.
-Do not label a browser-only preview Saved. The host applies approved proposals.
+Do not label a browser-only preview Saved. Only a confirmed shared-storage write may
+say Saved to shared meeting log; the host still applies decisions locally.
