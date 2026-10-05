@@ -32,7 +32,7 @@ this skill does not authorize building, modifying, grading or publishing it.
 | `refresh` | `references/refresh-summary.md`. Show the evidence delta, then update the same artifact. Starter artifacts use `first-run.md`; assessed or legacy artifacts use `full-workflow.md`. Assessed refresh includes relevant reassessment unless explicitly delivery-only. |
 | `move` or a request to shift items | `references/roadmap-moves.md`. Stage or apply explicit planning decisions between Now, Next and Later. Preview reasons, preserve evidence and dates, and append movement history. |
 | Shared meeting changes, cross-computer saves, or local synchronization | `references/shared-meetings.md`. For Claude artifacts, use native shared persistent storage for meeting JSON and reconcile it through the existing roadmap workflow. No separate service or browser storage. |
-| `gantt` | `references/full-workflow.md`, `references/gantt.md`. Explicit opt-in; preserve sourced dates and the unscheduled shelf. Never choose dates from horizons. |
+| `gantt` | `references/full-workflow.md`, `references/gantt.md`. Explicit opt-in; preserve sourced dates and the unscheduled shelf. Never choose dates from horizons. With no dates, the renderer draws the shelf and says why no chart exists. |
 | `wsjf [<source>]` | `references/full-workflow.md`, `references/wsjf.md`. Optional, confirmed cost-of-delay ranking, separate from grade opportunities and placement. |
 | `grade [<baseline-url>]` or `score [<baseline-url>]` | `references/full-workflow.md`, `references/report-card.md`, `references/grade-anchors.md`, `references/baseline-ledger.md`, `references/letter-reassessment.md`, `references/executable-grading.md`. Preserve the established method and append an assessment. |
 | `priorities` or “what tickets would raise the grade?” | `references/grade-opportunities.md`. Read the existing assessment, frozen rubric and evidenced ticket mappings. Produce conditional opportunities in the same artifact when modification is requested; a question alone gets the answer in chat. Never issue a new grade. |
@@ -110,7 +110,11 @@ For custom/graded artifacts, read `references/artifact-views.md`,
 `references/stakeholder-hierarchy.md`, `references/visual-identity.md`,
 `references/feature-rollups.md` and the full workflow's selected-mode references.
 Keep Roadmap, Progress and Evidence as views of the same project, with scope and
-dates visible. Preserve the inherited audience, visuals, filters and drill-downs.
+dates visible. A Roadmap view always carries its streams × horizons table:
+render it with `scripts/render-roadmap-matrix.mjs` (or mark an established
+matrix `data-roadmap-matrix`), and a requested Gantt with
+`scripts/render-roadmap-timeline.mjs`. Declare both in the manifest's
+`roadmapViews` so verification fails when either is missing. Preserve the inherited audience, visuals, filters and drill-downs.
 Clarifying grades or learning views does not replace approved roadmap/Gantt
 layouts or brand colors. Make incomplete current reviews and dated prior letters
 visually distinct. Show sourced cross-loop handoffs separately from within-loop
@@ -129,7 +133,11 @@ does not block a local artifact; failed mandatory integrity checks do.
 ## Handoff and publication
 
 Report the canonical path, what changed, pending decisions, verification and
-local/hosted status. Distinguish unsaved proposals, decisions saved to the shared
+local/hosted status. Name every requested view that was not drawn and why, using
+the renderers' own counts: `Gantt not drawn: 0 sourced or approved dates, 12
+unscheduled`, or `0 placed · 9 awaiting a planning decision`. Offer the next
+step (supply dates, approve a proposed scenario, decide placement); never let
+a missing view pass silently. Distinguish unsaved proposals, decisions saved to the shared
 meeting log, changes applied locally, and published changes. A browser download
 is a proposal, not a saved roadmap or tracker edit. A shared save preserves a
 meeting decision; it does not publish the canonical artifact or edit a tracker.

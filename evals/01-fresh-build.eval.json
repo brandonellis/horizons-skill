@@ -16,7 +16,8 @@
     "Carries the deliberate out-of-scope list (mobile app, billing rebuild, device firmware) into an explicit out-of-scope section rather than dropping it.",
     "Links MER-118 before MER-119 or states the ordering rule: measure the degradation before building the aggregate layer.",
     "Records a DIRECTION CONTRACT covering audience, brand and source authority so a later run inherits them instead of re-deciding.",
-    "Discloses what the page contains and confirms before any first publish, rather than publishing and handing back a URL."
+    "Discloses what the page contains and confirms before any first publish, rather than publishing and handing back a URL.",
+    "Renders a streams × horizons table of Now / Next / Later with every initiative in exactly one cell, and reports the placed / awaiting-decision count in the handoff."
   ],
   "must_not": [
     "Invent a target date, a quarter boundary, or a delivery timeline for any item.",

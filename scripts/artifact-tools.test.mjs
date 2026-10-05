@@ -223,3 +223,37 @@ test('milestone renderer retains unscheduled commitments and observation labels'
   assert.match(html, /No committed date/); assert.match(html, /Observed January 2/);
   assert.match(html, /not an invented completion date/);
 });
+
+test('declared roadmap views must render: a matrix for Now / Next / Later, a coverage-stated timeline for Gantt', async context => {
+  const data = await fixture(context);
+  const update = async (file, content) => {
+    await writeFile(join(data.root, file), content);
+    data.manifest.files.find(entry => entry.path === file).sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  const page = body => `<html>${body}<script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`;
+  // A grade-only artifact declares no roadmap views and owes none.
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 3);
+  // Legacy manifests: an NNL anchor of status paragraphs is not a roadmap.
+  await update('index.html', page('<section id="roadmap-nnl"><p>Now: telemetry. Next: alerting.</p></section>'));
+  await assert.rejects(verifyArtifact(data.path), /no streams × horizons table/);
+  await update('index.html', page('<section id="roadmap-nnl"><table class="rm-matrix"></table></section>'));
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 3);
+  await update('index.html', page('<section id="roadmap-nnl"><table data-roadmap-matrix></table></section>'));
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 3);
+  // A requested Gantt that silently vanished fails.
+  data.manifest.roadmapViews = ['now-next-later', 'timeline'];
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path), /Requested timeline is missing/);
+  await update('index.html', page('<table class="rm-matrix"></table><div class="rm-gantt-region"></div>'));
+  await assert.rejects(verifyArtifact(data.path), /scheduling coverage/);
+  await update('index.html', page('<table class="rm-matrix"></table><p data-schedule-coverage="committed:0 proposed:0 unscheduled:4">Gantt not drawn</p><div class="rm-gantt-region is-unscheduled-only"></div>'));
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 3);
+  data.manifest.roadmapViews = ['timeline'];
+  await data.save();
+  await update('index.html', page('<section id="roadmap-nnl"><p>Now: telemetry.</p></section><p data-schedule-coverage="committed:0 proposed:0 unscheduled:4">Gantt not drawn</p><div class="rm-gantt-region"></div>'));
+  await assert.rejects(verifyArtifact(data.path), /does not declare/);
+  data.manifest.roadmapViews = ['gantt'];
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path), /roadmapViews must be/);
+});

@@ -15,6 +15,10 @@ export function verifyStarter(html) {
   if (new Set(ids).size !== ids.length) throw new Error('Duplicate artifact anchor');
   for (const [, id] of markup.matchAll(/\shref="#([^"]+)"/g)) if (!ids.includes(id)) throw new Error(`Broken artifact link: ${id}`);
   for (const item of model.items) if (!ids.includes(`detail-${item.id}`)) throw new Error('Missing initiative detail');
+  // A roadmap without its Now / Next / Later table reads as no roadmap at all.
+  if (!/<table\b[^>]*\bclass="hz-overview-table"/.test(markup)) throw new Error('Missing Now / Next / Later overview table');
+  const overview = [...markup.matchAll(/\sdata-overview-item="([^"]+)"/g)].map(match => match[1]);
+  for (const item of model.items) if (overview.filter(id => id === item.id).length !== 1) throw new Error(`Overview table must place ${item.id} exactly once`);
   if (!html.includes(`data-digest="${digest(model)}"`)) throw new Error('Embedded model digest mismatch');
   return { revision: model.revision, items: model.items.length, historyEvents: model.history.length };
 }

@@ -47,6 +47,20 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
     const section = new RegExp(`<(?:section|article)\\b[^>]*\\bdata-assessment-lens=["']${lens.id}["'][^>]*>`);
     if (!section.test(html)) throw new Error(`Standing assessment lens missing from artifact: ${lens.id}`);
   }
+  // Roadmap views must actually render. A Roadmap section made of status
+  // paragraphs, or a requested Gantt that silently vanished, otherwise passes.
+  // `roadmapViews` declares what the artifact carries; an existing #roadmap-nnl
+  // anchor implies the Now / Next / Later view for manifests that predate it.
+  const views = manifest.roadmapViews;
+  if (views !== undefined && (!Array.isArray(views) || new Set(views).size !== views.length || views.some(view => !['now-next-later', 'timeline'].includes(view)))) throw new Error('roadmapViews must be a unique list of "now-next-later" and "timeline"');
+  const hasNnlAnchor = /\bid=["']roadmap-nnl["']/.test(html);
+  if (views && hasNnlAnchor && !views.includes('now-next-later')) throw new Error('Artifact has a Now / Next / Later view (#roadmap-nnl) that roadmapViews does not declare');
+  if ((views ?? (hasNnlAnchor ? ['now-next-later'] : [])).includes('now-next-later')
+    && !/<table\b[^>]*(?:\bclass=["'][^"']*\brm-matrix\b|\bdata-roadmap-matrix\b)/.test(html)) throw new Error('Now / Next / Later view has no streams × horizons table (render it with render-roadmap-matrix.mjs, or mark an established matrix table with data-roadmap-matrix)');
+  if (views?.includes('timeline')) {
+    if (!/\bclass=["'][^"']*\brm-gantt-region\b/.test(html)) throw new Error('Requested timeline is missing (render it with render-roadmap-timeline.mjs; with no dates it renders the unscheduled shelf)');
+    if (!/\bdata-schedule-coverage=["']committed:\d+ proposed:\d+ unscheduled:\d+["']/.test(html)) throw new Error('Timeline must state its scheduling coverage (data-schedule-coverage)');
+  }
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
   // A retraction recorded in the ledger and absent from the page is the
   // failure this state exists to prevent: the register is clean and nobody can

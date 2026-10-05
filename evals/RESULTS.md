@@ -645,3 +645,43 @@ archives build, and package tests extract and exercise the starter workflow.
 This is synthetic local coverage, not live operational proof, a multi-auditor
 qualification, a hosted-publication check or a human usability study. The
 private roadmap and its evidence are excluded from the repository and archives.
+
+## 2026-10-05 · v2.9.0 roadmap views always render
+
+Candidate: `0a6a069` plus the v2.9.0 diff. Changed scenarios 01 and 05 ran by
+hand on `claude-sonnet-5-5` and `claude-opus-5-5` (medium effort), each in a
+fresh headless session opened in a separate copy of the synthetic fixture,
+with the query verbatim and no simulated user replies. Two earlier attempts are
+void and not counted: subagents launched from a maintainer session inherited
+that session's project context, and one roadmapped the maintainer's own
+repository instead of the fixture (a harness defect, not a skill result); two
+Opus runs stopped on an account spend limit before finishing.
+
+- **05, Sonnet and Opus:** all expectations and prohibitions met, including the
+  new line. Both rendered the unscheduled shelf, reported `Gantt not drawn: 0
+  sourced or approved dates, 3 unscheduled`, invented no window, asked for dates
+  or approval of a proposed scenario, and flagged the prior page's unsourced
+  `Q3 2026` window as a conflict (past commitment, delivery unverified if
+  confirmed) without charting it. Opus also reported that the trimmed fixture
+  page has no streams × horizons board, which v2.9.0 now expects. The Sonnet
+  run first declared a nonexistent view in `roadmapViews`; that exposed a
+  verifier gap (a declared list could omit an existing `#roadmap-nnl` view),
+  fixed before release.
+- **01, Opus:** new line met (table rendered and verified, `4 placed · 2
+  awaiting`); no dates or Gantt; undecided items named; MER-118 placed before
+  MER-119; out-of-scope list carried; publication offered, not performed.
+  Next/Later placements chosen from ticket state were disclosed as inferred.
+- **01, Sonnet:** new line met (`0 placed · 5 awaiting`, table verified); no
+  dates or Gantt; questions batched; nothing published. Left every item
+  unplaced because no source states a horizon, and raised the MER-118 → 119
+  order as a question rather than stating it. Out-of-scope list appears only in
+  the handoff; the starter has no out-of-scope section.
+- **Open finding, both models, scenario 01:** every source was classified
+  `record` and confirmed, including the undecided planning notes. Not changed
+  by this release; carried as a defect for the source-authority guidance.
+
+The grading method is unchanged in this release, so no new lead grading run was
+performed; the earlier complete lead grading run remains the recorded evidence.
+All 194 helper tests and `git diff --check` pass. The demo was rebuilt and
+checked headless at 1440px and 390px (no horizontal page overflow). No browser
+keyboard, print or dark-theme checks were run for this release.

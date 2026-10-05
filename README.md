@@ -77,7 +77,7 @@ Record that planning decision and preserve the existing evidence and grades.
 | `refresh` | Evidence delta and same-artifact update; relevant reassessment when already graded |
 | `move` | Reviewed horizon changes with reason and append-only movement history |
 | `priorities` | Tickets and proof that could improve existing grades, separate from business priority |
-| `gantt` | Explicitly requested timeline with sourced dates and an unscheduled shelf |
+| `gantt` | Explicitly requested timeline with sourced dates and an unscheduled shelf; with no dates it states `Gantt not drawn` and why |
 | `wsjf [<source>]` | Optional human-confirmed cost-of-delay ranking |
 | `grade` / `score` | Assessment against the established baseline and rubric, with immutable history |
 | `help` | Workflow explanations; no artifact work |
@@ -195,7 +195,7 @@ being cheaper. See [the execution contract](references/execution-contract.md).
 - `references/outcome-evidence.md` separates customer problems, delivery and measured results.
 - `references/roadmap-moves.md` documents accessible draft moves, review and safe application.
 - `references/grade-opportunities.md` maps tickets and proof to existing grade gates.
-- `scripts/roadmap-model.mjs`, `render-starter.mjs` and `roadmap-pipeline.mjs` validate, render, stage and atomically save starter artifacts.
+- `scripts/roadmap-model.mjs`, `render-starter.mjs` and `roadmap-pipeline.mjs` validate, render, stage and atomically save starter artifacts. The starter always includes a streams × horizons overview table, and its verification refuses one without it.
 - `scripts/grade-opportunities.mjs` derives conditional grade plans without changing assessments.
 - `scripts/package-skill.mjs` builds tested Claude Code and portable archives with checksums.
 - `scripts/summarize-evals.mjs` reports local journey measurements without treating unknowns as passes.

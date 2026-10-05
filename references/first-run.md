@@ -19,7 +19,11 @@ Honor the established project and brief; do not open every connected workspace.
    starter inherits Horizons' documented readiness register; no design interview
    or external asset generation is required for that established default.
 4. Run `node <skill>/scripts/roadmap-pipeline.mjs build <canonical.html> <model.json>`.
-   Report its local path, source gaps and checks. No browser, runtime, issue
+   The starter renders a streams × horizons overview table above the movable
+   lanes, and verification refuses an artifact without it. Report its local
+   path, source gaps, checks and the table's placement count (`5 placed · 2
+   awaiting a planning decision`); when nothing is placed, say so and list the
+   decisions that would place items. No browser, runtime, issue
    creation, grade contract or hosting account is required for this first result.
 
 ## Version 1 model

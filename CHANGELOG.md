@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## 2.9.0 - 2026-10-05
+
+- Render a streams × horizons overview table in every starter roadmap, with a
+  placement count, and refuse a starter artifact without it. An all-unplaced
+  roadmap now says nothing is placed instead of showing three empty horizons.
+- Require the Now / Next / Later matrix in every custom or graded Roadmap view.
+  The publication manifest's new `roadmapViews` declares `now-next-later` and
+  `timeline`; `verify-artifact.mjs` refuses a declared view that did not render,
+  and treats an older manifest's `#roadmap-nnl` anchor as declaring the matrix.
+- Print scheduling coverage beside every timeline and expose
+  `scheduleCoverage()` for the handoff. A Gantt with no sourced or approved
+  dates now renders the unscheduled shelf under a `Gantt not drawn` line
+  instead of refusing to render.
+- Require the handoff to name every requested view that was not drawn, with the
+  renderer's counts and the input that would draw it.
+- Refuse a manifest whose `roadmapViews` omits a Now / Next / Later view the
+  artifact actually carries.
+
 ## 2.8.0 - 2026-09-29
 
 - Guide Claude artifacts to persist shared meeting decisions as JSON using native

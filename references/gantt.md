@@ -4,6 +4,13 @@ Use only when `gantt` is requested. Timeline is a view of the same artifact
 model, not a separately maintained roadmap. An explicitly requested standalone
 export uses that same model revision and links to the canonical artifact.
 
+## Contents
+
+- Preserve an existing chart
+- Date contract
+- Composition
+- Progress and drift
+
 ## Preserve an existing chart
 
 An already-requested Gantt stays part of the artifact on future updates.
@@ -38,6 +45,10 @@ Batch questions about missing windows and conflicting sources, and resolve any
 later ambiguity before adding dates under `execution-contract.md`. An
 unapproved suggestion belongs in the conversation, not on the published chart.
 Show scheduling coverage: `6 committed / 2 proposed / 4 unscheduled`.
+`scripts/render-roadmap-timeline.mjs` prints it beside every chart
+(`data-schedule-coverage`) and `scheduleCoverage(model).handoff` returns the
+matching handoff line. Declare `timeline` in the manifest's `roadmapViews`;
+verification then fails if the chart or its coverage line is missing.
 
 ## Composition
 
@@ -92,3 +103,7 @@ Refresh rechecks sources and reports date changes, expired commitments, missing
 owners and scheduling coverage. It may update observed status after approval,
 but re-dating requires an explicit human decision. If everything is unscheduled,
 ship the honest shelf and a one-line request for dates, not an empty fake chart.
+The timeline renderer does this itself when no window is source-stated or
+approved: it renders each theme's `Dates not set` shelf under a `Gantt not
+drawn` line. Report that line in the handoff; a reader who asked for a Gantt
+must learn why none was drawn and what input would draw one.

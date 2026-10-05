@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { renderRoadmapTimeline, packTimelineTracks } from './render-roadmap-timeline.mjs';
+import { renderRoadmapTimeline, packTimelineTracks, scheduleCoverage } from './render-roadmap-timeline.mjs';
 
 const fixture = () => ({
   months: ['Jan', 'Feb', 'Mar'], quarters: [{ label: 'Q1', months: 3 }],
@@ -101,4 +101,24 @@ test('an all-undated lane has no calendar track or fake starting position', () =
   assert.match(html, /rm-gantt-undated/);
   assert.match(html, /Now priority · dates not set/);
   assert.doesNotMatch(html, /class="rm-gantt-track"|--start:/);
+});
+
+test('every timeline states its scheduling coverage', () => {
+  const model = fixture();
+  model.groups[0].items.push({ ...model.groups[0].items[0], id: 'stated', windowType: 'source-stated', start: 1, duration: 1 }, { ...model.groups[0].items[0], id: 'undated', windowType: 'unscheduled', start: null, duration: null, windowLabel: 'Dates not set' });
+  const html = renderRoadmapTimeline(model);
+  assert.match(html, /data-schedule-coverage="committed:1 proposed:1 unscheduled:1">1 committed \/ 1 proposed \/ 1 unscheduled</);
+  assert.equal(scheduleCoverage(model).handoff, 'Timeline: 1 committed / 1 proposed / 1 unscheduled');
+});
+
+test('an all-undated gantt renders the shelf and says why no chart was drawn', () => {
+  const model = { groups: [{ name: 'Now', items: [{ id: 'delivery', title: 'Reliable delivery', themeId: 't1', themeName: 'Trust', windowType: 'unscheduled', windowLabel: 'Now · dates not set', sourceNote: 'Tracker has no target dates' }] }] };
+  const html = renderRoadmapTimeline(model);
+  assert.match(html, /Gantt not drawn: no source-stated or approved dates yet\. 1 initiative needs a date window/);
+  assert.match(html, /rm-gantt-unscheduled/);
+  assert.match(html, /is-unscheduled-only/);
+  assert.doesNotMatch(html, /class="rm-gantt-bar|--start:/);
+  assert.equal(scheduleCoverage(model).handoff, 'Gantt not drawn: 0 sourced or approved dates, 1 unscheduled');
+  model.groups[0].items[0] = { ...model.groups[0].items[0], windowType: 'scenario', start: 0, duration: 1 };
+  assert.throws(() => renderRoadmapTimeline(model), /months, quarters/);
 });

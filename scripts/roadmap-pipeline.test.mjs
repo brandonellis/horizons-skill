@@ -92,3 +92,19 @@ test('update retains the canonical file access mode',async()=>workspace(async pa
  const m=readEmbeddedModel(await readFile(path,'utf8'));await stageRoadmap(path,{proposal:proposal(m),approval:'user request'});await commitRoadmap(path);
  assert.equal((await stat(path)).mode&0o777,0o640);
 }));
+test('starter always renders a streams × horizons overview table that places every item once',()=>{
+  const m=model(); const html=renderStarter(m);
+  assert.match(html,/<table class="hz-overview-table">/);
+  for (const item of m.items) assert.equal((html.match(new RegExp(`data-overview-item="${item.id}"`,'g'))||[]).length,1);
+  for (const stream of new Set(m.items.map(item=>item.stream))) assert.match(html,new RegExp(`<th scope="row">${stream.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}</th>`));
+  assert.doesNotMatch(html,/<th scope="col">Needs a planning decision<\/th>/);
+  assert.throws(()=>verifyStarter(html.replace(/<div class="hz-overview"[\s\S]*?<\/table><\/div><\/div>/,'')),/overview table/);
+});
+test('all-unplaced roadmap says so instead of showing three silently empty horizons',()=>{
+  const m=model(); for (const item of m.items) item.horizon=null;
+  const html=renderStarter(m);
+  assert.match(html,/<th scope="col">Needs a planning decision<\/th>/);
+  assert.match(html,new RegExp(`data-placement-coverage="placed:0 unplaced:${m.items.length}"`));
+  assert.match(html,/Nothing is placed in Now, Next or Later yet/);
+  assert.equal(verifyStarter(html).items,m.items.length);
+});

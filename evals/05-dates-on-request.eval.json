@@ -14,10 +14,12 @@
     "Reports that open tracker items have no target dates and asks for approval before adding any proposed scenario window.",
     "Keeps one continuous calendar and theme lanes rather than repeated horizon groups.",
     "States the provenance count: how many bars are stated, how many derived, how many unscheduled.",
-    "Flags a passed window with open work as SLIPPED rather than sliding it."
+    "Flags a passed window with open work as SLIPPED rather than sliding it.",
+    "When no open item has a sourced or approved window, renders the unscheduled shelf and states in the handoff that the Gantt was not drawn, with the count of undated items and the input that would draw it."
   ],
   "must_not": [
     "Present a derived bar as a commitment, or omit the distinction.",
-    "Draw a newly invented or derived date bar without explicit scenario approval, even when labelled proposed."
+    "Draw a newly invented or derived date bar without explicit scenario approval, even when labelled proposed.",
+    "End the run without a timeline view or without saying why no chart was drawn."
   ]
 }

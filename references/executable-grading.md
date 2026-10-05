@@ -145,7 +145,10 @@ and ledger checks still apply, and unavailable checks must be disclosed.
 Project artifact verification runs in the canonical workspace by default, using
 a private `publication-manifest.json` with `schemaVersion: 1`, `visibility:
 private`, `assessmentId`, `audience`, `artifactFile`, `ledgerFile`, `historyLockFile`
-and an explicit `files` array of relative `path` + SHA-256. Include linked archives
+and an explicit `files` array of relative `path` + SHA-256. Add `roadmapViews`
+(`now-next-later`, `timeline`) for each Roadmap format the artifact carries; a
+grade-only artifact omits it. An older manifest with a `#roadmap-nnl` anchor is
+checked as `now-next-later`. Include linked archives
 and evidence files needed for the private artifact. Do not include the publication
 manifest in its own file list. Embed the same ledger in a JSON script with ID
 `roadmap-history`, escaping `<` as `\u003c`.

@@ -12,8 +12,24 @@ export function packTimelineTracks(items) {
   return tracks;
 }
 
+// Scheduling coverage, stated beside every timeline and in the handoff:
+// source-stated windows are commitments, approved scenarios are proposals.
+export function scheduleCoverage(model) {
+  const items = (model.groups || []).flatMap(group => group.items || []);
+  const count = type => items.filter(item => item.windowType === type).length;
+  const committed = count('source-stated'), proposed = count('scenario'), unscheduled = count('unscheduled');
+  const text = `${committed} committed / ${proposed} proposed / ${unscheduled} unscheduled`;
+  return { committed, proposed, unscheduled, text, drawn: committed + proposed > 0,
+    handoff: committed + proposed ? `Timeline: ${text}` : `Gantt not drawn: 0 sourced or approved dates, ${unscheduled} unscheduled` };
+}
+
 export function renderRoadmapTimeline(model) {
-  if (!model.months?.length || !model.quarters?.length || !model.groups?.length) throw new Error('Timeline needs months, quarters and groups');
+  if (!model.groups?.length) throw new Error('Timeline needs months, quarters and groups');
+  const coverage = scheduleCoverage(model);
+  // With no sourced or approved window there is nothing to place on a calendar:
+  // render the honest unscheduled shelf instead of an empty or invented chart.
+  if (!coverage.drawn) model = { ...model, months: model.months?.length ? model.months : ['Dates not set'], quarters: model.quarters?.length ? model.quarters : [{ label: 'No dated windows', months: model.months?.length || 1 }] };
+  if (!model.months?.length || !model.quarters?.length) throw new Error('Timeline needs months, quarters and groups');
   if (model.quarters.some(quarter => !Number.isInteger(quarter.months) || quarter.months <= 0) || model.quarters.reduce((total, quarter) => total + quarter.months, 0) !== model.months.length) throw new Error('Quarter spans must cover the calendar');
   const ids = new Set();
   const themes = new Map();
@@ -55,5 +71,6 @@ export function renderRoadmapTimeline(model) {
     const shelf = undated.length ? `<section class="rm-gantt-undated" data-roadmap-track aria-label="${escapeHtml(theme.name)}: dates not set"><p>Dates not set</p><div class="rm-gantt-undated-items">${undated.map(renderItem).join('')}</div></section>` : '';
     return `<section class="rm-gantt-lane rm-theme-${theme.id}" data-roadmap-lane="${theme.id}" aria-labelledby="gantt-lane-${theme.id}"><header class="rm-gantt-lane-label"><div><h3 id="gantt-lane-${theme.id}"><button type="button" data-roadmap-theme-choice="${theme.id}" data-theme-label="${escapeHtml(theme.name)}" aria-pressed="false" data-enhance-control hidden>${escapeHtml(theme.name)}</button><span data-theme-filter-fallback>${escapeHtml(theme.name)}</span></h3><p data-roadmap-lane-count>${theme.items.length} initiatives</p></div></header><div class="rm-gantt-lane-body">${tracks}${shelf}</div></section>`;
   }).join('');
-  return `<div class="rm-gantt-region" role="region" aria-label="${escapeHtml(model.label || 'Roadmap timeline by theme; scroll to explore')}" tabindex="0" data-roadmap-list><div class="rm-gantt rm-gantt-theme-lanes" style="--month-count:${model.months.length}"><div class="rm-gantt-axis"><strong>Theme</strong><div class="rm-gantt-calendar">${model.quarters.map(quarter => `<span class="rm-quarter" style="grid-column:span ${quarter.months}">${escapeHtml(quarter.label)}</span>`).join('')}${model.months.map(month => `<span>${escapeHtml(month)}</span>`).join('')}</div></div>${lanes}</div><p data-filter-empty hidden>No matching roadmap items. Clear the filters to show the timeline.</p></div>`;
+  const coverageLine = `<p class="rm-gantt-coverage" data-schedule-coverage="committed:${coverage.committed} proposed:${coverage.proposed} unscheduled:${coverage.unscheduled}">${coverage.drawn ? escapeHtml(coverage.text) : `Gantt not drawn: no source-stated or approved dates yet. ${coverage.unscheduled} ${coverage.unscheduled === 1 ? 'initiative needs' : 'initiatives need'} a date window before it can be placed.`}</p>`;
+  return `${coverageLine}<div class="rm-gantt-region${coverage.drawn ? '' : ' is-unscheduled-only'}" role="region" aria-label="${escapeHtml(model.label || 'Roadmap timeline by theme; scroll to explore')}" tabindex="0" data-roadmap-list><div class="rm-gantt rm-gantt-theme-lanes" style="--month-count:${model.months.length}"><div class="rm-gantt-axis"><strong>Theme</strong><div class="rm-gantt-calendar">${model.quarters.map(quarter => `<span class="rm-quarter" style="grid-column:span ${quarter.months}">${escapeHtml(quarter.label)}</span>`).join('')}${model.months.map(month => `<span>${escapeHtml(month)}</span>`).join('')}</div></div>${lanes}</div><p data-filter-empty hidden>No matching roadmap items. Clear the filters to show the timeline.</p></div>`;
 }
