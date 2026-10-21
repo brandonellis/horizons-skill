@@ -2,12 +2,17 @@
 
 ## Unreleased
 
+## 2.10.0 - 2026-10-21
+
 - Install as a Claude Code plugin: `claude plugin marketplace add
   brandonellis/horizons-skill`, then `claude plugin install horizons@horizons`.
   The repo is its own one-plugin marketplace and keeps its layout, so a
   personal-skill checkout at `~/.claude/skills/horizons` still works and now
   loads in place as `horizons@skills-dir`. A test keeps the plugin version
   equal to the newest released changelog version.
+- Attach the portable and Claude Code archives to the release again. v2.9.0
+  shipped without them, which broke the README's latest-release download; the
+  release checklist now builds and uploads them.
 
 ## 2.9.0 - 2026-10-05
 

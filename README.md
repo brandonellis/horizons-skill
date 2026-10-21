@@ -286,9 +286,14 @@ is not a completed release. Several implementation commits can ship together.
    `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
 5. Push the intended branch and tag without force, preferably atomically:
    `git push --atomic origin main refs/tags/vX.Y.Z`.
-6. Publish the GitHub Release for that tag with the version's changelog notes:
-   `gh release create vX.Y.Z --verify-tag --title "vX.Y.Z" --notes-file <notes-file>`.
-   Normal stable releases must not remain drafts or prereleases.
+6. Build both archives from the release commit with
+   `node scripts/package-skill.mjs <dir> portable` and
+   `node scripts/package-skill.mjs <dir> claude-code`, then publish the GitHub
+   Release for that tag with the version's changelog notes and all four files:
+   `gh release create vX.Y.Z <dir>/horizons-*.tar.gz* --verify-tag --title "vX.Y.Z" --notes-file <notes-file>`.
+   **Packages and local demonstration** links to the latest release, so a release
+   without the archives breaks that download. Normal stable releases must not
+   remain drafts or prereleases.
 7. Verify the remote tag's peeled commit matches the intended release commit,
    and the published GitHub Release points to that tag. Report the released
    version; if publication fails, state the incomplete step rather than claiming
