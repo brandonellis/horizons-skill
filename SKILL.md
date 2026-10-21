@@ -60,6 +60,9 @@ uses affected-scope reassessment, not an automatic full panel.
   source-authority conflicts; inferred source tiers stay labelled provisional.
   For an authorized draft, unresolved nonblocking detail may remain explicitly
   unknown. Never infer ownership, impact, commitments or user approval.
+- Check architecture views for staleness before using them as evidence, on
+  every build and refresh (`references/full-workflow.md` Phase 1). Report a stale
+  view with each contradicted claim cited and offer the redraw as a separate task.
 - An item's source-stated horizon is a commitment or option. Automatic evidence
   refresh cannot move it. User-directed movement is a separate recorded decision.
 - If shared meeting storage is configured, read its pending changes before a

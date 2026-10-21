@@ -3,6 +3,22 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
+## 2026-10-21 · Unreleased architecture-view staleness check
+
+Scenario 28 ran headless (`claude -p`, fixture copy as a fresh one-commit repo,
+read-only tools) on `claude-sonnet-5-5` and `claude-opus-5-5`, with the skill
+invoked by name. First pass: both read the view, the three deploy files and the
+changelog, called the view stale and cited every contradicted claim, and changed
+no files. Neither offered the redraw, so expectation 4 failed on both. The
+guidance then gained a `SKILL.md` pointer and an explicit "end the report by
+offering the redraw" clause. Second pass: both met all four expectations and
+avoided both prohibited behaviors; each also noted that a one-commit history
+cannot date the view and used the stated date instead. Both traced runs read
+`references/full-workflow.md`. Cost: $0.23 (Sonnet) and $0.49 (Opus).
+
+Not run: the assessment-lead grading run the release checklist requires, and a
+no-skill baseline for this scenario.
+
 ## 2026-09-29 · v2.8.0 shared meeting guidance and final release checks
 
 Scenario 27 ran on the inherited selected Codex assessment lead and the requested

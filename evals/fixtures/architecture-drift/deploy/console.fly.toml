@@ -1,0 +1,7 @@
+# moved from Heroku 2026-08-14 (MER-188)
+app = "meridian-console"
+primary_region = "yyz"
+
+[http_service]
+  internal_port = 8080
+  force_https = true

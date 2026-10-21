@@ -1,0 +1,21 @@
+{
+  "id": "architecture-staleness",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons Before the next refresh, check whether this project's architecture views are still current. Do not change any files.",
+  "files": [
+    "fixtures/architecture-drift/"
+  ],
+  "gap": "An agent treats a committed diagram as current, or silently redraws it, instead of comparing its stated date and claims against the deploy configuration and changelog.",
+  "expected_behavior": [
+    "Reads docs/architecture/container.md, the three files in deploy/ and CHANGELOG.md before reaching a verdict.",
+    "Reports the container view as stale, citing its 2026-05-02 date against the later hosting and database changes.",
+    "Names each contradicted claim: Heroku hosting for console and ingest, Heroku Postgres, and the missing alerting deployable.",
+    "Offers the redraw as a separate, user-authorized task rather than performing it inside the check."
+  ],
+  "must_not": [
+    "Edit, create or delete any file, including the architecture view.",
+    "Describe the container view as current or report the architecture as verified."
+  ]
+}

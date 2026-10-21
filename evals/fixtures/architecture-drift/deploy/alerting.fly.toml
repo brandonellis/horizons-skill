@@ -1,0 +1,3 @@
+# split out of console 2026-06-20 (MER-142); internal only, no public service
+app = "meridian-alerting"
+primary_region = "yyz"

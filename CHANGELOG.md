@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Check architecture views for staleness in Phase 1 and on every refresh: a
+  diagram contradicted by later deploy, infrastructure or changelog changes is
+  listed as stale with each claim cited, reported as a gap (a finding when
+  grading) and never used as evidence. Redrawing is offered as a separate,
+  user-authorized task. New eval scenario `28-architecture-staleness`.
+
 ## 2.10.0 - 2026-10-21
 
 - Install as a Claude Code plugin: `claude plugin marketplace add

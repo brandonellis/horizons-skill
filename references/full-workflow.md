@@ -159,7 +159,8 @@ and changes to a criterion's verification, not only the original finding cohort.
 Ticket closure triggers verification, never a pass or automatic letter uplift.
 Keep unchecked results dated. A draft cannot issue deterministic letters, but
 does not suspend an established qualitative method. An explicit delivery-only
-refresh skips reassessment.
+refresh skips reassessment. Every refresh re-runs Phase 1's architecture-view
+freshness check and reports a view that went stale since the last run.
 
 ## The dates rule (decided, do not re-litigate per run)
 
@@ -302,6 +303,15 @@ the whole-run allocation; parallelism alone does not justify spawning agents.
 1. **Repo docs**: `CLAUDE.md`, `AGENTS.md`, `README*`, `docs/**`, any
    `*roadmap*`, `*strategy*`, `*vision*`, `*plan*`, `*priorities*`, `PROGRESS`,
    `DECISIONS`, ADR files (case-insensitive, exclude node_modules/vendor).
+   **Architecture views** (C4, container, network or deployment diagrams, usually
+   under `docs/architecture/`) are a source with their own freshness check. Compare
+   each view's last change (its stated date or `git log -1`) and its claims against
+   what changed since in deploy configuration, infrastructure code and the
+   changelog. A view contradicted by later changes is **stale**: list it in the
+   source inventory with each contradicted claim cited, report it as a gap (a
+   finding when grading), and never use it as evidence for the claims it gets
+   wrong. Redrawing edits the project's own files: end the report by offering the
+   redraw as a separate task, and do it only when the user authorizes it.
 2. **Issue tracker** — detect what this project actually uses:
    - Linear MCP tools available? CLAUDE.md often carries the team/status/label ids.
    - `gh` CLI + a GitHub remote → issues, milestones, labels, recent PRs.
