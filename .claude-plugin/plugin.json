@@ -1,0 +1,16 @@
+{
+  "name": "horizons",
+  "version": "2.9.0",
+  "description": "Build and maintain evidence-backed roadmap artifacts from project sources.",
+  "author": {
+    "name": "Brandon Ellis"
+  },
+  "homepage": "https://github.com/brandonellis/horizons-skill",
+  "repository": "https://github.com/brandonellis/horizons-skill",
+  "keywords": [
+    "roadmap",
+    "planning",
+    "now-next-later",
+    "assessment"
+  ]
+}

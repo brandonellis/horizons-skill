@@ -21,7 +21,21 @@ address the next grade gate. Draft moves do not change the shared demo.
 
 ## Get your first roadmap
 
-For Claude Code:
+For Claude Code, install the plugin:
+
+```sh
+claude plugin marketplace add brandonellis/horizons-skill
+claude plugin install horizons@horizons
+```
+
+`claude plugin update horizons@horizons` moves to the newest release. The
+command is `/horizons:horizons`, because Claude Code names plugin skills
+`<plugin>:<skill>`.
+
+To change the skill while using it, clone it as a personal skill instead. The
+checkout loads in place as `horizons@skills-dir`, so edits apply without a
+reinstall, and the command stays `/horizons`. Use one install or the other: an
+installed marketplace copy shadows the checkout, and your edits stop loading.
 
 ```sh
 git clone https://github.com/brandonellis/horizons-skill.git ~/.claude/skills/horizons
@@ -267,7 +281,8 @@ is not a completed release. Several implementation commits can ship together.
    [lead-model grading evaluation](evals/README.md#release-model-coverage),
    recording outcomes and limitations before release.
 4. Move the shipped `Unreleased` entries into a dated version section in
-   `CHANGELOG.md`. Commit the release changes and annotate that commit with
+   `CHANGELOG.md`, and set the same version in `.claude-plugin/plugin.json`;
+   `plugin-manifest.test.mjs` fails until both agree. Commit the release changes and annotate that commit with
    `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
 5. Push the intended branch and tag without force, preferably atomically:
    `git push --atomic origin main refs/tags/vX.Y.Z`.

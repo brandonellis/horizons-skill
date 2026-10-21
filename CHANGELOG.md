@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Install as a Claude Code plugin: `claude plugin marketplace add
+  brandonellis/horizons-skill`, then `claude plugin install horizons@horizons`.
+  The repo is its own one-plugin marketplace and keeps its layout, so a
+  personal-skill checkout at `~/.claude/skills/horizons` still works and now
+  loads in place as `horizons@skills-dir`. A test keeps the plugin version
+  equal to the newest released changelog version.
+
 ## 2.9.0 - 2026-10-05
 
 - Render a streams × horizons overview table in every starter roadmap, with a

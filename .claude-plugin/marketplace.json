@@ -1,0 +1,14 @@
+{
+  "name": "horizons",
+  "description": "The Horizons roadmap builder as a Claude Code plugin.",
+  "owner": {
+    "name": "Brandon Ellis"
+  },
+  "plugins": [
+    {
+      "name": "horizons",
+      "source": "./",
+      "description": "Build and maintain evidence-backed roadmap artifacts from project sources."
+    }
+  ]
+}
