@@ -2,11 +2,27 @@
 
 ## Unreleased
 
+## 2.11.0 - 2026-10-21
+
 - Check architecture views for staleness in Phase 1 and on every refresh: a
   diagram contradicted by later deploy, infrastructure or changelog changes is
   listed as stale with each claim cited, reported as a gap (a finding when
   grading) and never used as evidence. Redrawing is offered as a separate,
   user-authorized task. New eval scenario `28-architecture-staleness`.
+- Let a page pin its ledger by hash (`roadmap-history-ref`: ledger file,
+  SHA-256, current assessment) instead of re-embedding the whole history on
+  every run; `verify-artifact.mjs` checks the pin, refuses a page that both
+  embeds and pins, and reports `pageBytes`. A long-lived hub had grown to 5.4 MB,
+  most of it re-embedded history.
+- Per-initiative "Back to roadmap" links render as a plain block, not a `<nav>`
+  landmark. One per initiative had filled a screen reader's landmark list with
+  two dozen identical navigations.
+- Writing floor rule 4: no rebuttal cadence ("X. No Y."). A page audit counted
+  70 such constructions on one hub.
+- Grading guidance: the auditors' model family is part of the instrument (moves
+  under a new model are classed `instrument`); auditors finish minimum coverage
+  in the first pass and confirm unchanged files with `git diff --stat`;
+  present-load numbers come from the latest dated measurement in the artifact.
 
 ## 2.10.0 - 2026-10-21
 

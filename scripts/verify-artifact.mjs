@@ -37,8 +37,16 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
   if (manifest.assessmentId !== ledger.currentAssessmentId) throw new Error('Manifest and ledger disagree on current assessment');
   if (!ledger.assessments.some(assessment => assessment.id === manifest.assessmentId)) throw new Error('Current assessment is missing from history');
   const html = await read(manifest.artifactFile);
+  // The ledger grows with every assessment, so a page may pin it by hash
+  // (roadmap-history-ref) instead of re-embedding the whole history each run.
   const embedded = html.match(/<script\b(?=[^>]*\bid="roadmap-history")(?=[^>]*\btype="application\/json")[^>]*>([\s\S]*?)<\/script>/);
-  if (!embedded || canonical(JSON.parse(embedded[1])) !== canonical(ledger)) throw new Error('Visible artifact and saved ledger are different revisions');
+  const reference = html.match(/<script\b(?=[^>]*\bid="roadmap-history-ref")(?=[^>]*\btype="application\/json")[^>]*>([\s\S]*?)<\/script>/);
+  if (embedded && reference) throw new Error('Embed the ledger or reference it, not both');
+  if (reference) {
+    const ref = JSON.parse(reference[1]);
+    const ledgerSha256 = createHash('sha256').update(await readFile(await safeFile(root, manifest.ledgerFile))).digest('hex');
+    if (ref.ledgerFile !== manifest.ledgerFile || ref.sha256 !== ledgerSha256 || ref.assessmentId !== ledger.currentAssessmentId) throw new Error('Visible artifact and saved ledger are different revisions');
+  } else if (!embedded || canonical(JSON.parse(embedded[1])) !== canonical(ledger)) throw new Error('Visible artifact and saved ledger are different revisions');
   const lenses = ledger.assessmentLenses ?? [];
   if (!Array.isArray(lenses) || new Set(lenses.map(lens => lens.id)).size !== lenses.length) throw new Error('Standing assessment lenses need unique IDs');
   for (const lens of lenses) {
@@ -70,7 +78,7 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
   const current = ledger.assessments.find(assessment => assessment.id === manifest.assessmentId);
   const retracted = (current.findings ?? current.findingStates ?? []).filter(finding => finding.status === 'retracted');
   if (retracted.length && !/\bdata-panel-error-rate=["'][^"']+["']/.test(html)) throw new Error(`Current assessment retracts ${retracted.map(finding => finding.id).join(', ')} but the artifact prints no panel error rate (add data-panel-error-rate="<retracted> of <first seen on previous>" where the measurement band shows it)`);
-  return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256,
+  return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256, pageBytes: Buffer.byteLength(html),
     historyLockPreservation: expectedHistoryLockSha256 === undefined ? 'not-checked' : 'verified' };
 }
 

@@ -47,7 +47,7 @@ export function renderDeliveryProgress(delivery) {
 }
 
 export function renderRoadmapReturn() {
-  return '<nav class="rm-detail-navigation" aria-label="Return from initiative details"><a href="#roadmap-nnl" data-roadmap-return>Back to roadmap</a></nav>';
+  return '<div class="rm-detail-navigation"><a href="#roadmap-nnl" data-roadmap-return>Back to roadmap</a></div>';
 }
 
 export function renderOutcomeStory(story) {

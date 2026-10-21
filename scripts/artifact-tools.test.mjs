@@ -257,3 +257,24 @@ test('declared roadmap views must render: a matrix for Now / Next / Later, a cov
   await data.save();
   await assert.rejects(verifyArtifact(data.path), /roadmapViews must be/);
 });
+
+test('a page may pin the ledger by hash instead of embedding it, and a stale pin fails', async context => {
+  const data = await fixture(context);
+  const sha = createHash('sha256').update(data.files['ledger.json']).digest('hex');
+  const write = async html => {
+    await writeFile(join(data.root, 'index.html'), html);
+    data.manifest.files.find(entry => entry.path === 'index.html').sha256 = createHash('sha256').update(html).digest('hex');
+    await data.save();
+  };
+  const ref = value => `<script type="application/json" id="roadmap-history-ref">${JSON.stringify(value)}</script>`;
+  await write(`<html>${ref({ ledgerFile: 'ledger.json', sha256: sha, assessmentId: 'first' })}</html>`);
+  const result = await verifyArtifact(data.path);
+  assert.equal(result.verifiedFiles, 3);
+  assert.ok(result.pageBytes > 0);
+  await write(`<html>${ref({ ledgerFile: 'ledger.json', sha256: '0'.repeat(64), assessmentId: 'first' })}</html>`);
+  await assert.rejects(verifyArtifact(data.path), /different revisions/);
+  await write(`<html>${ref({ ledgerFile: 'ledger.json', sha256: sha, assessmentId: 'older' })}</html>`);
+  await assert.rejects(verifyArtifact(data.path), /different revisions/);
+  await write(`<html>${ref({ ledgerFile: 'ledger.json', sha256: sha, assessmentId: 'first' })}<script type="application/json" id="roadmap-history">${data.files['ledger.json']}</script></html>`);
+  await assert.rejects(verifyArtifact(data.path), /not both/);
+});

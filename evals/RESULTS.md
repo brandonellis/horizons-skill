@@ -3,7 +3,26 @@
 One section per run. A run is a date, a model, a scenario and what happened —
 never a summary that outlives the evidence.
 
-## 2026-10-21 · Unreleased architecture-view staleness check
+## 2026-10-21 · v2.11.0 lead grading run and page audit
+
+A complete assessed refresh ran on the intended lead model (`claude-opus-5-5`)
+against a real long-lived hub: source pins frozen, three separate prior-finding
+verifiers, ten blind auditors (eight components, two lenses), two outliers sent
+back and revised down on evidence, five auditors returned to finish coverage, the
+established qualitative method's recorder accepted the panel (method hash
+unchanged), the assessment was appended (history verdict true), and
+`verify-artifact.mjs --history-lock-sha256` reported preservation `verified`.
+Browser QA ran at 1440 and 390 with no console errors. Findings that shaped this
+release: the auditor model changed from earlier cards, so every letter move was
+an instrument move; five of ten first passes did not cover their minimum list;
+the lead supplied a stale R0 from memory and had to correct it mid-run; an
+`/impeccable audit` of the page scored 14/20 and traced landmark noise, page
+weight and copy cadence to this skill. Scenario 28 results are recorded below.
+
+Not run for this release: a separate eval for the writing-floor rule 4 and the
+ledger pin (both covered by unit tests only), and a second model's grading run.
+
+## 2026-10-21 · Architecture-view staleness check
 
 Scenario 28 ran headless (`claude -p`, fixture copy as a fresh one-commit repo,
 read-only tools) on `claude-sonnet-5-5` and `claude-opus-5-5`, with the skill

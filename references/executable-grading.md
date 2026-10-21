@@ -151,7 +151,11 @@ grade-only artifact omits it. An older manifest with a `#roadmap-nnl` anchor is
 checked as `now-next-later`. Include linked archives
 and evidence files needed for the private artifact. Do not include the publication
 manifest in its own file list. Embed the same ledger in a JSON script with ID
-`roadmap-history`, escaping `<` as `\u003c`.
+`roadmap-history`, escaping `<` as `\u003c`, or pin it by hash with a JSON
+script `roadmap-history-ref` holding `{ledgerFile, sha256, assessmentId}`
+(never both). The ledger grows with every assessment; once a page passes a few
+megabytes, pin it and render history from the evidence files. The verifier
+reports `pageBytes` so growth is visible.
 
 `node scripts/verify-artifact.mjs /private/path/publication-manifest.json` verifies
 internal file integrity, history consistency, audience and embedded/saved ledger

@@ -177,6 +177,15 @@ being load-bearing in a real run):
     and judges; the four-link loop-closure chain and the read-back rule; the
     instruction to grade an eval gate on whether it can fail, and a flag on
     what it does on each tier, not what its default is.
+13. Coverage is part of the letter: the auditor finishes the minimum
+    coverage before answering, confirms byte-identical files with
+    `git diff --stat <comparison>..<pin> -- <path>` instead of re-reading them,
+    and sets `componentComplete` true only when the list is covered. On a large
+    delta, first passes routinely skip half the list; asking for completion in
+    the first prompt saves a second round per auditor.
+14. Present-load numbers (R0, row counts, rates) come from the latest dated
+    measurement recorded in the artifact or its evidence, never from memory or
+    an earlier card's footer. Give the date with the number.
 
 **Check the prompts before sending them.** Each must carry its calibration
 sheet and coverage manifest as expanded text. A prompt that contains an
@@ -248,7 +257,10 @@ is a claim, an absent line is not.
 "How good is this" and "did it improve" are different questions, and a card
 that fuses them answers neither. A letter is a reading taken by one panel, at
 one reach, against one bar: change any of the three and the next letter comes
-from a different instrument, whatever the system did in between. A
+from a different instrument, whatever the system did in between. The panel
+includes the model the auditors run on: a card graded by a different model
+family is a new instrument even with the same prompts, and its letter moves
+are classed `instrument` with the models named. A
 measurement (a pin count, a closed-exposure tally, an IOPS ceiling, the
 number of declared-but-unapplied resources) is immune to who read what. So
 the card leads with the measurements, presents the letters as a snapshot of

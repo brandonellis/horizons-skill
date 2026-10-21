@@ -33,6 +33,12 @@ Apply to every "why" paragraph, thesis, risk entry, figcaption, and tooltip.
 
 3. **No banned phrases** (the list below).
 
+4. **No rebuttal cadence.** Do not close a status with a short rebuttal or a
+   manufactured contrast ("Idea: not yet scoped. No done-when until someone
+   decides what it is."; "Not a feature. A platform."). Once is a voice; on a
+   card wall it is the pattern a reader stops trusting. State the condition and
+   the next step plainly: "Not scoped yet; needs an owner to define done."
+
 ## The tests (run on the finished prose)
 
 1. **The said-aloud test.** Read each "why" sentence out loud. Any sentence you
