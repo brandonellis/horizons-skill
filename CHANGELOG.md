@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+## 2.12.0 - 2026-10-22
+
+- New `render-learning-wheel.mjs` and `assets/learning-wheel.css`: the leadership
+  view of learning loops. Every loop with its status (on, older path, waiting for
+  input, off), what it learns from, what it improves and why it is off; each loop
+  drawn as a cycle with its return arrow; a moving current only on a loop whose four
+  stages were all observed. The previous map, inspector and evaluation matrix stay,
+  folded under it for engineers. `learning-system.md` makes it the first view.
+- Hosted downloads: the starter's move-proposal download uses the artifact
+  `downloads` capability in a hosted Claude viewer (a plain link download is
+  blocked there) and keeps the direct download in a local file.
+- `artifact-views.md`: keep each view short (a new dated reading is one line with
+  the full text folded, the previous reading folds under it, evidence records start
+  closed), and three rules for architecture figures (one column for users and how
+  they get in, shared layers as one box, gaps drawn as stopped lines).
+
 ## 2.11.0 - 2026-10-21
 
 - Check architecture views for staleness in Phase 1 and on every refresh: a

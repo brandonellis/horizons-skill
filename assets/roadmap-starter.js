@@ -71,9 +71,15 @@
   document.querySelector('[data-download-moves]').addEventListener('click', () => {
     if ([...moves.values()].some(move => !move.reason.trim())) { announce.textContent = 'Add a reason for every proposed move before downloading.'; rows.querySelector('textarea:invalid')?.focus(); return; }
     const proposal = { schemaVersion: 1, projectId: model.project.id, baseRevision: model.revision, baseDigest: node.dataset.digest, moves: [...moves.values()] };
-    const url = URL.createObjectURL(new Blob([JSON.stringify(proposal, null, 2) + '\n'], { type: 'application/json' }));
-    const link = document.createElement('a'); link.href = url; link.download = `${model.project.id}-moves.json`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    announce.textContent = 'Move proposal downloaded. Ask Horizons to apply this proposal to the canonical roadmap. No changes are saved to the roadmap yet.';
+    const text = JSON.stringify(proposal, null, 2) + '\n', name = `${model.project.id}-moves.json`;
+    const done = 'Move proposal downloaded. Ask Horizons to apply this proposal to the canonical roadmap. No changes are saved to the roadmap yet.';
+    const local = () => { const url = URL.createObjectURL(new Blob([text], { type: 'application/json' })); const link = document.createElement('a'); link.href = url; link.download = name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); announce.textContent = done; };
+    // A hosted Claude artifact blocks anchor downloads; its viewer offers the file through the downloads capability.
+    if (!window.claude?.use) { local(); return; }
+    announce.textContent = 'Preparing the download...';
+    window.claude.use('downloads').then(d => d
+      ? d.save({ filename: name, data: text }).then(() => { announce.textContent = done; }, e => { announce.textContent = e?.code === 'declined' ? 'Download declined. Nothing was saved.' : 'The download could not be offered here.'; })
+      : (announce.textContent = 'Downloads are not available in this view. Open the local file to export the proposal.'));
   });
   window.addEventListener('beforeunload', event => { if (moves.size) { event.preventDefault(); event.returnValue = ''; } });
   function revealHash() { let id; try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; } const target = document.getElementById(id); if (target?.tagName === 'DETAILS') target.open = true; }

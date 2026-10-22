@@ -15,7 +15,10 @@ The artifact supports drag-and-drop and labelled native select controls. A move
 previews the new horizon, is visibly marked proposed, and requires a reason.
 Review moves lists every original and proposed placement. Discard restores the
 original view; download exports a JSON proposal. Both remain local. The page
-clearly states that a download has not saved the canonical roadmap.
+clearly states that a download has not saved the canonical roadmap. A hosted
+Claude artifact blocks plain link downloads: publish it with the `downloads`
+capability, and the shipped script uses `claude.use("downloads").save()` there
+while a local file keeps the direct download.
 
 Apply an explicitly approved proposal with:
 

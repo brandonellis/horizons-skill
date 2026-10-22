@@ -1,0 +1,63 @@
+/* Learning wheel (render-learning-wheel.mjs). Uses the host's --rm-* tokens; light and dark follow the host. */
+.lw-section { margin: 40px 0; }
+.lw-lede { color: var(--rm-muted); margin: 8px 0 20px; max-width: 72ch; }
+.lw-lede strong { color: var(--rm-ink); }
+.lw-figure { margin: 0 0 24px; padding: 20px; border: 1px solid var(--rm-rule); background: var(--rm-panel); overflow-x: auto; }
+.lw-figure svg { display: block; width: 100%; min-width: 640px; height: auto; color: var(--rm-muted); }
+.lw-figure figcaption { margin-top: 12px; font-size: 14px; color: var(--rm-muted); }
+.lw-col { font: 600 12px "Barlow Condensed", sans-serif; letter-spacing: .08em; fill: var(--rm-muted); }
+.lw-row-name, .lw-target-name { font: 600 15px Barlow, sans-serif; fill: var(--rm-ink); }
+.lw-row-sub { font: 12px Barlow, sans-serif; fill: var(--rm-muted); }
+.lw-row-status { font: 600 12px Barlow, sans-serif; }
+.lw-target rect { fill: var(--rm-soft); stroke: var(--rm-rule); }
+.lw-edge { fill: none; stroke-width: 1.6; }
+.lw-glyph circle { fill: none; stroke-width: 2.4; stroke-dasharray: 52 18; }
+.lw-glyph path { fill: none; stroke-width: 2; }
+/* status colors */
+.lw-s-on { --lw: var(--rm-success, #21694d); }
+.lw-s-older { --lw: var(--rm-t5, var(--rm-link)); }
+.lw-s-idle { --lw: var(--rm-warn); }
+.lw-s-off { --lw: var(--rm-muted); }
+text.lw-s-on, text.lw-s-older, text.lw-s-idle, text.lw-s-off { fill: var(--lw); }
+.lw-edge.lw-s-on, .lw-edge.lw-s-older, .lw-edge.lw-s-idle, .lw-glyph circle, .lw-glyph path { stroke: var(--lw); }
+.lw-edge.lw-s-off { stroke: var(--rm-rule); stroke-dasharray: 4 4; }
+.lw-glyph.lw-s-off circle { stroke-dasharray: 6 5; }
+/* cycle */
+.lw-cycle { display: block; width: 300px; max-width: 100%; height: auto; color: var(--rm-muted); flex: 0 0 auto; }
+.lw-arc { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.lw-arc.lw-observed { stroke: var(--rm-success, #21694d); stroke-width: 2.4; }
+.lw-arc.lw-carried { stroke: var(--rm-t5, var(--rm-link)); stroke-width: 2; }
+.lw-arc.lw-unknown { stroke-dasharray: 5 5; }
+.lw-arc.lw-attention { stroke: var(--rm-warn); stroke-dasharray: 5 5; }
+.lw-stage circle { fill: var(--rm-panel); stroke: var(--rm-rule); stroke-width: 1.4; }
+.lw-stage.lw-observed circle { fill: var(--rm-success-soft, var(--rm-soft)); stroke: var(--rm-success, #21694d); }
+.lw-stage.lw-carried circle { fill: var(--rm-soft); stroke: var(--rm-t5, var(--rm-link)); }
+.lw-stage.lw-attention circle { fill: var(--rm-warn-bg); stroke: var(--rm-warn); }
+.lw-stage.lw-unknown circle { stroke-dasharray: 3 3; }
+.lw-stage-name { font: 600 13px Barlow, sans-serif; fill: var(--rm-ink); }
+.lw-stage-state { font: 11px Barlow, sans-serif; fill: var(--rm-muted); }
+.lw-cycle-center { font: 600 12px "Barlow Condensed", sans-serif; letter-spacing: .06em; fill: var(--rm-muted); text-transform: uppercase; }
+/* moving current: only on loops seen working */
+.lw-current { fill: none; stroke: var(--rm-success, #21694d); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1.5 22; animation: lw-flow 2.4s linear infinite; pointer-events: none; }
+@keyframes lw-flow { to { stroke-dashoffset: -47; } }
+.lw-offscreen .lw-current, .lw-offscreen .lw-seen { animation-play-state: paused; }
+/* loop cards */
+.lw-loops { border-top: 1px solid var(--rm-rule); }
+.lw-loop { border-bottom: 1px solid var(--rm-rule); padding: 4px 0; }
+.lw-loop > summary { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; list-style: none; }
+.lw-loop > summary::-webkit-details-marker { display: none; }
+.lw-loop > summary::after { content: "+"; margin-left: auto; color: var(--rm-muted); }
+.lw-loop[open] > summary::after { content: "−"; }
+.lw-loop-body { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; padding: 8px 0 20px; }
+.lw-loop-body dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 14px; max-width: 60ch; }
+.lw-loop-body dt { color: var(--rm-muted); }
+.lw-loop-body dd { margin: 0; }
+.lw-chip { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--lw); color: var(--lw); }
+.lw-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--lw); flex: 0 0 auto; display: inline-block; }
+.lw-dot.lw-s-off { background: transparent; border: 1.5px solid var(--lw); }
+.lw-seen { animation: lw-breathe 2.4s ease-out infinite; }
+@keyframes lw-breathe { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lw) 55%, transparent); } 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.lw-key { font-size: 13px; color: var(--rm-muted); margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+.lw-key .lw-dot { --lw: var(--rm-success, #21694d); }
+@media (prefers-reduced-motion: reduce) { .lw-current { display: none; } .lw-seen { animation: none; } }
+@media print { .lw-loop { break-inside: avoid; } .lw-loop:not([open]) > .lw-loop-body { display: flex; } .lw-current { display: none; } }

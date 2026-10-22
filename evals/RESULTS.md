@@ -720,3 +720,26 @@ performed; the earlier complete lead grading run remains the recorded evidence.
 All 194 helper tests and `git diff --check` pass. The demo was rebuilt and
 checked headless at 1440px and 390px (no horizontal page overflow). No browser
 keyboard, print or dark-theme checks were run for this release.
+
+## 2026-10-22 · v2.12.0 learning wheel
+
+Scenario 23 (learning system) was run headless on two models against a fresh copy
+of its fixture with the 2.12.0 references loaded.
+
+- **23, Sonnet 5.5 ($0.59):** produced the requested explorer, evaluation view,
+  walkthrough with reduced motion and text fallback. Kept `learning.json` and the
+  observation file byte-identical and the grade unassessed. Reported no browser
+  checks run.
+- **23, Opus 5.5 ($1.36):** produced the same views. Checked at 1280px and 375px
+  (selection, Previous/Next, keyboard, WebGL fallback, print, no console errors).
+  Noted dark mode and screen-reader output not checked, and that the shared 3D
+  renderer starts its walkthrough by itself on wide screens.
+- **Limitation:** scenario 23 names an explorer layout, so neither run used the
+  new learning wheel. The wheel is covered by `scripts/learning-wheel.test.mjs`
+  (refusals, witnessed-only motion, escaping, order and counts) and by its use in
+  the Waatr hub, not by an eval. A wheel-specific scenario is open work.
+- **Open finding, carried:** the 3D renderer's self-starting walkthrough on wide
+  screens contradicts the guidance that walkthroughs start still.
+
+The grading method is unchanged, so no new lead grading run was performed. All 200
+helper tests and `git diff --check` pass.

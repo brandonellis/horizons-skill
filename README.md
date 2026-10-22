@@ -211,6 +211,7 @@ being cheaper. See [the execution contract](references/execution-contract.md).
 - `references/grade-opportunities.md` maps tickets and proof to existing grade gates.
 - `scripts/roadmap-model.mjs`, `render-starter.mjs` and `roadmap-pipeline.mjs` validate, render, stage and atomically save starter artifacts. The starter always includes a streams × horizons overview table, and its verification refuses one without it.
 - `scripts/grade-opportunities.mjs` derives conditional grade plans without changing assessments.
+- `scripts/render-learning-wheel.mjs` with `assets/learning-wheel.css` draws the leadership view of learning loops: status, what each learns from and improves, why one is off, and each loop as a cycle.
 - `scripts/package-skill.mjs` builds tested Claude Code and portable archives with checksums.
 - `scripts/summarize-evals.mjs` reports local journey measurements without treating unknowns as passes.
 - `references/run-budget.md` bounds delegation and retries across the whole run,

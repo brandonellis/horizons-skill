@@ -24,6 +24,8 @@ that order, and a grade-only artifact need not fabricate a roadmap.
 - Shared model, not separate interpretations
 - Chart-to-detail navigation
 - Visual direction: make the decisions easy to see
+- Keep it short: one line visible, the rest one click away
+- Architecture figures
 - Copy-ready view shell
 - One bounded verification round, when browser tools are available
 - Learning and evaluation evidence
@@ -294,6 +296,33 @@ tappable, focus visible, long titles wrap-safe, and essential evidence available
 without hover. The print view exposes all panels and all filtered/collapsed
 content with section headings. A static/no-JavaScript reader sees the same full
 document in source order.
+
+## Keep it short: one line visible, the rest one click away
+
+Each refresh adds dated material, and a page that shows all of it stops being
+read. When a dated reading replaces an earlier one, show the new reading as one
+sentence (letter, the point, what is missing) with the full text in a closed
+`<details>`, and fold the previous reading under it. Evidence records start
+closed. Long reference tables (item definitions, cohorts, baselines) sit behind a
+one-line summary. Nothing is deleted: dated history moves, it is never rewritten.
+Measure visible words per view after a refresh; if a view grew, fold before
+publishing.
+
+## Architecture figures
+
+When the artifact explains how the system is built, hand-draw it as inline SVG on
+the host's tokens (see the diagramming guidance). Three rules from real reviews:
+
+- One column for who uses the system and how they get in. A "users" column next
+  to a "ways in" column repeats every box.
+- Shared layers are one box. If several surfaces call the same tools or commands,
+  draw them all into one box; drawing a separate box per surface implies separate
+  implementations. Runtime detail (where a copy runs) goes in the caption.
+- Draw gaps honestly: a surface that does not use the shared layer gets a stopped
+  line with a cross and its ticket, never an arrow into the box.
+
+Motion is allowed only to show order or flow, labelled as illustration, paused
+offscreen and off under reduced motion.
 
 ## Copy-ready view shell
 

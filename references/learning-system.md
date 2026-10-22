@@ -10,6 +10,7 @@ Preserve the current audience, visual contract and canonical hub.
 - Leadership reading order
 - Evidence contract
 - Reusable renderer
+- The learning wheel (leadership overview)
 - Interaction and fallback
 - Connected loops and explicit feedback returns
 - Connect proof gaps to owned work
@@ -21,15 +22,18 @@ Lead with the decision: which capability is demonstrated, what evidence is
 missing, who can supply it when known, and what decision that evidence enables.
 Show the observation date and environment beside the conclusion. Then provide:
 
-1. A two-dimensional learning map: when handoffs are recorded, show connected
-   loops and a separate selected-loop stage view (see Connected loops below).
-   Otherwise use one declared loop per row, with signal, transform, changed
-   artifact and later consumption as columns.
-2. An evidence inspector: the selected sequence, exact missing witness, linked
+1. The learning wheel (`scripts/render-learning-wheel.mjs`, see below): every
+   declared loop with its status (on, older path, waiting for input, off), what it
+   learns from, what it improves, and why it is off when it is off. Each loop opens
+   to its own cycle. This is the first thing a reader sees.
+2. A two-dimensional learning map for engineers, folded under the wheel: when
+   handoffs are recorded, show connected loops and a separate selected-loop stage
+   view (see Connected loops below).
+3. An evidence inspector: the selected sequence, exact missing witness, linked
    work, next proof and source references. Selection must work by keyboard.
-3. An evaluation matrix separating inventory coverage, measured verdicts, human
+4. An evaluation matrix separating inventory coverage, measured verdicts, human
    calibration, release enforcement, run accounting and output controls.
-4. Optional 3D exploration when requested or when the discovered structure makes
+5. Optional 3D exploration when requested or when the discovered structure makes
    it useful. Keep the map as the initial view. A graph is an alternate way to
    inspect the same records, never an additional assessment.
 
@@ -120,6 +124,27 @@ See `evals/fixtures/learning-system/learning.json` for a synthetic full example.
 Never copy a project's private measurements into the shared skill fixture.
 `validateLearningSystem`, `learningSummary` and `learningGeometry` provide model
 checks and deterministic geometry; none is a grading evaluator.
+
+## The learning wheel (leadership overview)
+
+A loop is a cycle, so draw it as one: signal, transform, changed artifact, later
+use, and an arrow back to the signal. A left-to-right chain hides the one thing
+that makes it a loop. `renderLearningWheel(model)` takes the learning-system loops
+plus, per loop, `status` (`on`, `older`, `idle`, `off`), `learnsFrom`,
+`improves` (a `targets[]` id) and `whyStatus` (required unless plainly on), and
+model `targets[]` (`id`, `label`, `detail`) naming what the loops can change. It
+renders an overview (loops grouped by status, each wired to what it improves), a
+card per loop with its cycle, and a key. Include `assets/learning-wheel.css` once;
+`learningWheelScript` pauses motion offscreen.
+
+- A moving current is drawn only on a loop whose four stages are all `observed`
+  in this observation. `carried` evidence is "seen earlier", never motion.
+- Plain words first: "learns from rep feedback, improves account memory" beats
+  stage IDs. Put source identifiers, joins and run IDs in the engineers' details.
+- Status is a fact with a date and a reason. Read it from source or runtime before
+  drawing; a stale "disabled" on a loop that was switched on is a defect.
+- Keep the existing map, inspector, evaluation matrix and work lists, folded under
+  one "Details for engineers" disclosure below the wheel.
 
 ## Interaction and fallback
 
