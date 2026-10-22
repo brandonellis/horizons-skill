@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 2.13.0 - 2026-10-22
+
+- Learning flywheel: `renderFlywheel` and `renderFlywheelList` in
+  `render-learning-wheel.mjs`. With an optional `flywheel` model (the project's
+  agent outputs, the responses loops listen to, and guards such as eval gates),
+  the learning section leads with one ring: agents produce, people respond, loops
+  learn, knowledge changes and feeds the next outputs. Each item shows whether it
+  is live; arcs move only on observed evidence; guards sit outside the ring; narrow
+  screens get the same stages stacked. `learning-system.md` says how to fill it
+  from any project's own sources.
+
 ## 2.12.0 - 2026-10-22
 
 - New `render-learning-wheel.mjs` and `assets/learning-wheel.css`: the leadership

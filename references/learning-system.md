@@ -146,6 +146,33 @@ card per loop with its cycle, and a key. Include `assets/learning-wheel.css` onc
 - Keep the existing map, inspector, evaluation matrix and work lists, folded under
   one "Details for engineers" disclosure below the wheel.
 
+### The flywheel: the whole cycle on one ring
+
+When the project's agents, the responses people give to their output, the loops
+and what those loops change can all be read from its sources, give the model a
+`flywheel` and the section leads with one ring instead of the overview:
+agents produce, people respond, loops learn, knowledge changes, and back to the
+agents. It is the same ring for any project; fill it from that project's own
+evidence, never from Waatr's.
+
+- `flywheel.products[]` (`id`, `label`): what the project's agents produce. Read
+  them from the agent registry or the outputs the code writes.
+- `flywheel.responses[]` (`id`, `label`): what people (or schedules) do that a
+  loop listens to: feedback, corrections, outcomes, scans. Read them from loop
+  triggers or event subscriptions.
+- Per loop `responses` (response ids) and per target `feeds` (product ids): which
+  responses a loop learns from, and which outputs read what it changed. A `feeds`
+  link needs source evidence that the output reads it; with none, leave it empty
+  and the ring says "nothing learned feeds it yet".
+- `flywheel.guards[]` (`id`, `label`, `status`, `detail`) and `guard: true` on a
+  loop: evaluations and checks that watch the cycle without feeding it (model
+  release gates, eval suites). They are drawn below the ring, not on it.
+- An arc moves only when a loop that is not off has that stage `observed`; the
+  whole ring moves only when some loop was seen working all the way round.
+- A registry's own loop-to-loop edges are not the flywheel: they often join
+  loops that are off. Draw what loops read and write, and say where it came from.
+- Below 760px the ring becomes `renderFlywheelList`: the same four stages stacked.
+
 ## Interaction and fallback
 
 Stable identity ordering fixes position between renders. Depth separates stages and recorded binding classes for exploration; the spatial

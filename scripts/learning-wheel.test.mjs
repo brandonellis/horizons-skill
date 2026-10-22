@@ -39,3 +39,21 @@ test('summary counts and the rendered section escape text and drop unsafe links'
   assert.match(html, /1 on<\/strong>/);
   assert.ok(html.indexOf('lw-loop-a') < html.indexOf('lw-loop-b') && html.indexOf('lw-loop-b') < html.indexOf('lw-loop-c'), 'on, then waiting, then off');
 });
+
+test('flywheel: refuses unknown links, draws the four stages, and moves only when a loop was seen working', async () => {
+  const { renderFlywheel, validateFlywheel } = await import('./render-learning-wheel.mjs');
+  const m = model();
+  m.flywheel = { products: [{ id: 'plans', label: 'Account plans' }], responses: [{ id: 'fb', label: 'Rep feedback' }], guards: [{ id: 'g', label: 'Model checks', status: 'on' }] };
+  m.targets[0].feeds = ['plans'];
+  m.loops[0].responses = ['fb'];
+  const bad = structuredClone(m); bad.targets[0].feeds = ['nope']; assert.throws(() => validateFlywheel(bad), /unknown product/);
+  const bad2 = structuredClone(m); bad2.loops[0].responses = ['nope']; assert.throws(() => validateFlywheel(bad2), /unknown response/);
+  const svg = renderFlywheel(m);
+  for (const s of ['Agents', 'People', 'Loops', 'Knowledge', 'WATCHING THE CYCLE', 'uses account memory', 'feeds account plans']) assert.match(svg, new RegExp(s));
+  assert.match(svg, /lw-current/);
+  const still = structuredClone(m); still.loops[0].stages = still.loops[0].stages.map(s => ({ ...s, state: 'carried' }));
+  assert.doesNotMatch(renderFlywheel(still), /lw-current/);
+  assert.match(renderLearningWheel(m), /lw-flywheel/, 'the section uses the flywheel when the model has one');
+  assert.match(renderLearningWheel(m), /lw-fw-list[\s\S]*Rep feedback[\s\S]*feeds account plans/, 'with a stacked version of the same stages');
+  assert.doesNotMatch(renderLearningWheel(model()), /lw-flywheel/, 'and the overview otherwise');
+});

@@ -743,3 +743,13 @@ of its fixture with the 2.12.0 references loaded.
 
 The grading method is unchanged, so no new lead grading run was performed. All 200
 helper tests and `git diff --check` pass.
+
+## 2026-10-22 · v2.13.0 learning flywheel
+
+No eval scenario was run for this release. The flywheel is an optional, additive
+view (it renders only when a model supplies `flywheel`), and no scenario fixture
+carries one yet. Coverage is `scripts/learning-wheel.test.mjs` (refused unknown
+links, the four stages, motion only on observed evidence, the stacked list, the
+overview kept when no flywheel is given) and the Waatr hub, checked headless at
+1440px light and 390px dark with no console errors. A flywheel scenario is open
+work, alongside the wheel scenario noted for v2.12.0. All 201 helper tests pass.

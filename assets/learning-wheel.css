@@ -61,3 +61,16 @@ text.lw-s-on, text.lw-s-older, text.lw-s-idle, text.lw-s-off { fill: var(--lw); 
 .lw-key .lw-dot { --lw: var(--rm-success, #21694d); }
 @media (prefers-reduced-motion: reduce) { .lw-current { display: none; } .lw-seen { animation: none; } }
 @media print { .lw-loop { break-inside: avoid; } .lw-loop:not([open]) > .lw-loop-body { display: flex; } .lw-current { display: none; } }
+/* flywheel */
+.lw-figure .lw-flywheel { display: block; width: 100%; min-width: 760px; height: auto; color: var(--rm-muted); }
+.lw-fw-node circle { fill: var(--rm-panel); stroke: var(--rm-ink); stroke-width: 1.6; }
+.lw-fw-item { font-size: 14px; }
+.lw-fw-dot { fill: var(--lw); stroke: var(--lw); stroke-width: 1.5; }
+.lw-fw-dot.lw-s-off { fill: none; }
+.lw-fw-guard { stroke: var(--rm-rule); stroke-dasharray: 4 4; }
+.lw-fw-list { display: none; margin: 0; padding: 0; list-style: none; }
+.lw-fw-list > li { margin-bottom: 16px; }
+.lw-fw-list ul { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; font-size: 15px; }
+.lw-fw-list ul li { display: flex; gap: 8px; align-items: baseline; }
+.lw-fw-list .lw-dot { transform: translateY(1px); }
+@media (max-width: 760px) { .lw-fw-figure .lw-flywheel { display: none; } .lw-fw-figure .lw-fw-list { display: block; } }
