@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+## 2.15.0 - 2026-10-26
+
+- Freshness on every page: `scripts/freshness.mjs` and `assets/freshness.css`.
+  Each dated block declares a kind from a closed set (probe 3 days, delivery 7,
+  grade 30, architecture 30, learning 30; a project may override in the manifest)
+  and its real observation date, and shows its age at view time. A block past its
+  maximum age gets a Stale badge, and a strip at the top lists every stale block.
+- `verify-artifact.mjs` fails a dated block without a kind, date, maximum age or
+  visible age, and two current copies of the same section family. With the
+  manifest's `freshness.refreshedOn`, it fails a refresh that leaves a block stale
+  unless the block is marked `data-carried="not rechecked since <date>"`, which
+  the page prints.
+- Views renamed: Progress is now **Where we stand** (each grade tile carries its
+  own why, proof, next required proof and dates; one delivery block, one
+  environments block) and Evidence is now **History** (baseline, dated superseded
+  snapshots, original sources). A superseded copy moves to History with its date.
+- Scenario 30 and a synthetic fixture exercise a refresh that must recheck one
+  block, carry another and supersede a third.
+
 ## 2.14.1 - 2026-10-26
 
 - Skill-pipeline view reads at full size: larger lanes, rows, boxes and type; the diagram scrolls instead of shrinking below 86%; side-by-side arrow labels sit above the boxes so a narrow gap never hides them; tool boxes size for monospace titles.

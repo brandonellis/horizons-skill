@@ -12,6 +12,11 @@ Evidence gets decisions, sources and collapsed audit records. Unavailable
 domains are omitted. In a combined artifact, the compact masthead and comparison
 row in `progress-layout.md` take precedence over the roadmap-only masthead below.
 
+Every dated block in the spine carries a kind, its real observation date and a
+visible age, and the page opens with a freshness strip listing stale blocks
+(`artifact-views.md`, "Freshness and one current copy"). A superseded copy lives
+in History with its date, never beside the current one.
+
 Order within the content spine:
 
 1. **Masthead** — big condensed title, a mono kicker carrying the verification

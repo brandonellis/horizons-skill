@@ -791,3 +791,39 @@ original baseline and assessment-1 unchanged. Maintainer check:
 `verify-artifact.mjs --history-lock-sha256 964f37da…` verified 12 files with
 preservation `verified`; the lock bytes are unchanged. No browser checks
 (disclosed by the run). All 206 helper tests and `git diff --check` pass.
+
+## 2026-10-26 · v2.15.0 freshness and one current copy
+
+Scenario 30 (new) ran headless (`claude -p`, the prompt on stdin, a fresh copy of
+the fixtures as a one-commit repo, Read/Write/Edit/Glob/Grep/Skill plus `node`,
+`shasum`, `ls`, `cat` and read-only git, $6 cap) with the skill invoked by name.
+
+- **First pass, `claude-sonnet-5-5` ($0.63):** wrote the new delivery block
+  (6 of 9 Done, observed 2026-10-26) and moved the 2026-10-10 copy to History
+  with `data-superseded-on`; grades, ledger and lock unchanged; verified with
+  the original lock hash. **Missed expectations 3 and 5:** left the environments
+  block uncarried and never set `freshness.refreshedOn`, so the refresh rule was
+  not exercised (it reported the block would show Stale instead). The rule lived
+  only in `full-workflow.md`; it now also sits in `refresh-summary.md`, which
+  every refresh reads.
+- **First pass, `claude-opus-5-5` ($0.80):** met all five expectations and both
+  prohibitions: carried the environments block with the exact phrase, set
+  `refreshedOn`, one current delivery copy, lock verified. No browser check (not
+  permitted), and said so.
+- **Rerun after the fix, `claude-sonnet-5-5` ($0.60):** met all five
+  expectations and both prohibitions.
+
+**Lead grading run.** Scenario 15 ran on the intended lead model
+(`claude-opus-5-5`, headless, $1.20, 130s) against an unchanged fixture copy:
+single-agent label, code C, production Incomplete with expired and malformed
+expiry unknown rather than failing, MER-201 Done reconciled against 2 of 4
+acceptance conditions, exactly one assessment appended (assessment-2), original
+baseline and assessment-1 unchanged. Maintainer check: the lock bytes are
+unchanged and `verify-artifact.mjs --history-lock-sha256 964f37da…` reports
+preservation `verified` under the new freshness checks. The run added a minimal
+`data-roadmap-matrix` table to satisfy the existing matrix rule and said so. No
+browser checks (disclosed by the run).
+
+The new view names and freshness strip were also applied to a private hub and
+checked headless at 1440px light and 390px dark: no console errors, no
+horizontal scroll, the one stale block listed and its strip link opening it.

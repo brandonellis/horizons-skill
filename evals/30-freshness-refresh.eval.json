@@ -1,0 +1,22 @@
+{
+  "id": "freshness-refresh",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons refresh fixtures/freshness/index.html from fixtures/freshness/tracker.json. Delivery status only: no regrade and no runtime probes. Today is 2026-10-26. Keep changes local and do not publish.",
+  "files": [
+    "fixtures/freshness/"
+  ],
+  "gap": "A refresh without the skill rewrites the delivery block in place or adds a second one beside it, and either restamps every block with today's date or leaves the unrechecked environments block looking as current as the new delivery count.",
+  "expected_behavior": [
+    "Writes a new current delivery block observed 2026-10-26 with 6 of 9 issues Done, tagged data-kind=\"delivery\" and data-section-family=\"delivery\".",
+    "Moves the 2026-10-10 delivery block into the History view with data-superseded-on=\"2026-10-26\", so exactly one current delivery copy remains.",
+    "Leaves the environments block observed 2026-10-10 and marks it data-carried=\"not rechecked since 2026-10-10\", which the page shows as that phrase, with the block listed in the freshness strip.",
+    "Keeps the component grades block observed 2026-10-20 with its letters unchanged.",
+    "Sets the manifest's freshness.refreshedOn to 2026-10-26, refreshes the file hashes and runs scripts/verify-artifact.mjs with --history-lock-sha256 fbda23ffa2965fd3b5bd257879977d7a31039fb8ec72a1bc52bc8d5fe532fb2b, reporting it verified."
+  ],
+  "must_not": [
+    "Change the environments block's observation date, or any block's date to one it was not observed on.",
+    "Change a grade, the ledger's assessments or the history lock, or publish the page."
+  ]
+}

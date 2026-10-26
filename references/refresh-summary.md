@@ -22,3 +22,11 @@ Show useful changes before counts. Keep undated horizons and existing schedule
 commitments stable. A refresh never silently moves an initiative or interprets a
 closed ticket as a better letter. New planning options remain unplaced pending
 a decision. A unresolved grade mapping remains visible and prompts clarification.
+
+Every dated block is rechecked or carried, never silently. A retaken reading gets
+its real observation date and the copy it replaces moves to History with
+`data-superseded-on`. A block not rechecked keeps its date and is marked carried
+(`data-carried="not rechecked since <date>"`). Set the manifest's
+`freshness.refreshedOn` to the refresh date before running `verify-artifact.mjs`,
+which then refuses a stale block that is not marked carried. Details:
+`full-workflow.md`, "Refresh is a drift report, then a fix".

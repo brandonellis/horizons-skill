@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Lantern Roadmap</title><style>/* Freshness: age line on every dated block, a Stale badge past its kind's maximum age, and the strip listing them. */
+.fz-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 8px 0 0; font-size: 12px; color: var(--rm-muted, #56625d); }
+.fz-badge time { font-variant-numeric: tabular-nums; }
+.fz-stale { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; background: var(--rm-warn-bg, #f7efe1); color: var(--rm-warn, #804812); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.fz-stale[hidden] { display: none; }
+.fz-carried { font-style: italic; }
+.fz-badge.is-superseded { font-style: normal; }
+[data-stale] > .fz-badge, [data-stale] .fz-badge { color: var(--rm-warn, #804812); }
+.fz-strip { margin: 16px 0 0; padding: 12px 16px; border-left: 3px solid var(--rm-warn, #804812); background: var(--rm-warn-bg, #f7efe1); color: var(--rm-ink, #1c2321); font-size: 14px; }
+.fz-strip[hidden] { display: none; }
+.fz-strip p { margin: 0; }
+.fz-strip strong { color: var(--rm-warn, #804812); }
+.fz-strip ul { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 8px 0 0; padding: 0; list-style: none; }
+.fz-strip li span { color: var(--rm-muted, #56625d); font-size: 12px; }
+.fz-strip a { color: var(--rm-link, #245d94); }
+@media print { .fz-strip, .fz-stale { print-color-adjust: exact; } }
+</style></head><body>
+<header><h1>Lantern</h1><nav class="view-tabs"><a href="#view-overview">Where we stand</a> <a href="#view-history">History</a></nav></header>
+<aside class="fz-strip" id="freshness-strip" aria-labelledby="freshness-strip-title" hidden><p id="freshness-strip-title"><strong>Stale</strong> <span class="fz-count">0 blocks are older than their kind allows</span></p><ul></ul></aside>
+<main>
+<section id="view-overview" data-view="overview">
+<section id="grades" data-kind="grade" data-observed-on="2026-10-20" data-max-age-days="30" data-freshness-label="Component grades" data-section-family="grades"><h2>Component grades</h2><p class="fz-badge" data-freshness-for="grades"><span class="fz-age">Observed <time datetime="2026-10-20">2026-10-20</time></span><strong class="fz-stale" hidden>Stale</strong></p><ul><li>API: <strong>B</strong><details><summary>Why, proof and next required proof</summary><p>Contract tests cover every public route. Next required proof: a load test at 2x current traffic.</p></details></li><li>Console: <strong>B-</strong><details><summary>Why, proof and next required proof</summary><p>No browser tests for the billing screens. Next required proof: billing journeys in CI.</p></details></li></ul></section>
+<section id="environments" data-kind="probe" data-observed-on="2026-10-10" data-max-age-days="3" data-freshness-label="Environments" data-section-family="environments"><h2>Environments</h2><p class="fz-badge" data-freshness-for="environments"><span class="fz-age">Observed <time datetime="2026-10-10">2026-10-10</time></span><strong class="fz-stale" hidden>Stale</strong></p><p>Staging: API HTTP 200, console HTTP 200, serving 4f1c2a9. Production: API HTTP 200, console HTTP 200, serving 1b77d03.</p></section>
+<section id="delivery-2026-10-10" data-kind="delivery" data-observed-on="2026-10-10" data-max-age-days="7" data-freshness-label="Delivery" data-section-family="delivery"><h2>Delivery</h2><p class="fz-badge" data-freshness-for="delivery-2026-10-10"><span class="fz-age">Observed <time datetime="2026-10-10">2026-10-10</time></span><strong class="fz-stale" hidden>Stale</strong></p><p>Tracker observed 2026-10-10: 4 of 9 issues Done (LAN-1, LAN-2, LAN-3, LAN-5).</p></section>
+</section>
+<section id="view-history" data-view="history" hidden>
+<h2>History</h2>
+<p>Original baseline, 2026-09-01: overall C+. This record is permanent.</p>
+</section>
+</main>
+<script data-freshness-script>(()=>{const now=new Date(),today=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()),stale=[];document.querySelectorAll("[data-observed-on][data-kind][data-max-age-days]:not([data-superseded-on])").forEach(el=>{const t=Date.parse(el.dataset.observedOn+"T00:00:00Z");if(Number.isNaN(t))return;const age=Math.max(0,Math.round((today-t)/864e5)),old=age>Number(el.dataset.maxAgeDays);el.toggleAttribute("data-stale",old);const badge=el.id&&document.querySelector("[data-freshness-for=\""+CSS.escape(el.id)+"\"]");if(badge){const a=badge.querySelector(".fz-age");if(a){a.textContent=age===0?"Observed today":"Observed "+age+(age===1?" day":" days")+" ago";a.title=el.dataset.observedOn;}const s=badge.querySelector(".fz-stale");if(s)s.hidden=!old;}if(old)stale.push(el);});const strip=document.getElementById("freshness-strip");if(!strip)return;const list=strip.querySelector("ul"),count=strip.querySelector(".fz-count");list.replaceChildren(...stale.map(el=>{const li=document.createElement("li"),a=document.createElement("a"),s=document.createElement("span");a.href="#"+el.id;a.textContent=el.dataset.freshnessLabel||el.id;s.textContent=" observed "+el.dataset.observedOn+(el.dataset.carried?" · "+el.dataset.carried:"");li.append(a,s);return li;}));if(count)count.textContent=stale.length+(stale.length===1?" block is older than its kind allows":" blocks are older than their kind allows");strip.hidden=!stale.length;strip.addEventListener("click",e=>{const a=e.target.closest("a[href^=\"#\"]");if(!a)return;let n=document.getElementById(a.getAttribute("href").slice(1));for(;n;n=n.parentElement)if(n.tagName==="DETAILS")n.open=true;});})();</script>
+<script type="application/json" id="roadmap-history">{"originalBaselineId":"lantern-baseline-2026-09-01","originalBaseline":{"id":"lantern-baseline-2026-09-01","grade":"C+","observedOn":"2026-09-01"},"currentAssessmentId":"lantern-assessment-2026-10-20","assessments":[{"id":"lantern-assessment-2026-10-20","observedOn":"2026-10-20","components":[{"id":"api","grade":"B"},{"id":"console","grade":"B-"}]}],"presentation":{"artifactBrief":{"audience":"Lantern product leads"}}}</script>
+</body></html>

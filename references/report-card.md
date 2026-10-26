@@ -37,7 +37,7 @@ Run it before a consequential moment: a deploy, a funding conversation, a
 quarter close, or right after a remediation program lands. Each run produces an
 **immutable dated assessment inside a living artifact**. Append the observation
 to the ledger, then reconcile existing roadmap completion and update Roadmap,
-Progress and Evidence at the canonical URL.
+Where we stand and History at the canonical URL.
 Earlier records remain readable at stable anchors; separate dated exports are
 optional, not a new grading universe on every run.
 

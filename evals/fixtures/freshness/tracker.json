@@ -1,0 +1,60 @@
+{
+  "observedAt": "2026-10-26T09:00:00Z",
+  "source": "synthetic tracker export",
+  "issues": [
+    {
+      "id": "LAN-1",
+      "title": "Synthetic work item 1",
+      "status": "Done",
+      "completedOn": "2026-10-02"
+    },
+    {
+      "id": "LAN-2",
+      "title": "Synthetic work item 2",
+      "status": "Done",
+      "completedOn": "2026-10-04"
+    },
+    {
+      "id": "LAN-3",
+      "title": "Synthetic work item 3",
+      "status": "Done",
+      "completedOn": "2026-10-08"
+    },
+    {
+      "id": "LAN-4",
+      "title": "Synthetic work item 4",
+      "status": "Done",
+      "completedOn": "2026-10-21"
+    },
+    {
+      "id": "LAN-5",
+      "title": "Synthetic work item 5",
+      "status": "Done",
+      "completedOn": "2026-10-09"
+    },
+    {
+      "id": "LAN-6",
+      "title": "Synthetic work item 6",
+      "status": "Done",
+      "completedOn": "2026-10-24"
+    },
+    {
+      "id": "LAN-7",
+      "title": "Synthetic work item 7",
+      "status": "In Progress",
+      "completedOn": null
+    },
+    {
+      "id": "LAN-8",
+      "title": "Synthetic work item 8",
+      "status": "Todo",
+      "completedOn": null
+    },
+    {
+      "id": "LAN-9",
+      "title": "Synthetic work item 9",
+      "status": "Todo",
+      "completedOn": null
+    }
+  ]
+}

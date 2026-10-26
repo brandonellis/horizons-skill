@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "visibility": "private",
+  "audience": "Lantern product leads",
+  "assessmentId": "lantern-assessment-2026-10-20",
+  "artifactFile": "index.html",
+  "ledgerFile": "ledger.json",
+  "historyLockFile": "history-lock.json",
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "a8b3290c280a283622120f42172401fc24be132e70a9183c04f888bcab251ee3"
+    },
+    {
+      "path": "ledger.json",
+      "sha256": "65f682607e4aecfacdddc5a68446aa2e5bd1fb26a9564b087bda3135dd85bec0"
+    },
+    {
+      "path": "history-lock.json",
+      "sha256": "fbda23ffa2965fd3b5bd257879977d7a31039fb8ec72a1bc52bc8d5fe532fb2b"
+    }
+  ]
+}

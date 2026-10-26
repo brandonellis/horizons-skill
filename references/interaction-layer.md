@@ -42,7 +42,7 @@ The code below assumes these hooks — rename to taste, keep the roles:
   items carry `data-tl="t1 t3"` as well.
 - the three horizon card sections carry `data-hz`.
 - every item representation carries its stable `data-roadmap-item` ID; the
-  Progress and Evidence panels are never item-filtered. For a combined hub use
+  Where we stand and History panels are never item-filtered. For a combined hub use
   `assets/progress-shell.js`, which scopes filtering to `data-view="roadmap"`.
   The legacy recipe below is for standalone roadmap pages, not combined hubs.
 - a root element carries `data-roadmap-id="<project-and-scope-id>"` to namespace

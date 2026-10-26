@@ -12,8 +12,8 @@ shell; bounded verification. The shell's code is for building, not source scanni
 First inherit the creation-time `artifactBrief` per `stakeholder-story.md`.
 Changing modes never changes the audience. Progress is a visual delivery story
 with a readiness lens, not a technical audit pasted into the first tab.
-For a combined stakeholder roadmap, order navigation Roadmap, Progress, Evidence
-and land on Roadmap. The board/Gantt and dated visual grade strip lead; audit
+For a combined stakeholder roadmap, order navigation Roadmap, Where we stand,
+History and land on Roadmap. The board/Gantt and dated visual grade strip lead; audit
 detail remains behind explicit drill-downs. An established brief may override
 that order, and a grade-only artifact need not fabricate a roadmap.
 
@@ -25,6 +25,7 @@ that order, and a grade-only artifact need not fabricate a roadmap.
 - Chart-to-detail navigation
 - Visual direction: make the decisions easy to see
 - Keep it short: one line visible, the rest one click away
+- Freshness and one current copy
 - Architecture figures
 - Skill-pipeline views
 - Copy-ready view shell
@@ -69,9 +70,12 @@ WSJF run. A new assessment is a new history record, not a new working artifact.
 
 | View | Reader's question | Content owner |
 |---|---|---|
-| Progress | What improved from the original baseline, and what blocks A+? | `grade` or its `score` alias |
+| Where we stand | What is true now, how old is each reading, and what blocks the next grade? | `grade` or its `score` alias, plus the current delivery and environment readings |
 | Roadmap | What are we doing, preparing and exploring? | NNL synthesis, with opt-in Timeline format |
-| Evidence | What supports this, and what did earlier runs say? | Sources, decisions, immutable assessments |
+| History | What was the baseline, and what did earlier runs say? | Baseline, dated superseded snapshots, original sources and decisions |
+
+Earlier artifacts called these views Progress and Evidence. Keep their anchor
+IDs (`#view-overview`, `#view-history`) when renaming the tabs.
 
 Use `progress-layout.md` for the combined artifact composition and reusable
 assets. Code quality, staging operations and production operations are separate
@@ -190,7 +194,7 @@ Put the theme controls immediately against the active chart. Headings, search,
 format selectors and summary copy go above the filters; explanations and legends
 go below the chart. No intervening section, card, heading or second theme key.
 If using a shared filter bar, omit the matrix renderer's own heading/key via
-`{ showHeading: false, showThemeKey: false }`. Progress and Evidence have neither
+`{ showHeading: false, showThemeKey: false }`. Where we stand and History have neither
 roadmap theme controls nor roadmap filter effects.
 
 Keep the visual theme key interactive. Use `scripts/render-theme-filters.mjs`
@@ -308,6 +312,34 @@ closed. Long reference tables (item definitions, cohorts, baselines) sit behind 
 one-line summary. Nothing is deleted: dated history moves, it is never rewritten.
 Measure visible words per view after a refresh; if a view grew, fold before
 publishing.
+
+## Freshness and one current copy
+
+Every dated block declares what it observes and when, and the page says how old
+it is. Use `scripts/freshness.mjs` with `assets/freshness.css`:
+
+- Give each dated block `freshnessAttributes({ id, kind, observedOn, label,
+  family })`: `data-kind` from the closed set (`probe` 3 days, `delivery` 7,
+  `grade` 30, `architecture` 30, `learning` 30), `data-observed-on` set to the
+  date it was actually observed (never the build date), and its maximum age.
+  A project overrides an age in the manifest's `freshness.maxAgeDays` and records
+  the same value in its direction contract.
+- Put `renderFreshnessBadge(block)` inside the block. It prints the observed date;
+  `freshnessScript` replaces it with the age at view time ("Observed 14 days
+  ago") and shows **Stale** past the maximum. Put `renderFreshnessStrip()` at the
+  top of the page: it lists every stale block with a link that opens it.
+- **Where we stand** holds the current copy of each section family: grades,
+  delivery, environments, lenses, next proof. Each grade tile carries its own
+  expandable evidence beside the letter: why, proof, next required proof and
+  dates. Show one delivery block and one environments block.
+- **History** holds the baseline, dated superseded snapshots and original
+  sources. When a newer reading replaces a block, move the older copy to History
+  with `supersededOn`; never leave it beside the current one or folded under it.
+  Delete an exact duplicate of a current block rather than archiving it.
+- `verify-artifact.mjs` fails a page with a dated block that lacks a kind, a
+  date, its maximum age or a visible age, and fails two current copies of the
+  same `data-section-family`. A block that is not current-dated content (a
+  roadmap card, a pipeline view) carries no freshness attributes.
 
 ## Architecture figures
 

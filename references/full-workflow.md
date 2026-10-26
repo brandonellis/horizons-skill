@@ -58,7 +58,7 @@ Read `stakeholder-story.md` for artifact work. Present direction and
 demonstrated progress to the established audience; inherit the brief. Lead with
 visuals and wins, linking to technical evidence.
 
-Use `stakeholder-hierarchy.md` for Roadmap, Progress and Evidence.
+Use `stakeholder-hierarchy.md` for Roadmap, Where we stand and History.
 Keep dated grade changes and lenses visible; disclose full evidence on demand.
 
 Keep delivery counts, fixed-cohort findings and dated readiness grades distinct.
@@ -161,6 +161,14 @@ Keep unchecked results dated. A draft cannot issue deterministic letters, but
 does not suspend an established qualitative method. An explicit delivery-only
 refresh skips reassessment. Every refresh re-runs Phase 1's architecture-view
 freshness check and reports a view that went stale since the last run.
+
+A refresh rechecks or carries every dated block, never silently. A block whose
+reading was retaken gets its new observation date; the copy it replaces moves to
+History with `data-superseded-on`. A block not rechecked keeps its old date and is
+marked `carried: true`, which renders `data-carried="not rechecked since <date>"`
+and prints that phrase. Never restamp a block with a date it was not observed on.
+Set the manifest's `freshness.refreshedOn` to the refresh date: verification then
+fails any current block older than its kind allows that is not marked carried.
 
 ## The dates rule (decided, do not re-litigate per run)
 
@@ -272,7 +280,7 @@ Rules that apply even without the reference loaded:
   reality. Partial requests keep their scope; an undecided scope needs a question.
   Merged-but-not-deployed is an activation gap, never proof of operational readiness.
 - **Every assessment is immutable, not every URL.** Append a dated ledger entry,
-  then update Roadmap, Progress and Evidence in the canonical hub without
+  then update Roadmap, Where we stand and History in the canonical hub without
   deleting earlier records. New snapshot URLs are optional exports. Operational
   A+ requires the fixed acceptance checks, live proof and no blocking gaps;
   unknown evidence is Incomplete, never a carried-forward pass. File tickets

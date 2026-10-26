@@ -301,3 +301,27 @@ test('a page may pin the ledger by hash instead of embedding it, and a stale pin
   await write(`<html>${ref({ ledgerFile: 'ledger.json', sha256: sha, assessmentId: 'first' })}<script type="application/json" id="roadmap-history">${data.files['ledger.json']}</script></html>`);
   await assert.rejects(verifyArtifact(data.path), /not both/);
 });
+
+test('verification refuses an untagged dated block, and a refresh that silently carries a stale one', async context => {
+  const { freshnessAttributes, renderFreshnessBadge, renderFreshnessStrip, freshnessScript } = await import('./freshness.mjs');
+  const data = await fixture(context);
+  const update = async content => {
+    await writeFile(join(data.root, 'index.html'), content);
+    data.manifest.files.find(entry => entry.path === 'index.html').sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  const envs = { id: 'envs', kind: 'probe', observedOn: '2026-10-12', label: 'Environments', family: 'environments' };
+  const page = (...blocks) => `<html>${renderFreshnessStrip()}${blocks.map(b => `<section${freshnessAttributes(b)}>${renderFreshnessBadge(b)}</section>`).join('')}${freshnessScript}<script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`;
+  await update(page(envs));
+  assert.equal((await verifyArtifact(data.path)).datedBlocks, 1);
+  await update(page(envs).replace(' data-kind="probe"', ''));
+  await assert.rejects(verifyArtifact(data.path), /envs needs data-kind/);
+  await update(page(envs));
+  data.manifest.freshness = { refreshedOn: '2026-10-26' };
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path), /refreshed 2026-10-26 but still observed 2026-10-12/);
+  await update(page({ ...envs, carried: true }));
+  assert.equal((await verifyArtifact(data.path)).datedBlocks, 1);
+  await update(page({ ...envs, carried: true }, { ...envs, id: 'envs-copy', carried: true }));
+  await assert.rejects(verifyArtifact(data.path), /environments has 2 current copies/);
+});

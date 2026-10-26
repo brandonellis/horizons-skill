@@ -6,6 +6,9 @@ blocks the target, and which action would supply the next proof. Preserve the
 project's visual identity. Do not wrap complete old reports in a new tab bar and
 call that a clearer current assessment.
 
+The view's tab reads **Where we stand**; older reports and superseded readings
+belong in **History** (`artifact-views.md`, "Freshness and one current copy").
+
 The creation-time audience takes precedence over this operational composition.
 `stakeholder-hierarchy.md` defines the stakeholder reading path and disclosure
 boundaries; it takes precedence over the detailed operational composition below.

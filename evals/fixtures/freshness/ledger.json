@@ -1,0 +1,30 @@
+{
+  "originalBaselineId": "lantern-baseline-2026-09-01",
+  "originalBaseline": {
+    "id": "lantern-baseline-2026-09-01",
+    "grade": "C+",
+    "observedOn": "2026-09-01"
+  },
+  "currentAssessmentId": "lantern-assessment-2026-10-20",
+  "assessments": [
+    {
+      "id": "lantern-assessment-2026-10-20",
+      "observedOn": "2026-10-20",
+      "components": [
+        {
+          "id": "api",
+          "grade": "B"
+        },
+        {
+          "id": "console",
+          "grade": "B-"
+        }
+      ]
+    }
+  ],
+  "presentation": {
+    "artifactBrief": {
+      "audience": "Lantern product leads"
+    }
+  }
+}

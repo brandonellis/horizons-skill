@@ -1,0 +1,16 @@
+/* Freshness: age line on every dated block, a Stale badge past its kind's maximum age, and the strip listing them. */
+.fz-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 8px 0 0; font-size: 12px; color: var(--rm-muted, #56625d); }
+.fz-badge time { font-variant-numeric: tabular-nums; }
+.fz-stale { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; background: var(--rm-warn-bg, #f7efe1); color: var(--rm-warn, #804812); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.fz-stale[hidden] { display: none; }
+.fz-carried { font-style: italic; }
+.fz-badge.is-superseded { font-style: normal; }
+[data-stale] > .fz-badge, [data-stale] .fz-badge { color: var(--rm-warn, #804812); }
+.fz-strip { margin: 16px 0 0; padding: 12px 16px; border-left: 3px solid var(--rm-warn, #804812); background: var(--rm-warn-bg, #f7efe1); color: var(--rm-ink, #1c2321); font-size: 14px; }
+.fz-strip[hidden] { display: none; }
+.fz-strip p { margin: 0; }
+.fz-strip strong { color: var(--rm-warn, #804812); }
+.fz-strip ul { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 8px 0 0; padding: 0; list-style: none; }
+.fz-strip li span { color: var(--rm-muted, #56625d); font-size: 12px; }
+.fz-strip a { color: var(--rm-link, #245d94); }
+@media print { .fz-strip, .fz-stale { print-color-adjust: exact; } }

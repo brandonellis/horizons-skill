@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "originalBaselineId": "lantern-baseline-2026-09-01",
+  "originalBaselineHash": "ec52f2d9e592ca55b1b5c2c236a680eb79279ad3edb90b1681e51982fc8f4c3e",
+  "assessments": [
+    {
+      "id": "lantern-assessment-2026-10-20",
+      "hash": "e51450b26786aef01bbb20bbb56e95a24bb0e7447a541672f01242708259378f"
+    }
+  ]
+}

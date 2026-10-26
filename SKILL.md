@@ -113,8 +113,10 @@ For custom/graded artifacts, read `references/artifact-views.md`,
 `references/progress-layout.md`, `references/stakeholder-story.md`,
 `references/stakeholder-hierarchy.md`, `references/visual-identity.md`,
 `references/feature-rollups.md` and the full workflow's selected-mode references.
-Keep Roadmap, Progress and Evidence as views of the same project, with scope and
-dates visible. A Roadmap view always carries its streams × horizons table:
+Keep Roadmap, Where we stand and History as views of the same project, with scope
+and dates visible. Every dated block declares its kind and real observation date
+and shows its age; stale blocks are listed at the top, and a superseded copy
+moves to History (`artifact-views.md`, "Freshness and one current copy"). A Roadmap view always carries its streams × horizons table:
 render it with `scripts/render-roadmap-matrix.mjs` (or mark an established
 matrix `data-roadmap-matrix`), and a requested Gantt with
 `scripts/render-roadmap-timeline.mjs`. Declare both in the manifest's

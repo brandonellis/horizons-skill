@@ -3,6 +3,7 @@ import { resolve, relative, dirname, isAbsolute, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { canonical, verifyHistory } from './assessment-engine.mjs';
+import { auditFreshness } from './freshness.mjs';
 
 async function safeFile(root, file) {
   if (typeof file !== 'string' || isAbsolute(file) || file.split(/[\\/]/).includes('..')) throw new Error('Manifest paths must stay inside the artifact directory');
@@ -77,6 +78,9 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
     if (!new RegExp(`<section\\b(?=[^>]*\\bid=["']view-${id}["'])(?=[^>]*\\bdata-view=["']${id}["'])(?=[^>]*\\bdata-skill-pipeline=["']${id}["'])`).test(html)) throw new Error(`Pipeline view ${id} is missing (render it with renderSkillFlowView)`);
   }
   for (const [, id] of html.matchAll(/\bdata-skill-pipeline=["']([^"']+)["']/g)) if (!pipelines.includes(id)) throw new Error(`Artifact has a pipeline view ${id} that pipelineViews does not declare`);
+  // Every dated block declares its kind and observation date and shows its age; one current copy per section
+  // family. A refresh (manifest.freshness.refreshedOn) may leave a block stale only by marking it carried.
+  const freshness = auditFreshness(html, { maxAgeDays: manifest.freshness?.maxAgeDays, refreshedOn: manifest.freshness?.refreshedOn });
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
   // A retraction recorded in the ledger and absent from the page is the
   // failure this state exists to prevent: the register is clean and nobody can
@@ -86,7 +90,7 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
   const current = ledger.assessments.find(assessment => assessment.id === manifest.assessmentId);
   const retracted = (current.findings ?? current.findingStates ?? []).filter(finding => finding.status === 'retracted');
   if (retracted.length && !/\bdata-panel-error-rate=["'][^"']+["']/.test(html)) throw new Error(`Current assessment retracts ${retracted.map(finding => finding.id).join(', ')} but the artifact prints no panel error rate (add data-panel-error-rate="<retracted> of <first seen on previous>" where the measurement band shows it)`);
-  return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256, pageBytes: Buffer.byteLength(html),
+  return { root, manifest, verifiedFiles: manifest.files.length, historyLockSha256, pageBytes: Buffer.byteLength(html), datedBlocks: freshness.length,
     historyLockPreservation: expectedHistoryLockSha256 === undefined ? 'not-checked' : 'verified' };
 }
 
