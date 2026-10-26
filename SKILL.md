@@ -1,7 +1,7 @@
 ---
 name: horizons
-description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, source-backed learning-loop and evaluation views, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify dated tracker work, prerequisites and proof needed to complete learning loops or raise existing grades. Answer roadmap questions directly without creating an artifact.
-argument-hint: "[create · refresh [<url>] · move · gantt · wsjf [<source>] · grade [<url>] · score [<url>] · priorities · help]"
+description: Build and maintain evidence-backed roadmap artifacts from project sources. Use for roadmap creation or refresh, reviewed Now/Next/Later moves, requested Gantt timelines, optional WSJF prioritization, source-backed learning-loop and evaluation views, skill-pipeline flows showing how named skills chain, and maturity grade/score assessments. Preserve the canonical artifact, planning decisions and original assessment history. Identify dated tracker work, prerequisites and proof needed to complete learning loops or raise existing grades. Answer roadmap questions directly without creating an artifact.
+argument-hint: "[create · refresh [<url>] · move · gantt · wsjf [<source>] · grade [<url>] · score [<url>] · priorities · skill-pipeline [<skills>] · help]"
 ---
 
 # /horizons — the Horizons roadmap builder
@@ -36,6 +36,7 @@ this skill does not authorize building, modifying, grading or publishing it.
 | `wsjf [<source>]` | `references/full-workflow.md`, `references/wsjf.md`. Optional, confirmed cost-of-delay ranking, separate from grade opportunities and placement. |
 | `grade [<baseline-url>]` or `score [<baseline-url>]` | `references/full-workflow.md`, `references/report-card.md`, `references/grade-anchors.md`, `references/baseline-ledger.md`, `references/letter-reassessment.md`, `references/executable-grading.md`. Preserve the established method and append an assessment. |
 | `priorities` or “what tickets would raise the grade?” | `references/grade-opportunities.md`. Read the existing assessment, frozen rubric and evidenced ticket mappings. Produce conditional opportunities in the same artifact when modification is requested; a question alone gets the answer in chat. Never issue a new grade. |
+| `skill-pipeline [<skills folder or names>]`, or a request to show how skills or pipeline steps chain | `references/skill-pipeline.md`. Read the named skills and draw only the steps, gates, tools, avenues and status they state. Standalone page, or a roadmap section when named. Never self-selected. |
 | Learning-loop, agent or evaluation visualization in the artifact | `references/learning-system.md` plus the applicable creation/refresh workflow. Present discovered evidence; optional 3D shares the same model. No implicit runtime access, paid evaluations or new grades. |
 | `help` | Show this table with brief examples and stop. |
 

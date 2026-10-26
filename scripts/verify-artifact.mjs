@@ -69,6 +69,14 @@ export async function verifyArtifact(manifestPath, { expectedHistoryLockSha256 }
     if (!/\bclass=["'][^"']*\brm-gantt-region\b/.test(html)) throw new Error('Requested timeline is missing (render it with render-roadmap-timeline.mjs; with no dates it renders the unscheduled shelf)');
     if (!/\bdata-schedule-coverage=["']committed:\d+ proposed:\d+ unscheduled:\d+["']/.test(html)) throw new Error('Timeline must state its scheduling coverage (data-schedule-coverage)');
   }
+  // A skill-pipeline flow is its own view, one per pipeline, declared in `pipelineViews`, in both directions.
+  const pipelines = manifest.pipelineViews ?? [];
+  if (!Array.isArray(pipelines) || new Set(pipelines).size !== pipelines.length || pipelines.some(id => typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id))) throw new Error('pipelineViews must be a unique list of lowercase view ids');
+  for (const id of pipelines) {
+    if (!new RegExp(`<a\\b[^>]*\\bhref=["']#view-${id}["']`).test(html)) throw new Error(`Pipeline view ${id} has no tab (href="#view-${id}")`);
+    if (!new RegExp(`<section\\b(?=[^>]*\\bid=["']view-${id}["'])(?=[^>]*\\bdata-view=["']${id}["'])(?=[^>]*\\bdata-skill-pipeline=["']${id}["'])`).test(html)) throw new Error(`Pipeline view ${id} is missing (render it with renderSkillFlowView)`);
+  }
+  for (const [, id] of html.matchAll(/\bdata-skill-pipeline=["']([^"']+)["']/g)) if (!pipelines.includes(id)) throw new Error(`Artifact has a pipeline view ${id} that pipelineViews does not declare`);
   if (ledger.presentation?.artifactBrief?.audience !== manifest.audience) throw new Error('Creation-time audience changed during publication');
   // A retraction recorded in the ledger and absent from the page is the
   // failure this state exists to prevent: the register is clean and nobody can

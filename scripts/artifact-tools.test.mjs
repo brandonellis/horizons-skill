@@ -258,6 +258,29 @@ test('declared roadmap views must render: a matrix for Now / Next / Later, a cov
   await assert.rejects(verifyArtifact(data.path), /roadmapViews must be/);
 });
 
+test('each declared pipeline view has its own tab and view, and an undeclared one fails', async context => {
+  const { renderSkillFlowView } = await import('./render-skill-flow.mjs');
+  const data = await fixture(context);
+  const update = async content => {
+    await writeFile(join(data.root, 'index.html'), content);
+    data.manifest.files.find(entry => entry.path === 'index.html').sha256 = createHash('sha256').update(content).digest('hex');
+    await data.save();
+  };
+  const flow = { lanes: [{ id: 'r', label: 'Steps' }], nodes: [{ id: 'a', kind: 'run', lane: 'r', col: 0, label: 'A' }, { id: 'b', kind: 'run', lane: 'r', col: 1, label: 'B' }], edges: [{ from: 'a', to: 'b', kind: 'handoff' }] };
+  const { tab, view } = renderSkillFlowView(flow, { id: 'intake-flow', tabLabel: 'Intake flow' });
+  const page = body => `<html>${body}<script type="application/json" id="roadmap-history">${JSON.stringify(data.ledger)}</script></html>`;
+  await update(page(`<nav class="view-tabs">${tab}</nav>${view}`));
+  await assert.rejects(verifyArtifact(data.path), /does not declare/);
+  data.manifest.pipelineViews = ['intake-flow', 'review-flow'];
+  await data.save();
+  await assert.rejects(verifyArtifact(data.path), /review-flow has no tab/);
+  data.manifest.pipelineViews = ['intake-flow'];
+  await data.save();
+  assert.equal((await verifyArtifact(data.path)).verifiedFiles, 3);
+  await update(page(view));
+  await assert.rejects(verifyArtifact(data.path), /intake-flow has no tab/);
+});
+
 test('a page may pin the ledger by hash instead of embedding it, and a stale pin fails', async context => {
   const data = await fixture(context);
   const sha = createHash('sha256').update(data.files['ledger.json']).digest('hex');

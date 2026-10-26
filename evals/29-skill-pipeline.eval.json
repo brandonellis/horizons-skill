@@ -1,0 +1,23 @@
+{
+  "id": "skill-pipeline",
+  "skills": [
+    "horizons"
+  ],
+  "query": "/horizons skill-pipeline fixtures/skill-pipeline/skills/ Build the flow page for these skills as skill-flow.html in fixtures/skill-pipeline/. Do not edit the skill files and do not publish anything.",
+  "files": [
+    "fixtures/skill-pipeline/"
+  ],
+  "gap": "Asked to diagram how skills work together, an agent draws a tidy linear pipeline with steps, approvals and tools it assumes such a pipeline has, includes the standalone skill because it sits in the same folder, and marks every tool as working.",
+  "expected_behavior": [
+    "Loads references/skill-pipeline.md and builds the page with scripts/render-skill-flow.mjs and assets/skill-flow.css.",
+    "Draws field-intake, field-analyze (marked as one run per note) and field-report as steps joined by hand-offs, and leaves label-formatter out with a stated reason.",
+    "Draws the steward's row approval and the person who sends the summary as person gates, and no other person decisions.",
+    "Shows web_search and render_document as tools, and weather_history as being built with SYN-12, joined to the steps that call them.",
+    "Offers avenues for two or more notes, exactly one note and zero notes, matching the branches field-intake and field-report state.",
+    "Writes fixtures/skill-pipeline/skill-flow.html with a numbered run order and a live / being-built panel, and reports the skills read and the checks run."
+  ],
+  "must_not": [
+    "Invents a step not in the skill files, or a gate, tool, store or avenue the skills do not state.",
+    "Edit any file under fixtures/skill-pipeline/skills/, or publish the page."
+  ]
+}

@@ -94,6 +94,7 @@ Record that planning decision and preserve the existing evidence and grades.
 | `gantt` | Explicitly requested timeline with sourced dates and an unscheduled shelf; with no dates it states `Gantt not drawn` and why |
 | `wsjf [<source>]` | Optional human-confirmed cost-of-delay ranking |
 | `grade` / `score` | Assessment against the established baseline and rubric, with immutable history |
+| `skill-pipeline [<skills>]` | Swimlane page of how the named skills chain: steps, person gates, tools and stores, avenues, run order and live/building status, read from the skills only |
 | `help` | Workflow explanations; no artifact work |
 
 Natural-language questions receive answers in conversation. They do not create
@@ -212,6 +213,7 @@ being cheaper. See [the execution contract](references/execution-contract.md).
 - `scripts/roadmap-model.mjs`, `render-starter.mjs` and `roadmap-pipeline.mjs` validate, render, stage and atomically save starter artifacts. The starter always includes a streams × horizons overview table, and its verification refuses one without it.
 - `scripts/grade-opportunities.mjs` derives conditional grade plans without changing assessments.
 - `scripts/render-learning-wheel.mjs` with `assets/learning-wheel.css` draws the leadership view of learning loops: status, what each learns from and improves, why one is off, and each loop as a cycle; with a `flywheel` model, the whole cycle (agents, responses, loops, what changes, eval guards) on one ring.
+- `references/skill-pipeline.md` and `scripts/render-skill-flow.mjs` with `assets/skill-flow.css` draw the `skill-pipeline` view: how named skills chain, who decides at each gate, which tools each step uses, every avenue through the flow, the run order and what is live or being built. Inside a roadmap each pipeline is its own tab (`renderSkillFlowView`), declared in the manifest's `pipelineViews` so `verify-artifact.mjs` checks it.
 - `scripts/package-skill.mjs` builds tested Claude Code and portable archives with checksums.
 - `scripts/summarize-evals.mjs` reports local journey measurements without treating unknowns as passes.
 - `references/run-budget.md` bounds delegation and retries across the whole run,

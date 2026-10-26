@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 2.14.0 - 2026-10-26
+
+- New `skill-pipeline` mode (`/horizons skill-pipeline [<skills folder or names>]`):
+  reads the named skills and draws how they chain, only from what the skills
+  state. `references/skill-pipeline.md` covers discovery (steps, hand-offs, person
+  gates, tools and stores, avenues, live / being-built status) and when the view
+  belongs: two or more steps that hand off. Never self-selected.
+- New `scripts/render-skill-flow.mjs` and `assets/skill-flow.css`: a swimlane
+  laid out from lane and column indexes (half columns keep a tool off another
+  edge), person gates in amber, dashed tools still being built with their ticket,
+  avenue chips that dim everything off the chosen path, moving hand-offs that stop
+  under reduced motion, every avenue listed as text without JavaScript, then a
+  numbered run order and a live / being-built panel. The validator refuses unknown
+  kinds, edges to missing nodes, unknown avenue members, duplicate ids, overlapping
+  nodes, a gate with no person and a single unchained step.
+- Inside a roadmap a pipeline is its own tab, one per pipeline, from
+  `renderSkillFlowView`. `verify-artifact.mjs` checks every id in the manifest's
+  new `pipelineViews` has a tab and a view, and refuses an undeclared one.
+- Scenario 29 and a synthetic four-skill fixture exercise the mode.
+
 ## 2.13.0 - 2026-10-22
 
 - Learning flywheel: `renderFlywheel` and `renderFlywheelList` in

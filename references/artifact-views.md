@@ -26,6 +26,7 @@ that order, and a grade-only artifact need not fabricate a roadmap.
 - Visual direction: make the decisions easy to see
 - Keep it short: one line visible, the rest one click away
 - Architecture figures
+- Skill-pipeline views
 - Copy-ready view shell
 - One bounded verification round, when browser tools are available
 - Learning and evaluation evidence
@@ -323,6 +324,15 @@ the host's tokens (see the diagramming guidance). Three rules from real reviews:
 
 Motion is allowed only to show order or flow, labelled as illustration, paused
 offscreen and off under reduced motion.
+
+## Skill-pipeline views
+
+A skill-pipeline flow (`references/skill-pipeline.md`) is its own view: one tab
+per pipeline, named after it, beside the existing views. Render it with
+`renderSkillFlowView` from `scripts/render-skill-flow.mjs` and declare each view
+id in the manifest's `pipelineViews`; `verify-artifact.mjs` fails a declared
+view with no tab or panel, and a pipeline view the manifest does not declare.
+Add one only when the user named the mode or the artifact already carries it.
 
 ## Copy-ready view shell
 

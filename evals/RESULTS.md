@@ -753,3 +753,41 @@ links, the four stages, motion only on observed evidence, the stacked list, the
 overview kept when no flywheel is given) and the Waatr hub, checked headless at
 1440px light and 390px dark with no console errors. A flywheel scenario is open
 work, alongside the wheel scenario noted for v2.12.0. All 201 helper tests pass.
+
+## 2026-10-26 · v2.14.0 skill-pipeline mode
+
+Scenario 29 (new) ran headless (`claude -p`, the prompt on stdin, a fresh copy of
+the fixtures as a one-commit repo, Read/Write/Edit/Glob/Grep/Skill and `node` only,
+$6 cap) with the skill invoked by name.
+
+- **First pass, `claude-sonnet-5-5` ($0.43):** built the page with the renderer,
+  three chained steps with analyze stacked, label-formatter left out with its
+  reason, two gates, weather_history building with SYN-12, four avenues (two or
+  more notes, a rejected row, one note, none). Marked the other tools live from
+  the fixture README. No step, gate or tool invented; skill files unchanged.
+- **First pass, `claude-opus-5-5` ($1.59):** same structure, and checked 1280px,
+  390px, dark mode and keyboard on the avenue chips. Drew the operator's start as
+  a gate, which is a start, not a decision: expectation 3 partly missed. The
+  guidance gained one line ("a person who only starts a run joins by a handoff,
+  not a gate"); a rerun ($0.89) drew the operator as a start.
+- **Final candidate (after half columns, edge routing and the per-pipeline tab
+  were added):** Sonnet ($0.50) and Opus ($0.97) both met all six expectations
+  and avoided both prohibited behaviors. Both left `Read`/`Write` off the tool lane
+  and said so; Opus left statuses blank where only the README claimed
+  availability. Neither ran a browser check (the headless permission set did not
+  allow one) and both said so.
+
+The roadmap-tab placement is covered by `artifact-tools.test.mjs` (declared views
+need a tab and a view; an undeclared one fails) and by its use in a private hub,
+checked headless at 1440px light and 390px dark with no console errors. No
+scenario exercises it yet.
+
+**Lead grading run.** Scenario 15 ran on the intended lead model
+(`claude-opus-5-5`, headless, $1.40, 149s) against an unchanged fixture copy:
+single-agent label, code C, production Incomplete with expired and malformed
+expiry unknown rather than failing, expiry-gap still open in code, MER-201 Done
+reconciled against 2 of 4 acceptance conditions, exactly one assessment appended,
+original baseline and assessment-1 unchanged. Maintainer check:
+`verify-artifact.mjs --history-lock-sha256 964f37da…` verified 12 files with
+preservation `verified`; the lock bytes are unchanged. No browser checks
+(disclosed by the run). All 206 helper tests and `git diff --check` pass.
