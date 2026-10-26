@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 2.14.1 - 2026-10-26
+
+- Skill-pipeline view reads at full size: larger lanes, rows, boxes and type; the diagram scrolls instead of shrinking below 86%; side-by-side arrow labels sit above the boxes so a narrow gap never hides them; tool boxes size for monospace titles.
+
 ## 2.14.0 - 2026-10-26
 
 - New `skill-pipeline` mode (`/horizons skill-pipeline [<skills folder or names>]`):

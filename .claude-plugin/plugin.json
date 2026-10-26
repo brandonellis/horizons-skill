@@ -1,6 +1,6 @@
 {
   "name": "horizons",
-  "version": "2.14.0",
+  "version": "2.14.1",
   "description": "Build and maintain evidence-backed roadmap artifacts from project sources.",
   "author": {
     "name": "Brandon Ellis"

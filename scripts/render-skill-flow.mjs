@@ -6,8 +6,9 @@
 export const NODE_KINDS = ['run', 'person', 'tool', 'store'];
 export const NODE_STATUSES = ['live', 'building'];
 export const EDGE_KINDS = ['handoff', 'gate', 'uses'];
-const COL_W = 220, NODE_W = 150, ROW_H = 84, LANE_HEAD = 28, PAD = 20;
-const NODE_H = { run: 64, person: 52, tool: 40, store: 48 };
+// sized to read at 100%: the svg never scales below MIN_SCALE (it scrolls instead), so these are on-screen pixels
+const COL_W = 244, NODE_W = 172, ROW_H = 132, LANE_HEAD = 40, PAD = 28, LINE = 18, MIN_SCALE = 0.86;
+const NODE_H = { run: 82, person: 66, tool: 66, store: 62 };
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const int = v => Number.isInteger(v) && v >= 0;
 const half = v => Number.isInteger(v * 2) && v >= 0; // a half column lets a tool sit between two steps, off a store's edge
@@ -77,7 +78,8 @@ export function skillFlowLayout(model) {
   const laneOf = Object.fromEntries(lanes.map(l => [l.id, l]));
   const boxes = Object.fromEntries(model.nodes.map(n => {
     // shortcut: width from character count, not measured text; a label over ~28 characters still overflows
-    const w = Math.min(COL_W - 10, Math.max(NODE_W, ...[n.label, n.sub, n.tag].filter(Boolean).map(t => t.length * 7 + 16)));
+    const perChar = n.kind === 'tool' ? 7.9 : 7.6; // tool titles are monospace
+    const w = Math.min(COL_W - 20, Math.max(NODE_W, ...[n.label, n.sub, n.tag].filter(Boolean).map(t => t.length * perChar + 24)));
     const h = NODE_H[n.kind], cx = PAD + n.col * COL_W + COL_W / 2, top = laneOf[n.lane].y + LANE_HEAD + (n.row ?? 0) * ROW_H;
     return [n.id, { x: cx - w / 2, y: top, w, h, cx, cy: top + h / 2 }];
   }));
@@ -87,16 +89,16 @@ export function skillFlowLayout(model) {
 function edgePath(a, b, sameRow) {
   if (sameRow && Math.abs(b.cx - a.cx) <= COL_W) {
     const [sx, ex] = b.cx > a.cx ? [a.x + a.w, b.x - 3] : [a.x, b.x + b.w + 3];
-    return { d: `M${sx} ${a.cy} H${ex}`, lx: (sx + ex) / 2, ly: a.cy - 8, anchor: 'middle' };
+    return { d: `M${sx} ${a.cy} H${ex}`, lx: (sx + ex) / 2, ly: Math.min(a.y, b.y) - 10, anchor: 'middle' }; // above the boxes: the gap between them is narrower than a label
   }
   if (sameRow) { // skips a column: arc over the boxes between
-    const top = a.y - 3, peak = a.y - 22;
+    const top = a.y - 3, peak = a.y - 30;
     return { d: `M${a.cx} ${a.y} C${a.cx} ${peak}, ${b.cx} ${peak}, ${b.cx} ${top}`, lx: (a.cx + b.cx) / 2, ly: peak + 2, anchor: 'middle' };
   }
   // several edges into one box arrive spread across it, nearer the side they come from
   const up = b.y < a.y, ex = b.cx + Math.max(-b.w / 3, Math.min(b.w / 3, (a.cx - b.cx) / 4));
   const sx = a.cx, sy = up ? a.y : a.y + a.h, ey = up ? b.y + b.h + 3 : b.y - 3, my = (sy + ey) / 2;
-  return { d: `M${sx} ${sy} C${sx} ${my}, ${ex} ${my}, ${ex} ${ey}`, lx: sx + 5, ly: up ? sy - 6 : sy + 13, anchor: 'start' }; // label at the source: one source rarely sends two
+  return { d: `M${sx} ${sy} C${sx} ${my}, ${ex} ${my}, ${ex} ${ey}`, lx: sx + 6, ly: up ? sy - 8 : sy + 17, anchor: 'start' }; // label at the source: one source rarely sends two
 }
 
 export function renderSkillFlowSvg(model, { id = 'skill-flow', label } = {}) {
@@ -104,7 +106,7 @@ export function renderSkillFlowSvg(model, { id = 'skill-flow', label } = {}) {
   const byId = Object.fromEntries(model.nodes.map(n => [n.id, n]));
   const sf = key => on[key].length === all ? '' : ` data-sf="${esc(on[key].join(' '))}"`;
   const bands = L.lanes.map((l, i) => (i % 2 ? '' : `<rect class="sf-band" x="0" y="${l.y}" width="${L.width}" height="${l.h}"/>`)
-    + `<text class="sf-lane" x="12" y="${l.y + 18}">${esc(l.label)}</text>`).join('');
+    + `<text class="sf-lane" x="16" y="${l.y + 24}">${esc(l.label)}</text>`).join('');
   const paths = model.edges.map((e, i) => {
     const na = byId[e.from], nb = byId[e.to];
     return { e, key: e.id ?? `edge-${i}`, p: edgePath(L.boxes[e.from], L.boxes[e.to], na.lane === nb.lane && (na.row ?? 0) === (nb.row ?? 0)) };
@@ -114,16 +116,16 @@ export function renderSkillFlowSvg(model, { id = 'skill-flow', label } = {}) {
   const labels = paths.filter(({ e }) => e.label).map(({ e, key, p }) => `<text class="sf-elabel"${sf(key)} x="${p.lx}" y="${p.ly}" text-anchor="${p.anchor}">${esc(e.label)}</text>`).join('');
   const nodes = model.nodes.map(n => {
     const b = L.boxes[n.id], cls = ['sf-node', `sf-${n.kind}`, n.status === 'building' && 'sf-building', n.optional && 'sf-optional'].filter(Boolean).join(' ');
-    const stack = n.multiple ? [8, 4].map(o => `<rect class="sf-stack" x="${b.x + o}" y="${b.y + o}" width="${b.w}" height="${b.h}" rx="8"/>`).join('') : '';
+    const stack = n.multiple ? [10, 5].map(o => `<rect class="sf-stack" x="${b.x + o}" y="${b.y + o}" width="${b.w}" height="${b.h}" rx="8"/>`).join('') : '';
     const lines = [[n.label, 'sf-title'], [n.sub, 'sf-sub'], [n.tag, 'sf-tag']].filter(([t]) => t);
-    const top = b.cy - (lines.length - 1) * 8 + 4;
+    const top = b.cy - (lines.length - 1) * LINE / 2 + 5;
     return `<g class="${cls}"${sf(n.id)}>${stack}<rect class="sf-box" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="8"/>`
-      + lines.map(([t, c], i) => `<text class="${c}" x="${b.cx}" y="${top + i * 16}" text-anchor="middle">${esc(t)}</text>`).join('') + '</g>';
+      + lines.map(([t, c], i) => `<text class="${c}" x="${b.cx}" y="${top + i * LINE}" text-anchor="middle">${esc(t)}</text>`).join('') + '</g>';
   }).join('');
   const marker = k => `<marker id="${esc(id)}-ah-${k}" class="sf-ah-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>`;
   const runs = model.nodes.filter(n => n.kind === 'run').length, gates = model.edges.filter(e => e.kind === 'gate').length;
   const aria = label ?? `Skill flow: ${runs} steps across ${model.lanes.length} lanes, ${gates} person decisions. The run order below lists every step in text.`;
-  return `<svg class="sf-flow" viewBox="0 0 ${L.width} ${L.height}" role="img" aria-label="${esc(aria)}"><defs>${EDGE_KINDS.map(marker).join('')}</defs>`
+  return `<svg class="sf-flow" viewBox="0 0 ${L.width} ${L.height}" style="min-width:${Math.round(L.width * MIN_SCALE)}px" role="img" aria-label="${esc(aria)}"><defs>${EDGE_KINDS.map(marker).join('')}</defs>`
     + bands + edges + nodes + labels + '</svg>';
 }
 
