@@ -34,7 +34,10 @@ blind to the grades, never to the standard".
 - **A+ is an acceptance tier, not a compliment.** All A anchors plus the
   dimension's fixed A+ tests must pass. Define those tests once with the user;
   use `baseline-ledger.md` for operational gates and the deterministic roll-up.
-  Plans, exceptions and merged-but-undeployed work cannot substitute for proof.
+  Plans and merged-but-undeployed work cannot substitute for proof. A register
+  exception that meets all four conditions in `report-card.md` lowers no
+  letter, A+ included: its compensating control, watched working this run, is
+  the proof. It never covers a live exposure.
 - **Unknown is not a low grade or a pass.** Unavailable or stale mandatory
   evidence makes coverage incomplete; keep the last verified grade dated and
   separate rather than silently carrying it into the current verdict.

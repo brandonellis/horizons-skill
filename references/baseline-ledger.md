@@ -152,9 +152,11 @@ An overall **operational A+** additionally requires all of these this run:
    agents needing criteria block an estate-wide A+ until assessed under an
    approved scope version. State the approved scope beside any scoped A+.
 
-Keep as-written and operational roll-ups separate. Grade exceptions may qualify
-an ordinary letter under `report-card.md`; they never waive A+ checks or turn
-unverified work into verified closure. A+ is a dated operational claim, not a
+Keep as-written and operational roll-ups separate. A register exception that
+meets all four conditions in `report-card.md` qualifies every letter, A+
+included, because the card watched its compensating control work this run. It
+never waives a live-exposure check or an A+ check the exception does not name,
+and it never turns unverified work into verified closure. A+ is a dated operational claim, not a
 permanent badge. Later regressions must lower it. Keep recommending the next
 highest-impact verified gap, not manufacturing work after the target is met.
 
@@ -294,6 +296,9 @@ preserving their content, not replacing them with the newest grade.
 - Losing credentials yields incomplete coverage, never a better letter.
 - A newly discovered live exposure blocks A+ even with an otherwise perfect
   baseline panel. An accepted exception cannot hide it.
+- A gap covered by a valid register exception, with its compensating control
+  watched working this run, does not block A+. The same gap with the control
+  unwatched, or with its trigger fired, does.
 - An instrument change or explicit comparison to another date does not replace
   the initial baseline. Rebaseline approval creates lineage, not deletion.
 - Reloading from the saved ledger and artifact alone recovers the same baseline,

@@ -454,6 +454,12 @@ and the card re-tests every one of them on every run:
 Fail any one and it is an ordinary finding again. Write the failing condition
 into the card, not just the letter.
 
+**The tier does not change the rule.** A valid entry lowers no letter at any
+tier, A and A+ included. At A+ the entry is not a plan standing in for proof:
+the compensating control, watched working this run, is the proof. A team that
+knowingly excluded a cost should not need to buy it to reach the top tier,
+and a card that says otherwise grades the budget, not the system.
+
 **Render exceptions by form, never by hue.** A dashed border, a mono label, no
 grade colour. The grade palette encodes tiers and an exception is not a tier;
 a reader who can mistake one for the other cannot read the matrix.

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 2.16.0 - 2026-10-29
+
+- A valid exception-register entry now lowers no letter at any tier, A+
+  included. Its compensating control, watched working this run, is the proof.
+  `report-card.md`, `grade-anchors.md` and `baseline-ledger.md` agree on this,
+  and a new acceptance scenario covers it. Live exposures, A+ checks the entry
+  does not name, and lapsed or unwatched entries still block A+.
+
 ## 2.15.0 - 2026-10-26
 
 - Freshness on every page: `scripts/freshness.mjs` and `assets/freshness.css`.
